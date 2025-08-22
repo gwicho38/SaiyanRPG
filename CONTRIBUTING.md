@@ -68,19 +68,19 @@ Example:
 *on the right uses that technique, the animation will be flipped horizontally to*
 *display movement from right to left.*
 
-[water0]: https://raw.githubusercontent.com/Tuxemon/Tuxemon/development/mods/tuxemon/animations/technique/watershot_00.png "watershot_00"
+[water0]: https://raw.githubusercontent.com/Tuxemon/Tuxemon/development/mods/saiyanquest/animations/technique/watershot_00.png "watershot_00"
 
-[water1]: https://raw.githubusercontent.com/Tuxemon/Tuxemon/development/mods/tuxemon/animations/technique/watershot_01.png "watershot_01"
+[water1]: https://raw.githubusercontent.com/Tuxemon/Tuxemon/development/mods/saiyanquest/animations/technique/watershot_01.png "watershot_01"
 
-[water2]: https://raw.githubusercontent.com/Tuxemon/Tuxemon/development/mods/tuxemon/animations/technique/watershot_02.png "watershot_02"
+[water2]: https://raw.githubusercontent.com/Tuxemon/Tuxemon/development/mods/saiyanquest/animations/technique/watershot_02.png "watershot_02"
 
-[water3]: https://raw.githubusercontent.com/Tuxemon/Tuxemon/development/mods/tuxemon/animations/technique/watershot_03.png "watershot_03"
+[water3]: https://raw.githubusercontent.com/Tuxemon/Tuxemon/development/mods/saiyanquest/animations/technique/watershot_03.png "watershot_03"
 
-[water4]: https://raw.githubusercontent.com/Tuxemon/Tuxemon/development/mods/tuxemon/animations/technique/watershot_04.png "watershot_04"
+[water4]: https://raw.githubusercontent.com/Tuxemon/Tuxemon/development/mods/saiyanquest/animations/technique/watershot_04.png "watershot_04"
 
-[water5]: https://raw.githubusercontent.com/Tuxemon/Tuxemon/development/mods/tuxemon/animations/technique/watershot_05.png "watershot_05"
+[water5]: https://raw.githubusercontent.com/Tuxemon/Tuxemon/development/mods/saiyanquest/animations/technique/watershot_05.png "watershot_05"
 
-[water6]: https://raw.githubusercontent.com/Tuxemon/Tuxemon/development/mods/tuxemon/animations/technique/watershot_06.png "watershot_06"
+[water6]: https://raw.githubusercontent.com/Tuxemon/Tuxemon/development/mods/saiyanquest/animations/technique/watershot_06.png "watershot_06"
 
 ### Content File Types
 - Images should be PNG format
@@ -246,7 +246,7 @@ For example:
   long or short... that is a limitation of our game right now and we will fix
   it sometime.  If possible, please leave the dialogs "long" or overflowing and 
   eventually a fix will be made so they fit correctly.
-- Translation files can be found in `mods/tuxemon/l18n` together with a README
+- Translation files can be found in `mods/saiyanquest/l18n` together with a README
 
 Content Restrictions
 ====================

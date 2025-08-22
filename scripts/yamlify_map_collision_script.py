@@ -27,7 +27,7 @@ python yamlify_map_collision_script.py FILE0 FILE1 FILE2 ...
 
 You can run the script from the /scripts/ folder like this:
 
-    python yamlify_map_collision_script.py ../mods/tuxemon/maps/map.tmx
+    python yamlify_map_collision_script.py ../mods/saiyanquest/maps/map.tmx
 """
 
 import logging

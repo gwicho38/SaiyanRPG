@@ -3,7 +3,7 @@
 import os
 from argparse import ArgumentParser
 
-from tuxemon.db import (
+from saiyanquest.db import (
     EconomyModel,
     EncounterModel,
     EnvironmentModel,

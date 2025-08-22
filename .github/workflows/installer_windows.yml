@@ -37,10 +37,10 @@ jobs:
           cd buildconfig
           cmd.exe /c "build_installer.bat"
           mkdir ../dist/
-          mv tuxemon-installer.exe ../dist/.
+          mv saiyanquest-installer.exe ../dist/.
 
       - name: Upload installer
         uses: actions/upload-artifact@v4
         with:
-            name: tuxemon_windows_installer
+            name: saiyanquest_windows_installer
             path: dist

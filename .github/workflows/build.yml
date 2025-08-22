@@ -48,8 +48,8 @@ jobs:
         run: |
           echo "Show artifacts folder:"
           ls artifacts
-          echo "Show artifacts/tuxemon_windows_installer folder:"
-          ls "artifacts/tuxemon_windows_installer"
+          echo "Show artifacts/saiyanquest_windows_installer folder:"
+          ls "artifacts/saiyanquest_windows_installer"
           echo "Show artifacts/Tuxemon-x86_64:"
           ls "artifacts/Tuxemon-x86_64"
 
@@ -77,6 +77,6 @@ jobs:
           name: ${{ steps.release_title.outputs.value }}
           tag_name: ${{ steps.release_tag.outputs.value }}
           # TODO: Add windows artifact again when #1229 is fixed
-          # **/artifacts/tuxemon_windows_installer/*.exe
+          # **/artifacts/saiyanquest_windows_installer/*.exe
           files: |
             **/Tuxemon-x86_64/Tuxemon.flatpak

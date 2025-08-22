@@ -3,8 +3,8 @@ from unittest import TestCase
 import mock
 import pygame as pg
 
-from tuxemon.core import prepare
-from tuxemon.states.world import WorldState
+from saiyanquest.core import prepare
+from saiyanquest.states.world import WorldState
 
 pg.display.set_mode((1, 1), 0, 0)
 control = mock.MagicMock()

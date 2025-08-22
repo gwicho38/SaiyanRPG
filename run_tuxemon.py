@@ -3,7 +3,7 @@
 # Copyright (c) 2014-2025 William Edwards <shadowapex@gmail.com>, Benjamin Bean <superman2k5@gmail.com>
 from argparse import ArgumentParser, Namespace
 import sys
-from tuxemon import main, prepare
+from saiyanquest import main, prepare
 
 
 def parse_args() -> Namespace:

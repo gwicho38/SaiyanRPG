@@ -167,7 +167,7 @@ is licensed under [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/
 
 * ["Overseer"](https://wiki.tuxemon.org/index.php?title=Mine_Overseer). Front sprite by tamashihoshi, hat adapted from a sprite by Catch Challenger. Overland sprites adapted by Sanglorian from sprites by Catch Challenger.
 
-* ["Penguin"](https://github.com/Tuxemon/Tuxemon/tree/development/mods/tuxemon/sprites)Overland sprites are by ultidonki, made for Tuxemon. Licensed under[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+* ["Penguin"](https://github.com/Tuxemon/Tuxemon/tree/development/mods/saiyanquest/sprites)Overland sprites are by ultidonki, made for Tuxemon. Licensed under[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
 
 * ["Picnicker"](https://wiki.tuxemon.org/index.php?title=Picnicker). Main sprite by Catch Challenger, adapted by Sanglorian. Overland sprites by Catch Challenger.
 
@@ -787,7 +787,7 @@ is licensed under [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/
 design and front sprite by [Tricoelacanth](https://twitter.com/@tricoelacanth),
 back and menu sprites by ultidonki based on the design by Tricoelacanth, all released under CC-BY-SA 4.0
 
-* ["Teddisun"](https://www.github.com/Tuxemon/Tuxemon/tree/development/mods/tuxemon/gfx/sprites/battle/teddisun-front.png)
+* ["Teddisun"](https://www.github.com/Tuxemon/Tuxemon/tree/development/mods/saiyanquest/gfx/sprites/battle/teddisun-front.png)
 Character created by Leo (from Discord) and released under the CC-BY-SA 4.0+ license. Front, back, and menu sprites drawn by ultidonki, also released under the CC-BY-SA 4.0+ license based on the design by Leo (from Discord).
 
 ### Bubbles

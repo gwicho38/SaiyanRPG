@@ -6,9 +6,9 @@ import unittest
 from interactive.locale.verify_master_locale import test_dialog, test_translation_slugs
 
 # for some test runners that cannot find the tuxemon core
-sys.path.insert(0, os.path.join('tuxemon', ))
+sys.path.insert(0, os.path.join('saiyanquest', ))
 
-from tuxemon.core.components.ui import draw
+from saiyanquest.core.components.ui import draw
 
 
 def flatten(it):

@@ -5,13 +5,13 @@ Snap collisions and events to the tile grid
 EXAMPLES:
 
     preview changes:
-    python3 scripts/snap_map.py mods/tuxemon/maps/taba_town.tmx
+    python3 scripts/snap_map.py mods/saiyanquest/maps/taba_town.tmx
 
     write changes
-    python3 -w scripts/snap_map.py mods/tuxemon/maps/taba_town.tmx
+    python3 -w scripts/snap_map.py mods/saiyanquest/maps/taba_town.tmx
 
     many files:
-    python3 scripts/snap_map.py mods/tuxemon/maps/*tmx
+    python3 scripts/snap_map.py mods/saiyanquest/maps/*tmx
 
 """
 

@@ -1,0 +1,69 @@
+# SPDX-License-Identifier: GPL-3.0
+# Copyright (c) 2014-2025 William Edwards <shadowapex@gmail.com>, Benjamin Bean <superman2k5@gmail.com>
+from __future__ import annotations
+
+import logging
+from dataclasses import dataclass
+from typing import Optional, final
+from uuid import UUID
+
+from saiyanquest.event import get_monster_by_iid
+from saiyanquest.event.eventaction import EventAction
+from saiyanquest.monster import Monster
+from saiyanquest.session import Session
+from saiyanquest.status.status import Status
+
+logger = logging.getLogger(__name__)
+
+
+@final
+@dataclass
+class SetMonsterStatusAction(EventAction):
+    """
+    Change the status of a monster in the current player's party.
+
+    Script usage:
+        .. code-block::
+
+            set_monster_status [slot][,status]
+
+    Script parameters:
+        variable: Name of the variable where to store the monster id. If no
+            variable is specified, all monsters get/lose status.
+        status: Status to set. If no status is specified, the status is
+            cleared.
+    """
+
+    name = "set_monster_status"
+    variable: Optional[str] = None
+    status: Optional[str] = None
+
+    @staticmethod
+    def set_status(
+        monster: Monster, value: Optional[str], steps: float
+    ) -> None:
+        if not value:
+            monster.status.remove_status()
+        else:
+            status = Status.create(value, monster, steps)
+            monster.status.add_status(status)
+
+    def start(self, session: Session) -> None:
+        player = session.player
+        steps = player.steps
+        if not player.monsters:
+            return
+
+        if self.variable is None:
+            for mon in player.monsters:
+                self.set_status(mon, self.status, steps)
+        else:
+            if self.variable not in player.game_variables:
+                logger.error(f"Game variable {self.variable} not found")
+                return
+            monster_id = UUID(player.game_variables[self.variable])
+            monster = get_monster_by_iid(session, monster_id)
+            if monster is None:
+                logger.error("Monster not found")
+                return
+            self.set_status(monster, self.status, steps)

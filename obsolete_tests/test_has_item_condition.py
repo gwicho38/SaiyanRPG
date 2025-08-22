@@ -5,9 +5,9 @@ from collections import namedtuple
 from nose.tools import nottest
 
 # for some test runners that cannot find the tuxemon core
-sys.path.insert(0, os.path.join('tuxemon', ))
-from tuxemon.core.control import HeadlessControl
-from tuxemon.core.components.event.conditions.has_item import HasItemCondition
+sys.path.insert(0, os.path.join('saiyanquest', ))
+from saiyanquest.core.control import HeadlessControl
+from saiyanquest.core.components.event.conditions.has_item import HasItemCondition
 
 # mocks and defaults
 cond_nt = namedtuple("condition", ("parameters",))

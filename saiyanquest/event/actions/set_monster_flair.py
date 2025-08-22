@@ -1,0 +1,55 @@
+# SPDX-License-Identifier: GPL-3.0
+# Copyright (c) 2014-2025 William Edwards <shadowapex@gmail.com>, Benjamin Bean <superman2k5@gmail.com>
+from __future__ import annotations
+
+import logging
+from dataclasses import dataclass
+from typing import final
+from uuid import UUID
+
+from saiyanquest.event import get_monster_by_iid
+from saiyanquest.event.eventaction import EventAction
+from saiyanquest.monster_dir.sprite import Flair
+from saiyanquest.session import Session
+
+logger = logging.getLogger(__name__)
+
+
+@final
+@dataclass
+class SetMonsterFlairAction(EventAction):
+    """
+    Set a monster's flair to the given value.
+
+    Script usage:
+        .. code-block::
+
+            set_monster_flair <variable>,<category>,<flair>
+
+    Script parameters:
+        variable: Name of the variable where to store the monster id. If no
+            variable is specified, all monsters are changed.
+        category: Category of the monster flair.
+        flair: Name of the monster flair.
+    """
+
+    name = "set_monster_flair"
+    variable: str
+    category: str
+    flair: str
+
+    def start(self, session: Session) -> None:
+        player = session.player
+        if self.variable not in player.game_variables:
+            logger.error(f"Game variable {self.variable} not found")
+            return
+        monster_id = UUID(player.game_variables[self.variable])
+        monster = get_monster_by_iid(session, monster_id)
+        if monster is None:
+            logger.error("Monster not found")
+            return
+        if self.category in monster.flairs:
+            monster.flairs[self.category] = Flair(
+                self.category,
+                self.flair,
+            )

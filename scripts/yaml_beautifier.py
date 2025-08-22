@@ -13,7 +13,7 @@ Beautify all YAML files in a directory with 2-space indent, recursively and forc
     python yaml_beautifier.py my_yaml_folder -r -i 2 -f
 
 Example (moving in scripts folder):
-    python yaml_beautifier.py ../mods/tuxemon/PATH/ -r
+    python yaml_beautifier.py ../mods/saiyanquest/PATH/ -r
 
 Get help/usage information:
     python yaml_beautifier.py --help

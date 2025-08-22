@@ -1,6 +1,6 @@
 import pygame
 import this
-from tuxemon.core.components.ui import draw
+from saiyanquest.core.components.ui import draw
 
 if __name__ == "__main__":
     pygame.init()

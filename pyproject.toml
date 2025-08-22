@@ -11,7 +11,7 @@ authors = [
     {name = "William Edwards", email = "shadowapex@gmail.com"}
 ]
 maintainers = [
-    {name = "Tuxemon Community"}
+    {name = "SaiyanQuest Community"}
 ]
 classifiers = [
         "Intended Audience :: End Users/Desktop",
@@ -32,14 +32,14 @@ homepage = "https://www.tuxemon.org"
 source = "https://github.com/Tuxemon/Tuxemon"
 
 [project.gui-scripts]
-saiyanquest = "tuxemon.__main__:main"
+saiyanquest = "saiyanquest.__main__:main"
 
 [tool.setuptools]
 include-package-data = true
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["tuxemon*"]
+include = ["saiyanquest*"]
 
 [tool.setuptools.dynamic]
 dependencies = {file = "requirements.txt"}

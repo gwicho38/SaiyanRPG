@@ -1,0 +1,79 @@
+# SPDX-License-Identifier: GPL-3.0
+# Copyright (c) 2014-2025 William Edwards <shadowapex@gmail.com>, Benjamin Bean <superman2k5@gmail.com>
+from __future__ import annotations
+
+import random
+from dataclasses import dataclass
+from typing import TYPE_CHECKING
+
+from saiyanquest.core.core_effect import CoreEffect, TechEffectResult
+from saiyanquest.locale import T
+from saiyanquest.monster_dir.status import BlockedReason
+from saiyanquest.status.status import Status
+
+if TYPE_CHECKING:
+    from saiyanquest.monster import Monster
+    from saiyanquest.session import Session
+    from saiyanquest.technique.technique import Technique
+
+
+@dataclass
+class GiveEffect(CoreEffect):
+    """
+    This effect has a chance to give a status effect.
+
+    Parameters:
+        condition: The Status slug (e.g. enraged).
+        objectives: The targets (e.g. own_monster, enemy_monster, etc.), if
+            single "enemy_monster" or "enemy_monster:own_monster"
+
+    eg "give enraged,own_monster"
+    """
+
+    name = "give"
+    condition: str
+    objectives: str
+
+    def apply_tech_target(
+        self, session: Session, tech: Technique, user: Monster, target: Monster
+    ) -> TechEffectResult:
+        player = user.get_owner()
+
+        objectives = self.objectives.split(":")
+        potency = random.random()
+        hit = session.client.combat_session.get_tech_hit(user)
+        success = tech.potency >= potency and tech.accuracy >= hit
+
+        if not success:
+            return TechEffectResult(name=tech.name)
+
+        status = Status.create(self.condition, user, player.steps)
+
+        immune_info = []
+        successful_targets = []
+        extras = []
+        monsters = session.client.combat_session.get_target_monsters(
+            objectives, user, target
+        )
+
+        for monster in monsters:
+            result = monster.status.apply_status(session, status, monster)
+            if result.applied:
+                successful_targets.append(monster)
+            elif result.blocked_reason == BlockedReason.IMMUNE_BY_ITEM:
+                immune_info.append(f"{monster.name} ({result.blocked_by})")
+
+        if immune_info:
+            immune_names = ", ".join(immune_info)
+            key = (
+                "combat_state_immune"
+                if len(immune_info) == 1
+                else "combat_state_immune_multiple"
+            )
+            params = {"target": immune_names, "method": status.name}
+            extract_text = T.format(key, params)
+            extras = [extract_text]
+
+        return TechEffectResult(
+            name=tech.name, success=bool(monsters), extras=extras
+        )

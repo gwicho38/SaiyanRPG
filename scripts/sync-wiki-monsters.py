@@ -2,7 +2,7 @@
 # Downloads all the monsters from the wiki and
 # creates monsters and their sprites.
 # Run set_movelist.py after this, as this script
-# deletes the movelist of every tuxemon.
+# deletes the movelist of every saiyanquest.
 
 from scripts.tuxepedia.api import TuxepediaStore
 

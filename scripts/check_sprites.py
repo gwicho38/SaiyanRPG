@@ -59,7 +59,7 @@ def save_report_to_txt(report, output_path="sprite_report.txt"):
 
 
 def analyze_battles_images() -> list[dict[str, str]]:
-    folder_path = Path("../mods/tuxemon/gfx/sprites/battle")
+    folder_path = Path("../mods/saiyanquest/gfx/sprites/battle")
     issues = []
 
     for file_path in folder_path.iterdir():

@@ -5,7 +5,7 @@ class TuxemonRecipe(PythonRecipe):
     version = 'development'
     url = 'https://github.com/Tuxemon/Tuxemon/archive/development.zip'
     depends = ['setuptools']
-    site_packages_name = 'tuxemon'
+    site_packages_name = 'saiyanquest'
     call_hostpython_via_targetpython = False
     install_in_hostpython = True
 

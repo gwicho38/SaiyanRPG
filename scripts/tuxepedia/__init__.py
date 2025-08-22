@@ -11,7 +11,7 @@ import os.path
 class WEB_PATHS:
     """Listing of Web content resource paths for the Tuxepedia."""
 
-    tuxepedia = "https://wiki.tuxemon.org"
+    tuxepedia = "https://wiki.saiyanquest.org"
 
     # TODO: add xpath filters for other parts of the Tuxepedia as needed
     monsters_xpath = '//*[@id="mw-content-text"]/table[1]/tr[1]/td[1]/table'
@@ -24,13 +24,13 @@ class RESOURCE_PATHS:
 
     # TODO: add project root path from global constants if possible
     # main static resources path
-    resources = os.path.join("tuxemon", "resources")
+    resources = os.path.join("saiyanquest", "resources")
 
     database = os.path.join(resources, "db", "tuxepedia", "tuxepedia.sqlite")
 
     # tuxemon sprites and sound file paths
     monster_sprites = os.path.join(resources, "gfx", "sprites", "battle")
-    monster_sounds = os.path.join(resources, "sounds", "tuxemon")
+    monster_sounds = os.path.join(resources, "sounds", "saiyanquest")
 
     # tuxemon JSON/YAML file paths
     monster_stats = os.path.join(resources, "db", "monster")

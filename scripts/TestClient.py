@@ -5,7 +5,7 @@ dont_extract = True  # Switching to false will make the download function
 import os
 import readline
 
-from tuxemon.mod_manager import Manager
+from saiyanquest.mod_manager import Manager
 
 print(
     "",

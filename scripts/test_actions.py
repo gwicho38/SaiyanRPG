@@ -4,14 +4,14 @@ Script to validate map actions
 
 from unittest.mock import MagicMock
 
-from tuxemon.constants import paths
-from tuxemon.db import db
-from tuxemon.event.eventaction import ActionManager
-from tuxemon.event.eventcondition import ConditionManager
-from tuxemon.event.eventengine import EventEngine
-from tuxemon.map_loader import TMXMapLoader
-from tuxemon.prepare import CONFIG
-from tuxemon.session import Session
+from saiyanquest.constants import paths
+from saiyanquest.db import db
+from saiyanquest.event.eventaction import ActionManager
+from saiyanquest.event.eventcondition import ConditionManager
+from saiyanquest.event.eventengine import EventEngine
+from saiyanquest.map_loader import TMXMapLoader
+from saiyanquest.prepare import CONFIG
+from saiyanquest.session import Session
 
 db.load("monster")
 action = ActionManager()

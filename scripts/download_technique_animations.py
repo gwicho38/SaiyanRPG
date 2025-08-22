@@ -19,14 +19,14 @@ import requests
 from lxml import html
 from PIL import Image
 
-WIKI_URL = "https://wiki.tuxemon.org"
+WIKI_URL = "https://wiki.saiyanquest.org"
 
 # Set to True if the download script is supposed to stop on first failed  animation download
 EXIT_ON_FAILED_DOWNLOAD = False
 
 TUXEMON_ROOT_DIR = pathlib.Path(__file__).resolve().parent.parent
 ANIMATION_DIR = TUXEMON_ROOT_DIR.joinpath(
-    pathlib.Path("mods/tuxemon/animations/technique")
+    pathlib.Path("mods/saiyanquest/animations/technique")
 )
 CREDITS_TEMPLATE = """* ["{animation_name}"]({animation_url})
 {credits_text}"""

@@ -1,6 +1,6 @@
 from pprint import pprint
 
-from tuxemon.mod_manager import Manager
+from saiyanquest.mod_manager import Manager
 
 # ip_list = ["http://127.0.0.1:5000", "http://127.0.0.1:5001"]
 ip_list = ["http://127.0.0.1:5000"]

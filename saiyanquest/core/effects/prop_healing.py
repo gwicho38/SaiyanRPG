@@ -1,0 +1,61 @@
+# SPDX-License-Identifier: GPL-3.0
+# Copyright (c) 2014-2025 William Edwards <shadowapex@gmail.com>, Benjamin Bean <superman2k5@gmail.com>
+from __future__ import annotations
+
+from dataclasses import dataclass
+from typing import TYPE_CHECKING
+
+from saiyanquest.core.core_effect import CoreEffect, TechEffectResult
+
+if TYPE_CHECKING:
+    from saiyanquest.monster import Monster
+    from saiyanquest.session import Session
+    from saiyanquest.technique.technique import Technique
+
+
+@dataclass
+class PropHealingEffect(CoreEffect):
+    """
+    Proportional Healing:
+    This effect does healing to the enemy equal to % of the user's maximum HP.
+
+    Parameters:
+        objectives: The targets (e.g. own_monster, enemy_monster, etc.), if
+            single "enemy_monster" or "enemy_monster:own_monster"
+        proportional: The percentage of the max HP (from 0 to 1)
+
+    eg prop_healing own_monster,0.25 (1/4 max enemy HP)
+
+    """
+
+    name = "prop_healing"
+    objectives: str
+    proportional: float
+
+    def apply_tech_target(
+        self, session: Session, tech: Technique, user: Monster, target: Monster
+    ) -> TechEffectResult:
+
+        if not 0 <= self.proportional <= 1:
+            raise ValueError(f"{self.proportional} must be between 0 and 1")
+
+        monsters: list[Monster] = []
+        hit = session.client.combat_session.get_tech_hit(user)
+
+        objectives = self.objectives.split(":")
+        tech.hit = tech.accuracy >= hit
+        reference_hp = user.hp
+
+        if tech.hit:
+            monsters = session.client.combat_session.get_target_monsters(
+                objectives, user, target
+            )
+
+        if monsters:
+            amount = int((reference_hp) * self.proportional)
+            for monster in monsters:
+                monster.current_hp = min(
+                    monster.hp, monster.current_hp + amount
+                )
+
+        return TechEffectResult(name=tech.name, success=tech.hit)

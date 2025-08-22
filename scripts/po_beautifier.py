@@ -7,7 +7,7 @@ To beautify all .po files in the current directory:
     python po_beautifier.py *.po
 
 To beautify files in a specific folder:
-    python po_beautifier.py ../mods/tuxemon/l18n/LANGUAGE/LC_MESSAGES -r
+    python po_beautifier.py ../mods/saiyanquest/l18n/LANGUAGE/LC_MESSAGES -r
 
 To beautify a file but NOT remove obsolete entries:
     python po_beautifier.py my_translation.po --no-remove-obsolete
