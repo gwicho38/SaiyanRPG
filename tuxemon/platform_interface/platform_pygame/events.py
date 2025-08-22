@@ -10,8 +10,8 @@ from pygame.rect import Rect
 from pygame.surface import Surface
 
 from tuxemon import graphics, prepare
-from tuxemon.platform.const import buttons, events
-from tuxemon.platform.events import (
+from tuxemon.platform_interface.const import buttons, events
+from tuxemon.platform_interface.events import (
     EventQueueHandler,
     InputHandler,
     PlayerInput,

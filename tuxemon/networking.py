@@ -16,7 +16,7 @@ from tuxemon import prepare
 from tuxemon.event import get_npc
 from tuxemon.middleware import Controller, Multiplayer
 from tuxemon.npc import NPC
-from tuxemon.platform.const import buttons
+from tuxemon.platform_interface.const import buttons
 from tuxemon.session import local_session
 from tuxemon.states.world import worldstate as world
 
@@ -34,7 +34,7 @@ except ImportError:
 
 if TYPE_CHECKING:
     from tuxemon.client import LocalPygameClient
-    from tuxemon.platform.events import PlayerInput
+    from tuxemon.platform_interface.events import PlayerInput
 
 
 class ConnectionState(Enum):

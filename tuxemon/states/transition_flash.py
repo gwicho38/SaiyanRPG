@@ -9,7 +9,7 @@ from pygame.surface import Surface
 
 from tuxemon import prepare
 from tuxemon.graphics import ColorLike
-from tuxemon.platform.events import PlayerInput
+from tuxemon.platform_interface.events import PlayerInput
 from tuxemon.rumble.tools import RumbleParams
 from tuxemon.state.state import State
 

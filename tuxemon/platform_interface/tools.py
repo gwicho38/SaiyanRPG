@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import logging
 
-from tuxemon.platform.const import buttons, events, intentions
-from tuxemon.platform.events import PlayerInput
+from tuxemon.platform_interface.const import buttons, events, intentions
+from tuxemon.platform_interface.events import PlayerInput
 
 logger = logging.getLogger(__name__)
 

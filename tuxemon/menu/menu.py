@@ -26,8 +26,8 @@ from tuxemon.menu.cursor import MenuCursor, MenuCursorController
 from tuxemon.menu.events import playerinput_to_event
 from tuxemon.menu.interface import MenuItem
 from tuxemon.menu.theme import get_sound_engine, get_theme
-from tuxemon.platform.const import buttons, intentions
-from tuxemon.platform.events import PlayerInput
+from tuxemon.platform_interface.const import buttons, intentions
+from tuxemon.platform_interface.events import PlayerInput
 from tuxemon.sprite import (
     RelativeGroup,
     SpriteGroup,

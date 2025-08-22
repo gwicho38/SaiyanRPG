@@ -5,8 +5,8 @@ from __future__ import annotations
 from collections import deque
 from typing import Optional
 
-from tuxemon.platform.events import PlayerInput
-from tuxemon.platform.tools import translate_input_event
+from tuxemon.platform_interface.events import PlayerInput
+from tuxemon.platform_interface.tools import translate_input_event
 
 
 class InputHistory:

@@ -11,7 +11,7 @@ from tuxemon.animation import Animation, ScheduleType
 from tuxemon.locale import T
 from tuxemon.menu.menu import PygameMenuState
 from tuxemon.menu.theme import get_theme
-from tuxemon.platform.events import PlayerInput
+from tuxemon.platform_interface.events import PlayerInput
 
 
 class SetKeyState(PygameMenuState):

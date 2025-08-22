@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import ClassVar, Optional
 
-from tuxemon.platform.events import PlayerInput
+from tuxemon.platform_interface.events import PlayerInput
 from tuxemon.state.state import State
 
 

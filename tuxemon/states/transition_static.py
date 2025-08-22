@@ -9,7 +9,7 @@ from typing import ClassVar, Optional
 from pygame.surface import Surface
 
 from tuxemon import prepare
-from tuxemon.platform.events import PlayerInput
+from tuxemon.platform_interface.events import PlayerInput
 from tuxemon.state.state import State
 
 logger = logging.getLogger(__name__)

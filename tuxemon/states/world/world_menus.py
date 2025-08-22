@@ -15,8 +15,8 @@ from tuxemon.animation import ScheduleType
 from tuxemon.item.filter import ItemFilter
 from tuxemon.locale import T
 from tuxemon.menu.menu import PygameMenuState
-from tuxemon.platform.const import buttons
-from tuxemon.platform.events import PlayerInput
+from tuxemon.platform_interface.const import buttons
+from tuxemon.platform_interface.events import PlayerInput
 from tuxemon.states.monster import MonsterMenuHandler
 from tuxemon.states.world.world_menu_flags import MenuFlags
 

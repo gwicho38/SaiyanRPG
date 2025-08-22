@@ -8,15 +8,15 @@ from typing import TYPE_CHECKING, Any, ClassVar, Optional
 
 from tuxemon.graphics import load_and_scale
 from tuxemon.menu.menu import PopUpMenu
-from tuxemon.platform.const import buttons
-from tuxemon.platform.events import PlayerInput
+from tuxemon.platform_interface.const import buttons
+from tuxemon.platform_interface.events import PlayerInput
 from tuxemon.sprite import Sprite
 from tuxemon.tools import scale
 from tuxemon.ui.text import TextArea
 from tuxemon.ui.text_alignment import HorizontalAlignment, VerticalAlignment
 
 if TYPE_CHECKING:
-    from tuxemon.platform.events import PlayerInput
+    from tuxemon.platform_interface.events import PlayerInput
     from tuxemon.sprite import Sprite
 
 logger = logging.getLogger(__name__)

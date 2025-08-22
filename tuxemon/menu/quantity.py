@@ -11,8 +11,8 @@ from tuxemon.locale import T
 from tuxemon.menu.formatter import CurrencyFormatter, QuantityFormatter
 from tuxemon.menu.interface import MenuItem
 from tuxemon.menu.menu import Menu
-from tuxemon.platform.const import buttons, intentions
-from tuxemon.platform.events import PlayerInput
+from tuxemon.platform_interface.const import buttons, intentions
+from tuxemon.platform_interface.events import PlayerInput
 from tuxemon.session import local_session
 
 logger = logging.getLogger(__name__)

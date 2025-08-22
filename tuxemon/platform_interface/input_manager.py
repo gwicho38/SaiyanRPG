@@ -6,8 +6,8 @@ import logging
 from collections.abc import Generator
 from typing import TYPE_CHECKING, Optional
 
-from tuxemon.platform.input_history import InputHistory
-from tuxemon.platform.platform_pygame.events import (
+from tuxemon.platform_interface.input_history import InputHistory
+from tuxemon.platform_interface.platform_pygame.events import (
     PygameEventQueueHandler,
     PygameGamepadInput,
     PygameKeyboardInput,
@@ -17,7 +17,7 @@ from tuxemon.platform.platform_pygame.events import (
 
 if TYPE_CHECKING:
     from tuxemon.config import TuxemonConfig
-    from tuxemon.platform.events import PlayerInput
+    from tuxemon.platform_interface.events import PlayerInput
 
 logger = logging.getLogger(__name__)
 

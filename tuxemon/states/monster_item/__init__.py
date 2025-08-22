@@ -15,8 +15,8 @@ from tuxemon.locale import T
 from tuxemon.menu.interface import MenuItem
 from tuxemon.menu.menu import PygameMenuState
 from tuxemon.monster import Monster
-from tuxemon.platform.const import buttons
-from tuxemon.platform.events import PlayerInput
+from tuxemon.platform_interface.const import buttons
+from tuxemon.platform_interface.events import PlayerInput
 from tuxemon.states.items.item_menu import ItemMenuState
 
 

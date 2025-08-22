@@ -15,9 +15,9 @@ from tuxemon.animation import Animation, ScheduleType
 from tuxemon.locale import T
 from tuxemon.menu.menu import PygameMenuState
 from tuxemon.menu.theme import get_theme
-from tuxemon.platform.const import buttons
-from tuxemon.platform.events import PlayerInput
-from tuxemon.platform.platform_pygame.events import PygameKeyboardInput
+from tuxemon.platform_interface.const import buttons
+from tuxemon.platform_interface.events import PlayerInput
+from tuxemon.platform_interface.platform_pygame.events import PygameKeyboardInput
 from tuxemon.state.state import State
 
 

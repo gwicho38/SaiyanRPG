@@ -8,7 +8,7 @@ from tuxemon.db import Direction
 from tuxemon.event.eventmanager import EventManager
 from tuxemon.movement import MovementManager
 from tuxemon.npc import NPC
-from tuxemon.platform.input_manager import InputManager
+from tuxemon.platform_interface.input_manager import InputManager
 
 
 class TestMovementManager(unittest.TestCase):

@@ -3,7 +3,7 @@
 import unittest
 from unittest.mock import MagicMock
 
-from tuxemon.platform.events import (
+from tuxemon.platform_interface.events import (
     EventQueueHandler,
     InputHandler,
     PlayerInput,

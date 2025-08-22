@@ -23,8 +23,8 @@ from tuxemon.event.eventpersist import EventPersist
 from tuxemon.map_loader import MapLoader
 from tuxemon.map_manager import MapManager
 from tuxemon.npc_manager import NPCManager
-from tuxemon.platform.events import PlayerInput
-from tuxemon.platform.input_manager import InputManager
+from tuxemon.platform_interface.events import PlayerInput
+from tuxemon.platform_interface.input_manager import InputManager
 from tuxemon.rumble import RumbleManager
 from tuxemon.session import local_session
 from tuxemon.state.loader import StateLoader

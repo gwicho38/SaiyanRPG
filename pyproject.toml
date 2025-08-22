@@ -3,7 +3,7 @@ requires = ["setuptools", "setuptools-scm", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "tuxemon"
+name = "saiyanquest"
 description = "Open source monster-fighting RPG"
 readme = "README.md"
 license = {file = "LICENSE"}
@@ -32,7 +32,7 @@ homepage = "https://www.tuxemon.org"
 source = "https://github.com/Tuxemon/Tuxemon"
 
 [project.gui-scripts]
-tuxemon = "tuxemon.__main__:main"
+saiyanquest = "tuxemon.__main__:main"
 
 [tool.setuptools]
 include-package-data = true

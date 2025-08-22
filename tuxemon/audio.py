@@ -11,7 +11,7 @@ import pygame
 from tuxemon import prepare
 from tuxemon.constants.asset_loader import fetch_asset
 from tuxemon.db import MusicStatus, db
-from tuxemon.platform import mixer as mixer2
+from tuxemon.platform_interface import mixer as mixer2
 from tuxemon.tools import transform_resource_filename
 
 logger = logging.getLogger(__name__)

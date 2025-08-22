@@ -290,7 +290,7 @@ DEV_TOOLS = CONFIG.dev_tools
 
 def pygame_init() -> None:
     """Eventually refactor out of prepare."""
-    from tuxemon import platform
+    from tuxemon import platform_interface as platform
 
     platform.init()
 
@@ -316,7 +316,7 @@ def pygame_init() -> None:
     pg.init()
     pg.display.set_caption(CONFIG.window_caption)
 
-    from tuxemon.platform import is_android
+    from tuxemon.platform_interface import is_android
 
     fullscreen = pg.FULLSCREEN if CONFIG.fullscreen else 0
     if is_android():

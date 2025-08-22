@@ -23,7 +23,7 @@ if TYPE_CHECKING:
     from tuxemon.map_manager import MapManager
     from tuxemon.npc import NPC
     from tuxemon.npc_manager import NPCManager
-    from tuxemon.platform.input_manager import InputManager
+    from tuxemon.platform_interface.input_manager import InputManager
 
 logger = logging.getLogger(__name__)
 

@@ -12,7 +12,7 @@ import yaml
 from tuxemon.animation import Animation
 from tuxemon.constants import paths
 from tuxemon.constants.dialog_speed import DIALOG_SPEED_PROFILES
-from tuxemon.platform.const import buttons, events
+from tuxemon.platform_interface.const import buttons, events
 
 Animation.default_transition = "out_quint"
 

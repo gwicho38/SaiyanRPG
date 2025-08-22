@@ -58,7 +58,7 @@ from tuxemon.locale import T
 from tuxemon.menu.interface import MenuItem
 from tuxemon.monster import Monster
 from tuxemon.npc import NPC
-from tuxemon.platform.const import buttons
+from tuxemon.platform_interface.const import buttons
 from tuxemon.state.state import State
 from tuxemon.states.monster import MonsterMenuState
 from tuxemon.status.status import Status
@@ -72,7 +72,7 @@ from .combat_animations import CombatAnimations
 from .reward_system import RewardSystem
 
 if TYPE_CHECKING:
-    from tuxemon.platform.events import PlayerInput
+    from tuxemon.platform_interface.events import PlayerInput
     from tuxemon.sprite import Sprite
 
 logger = logging.getLogger(__name__)

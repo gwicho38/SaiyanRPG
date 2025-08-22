@@ -4,7 +4,7 @@ import unittest
 from unittest.mock import Mock
 
 from tuxemon.event.eventmanager import EventManager
-from tuxemon.platform.events import PlayerInput
+from tuxemon.platform_interface.events import PlayerInput
 from tuxemon.state.manager import StateManager
 
 

@@ -8,7 +8,7 @@ from tuxemon import prepare
 from tuxemon.graphics import string_to_colorlike
 from tuxemon.menu.menu import PygameMenuState
 from tuxemon.menu.theme import get_theme
-from tuxemon.platform.events import PlayerInput
+from tuxemon.platform_interface.events import PlayerInput
 
 
 class ColorState(PygameMenuState):

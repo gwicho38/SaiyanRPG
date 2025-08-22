@@ -4,7 +4,7 @@ import unittest
 from unittest.mock import Mock
 
 from tuxemon.camera import Camera, CameraInputHandler
-from tuxemon.platform.const import intentions
+from tuxemon.platform_interface.const import intentions
 
 
 class TestCameraInputHandler(unittest.TestCase):

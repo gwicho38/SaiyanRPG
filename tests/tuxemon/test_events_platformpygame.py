@@ -8,9 +8,9 @@ from pygame.event import Event
 from pygame.surface import Surface
 
 from tuxemon import graphics, prepare
-from tuxemon.platform.const import buttons, events
-from tuxemon.platform.events import PlayerInput
-from tuxemon.platform.platform_pygame.events import (
+from tuxemon.platform_interface.const import buttons, events
+from tuxemon.platform_interface.events import PlayerInput
+from tuxemon.platform_interface.platform_pygame.events import (
     HORIZONTAL_AXIS,
     VERTICAL_AXIS,
     PygameGamepadInput,

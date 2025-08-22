@@ -23,7 +23,7 @@ from tuxemon.animation import (
 )
 from tuxemon.event import get_event_bus
 from tuxemon.event.eventbus import Listener
-from tuxemon.platform.events import PlayerInput
+from tuxemon.platform_interface.events import PlayerInput
 from tuxemon.session import local_session
 from tuxemon.sprite import Sprite, SpriteGroup
 

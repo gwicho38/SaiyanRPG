@@ -8,7 +8,7 @@ from pygame_menu.locals import ALIGN_CENTER
 
 from tuxemon import prepare
 from tuxemon.menu.menu import PygameMenuState
-from tuxemon.platform.events import PlayerInput
+from tuxemon.platform_interface.events import PlayerInput
 
 
 class ImageState(PygameMenuState):

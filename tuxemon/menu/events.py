@@ -4,8 +4,8 @@ from typing import Final, Optional
 
 import pygame
 
-from tuxemon.platform.const import buttons
-from tuxemon.platform.events import PlayerInput
+from tuxemon.platform_interface.const import buttons
+from tuxemon.platform_interface.events import PlayerInput
 
 _EVENT_MAP: Final = {
     buttons.UP: pygame.event.Event(pygame.KEYDOWN, key=pygame.K_UP),

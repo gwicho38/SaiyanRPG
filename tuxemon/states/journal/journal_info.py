@@ -12,8 +12,8 @@ from tuxemon import formula, prepare
 from tuxemon.db import MonsterModel, db
 from tuxemon.locale import T
 from tuxemon.menu.menu import PygameMenuState
-from tuxemon.platform.const import buttons
-from tuxemon.platform.events import PlayerInput
+from tuxemon.platform_interface.const import buttons
+from tuxemon.platform_interface.events import PlayerInput
 from tuxemon.tools import fix_measure
 
 if TYPE_CHECKING:

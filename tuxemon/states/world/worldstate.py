@@ -20,9 +20,9 @@ from tuxemon.camera import Camera
 from tuxemon.db import Direction
 from tuxemon.faction.manager import FactionManager
 from tuxemon.map_view import MapRenderer
-from tuxemon.platform.const import intentions
-from tuxemon.platform.events import PlayerInput
-from tuxemon.platform.tools import translate_input_event
+from tuxemon.platform_interface.const import intentions
+from tuxemon.platform_interface.events import PlayerInput
+from tuxemon.platform_interface.tools import translate_input_event
 from tuxemon.player import Player
 from tuxemon.session import Session
 from tuxemon.state.state import State

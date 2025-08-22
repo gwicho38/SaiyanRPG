@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find:*)",
+      "Bash(uv run:*)",
+      "Bash(uv pip install:*)",
+      "Bash(saiyanquest:*)",
+      "Bash(identify:*)",
+      "Bash(convert:*)",
+      "Bash(mv:*)",
+      "Bash(magick:*)",
+      "Bash(timeout 3 uv run:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

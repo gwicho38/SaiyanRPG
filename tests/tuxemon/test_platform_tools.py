@@ -2,9 +2,9 @@
 # Copyright (c) 2014-2025 William Edwards <shadowapex@gmail.com>, Benjamin Bean <superman2k5@gmail.com>
 import unittest
 
-from tuxemon.platform.const import events, intentions
-from tuxemon.platform.events import PlayerInput
-from tuxemon.platform.tools import keymap, translate_input_event
+from tuxemon.platform_interface.const import events, intentions
+from tuxemon.platform_interface.events import PlayerInput
+from tuxemon.platform_interface.tools import keymap, translate_input_event
 
 
 class TestTranslateInputEvent(unittest.TestCase):

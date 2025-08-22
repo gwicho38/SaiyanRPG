@@ -12,11 +12,11 @@ from tuxemon import prepare, tools
 from tuxemon.db import MonsterModel, db
 from tuxemon.graphics import load_sprite
 from tuxemon.locale import T
-from tuxemon.platform.const import buttons
+from tuxemon.platform_interface.const import buttons
 from tuxemon.state.state import State
 
 if TYPE_CHECKING:
-    from tuxemon.platform.events import PlayerInput
+    from tuxemon.platform_interface.events import PlayerInput
     from tuxemon.sprite import Sprite
 
 logger = logging.getLogger(__name__)

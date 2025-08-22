@@ -24,8 +24,8 @@ from pygame.surface import Surface
 from pygame.transform import rotozoom, scale
 
 from tuxemon import graphics
-from tuxemon.platform.const import buttons
-from tuxemon.platform.events import PlayerInput
+from tuxemon.platform_interface.const import buttons
+from tuxemon.platform_interface.events import PlayerInput
 from tuxemon.surfanim import SurfaceAnimation
 from tuxemon.tools import scale as tuxemon_scale
 

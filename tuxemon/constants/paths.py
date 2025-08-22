@@ -4,7 +4,7 @@ import logging
 import sys
 from pathlib import Path
 
-from tuxemon.platform import get_system_storage_dirs, get_user_storage_dir
+from tuxemon.platform_interface import get_system_storage_dirs, get_user_storage_dir
 
 logger = logging.getLogger(__name__)
 
