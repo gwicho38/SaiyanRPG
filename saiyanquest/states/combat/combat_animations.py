@@ -279,7 +279,7 @@ class CombatAnimations(Menu[None], ABC):
             if monster in monsters:
                 monsters.remove(monster)
 
-        # Update the party HUD to reflect the fainted tuxemon
+        # Update the party HUD to reflect the fainted SaiyanQuest
         self.animate_update_party_hud()
 
     def animate_sprite_take_damage(self, sprite: Sprite) -> None:
@@ -580,7 +580,7 @@ class CombatAnimations(Menu[None], ABC):
 
     def animate_update_party_hud(self) -> None:
         """
-        Update the balls in the party HUD to reflect fainted Tuxemon.
+        Update the balls in the party HUD to reflect fainted SaiyanQuest.
 
         Note:
             Party HUD is the arrow thing with balls.  Yes, that one.

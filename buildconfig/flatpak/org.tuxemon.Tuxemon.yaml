@@ -1,9 +1,9 @@
 ---
-id: org.saiyanquest.Tuxemon
+id: org.saiyanquest.SaiyanQuest
 runtime: org.freedesktop.Platform
 runtime-version: 24.08
 sdk: org.freedesktop.Sdk
-command: org.saiyanquest.Tuxemon
+command: org.saiyanquest.SaiyanQuest
 rename-icon: icon
 
 finish-args:
@@ -25,15 +25,15 @@ modules:
     buildsystem: simple
     build-commands:
       # Create the necessary directories and copy files
-      - install -d /app/share/Tuxemon
-      - cp -r saiyanquest /app/share/Tuxemon
-      - cp -r mods /app/share/Tuxemon/mods
-      - install -Dm755 run_saiyanquest.py /app/share/Tuxemon/org.saiyanquest.Tuxemon.py
-      - install -Dm755 org.saiyanquest.Tuxemon /app/bin
-      - ln -s /app/share/Tuxemon/org.saiyanquest.Tuxemon.py /app/bin/org.saiyanquest.Tuxemon.py
+      - install -d /app/share/SaiyanQuest
+      - cp -r saiyanquest /app/share/SaiyanQuest
+      - cp -r mods /app/share/SaiyanQuest/mods
+      - install -Dm755 run_saiyanquest.py /app/share/SaiyanQuest/org.saiyanquest.SaiyanQuest.py
+      - install -Dm755 org.saiyanquest.SaiyanQuest /app/bin
+      - ln -s /app/share/SaiyanQuest/org.saiyanquest.SaiyanQuest.py /app/bin/org.saiyanquest.SaiyanQuest.py
     post-install:
-      - desktop-file-install --dir=/app/share/applications buildconfig/flatpak/org.saiyanquest.Tuxemon.desktop
-      - install -Dm755 buildconfig/flatpak/org.saiyanquest.Tuxemon.appdata.xml /app/share/metainfo/org.saiyanquest.Tuxemon.appdata.xml
+      - desktop-file-install --dir=/app/share/applications buildconfig/flatpak/org.saiyanquest.SaiyanQuest.desktop
+      - install -Dm755 buildconfig/flatpak/org.saiyanquest.SaiyanQuest.appdata.xml /app/share/metainfo/org.saiyanquest.SaiyanQuest.appdata.xml
       - install -Dm755 mods/saiyanquest/gfx/icon.png /app/share/icons/hicolor/64x64/apps/icon.png
       - install -Dm755 mods/saiyanquest/gfx/icon_128.png /app/share/icons/hicolor/128x128/apps/icon.png
       - install -Dm755 mods/saiyanquest/gfx/icon_32.png /app/share/icons/hicolor/32x32/apps/icon.png
@@ -41,9 +41,9 @@ modules:
     sources:
       - type: git
         tag: development
-        url: https://github.com/Tuxemon/Tuxemon.git
+        url: https://github.com/SaiyanQuest/SaiyanQuest.git
       - type: script
-        dest-filename: org.saiyanquest.Tuxemon
+        dest-filename: org.saiyanquest.SaiyanQuest
         commands:
           - MY_PATH="$(dirname "$0")"
-          - python3 "$MY_PATH/org.saiyanquest.Tuxemon.py"
+          - python3 "$MY_PATH/org.saiyanquest.SaiyanQuest.py"

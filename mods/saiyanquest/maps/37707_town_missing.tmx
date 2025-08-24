@@ -46,7 +46,7 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="1313" source="../gfx/tilesets/My_tuxemon_sheet_BW.tsx"/>
+ <tileset firstgid="1313" source="../gfx/tilesets/My_SaiyanQuest_sheet_BW.tsx"/>
  <tileset firstgid="1417" name="setPieces_glitch" tilewidth="16" tileheight="16" tilecount="84" columns="12">
   <image source="../gfx/tilesets/setPieces_glitch.png" width="192" height="112"/>
   <tile id="0">

@@ -116,7 +116,7 @@ class JournalState(PygameMenuState):
             min_txmn = page * MAX_PAGE
             max_txmn = (page + 1) * MAX_PAGE
 
-        # applies range to tuxemon
+        # applies range to SaiyanQuest
         monster_list = [
             ele for ele in monsters if min_txmn < ele.txmn_id <= max_txmn
         ]

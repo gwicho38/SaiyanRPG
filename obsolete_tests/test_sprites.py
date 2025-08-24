@@ -4,7 +4,7 @@ from os.path import dirname, join, normpath
 import unittest
 
 
-RESOURCES_DIR = normpath(join(dirname(__file__), '../tuxemon/resources'))
+RESOURCES_DIR = normpath(join(dirname(__file__), '../SaiyanQuest/resources'))
 
 # assume run from tests folder
 MAP_ROOT = join(RESOURCES_DIR, 'maps')

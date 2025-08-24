@@ -1,12 +1,12 @@
 
 ; The name of the installer
-Name "Tuxemon"
+Name "SaiyanQuest"
 
 ; Set the icon for the installer
-Icon "../mods/tuxemon/gfx/icon.ico"
+Icon "../mods/SaiyanQuest/gfx/icon.ico"
 
 ; The file to write
-OutFile "tuxemon-installer.exe"
+OutFile "SaiyanQuest-installer.exe"
 
 ; Request application privileges for Windows Vista and higher
 RequestExecutionLevel admin
@@ -15,11 +15,11 @@ RequestExecutionLevel admin
 Unicode True
 
 ; The default installation directory
-InstallDir $PROGRAMFILES\Tuxemon
+InstallDir $PROGRAMFILES\SaiyanQuest
 
 ; Registry key to check for directory (so if you install again, it will 
 ; overwrite the old one automatically)
-InstallDirRegKey HKLM "Software\Tuxemon" "Install_Dir"
+InstallDirRegKey HKLM "Software\SaiyanQuest" "Install_Dir"
 
 ;--------------------------------
 
@@ -48,13 +48,13 @@ LicenseData "$%TXMNBuildDir%\LICENSE"
 
 !define VERSION "0.4.35.0"
 VIProductVersion "${VERSION}"
-VIAddVersionKey /LANG=${LANG_ENGLISH} "ProductName" "Tuxemon"
+VIAddVersionKey /LANG=${LANG_ENGLISH} "ProductName" "SaiyanQuest"
 VIAddVersionKey /LANG=${LANG_ENGLISH} "FileVersion" "${VERSION}"
-VIAddVersionKey /LANG=${LANG_ENGLISH} "FileDescription" "Tuxemon is a free, open source monster-fighting RPG."
+VIAddVersionKey /LANG=${LANG_ENGLISH} "FileDescription" "SaiyanQuest is a free, open source monster-fighting RPG."
 VIAddVersionKey /LANG=${LANG_ENGLISH} "LegalCopyright" "GNU GPL v3"
 
 ; The stuff to install
-Section "Tuxemon (required)"
+Section "SaiyanQuest (required)"
 
   SectionIn RO
 
@@ -62,17 +62,17 @@ Section "Tuxemon (required)"
   SetOutPath $INSTDIR
 
   ; Put file there
-  File "$%TXMNBuildDir%\run_tuxemon.exe"
+  File "$%TXMNBuildDir%\run_SaiyanQuest.exe"
   File /r "$%TXMNBuildDir%\*"
 
   ; Write the installation path into the registry
-  WriteRegStr HKLM SOFTWARE\Tuxemon "Install_Dir" "$INSTDIR"
+  WriteRegStr HKLM SOFTWARE\SaiyanQuest "Install_Dir" "$INSTDIR"
 
   ; Write the uninstall keys for Windows
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Tuxemon" "DisplayName" "Tuxemon"
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Tuxemon" "UninstallString" '"$INSTDIR\uninstall.exe"'
-  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Tuxemon" "NoModify" 1
-  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Tuxemon" "NoRepair" 1
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\SaiyanQuest" "DisplayName" "SaiyanQuest"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\SaiyanQuest" "UninstallString" '"$INSTDIR\uninstall.exe"'
+  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\SaiyanQuest" "NoModify" 1
+  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\SaiyanQuest" "NoRepair" 1
   WriteUninstaller "$INSTDIR\uninstall.exe"
 
 SectionEnd
@@ -80,8 +80,8 @@ SectionEnd
 ; Optional section (can be disabled by the user)
 Section "Start Menu Shortcuts"
 
-  CreateDirectory "$SMPROGRAMS\Tuxemon"
-  CreateShortcut "$SMPROGRAMS\Tuxemon\Tuxemon.lnk" "$INSTDIR\Tuxemon.nsi"
+  CreateDirectory "$SMPROGRAMS\SaiyanQuest"
+  CreateShortcut "$SMPROGRAMS\SaiyanQuest\SaiyanQuest.lnk" "$INSTDIR\SaiyanQuest.nsi"
 
 SectionEnd
 
@@ -92,19 +92,19 @@ SectionEnd
 Section "Uninstall"
 
   ; Remove registry keys
-  DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Tuxemon"
-  DeleteRegKey HKLM SOFTWARE\NSIS_Tuxemon
+  DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\SaiyanQuest"
+  DeleteRegKey HKLM SOFTWARE\NSIS_SaiyanQuest
 
   ; Remove files and uninstaller
-  Delete $INSTDIR\run_tuxemon.exe
+  Delete $INSTDIR\run_SaiyanQuest.exe
   Delete $INSTDIR\uninstall.exe
   Delete $INSTDIR\*
 
   ; Remove shortcuts, if any
-  Delete "$SMPROGRAMS\Tuxemon\*.lnk"
+  Delete "$SMPROGRAMS\SaiyanQuest\*.lnk"
 
   ; Remove directories
-  RMDir "$SMPROGRAMS\Tuxemon"
+  RMDir "$SMPROGRAMS\SaiyanQuest"
   RMDir "$INSTDIR"
 
 SectionEnd

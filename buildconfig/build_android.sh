@@ -51,21 +51,21 @@ yes | sdkmanager "ndk;21.4.7075529"
 python3 -m pip install -U setuptools wheel Cython
 python3 -m pip install -U git+https://github.com/pygame/python-for-android.git
 # python3 -m pip install -U python-for-android
-# --requirements=openssl,pygame,libffi,tuxemon \
-cp run_tuxemon.py main.py
+# --requirements=openssl,pygame,libffi,SaiyanQuest \
+cp run_SaiyanQuest.py main.py
 # rebuild...
 rm -rf ~/.local/share/python-for-android/dists/unnamed_dist_1__armeabi-v7a/_python_bundle/
-rm ~/.local/share/python-for-android/packages/tuxemon/development.zip
-p4a clean_recipe_build tuxemon
+rm ~/.local/share/python-for-android/packages/SaiyanQuest/development.zip
+p4a clean_recipe_build SaiyanQuest
 p4a clean_dists
-p4a apk --name Tuxemon \
-  --private tuxemon \
+p4a apk --name SaiyanQuest \
+  --private SaiyanQuest \
   --version 0.0 \
-  --package=org.tuxemon.tuxemon \
-  --requirements=python3,openssl,pygame,libffi,tuxemon,babel,pytmx,pyscroll,natsort,android \
+  --package=org.SaiyanQuest.SaiyanQuest \
+  --requirements=python3,openssl,pygame,libffi,SaiyanQuest,babel,pytmx,pyscroll,natsort,android \
   --bootstrap=sdl2 \
   --orientation=landscape \
   --permission READ_EXTERNAL_STORAGE \
   --permission WRITE_EXTERNAL_STORAGE
 mkdir -p dist/android
-mv *apk dist/android/tuxemon-development.apk
+mv *apk dist/android/SaiyanQuest-development.apk

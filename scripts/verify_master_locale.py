@@ -16,7 +16,7 @@ import json
 import re
 from os.path import dirname, join, normpath
 
-RESOURCES_DIR = normpath(join(dirname(__file__), "../../../tuxemon/resources"))
+RESOURCES_DIR = normpath(join(dirname(__file__), "../../../SaiyanQuest/resources"))
 
 # assume run from tests folder
 DB_ROOT = join(RESOURCES_DIR, "db")

@@ -4,7 +4,7 @@ Tool for quickly filling in slugs into monster json data files.
 This tool may or may not have much use beyond brute force fixing
 of some translation issues.
 
-The script will read a tuxemon json file, read the slug, then
+The script will read a SaiyanQuest json file, read the slug, then
 fill in sane defaults for the name, description, and category.
 
 If values are already existing, then it will not overwrite them.
@@ -24,7 +24,7 @@ import re
 from os.path import join, normpath
 
 # assume run from tests folder
-db_root = normpath("../tuxemon/resources/db")
+db_root = normpath("../SaiyanQuest/resources/db")
 db_tables = ["monster"]  # tables to check for translation slugs
 master_filename = "en_US.json"
 

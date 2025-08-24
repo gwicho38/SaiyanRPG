@@ -108,8 +108,8 @@ class MinigameState(PygameMenuState):
         )
 
         data = list(lookup_cache.values())
-        tuxemon = random.choice(data)
-        self.tuxemon = tuxemon
+        SaiyanQuest = random.choice(data)
+        self.SaiyanQuest = SaiyanQuest
 
         # Image Display Based on Difficulty
         image_path = f"gfx/sprites/battle/{saiyanquest.slug}-front.png"
@@ -138,8 +138,8 @@ class MinigameState(PygameMenuState):
         num_choices = {"easy": 3, "normal": 5, "hard": 5}[self.difficulty]
         choice_pool = random.sample(data, num_choices)
 
-        if tuxemon not in choice_pool:
-            choice_pool[random.randint(0, num_choices - 1)] = tuxemon
+        if SaiyanQuest not in choice_pool:
+            choice_pool[random.randint(0, num_choices - 1)] = SaiyanQuest
 
         frame = menu.add.frame_h(
             width=fix_measure(menu._width, 0.95),

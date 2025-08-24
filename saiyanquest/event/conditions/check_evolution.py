@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 @dataclass
 class CheckEvolutionCondition(EventCondition):
     """
-    Check to see the player has at least one tuxemon evolving.
+    Check to see the player has at least one SaiyanQuest evolving.
     If yes, it'll save the monster and the evolution inside a list.
     The list will be used by the event action "evolution".
 

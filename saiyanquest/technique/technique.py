@@ -33,7 +33,7 @@ SIMPLE_PERSISTANCE_ATTRIBUTES = (
 
 class Technique:
     """
-    Particular skill that tuxemon monsters can use in battle.
+    Particular skill that SaiyanQuest monsters can use in battle.
     """
 
     effect_manager: Optional[EffectManager] = None

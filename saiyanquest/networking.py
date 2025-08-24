@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: GPL-3.0
 # Copyright (c) 2014-2025 William Edwards <shadowapex@gmail.com>, Benjamin Bean <superman2k5@gmail.com>
-"""This module contains the Tuxemon server and client."""
+"""This module contains the SaiyanQuest server and client."""
 from __future__ import annotations
 
 import logging
@@ -63,13 +63,13 @@ class EventData(TypedDict, total=False):
 class NetworkManager:
     def __init__(self, parent: LocalPygameClient) -> None:
         self.parent = parent
-        self.server: Optional[TuxemonServer] = None
-        self.client: Optional[TuxemonClient] = None
+        self.server: Optional[SaiyanQuestServer] = None
+        self.client: Optional[SaiyanQuestClient] = None
         self.connection_state = ConnectionState.DISCONNECTED
 
     def initialize(self) -> None:
-        self.server = TuxemonServer(self.parent)
-        self.client = TuxemonClient(self.parent)
+        self.server = SaiyanQuestServer(self.parent)
+        self.client = SaiyanQuestClient(self.parent)
 
     def update(self, time_delta: float) -> None:
         if self.client and self.client.listening:
@@ -116,10 +116,10 @@ class NetworkManager:
         }
 
 
-SERVER_NAME = "Default Tuxemon Server"
+SERVER_NAME = "Default SaiyanQuest Server"
 
 
-class TuxemonServer:
+class SaiyanQuestServer:
     """
     Server class for managing multiplayer games.
 
@@ -137,13 +137,13 @@ class TuxemonServer:
         timeout: int = 15,
     ) -> None:
         """
-        Initializes the TuxemonServer instance.
+        Initializes the SaiyanQuestServer instance.
 
         Parameters:
             game: The instance of the local game client that the server
                 will manage.
             server_name: The name of the server as displayed to clients.
-                Defaults to "Default Tuxemon Server" if not provided.
+                Defaults to "Default SaiyanQuest Server" if not provided.
             server_port: The port number on which the server listens for
                 incoming client connections. Defaults to 40081.
             timeout: The timeout duration (in seconds) for client activity.
@@ -445,7 +445,7 @@ class ControllerServer:
         return events
 
 
-class TuxemonClient:
+class SaiyanQuestClient:
     """
     Client class for multiplayer games. Creates a Neteria client and
     synchronizes the local game with the host state.
@@ -460,7 +460,7 @@ class TuxemonClient:
         join_self: bool = False,
     ) -> None:
         """
-        Initializes the TuxemonClient instance.
+        Initializes the SaiyanQuestClient instance.
 
         Parameters:
             game: The instance of the local game client that the client

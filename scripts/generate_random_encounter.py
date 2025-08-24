@@ -16,7 +16,7 @@ from glob import glob
 from os.path import join, normpath
 
 # assume run from tests folder
-monster_folder = normpath("../tuxemon/resources/db/monster/")
+monster_folder = normpath("../SaiyanQuest/resources/db/monster/")
 monster_glob = join(monster_folder, "*.json")
 
 # skip monsters that are not ready for the game

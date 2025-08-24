@@ -13,7 +13,7 @@
 **The manifest points to the development branch, so the source is always up to date. In case of any build problems, because of changes in the requirements.txt, the manifest and its dependencies must be updated as described below.**
 
 1. **Update Flatpak Manifest**:
-   - Open `org.tuxemon.Tuxemon.yaml`.
+   - Open `org.SaiyanQuest.SaiyanQuest.yaml`.
 
 2. **Update PortMidi Version**:
    - If a new version of PortMidi exists, update it in the relevant section.

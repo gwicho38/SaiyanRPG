@@ -17,11 +17,11 @@ PLUGIN_INCLUDE_PATTERNS = [
 
 # --- Core Game Paths ---
 
-# LIBDIR is where the tuxemon lib is
+# LIBDIR is where the SaiyanQuest lib is
 LIBDIR = Path(__file__).resolve().parent.parent
 logger.debug(f"libdir: {LIBDIR}")
 
-# BASEDIR is where tuxemon was launched from
+# BASEDIR is where SaiyanQuest was launched from
 BASEDIR = Path(sys.path[0]).resolve()
 logger.debug(f"basedir: {BASEDIR}")
 

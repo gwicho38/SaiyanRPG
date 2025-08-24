@@ -61,7 +61,7 @@ events:
     type: event
     x: 8
     y: 11
-  Heal Tuxemon:
+  Heal SaiyanQuest:
     actions:
     - set_monster_health
     - set_monster_status

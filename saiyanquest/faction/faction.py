@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 
 class Faction:
     """
-    Represents a faction within the Tuxemon game world.
+    Represents a faction within the SaiyanQuest game world.
 
     This class manages all aspects of a faction, including its identity,
     relationships with other factions, and the status of its members.

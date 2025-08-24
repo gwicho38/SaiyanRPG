@@ -28,9 +28,9 @@ class RESOURCE_PATHS:
 
     database = os.path.join(resources, "db", "tuxepedia", "tuxepedia.sqlite")
 
-    # tuxemon sprites and sound file paths
+    # SaiyanQuest sprites and sound file paths
     monster_sprites = os.path.join(resources, "gfx", "sprites", "battle")
     monster_sounds = os.path.join(resources, "sounds", "saiyanquest")
 
-    # tuxemon JSON/YAML file paths
+    # SaiyanQuest JSON/YAML file paths
     monster_stats = os.path.join(resources, "db", "monster")

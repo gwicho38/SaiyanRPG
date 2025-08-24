@@ -91,7 +91,7 @@ for x in range(0, 2000):
 
 
 for mon, moves in mons.items():
-    path = "tuxemon/resources/db/monster/%s.json" % mon.lower()
+    path = "SaiyanQuest/resources/db/monster/%s.json" % mon.lower()
     data = None
     try:
         with open(path, "r") as f:
@@ -120,7 +120,7 @@ if missing_json_file:
             for mon in missing_json_file:
                 f.write(mon + "\n")
 
-monster_path = "tuxemon/resources/db/monster/*.json"
+monster_path = "SaiyanQuest/resources/db/monster/*.json"
 jsons = glob.glob(monster_path)
 for path in jsons:
     if path not in updated_mons:

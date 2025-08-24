@@ -23,7 +23,7 @@ logging.basicConfig(level=logging.INFO)
 
 class TuxepediaWebExtractor:
     """
-    Requests + lxml wrapper class to extract Tuxemon
+    Requests + lxml wrapper class to extract SaiyanQuest
     information from the Tuxepedia website.
     """
 
@@ -53,7 +53,7 @@ class TuxepediaWebExtractor:
         monsters = {}
 
         monsters_tree = self.url_to_html(
-            self.tuxepedia_url, {"title": "Completed_Tuxemon"}
+            self.tuxepedia_url, {"title": "Completed_SaiyanQuest"}
         )
 
         table = monsters_tree.xpath(WEB_PATHS.monsters_xpath)[0]
@@ -129,13 +129,13 @@ class TuxepediaWebExtractor:
 
     def get_monster_category(self, monster_row):
         """
-        Get tuxemon types/elements from Tuxepedia table row.
+        Get SaiyanQuest types/elements from Tuxepedia table row.
 
         Parameters:
             monster_row: HTML <tr> table row element.
 
         Returns:
-            List of tuxemon types/elements.
+            List of SaiyanQuest types/elements.
 
         """
 
@@ -147,7 +147,7 @@ class TuxepediaWebExtractor:
 
     def get_monster_name(self, monster_row):
         """
-        Get tuxemon name from Tuxepedia table row.
+        Get SaiyanQuest name from Tuxepedia table row.
 
         Parameters:
             monster_row: HTML <tr> table row element.
@@ -161,7 +161,7 @@ class TuxepediaWebExtractor:
 
     def get_monster_url(self, monster_row):
         """
-        Get tuxemon entry URL from Tuxepedia table row.
+        Get SaiyanQuest entry URL from Tuxepedia table row.
 
         Parameters:
             monster_row: HTML <tr> table row element.
@@ -178,13 +178,13 @@ class TuxepediaWebExtractor:
 
     def get_monster_types(self, monster_row):
         """
-        Get tuxemon types/elements from Tuxepedia table row.
+        Get SaiyanQuest types/elements from Tuxepedia table row.
 
         Parameters:
             monster_row: HTML <tr> table row element.
 
         Returns:
-            List of tuxemon types/elements.
+            List of SaiyanQuest types/elements.
 
         """
 
@@ -201,13 +201,13 @@ class TuxepediaWebExtractor:
 
     def get_complete_monster_sprites(self, monster_row):
         """
-        Get tuxemon sprites from Tuxepedia table row.
+        Get SaiyanQuest sprites from Tuxepedia table row.
 
         Parameters:
             monster_row: HTML <tr> table row element.
 
         Returns:
-            Dict/JSON of tuxemon sprites.
+            Dict/JSON of SaiyanQuest sprites.
 
         """
 
@@ -265,7 +265,7 @@ class TuxepediaWebExtractor:
 
             local_sprite_path = os.path.join(RESOURCE_PATHS.monster_sprites, n)
 
-            # download tuxemon sprite
+            # download SaiyanQuest sprite
             self.url_to_file(sprite_url, local_sprite_path)
 
             # log output
@@ -279,17 +279,17 @@ class TuxepediaWebExtractor:
 
     def get_incomplete_monster_sprites(self, monster_row):
         """
-        Get tuxemon sprites from Tuxepedia table row.
+        Get SaiyanQuest sprites from Tuxepedia table row.
 
         Parameters:
             monster_row: HTML <tr> table row element.
 
         Returns:
-            Dict/JSON of tuxemon sprites.
+            Dict/JSON of SaiyanQuest sprites.
 
         """
 
-        # get tuxemon name
+        # get SaiyanQuest name
         txmn_name = self.get_monster_name(monster_row)
 
         # sprites JSON template
@@ -322,7 +322,7 @@ class TuxepediaWebExtractor:
                 RESOURCE_PATHS.monster_sprites, txmn_name.lower(), sprite_file
             )
 
-            # download tuxemon sprite
+            # download SaiyanQuest sprite
             self.url_to_file(sprite_url, local_sprite_path)
 
             # log output
@@ -336,13 +336,13 @@ class TuxepediaWebExtractor:
 
     def get_monster_shape(self, monster_row):
         """
-        Get tuxemon description/blurp from Tuxepedia table row.
+        Get SaiyanQuest description/blurp from Tuxepedia table row.
 
         Parameters:
             monster_row: HTML <tr> table row element.
 
         Returns:
-            Tuxemon description/blurp text.
+            SaiyanQuest description/blurp text.
 
         """
 
@@ -350,13 +350,13 @@ class TuxepediaWebExtractor:
 
     def get_monster_blurp(self, monster_row):
         """
-        Get tuxemon description/blurp from Tuxepedia table row.
+        Get SaiyanQuest description/blurp from Tuxepedia table row.
 
         Parameters:
             monster_row: HTML <tr> table row element.
 
         Returns:
-            Tuxemon description/blurp text.
+            SaiyanQuest description/blurp text.
 
         """
 
@@ -367,17 +367,17 @@ class TuxepediaWebExtractor:
 
     def get_monster_call(self, monster_row):
         """
-        Get tuxemon call/cry from Tuxepedia table row.
+        Get SaiyanQuest call/cry from Tuxepedia table row.
 
         Parameters:
             monster_row: HTML <tr> table row element.
 
         Returns:
-            Tuxemon call/cry URL.
+            SaiyanQuest call/cry URL.
 
         """
 
-        # get tuxemon name
+        # get SaiyanQuest name
         try:
             txmn_name = self.get_monster_name(monster_row)
 
@@ -409,7 +409,7 @@ class TuxepediaWebExtractor:
                 RESOURCE_PATHS.monster_sounds, txmn_name.lower(), cry_file
             )
 
-            # download tuxemon sound
+            # download SaiyanQuest sound
             self.url_to_file(cry_url, local_cry_path)
 
             # log output

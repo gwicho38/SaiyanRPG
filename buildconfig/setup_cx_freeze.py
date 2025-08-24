@@ -17,7 +17,7 @@ import sys
 import yaml
 from cx_Freeze import Executable, setup
 
-# required so that the tuxemon folder can be found
+# required so that the SaiyanQuest folder can be found
 # when run from the buildconfig folder
 sys.path.append(os.getcwd())
 

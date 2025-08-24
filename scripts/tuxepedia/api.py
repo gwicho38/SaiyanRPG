@@ -54,7 +54,7 @@ class TuxepediaStore:
         # TODO: add version/timestamp check to decide whether a full pull is needed
         tuxepedia = TuxepediaWebExtractor()
 
-        # scrape entire tuxemon database from Web
+        # scrape entire SaiyanQuest database from Web
         # (sprites and sounds are downloaded as well)
         if completed_monsters:
             txmn_json_full = tuxepedia.get_completed_monsters()
@@ -63,12 +63,12 @@ class TuxepediaStore:
 
         for txmn_name in txmn_json_full:
 
-            # full path to tuxemon JSON file
+            # full path to SaiyanQuest JSON file
             txmn_json_path = os.path.join(
                 RESOURCE_PATHS.monster_stats, fix_name(txmn_name.lower()) + ".json"
             )
 
-            # update tuxemon JSON record if it already exists
+            # update SaiyanQuest JSON record if it already exists
             if os.path.isfile(txmn_json_path):
                 self.update_txmn_json(txmn_name, txmn_json_full[txmn_name])
 
@@ -77,32 +77,32 @@ class TuxepediaStore:
                     "JSON record for {} exists and was overwritten.".format(txmn_name)
                 )
 
-            # create new tuxemon JSON entry
+            # create new SaiyanQuest JSON entry
             else:
-                # make sure the tuxemon database directory exists
+                # make sure the SaiyanQuest database directory exists
                 os.makedirs(os.path.dirname(txmn_json_path), exist_ok=True)
 
-                # dump tuxemon JSON
+                # dump SaiyanQuest JSON
                 with open(txmn_json_path, "w") as f:
                     json.dump(txmn_json_full[txmn_name], f, indent=4)
 
     def update_txmn_json(self, txmn_name, txmn_json_new, overwrite=True):
         """
-        Update a tuxemon JSON file record.
+        Update a SaiyanQuest JSON file record.
 
         Parameters:
-            txmn_name: Tuxemon name.
-            txmn_json_new: New tuxemon JSON record.
+            txmn_name: SaiyanQuest name.
+            txmn_json_new: New SaiyanQuest JSON record.
             overwrite: Toggle to overwrite existing JSON fields.
 
         """
 
-        # full path to tuxemon JSON file
+        # full path to SaiyanQuest JSON file
         txmn_json_path = os.path.join(
             RESOURCE_PATHS.monster_stats, fix_name(txmn_name.lower()) + ".json"
         )
 
-        # load previous tuxemon JSON from file
+        # load previous SaiyanQuest JSON from file
         with open(txmn_json_path) as f:
             txmn_json_old = json.load(f)
 
@@ -117,22 +117,22 @@ class TuxepediaStore:
             elif field in txmn_json_new and field not in txmn_json_old:
                 txmn_json_old[field] = txmn_json_new[field]
 
-        # dump tuxemon JSON
+        # dump SaiyanQuest JSON
         with open(txmn_json_path, "w") as f:
             json.dump(txmn_json_old, f, indent=4)
 
     def get_txmn_json(self, txmn_name):
         """
-        Extract tuxemon JSON from file.
+        Extract SaiyanQuest JSON from file.
 
         Parameters:
-            txmn_name: Tuxemon name.
+            txmn_name: SaiyanQuest name.
 
         """
 
         txmn_json = None
 
-        # full path to tuxemon JSON file
+        # full path to SaiyanQuest JSON file
         txmn_json_path = os.path.join(
             RESOURCE_PATHS.monster_stats, txmn_name.lower() + ".json"
         )

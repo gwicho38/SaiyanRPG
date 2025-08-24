@@ -7,7 +7,7 @@
 #
 
 
-# Note: this script, in its current state, is non-functional and the Tuxemon selected here
+# Note: this script, in its current state, is non-functional and the SaiyanQuest selected here
 # serve only as examples of potential fusions.
 from __future__ import annotations
 
@@ -27,7 +27,7 @@ class Body:
     A class that holds data for use with fusing two sprites together.
 
     Example:
-        Two Tuxemon can be fused by joining the face of one with the
+        Two SaiyanQuest can be fused by joining the face of one with the
         body of another.
 
         >>> sapsnap = Body()

@@ -1,9 +1,9 @@
-.. Tuxemon documentation master file, created by
+.. SaiyanQuest documentation master file, created by
    sphinx-quickstart on Mon Sep  6 21:49:46 2021.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Tuxemon's documentation!
+Welcome to SaiyanQuest's documentation!
 ===================================
 
 .. toctree::

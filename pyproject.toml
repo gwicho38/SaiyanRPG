@@ -28,8 +28,8 @@ requires-python = ">=3.9"
 dynamic = ["version", "dependencies"]
 
 [project.urls]
-homepage = "https://www.tuxemon.org"
-source = "https://github.com/Tuxemon/Tuxemon"
+homepage = "https://www.SaiyanQuest.org"
+source = "https://github.com/SaiyanQuest/SaiyanQuest"
 
 [project.gui-scripts]
 saiyanquest = "saiyanquest.__main__:main"

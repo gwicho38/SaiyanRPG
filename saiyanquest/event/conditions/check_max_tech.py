@@ -13,7 +13,7 @@ from saiyanquest.session import Session
 @dataclass
 class CheckMaxTechCondition(EventCondition):
     """
-    Check to see the player has at least one tuxemon with more
+    Check to see the player has at least one SaiyanQuest with more
     than the max number of techniques in its party.
 
     If yes, then it saves automatically the monster_id and

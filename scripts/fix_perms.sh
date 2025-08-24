@@ -1,5 +1,5 @@
 #!/bin/bash
-FOLDERS=("buildconfig" "docs" "mods" "scripts" "tests" "tuxemon")
+FOLDERS=("buildconfig" "docs" "mods" "scripts" "tests" "SaiyanQuest")
 
 for folder in "${FOLDERS[@]}"
 do
@@ -8,4 +8,4 @@ do
 done
 chmod 0744 buildconfig/*sh
 chmod 0744 scripts/*sh
-chmod +x tuxemon.py
+chmod +x SaiyanQuest.py

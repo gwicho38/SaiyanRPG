@@ -2,7 +2,7 @@
 # debian 10
 PYTHON_VERSION="3.9"
 WINE_PYTHON="wine python${PYTHON_VERSION}"
-BUILD_DIR="build/tuxemon"
+BUILD_DIR="build/SaiyanQuest"
 
 # Run setup script
 buildconfig/setup_wine_debian10.sh
@@ -32,7 +32,7 @@ if [ $? -ne 0 ]; then
 fi
 
 # Build with PyInstaller
-wine pyinstaller buildconfig/pyinstaller/tuxemon.spec
+wine pyinstaller buildconfig/pyinstaller/SaiyanQuest.spec
 if [ $? -ne 0 ]; then
   echo "Error: PyInstaller build failed."
   exit 1

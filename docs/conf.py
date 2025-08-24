@@ -19,7 +19,7 @@ sys.path.insert(0, os.path.abspath('../'))
 # -- Project information -----------------------------------------------------
 from typing import Any
 
-project = 'Tuxemon'
+project = 'SaiyanQuest'
 copyright = '2015-2025, William Edwards'
 author = 'William Edwards'
 

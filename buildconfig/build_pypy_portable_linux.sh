@@ -44,7 +44,7 @@ fi
 mv "$PYPY_BUILD" pypy
 
 # Copy project files
-cp -a "$ROOT_FOLDER/tuxemon" "pypy/lib/$PYPY_VERSION/tuxemon"
+cp -a "$ROOT_FOLDER/SaiyanQuest" "pypy/lib/$PYPY_VERSION/SaiyanQuest"
 cp -a "$ROOT_FOLDER/mods" .
 
 # Install dependencies with PyPy
@@ -67,7 +67,7 @@ if [ $? -ne 0 ]; then
 fi
 
 cp "$ROOT_FOLDER/LICENSE" .
-cp "$ROOT_FOLDER/run_tuxemon.py" .
+cp "$ROOT_FOLDER/run_SaiyanQuest.py" .
 cp "$ROOT_FOLDER/CONTRIBUTING.md" .
 cp "$ROOT_FOLDER/CONTRIBUTORS.md" .
 cp "$ROOT_FOLDER/ATTRIBUTIONS.md" .
@@ -81,14 +81,14 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-# Create Tuxemon.sh
-cat << EOF > Tuxemon.sh
+# Create SaiyanQuest.sh
+cat << EOF > SaiyanQuest.sh
 #!/bin/bash
 FWD=\$(dirname \$(readlink -f \$0))
-\$FWD/pypy/bin/pypy \$FWD/run_tuxemon.py
+\$FWD/pypy/bin/pypy \$FWD/run_SaiyanQuest.py
 EOF
 
-chmod a+x Tuxemon.sh
+chmod a+x SaiyanQuest.sh
 
 echo "Linux PyPy build complete."
 

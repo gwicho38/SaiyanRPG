@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: GPL-3.0
 # Copyright (c) 2014-2025 William Edwards <shadowapex@gmail.com>, Benjamin Bean <superman2k5@gmail.com>
 """
-Mod manager support module TuxemonContentServer
-https://github.com/vXtreniusX/TuxemonContentServer
+Mod manager support module SaiyanQuestContentServer
+https://github.com/vXtreniusX/SaiyanQuestContentServer
 """
 
 import json

@@ -70,7 +70,7 @@
     <property name="cond30" value="not variable_set chooses:yes"/>
    </properties>
   </object>
-  <object id="28" name="Heal Tuxemon" type="event" x="80" y="96" width="16" height="16">
+  <object id="28" name="Heal SaiyanQuest" type="event" x="80" y="96" width="16" height="16">
    <properties>
     <property name="act10" value="set_monster_health"/>
     <property name="act20" value="set_monster_status"/>

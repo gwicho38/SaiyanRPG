@@ -24,15 +24,15 @@ WIKI_URL = "https://wiki.saiyanquest.org"
 # Set to True if the download script is supposed to stop on first failed  animation download
 EXIT_ON_FAILED_DOWNLOAD = False
 
-TUXEMON_ROOT_DIR = pathlib.Path(__file__).resolve().parent.parent
-ANIMATION_DIR = TUXEMON_ROOT_DIR.joinpath(
+SaiyanQuest_ROOT_DIR = pathlib.Path(__file__).resolve().parent.parent
+ANIMATION_DIR = SaiyanQuest_ROOT_DIR.joinpath(
     pathlib.Path("mods/saiyanquest/animations/technique")
 )
 CREDITS_TEMPLATE = """* ["{animation_name}"]({animation_url})
 {credits_text}"""
 CREDITS_FILENAME = "TECHNIQUE_ANIMATION_CREDITS.md"
 
-print("Tuxemon project root dir:", TUXEMON_ROOT_DIR)
+print("SaiyanQuest project root dir:", SaiyanQuest_ROOT_DIR)
 print("Technique animation dir:", ANIMATION_DIR)
 
 
@@ -123,7 +123,7 @@ def gif_to_frames(animation_slug: str, filepath: str) -> None:
 
 # TODO: Is passing the Wiki URL needed?
 def download_technique_animations(wiki_url: str) -> None:
-    """Download technique animation frames from the Tuxemon Wiki."""
+    """Download technique animation frames from the SaiyanQuest Wiki."""
     print(f"Getting animations and metadata from URL: {wiki_url}")
 
     # Animation GIF path

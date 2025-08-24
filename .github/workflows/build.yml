@@ -1,4 +1,4 @@
-name: Tuxemon
+name: SaiyanQuest
 on:
   push:
     branches:
@@ -50,15 +50,15 @@ jobs:
           ls artifacts
           echo "Show artifacts/saiyanquest_windows_installer folder:"
           ls "artifacts/saiyanquest_windows_installer"
-          echo "Show artifacts/Tuxemon-x86_64:"
-          ls "artifacts/Tuxemon-x86_64"
+          echo "Show artifacts/SaiyanQuest-x86_64:"
+          ls "artifacts/SaiyanQuest-x86_64"
 
       - name: Determine release title
         uses: haya14busa/action-cond@v1
         id: release_title
         with:
           cond: ${{ env.IS_RELEASE }}
-          if_true: 'Tuxemon Release ${{ github.ref_name }}'
+          if_true: 'SaiyanQuest Release ${{ github.ref_name }}'
           if_false: 'Latest Build (Development)'
 
       - name: Determine release tag
@@ -79,4 +79,4 @@ jobs:
           # TODO: Add windows artifact again when #1229 is fixed
           # **/artifacts/saiyanquest_windows_installer/*.exe
           files: |
-            **/Tuxemon-x86_64/Tuxemon.flatpak
+            **/SaiyanQuest-x86_64/SaiyanQuest.flatpak

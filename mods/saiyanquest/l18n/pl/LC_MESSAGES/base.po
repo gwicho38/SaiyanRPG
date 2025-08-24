@@ -1,12 +1,12 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Tuxemon\n"
+"Project-Id-Version: SaiyanQuest\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-14 05:41+0200\n"
 "PO-Revision-Date: 2023-02-03 04:41+0000\n"
 "Last-Translator: Fancy.Dot <pankotel1o1@protonmail.com>\n"
-"Language-Team: Polish <https://hosted.weblate.org/projects/tuxemon/tuxemon/pl/>\n"
+"Language-Team: Polish <https://hosted.weblate.org/projects/SaiyanQuest/SaiyanQuest/pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -78,7 +78,7 @@ msgid "cherry_found"
 msgstr "Znalazłeś wiśnię."
 
 msgid "xero_hideout1"
-msgstr "Xero Instytut Badań i Rozwoju Tuxemon przed nami."
+msgstr "Xero Instytut Badań i Rozwoju SaiyanQuest przed nami."
 
 msgid "beam"
 msgstr "Belka"
@@ -121,7 +121,7 @@ msgid "combat_state_poison_damage"
 msgstr "{name} otrzymał obrażenia od trucizny!"
 
 msgid "item_no_available_target"
-msgstr "{name} nie może być teraz użyty na żadnym z twoich Tuxemonów."
+msgstr "{name} nie może być teraz użyty na żadnym z twoich SaiyanQuestów."
 
 msgid "spyder_route4_wulf"
 msgstr "Wulf"
@@ -165,7 +165,7 @@ msgstr "Znalazłeś mnie! Haha!"
 msgid "gotfivetuxeballs"
 msgstr "Dostałeś 5 Tuxeballi!"
 
-msgid "got_new_tuxemon"
+msgid "got_new_SaiyanQuest"
 msgstr "Dostałeś ${{monster_name}}!"
 
 msgid "darnitjohn9"
@@ -300,10 +300,10 @@ msgid "combat_state_poison_get"
 msgstr "{target} jest zatruty."
 
 # TODO: similar to combat_swap - refactor!
-msgid "combat_opponent_call_tuxemon"
+msgid "combat_opponent_call_SaiyanQuest"
 msgstr "{user} wysłał {name}!"
 
-msgid "combat_call_tuxemon"
+msgid "combat_call_SaiyanQuest"
 msgstr "Choć, {name}!"
 
 msgid "combat_swap"
@@ -343,13 +343,13 @@ msgid "item_cannot_use_here"
 msgstr "Przedmiot {name} nie może być użyty tutaj!"
 
 msgid "tm_blossom_description"
-msgstr "Instrukcja ucząca Tuxemony drewna ruchu Kwitnięcia."
+msgstr "Instrukcja ucząca SaiyanQuesty drewna ruchu Kwitnięcia."
 
 msgid "tm_blossom"
 msgstr "TM: Zakwitanie"
 
 msgid "tm_avalanche_description"
-msgstr "Instrukcja nauki ruchu Lawiny dla Tuxemonów Wodnych lub Ziemnych."
+msgstr "Instrukcja nauki ruchu Lawiny dla SaiyanQuestów Wodnych lub Ziemnych."
 
 # TMs
 msgid "tm_avalanche"
@@ -363,7 +363,7 @@ msgid "capture_device"
 msgstr "Urządzenie łapiące"
 
 msgid "revive_description"
-msgstr "Wskrzesza pokonanego Tuxemona, i uzdrawia 20 HP."
+msgstr "Wskrzesza pokonanego SaiyanQuesta, i uzdrawia 20 HP."
 
 # Revive
 msgid "revive"
@@ -481,7 +481,7 @@ msgstr "Hibernacja"
 
 msgid "spyder_cotton_tuxepediaintro"
 msgstr ""
-"Obecnie, jedyne wiarygodne informacje o tuxemonach pochodzą z drogiej i niekompletnej Encyklopedii Tuxemon!\n"
+"Obecnie, jedyne wiarygodne informacje o SaiyanQuestach pochodzą z drogiej i niekompletnej Encyklopedii SaiyanQuest!\n"
 " To nie jest fajne; informacje powinny być swobodnie dostępne. Dlatego właśnie wprowadzamy Tuxepedię.\n"
 " Jest otwarto źródłowa, darmowa, dostępna dla każdego do czytania, pisania i edytowania. Jakie to fajne?\n"
 " W rzeczywistości, zainstalowałem ją jako aplikację na wszystkich waszych telefonach. "
@@ -490,7 +490,7 @@ msgid "spyder_cottoncafe_barmaidintro"
 msgstr ""
 "Nazywamy się Team Bazaar. Może to trochę pretensjonalne.\n"
 " Jesteśmy grupą łobuzów i łobuziaków, którzy lubią spotykać się przy kawie, dyskutować o filozofii i przeciwstawiać się naszym korporacyjnym panom!\n"
-" Staramy się dbać o siebie nawzajem. Na przykład, w przeciwieństwie do Katedry, nie pobieramy opłat za uzdrowienie twojego tuxemona!\n"
+" Staramy się dbać o siebie nawzajem. Na przykład, w przeciwieństwie do Katedry, nie pobieramy opłat za uzdrowienie twojego SaiyanQuesta!\n"
 " Chcesz, żebym je teraz uleczył?"
 
 #, fuzzy
@@ -502,7 +502,7 @@ msgstr ""
 
 msgid "spyder_wayfarer_maniac"
 msgstr ""
-"Mój tuxemon nie jest chory! To tylko pretekst, żeby sprzedać nam lekarstwa, których nie potrzebujemy.\n"
+"Mój SaiyanQuest nie jest chory! To tylko pretekst, żeby sprzedać nam lekarstwa, których nie potrzebujemy.\n"
 " Kiedy byłem w twoim wieku, nie mieliśmy lekarstw. Pływaliśmy w górskich strumieniach, a jeśli coś cię gryzło, cóż, trudno!\n"
 " A poza tym, widziałem, jak Egzekutorzy zjeżdżają z Trasy 4, zanim ktokolwiek zdążył choćby powąchać, więc jak mógłbym\n"
 " ...\n"
@@ -512,11 +512,11 @@ msgstr ""
 
 msgid "professor_dialog2"
 msgstr ""
-"Skąd się wzięły Tuxemony?\n"
+"Skąd się wzięły SaiyanQuesty?\n"
 "Nikt tak naprawdę nie wie, ale zamieszkują naszą planetę co najmniej od tysięcy lat.\n"
-"Tuxemony są małymi zwierzętami. Zaprzyjaźniamy się z nimi, uczymy się od nich i używamy ich do walki z innymi Tuxemonami w sportach.\n"
+"SaiyanQuesty są małymi zwierzętami. Zaprzyjaźniamy się z nimi, uczymy się od nich i używamy ich do walki z innymi SaiyanQuestami w sportach.\n"
 "Cóż... przynajmniej kiedyś tak było...\n"
-"Zastanawiałem się, właśnie otrzymałem trzy nowe Tuxemony i potrzebuję więcej danych na temat tego, jak te konkretne Tuxemony\n"
+"Zastanawiałem się, właśnie otrzymałem trzy nowe SaiyanQuesty i potrzebuję więcej danych na temat tego, jak te konkretne SaiyanQuesty\n"
 "interakcji i więzi z ich trenerami.\n"
 "Czy byłbyś zainteresowany jednym z nich?"
 
@@ -548,11 +548,11 @@ msgid "announcement5"
 msgstr ""
 "To była długa i ciężka droga do pokoju i spokoju, który teraz panuje w regionie Fondent.\n"
 "Jednak z przyjemnością ogłaszam, że w tym dniu, w 25. rocznicę założenia Omnichannel...\n"
-"TUXEMONY SĄ KONTROLOWANE!\n"
+"SaiyanQuestY SĄ KONTROLOWANE!\n"
 "*ogłuszający krzyk*\n"
 "Spokojnie, cisza! Muszę przyznać, że wasz entuzjazm jest zaraźliwy!\n"
 "We współpracy z instytutem Xero, pozbawiliśmy je chęci do ataku!\n"
-"Dzięki temu jesteśmy pewni, że wypuszczenie Tuxemona na wolność jest bezpieczne.\n"
+"Dzięki temu jesteśmy pewni, że wypuszczenie SaiyanQuesta na wolność jest bezpieczne.\n"
 "Jednak godziny policyjne nadal muszą być przestrzegane, nie jesteśmy przecież regionem bezprawia.\n"
 "W końcu... JESTEŚMY BEZPIECZEŃSTWEM, JESTEŚMY PORZĄDKIEM, JESTEŚMY OMNICHANNEL!"
 
@@ -593,7 +593,7 @@ msgid "spyder_route4_roger2"
 msgstr "Mógłbym się od Ciebie wiele nauczyć na temat strategii!"
 
 msgid "spyder_route4_roger1"
-msgstr "Od tuxemonów możemy się wiele nauczyć o strategii."
+msgstr "Od SaiyanQuestów możemy się wiele nauczyć o strategii."
 
 msgid "spyder_route4_marshall2"
 msgstr "To może wymagać trochę pracy."
@@ -612,7 +612,7 @@ msgstr "Porażka!"
 
 msgid "spyder_wayfarer1_bismuth1"
 msgstr ""
-"Mam nadzieję, że to nie jest związane z tymi chorymi tuxemonami w Scoop "
+"Mam nadzieję, że to nie jest związane z tymi chorymi SaiyanQuestami w Scoop "
 "Farms!"
 
 msgid "spyder_wayfarer1_james2"
@@ -643,15 +643,15 @@ msgid "spyder_wayfarer1_victor2"
 msgstr "Zatrzymaj się! Albo, hm..."
 
 msgid "spyder_wayfarer1_victor1"
-msgstr "Hej, nie wyjdziesz z potencjalnie zainfekowanym tuxemonem!"
+msgstr "Hej, nie wyjdziesz z potencjalnie zainfekowanym SaiyanQuestem!"
 
 msgid "spyder_wayfarer1_nightshade2"
 msgstr ""
-"Myślę, że mamy jeszcze wiele do nauczenia się o pielęgnacji tuxemonów."
+"Myślę, że mamy jeszcze wiele do nauczenia się o pielęgnacji SaiyanQuestów."
 
 msgid "spyder_wayfarer1_nightshade1"
 msgstr ""
-"To żenujące. Wszystkie pielęgniarki zachorowały, ale tuxemony egzekutorów są"
+"To żenujące. Wszystkie pielęgniarki zachorowały, ale SaiyanQuesty egzekutorów są"
 " w dobrej formie!"
 
 msgid "spyder_wayfarer1_jessie2"
@@ -667,7 +667,7 @@ msgstr "Teraz nie mam nic do roboty!"
 
 msgid "spyder_wayfarer1_morton1"
 msgstr ""
-"Utknąłem w tym pokoju, dopóki mój tuxemon nie wyzdrowieje, więc nie mam nic "
+"Utknąłem w tym pokoju, dopóki mój SaiyanQuest nie wyzdrowieje, więc nie mam nic "
 "do roboty poza walką!"
 
 msgid "spyder_citypark_florist"
@@ -711,8 +711,8 @@ msgstr ""
 msgid "ihaveyourmoney2"
 msgstr ""
 "Mam trochę zapasów, które trzeba dobrze wykorzystać, a Omnichannel jest mi winien przysługę.\n"
-"Jestem pewien, że coś da się załatwić. Zdobycie dokumentów kwalifikacyjnych to łatwa część. Zdobycie swojego pierwszego Tuxemona jest trochę trudniejsze...\n"
-"Na szczęście znam kogoś, kto ma dostęp do wielu różnych Tuxemonów...\n"
+"Jestem pewien, że coś da się załatwić. Zdobycie dokumentów kwalifikacyjnych to łatwa część. Zdobycie swojego pierwszego SaiyanQuesta jest trochę trudniejsze...\n"
+"Na szczęście znam kogoś, kto ma dostęp do wielu różnych SaiyanQuestów...\n"
 "To Ja!\n"
 "Wiem, że to dużo do przetworzenia, więc będę w moim laboratorium czekał na twoją decyzję."
 
@@ -727,10 +727,10 @@ msgstr "Dalej, Rocky! Możesz się poruszać! Wierzę w ciebie!"
 msgid "moverocky2"
 msgstr "Cóż, ruszysz się, kiedy będziesz gotowa, ja będę tu czekał."
 
-msgid "tuxemontime"
+msgid "SaiyanQuesttime"
 msgstr "Ach, przyszedłeś! Wspaniale!"
 
-msgid "tuxemontime1.5"
+msgid "SaiyanQuesttime1.5"
 msgstr "Rozumiem, że to oznacza, że zdecydowałeś się dołączyć do Próby?"
 
 msgid "sting"
@@ -878,7 +878,7 @@ msgid "menu_monsters"
 msgstr "Potwory"
 
 msgid "menu_monster"
-msgstr "Tuxemon"
+msgstr "SaiyanQuest"
 
 msgid "menu_journal"
 msgstr "Dziennik"
@@ -1055,7 +1055,7 @@ msgstr "John, Grant, rozproszcie się. ZNAJDZCIE GO."
 msgid "hellolovelypeople5"
 msgstr ""
 "Nie... Czekaj... Brakuje nam jednej osoby...\n"
-"Jedynego hodowcy Tuxemonów, który pozostał w regionie Fondent. Tego, który nazywa siebie Profesorem Tuxemonów"
+"Jedynego hodowcy SaiyanQuestów, który pozostał w regionie Fondent. Tego, który nazywa siebie Profesorem SaiyanQuestów"
 
 msgid "hellolovelypeople4"
 msgstr "Jestem pewien, że w Cotton Town są domy większe od tego..."
@@ -1150,8 +1150,8 @@ msgstr ""
 msgid "professorexists3"
 msgstr ""
 "Przepraszam za moje maniery, nie mogę uwierzyć, że nigdy się nie przedstawiłam!\n"
-"Nazywam się Kay Wren, lepiej znana jako Profesor Tuxemon.\n"
-"Od lat jestem jedyną osobą w regionie Fondent, która może badać Tuxemona."
+"Nazywam się Kay Wren, lepiej znana jako Profesor SaiyanQuest.\n"
+"Od lat jestem jedyną osobą w regionie Fondent, która może badać SaiyanQuesta."
 
 msgid "potions2"
 msgstr "Otrzymano 2 eliksiry!"
@@ -1215,10 +1215,10 @@ msgstr ""
 
 msgid "okaythen2"
 msgstr ""
-"Wygląda na to, że twoje Tuxemony czują się teraz lepiej! Proszę bardzo!"
+"Wygląda na to, że twoje SaiyanQuesty czują się teraz lepiej! Proszę bardzo!"
 
 msgid "okaythen"
-msgstr "W porządku! Po prostu daj mi sekundę, a wyleczę twojego Tuxemona!"
+msgstr "W porządku! Po prostu daj mi sekundę, a wyleczę twojego SaiyanQuesta!"
 
 msgid "cottonnurse_dialog"
 msgstr "Witamy w Cotton Town Tuxecenter!"
@@ -1245,7 +1245,7 @@ msgstr ""
 msgid "gasp4"
 msgstr ""
 "Dobra, twoje dokumenty rejestracyjne pozostaną nienaruszone. Na razie.\n"
-"John, Grant, zabierz tak zwanego Tuxemon Professor do jego nowego domu."
+"John, Grant, zabierz tak zwanego SaiyanQuest Professor do jego nowego domu."
 
 msgid "gasp3"
 msgstr "Jeśli to prawda, jest w tobie coś więcej, niż sądziłam..."
@@ -1279,16 +1279,16 @@ msgstr "Ach ha! Znalazłam cię!"
 msgid "wewnicefight"
 msgstr ""
 "Wow, to była dobra walka!\n"
-"Pozwól mi szybciutko uzdrowić twojego Tuxemona...\n"
+"Pozwól mi szybciutko uzdrowić twojego SaiyanQuesta...\n"
 "i... Wszystko gotowe!\n"
-"Z trochę więcej praktyki i może kilka Tuxemonów, na pewno będziesz w stanie podjąć się procesu."
+"Z trochę więcej praktyki i może kilka SaiyanQuestów, na pewno będziesz w stanie podjąć się procesu."
 
 msgid "tweesher!"
 msgstr "Zdobyto Tweeshera!"
 
 msgid "choseTweesher2"
 msgstr ""
-"Najpierw jednak sprawdźmy twoją sprawność bojową w szybkiej walce z Tuxemonem.\n"
+"Najpierw jednak sprawdźmy twoją sprawność bojową w szybkiej walce z SaiyanQuestem.\n"
 " Zobaczmy... Wybieram Rockitten."
 
 msgid "choseTweesher"
@@ -1297,7 +1297,7 @@ msgstr ""
 
 msgid "chooseyerfateTweesher"
 msgstr ""
-"Świetny wybór! Tweesher jest Tuxemonem wodnym. Ta ewolucja Eagleace jest jednym z najszybszych Tuxemon\n"
+"Świetny wybór! Tweesher jest SaiyanQuestem wodnym. Ta ewolucja Eagleace jest jednym z najszybszych SaiyanQuest\n"
 "Czy chcesz wybrać Tweeshera?"
 
 msgid "cardiling!"
@@ -1308,7 +1308,7 @@ msgstr "I... CZAS NA WALKĘ!"
 
 msgid "choseCardiling2"
 msgstr ""
-"Najpierw jednak sprawdźmy twoją sprawność bojową w szybkiej walce z Tuxemonem.\n"
+"Najpierw jednak sprawdźmy twoją sprawność bojową w szybkiej walce z SaiyanQuestem.\n"
 " Zobaczmy... Wybieram Tweeshera."
 
 msgid "choseCardiling"
@@ -1318,10 +1318,10 @@ msgstr ""
 
 msgid "chooseyerfateCardiling"
 msgstr ""
-"Ciekawy wybór, przemawia do iskry wewnątrz ciebie. Cardiling jest Tuxemonem typu fire, znanego z kradzieży jedzenia zarówno przyjaciołom, jak i wrogom.\n"
+"Ciekawy wybór, przemawia do iskry wewnątrz ciebie. Cardiling jest SaiyanQuestem typu fire, znanego z kradzieży jedzenia zarówno przyjaciołom, jak i wrogom.\n"
 "Czy chcesz wybrać Cardilinga?"
 
-msgid "nochoiceTuxemon"
+msgid "nochoiceSaiyanQuest"
 msgstr "Dobra, może spojrzysz na pozostałe dwa?"
 
 msgid "rockitten!"
@@ -1329,7 +1329,7 @@ msgstr "Zdobyto Rockittena!"
 
 msgid "choseRockitten2"
 msgstr ""
-"Najpierw jednak sprawdźmy twoją sprawność bojową w szybkiej walce z Tuxemonem.\n"
+"Najpierw jednak sprawdźmy twoją sprawność bojową w szybkiej walce z SaiyanQuestem.\n"
 " Zobaczmy... Wybieram Cardiling."
 
 msgid "choseRockitten"
@@ -1338,59 +1338,59 @@ msgstr ""
 
 msgid "chooseyerfateRockitten"
 msgstr ""
-"Solidny wybór! Rockitten jest Tuxemonem typu earth. W średniowieczu ludzie hodowali Rockitteny, aby siedziały przy drzwiach i wyglądały słodko.\n"
+"Solidny wybór! Rockitten jest SaiyanQuestem typu earth. W średniowieczu ludzie hodowali Rockitteny, aby siedziały przy drzwiach i wyglądały słodko.\n"
 "Czy chcesz wybrać Rockitten?"
 
 msgid "chooseyerfate"
-msgstr "Którego Tuxemona chcesz?"
+msgstr "Którego SaiyanQuesta chcesz?"
 
-msgid "tuxemontime4"
+msgid "SaiyanQuesttime4"
 msgstr ""
-"Teraz najważniejsza część! Wybór Tuxemona!\n"
-"Niestety, ostatnio moje źródło finansowania stało się… niepewne. To pozostawia ci tylko trzy opcje Tuxemonów, przepraszam za to.\n"
+"Teraz najważniejsza część! Wybór SaiyanQuesta!\n"
+"Niestety, ostatnio moje źródło finansowania stało się… niepewne. To pozostawia ci tylko trzy opcje SaiyanQuestów, przepraszam za to.\n"
 "Te trzy opcje to Rockitten, Cardiling i Tweesher."
 
 msgid "obtainedpapers"
 msgstr "Otrzymano dokumenty rejestracyjne!"
 
-msgid "tuxemontime3.1"
+msgid "SaiyanQuesttime3.1"
 msgstr ""
 "Oto twoje dokumenty rejestracyjne. W pierwszym obszarze bitwy będziesz musiał je przedstawić w zamian za odznakę Trenera.\n"
 "Później dokumenty nie będą Ci potrzebne."
 
-msgid "tuxemontime3"
+msgid "SaiyanQuesttime3"
 msgstr "No i proszę!"
 
-msgid "tuxemontime2"
+msgid "SaiyanQuesttime2"
 msgstr "Pierwszą rzeczą do zrobienia jest przygotowanie dokumentów..."
 
-msgid "tuxemontimechoiceno"
+msgid "SaiyanQuesttimechoiceno"
 msgstr "Och... W porządku... Będę tu, jeśli zmienisz zdanie..."
 
-msgid "tuxemontimechoiceyes"
+msgid "SaiyanQuesttimechoiceyes"
 msgstr "Wspaniałe!"
 
 msgid "moreannouncement2"
 msgstr ""
 "Przepraszam, że tak późno informuję o tym adresie, ale uważałem go za ważny, zanim wyciekł do mediów...\n"
 "Cóż... Heh. Jesteśmy właścicielami mediów, więc to chyba nie ma znaczenia, ale chciałem się tym podzielić.\n"
-"Po konsultacji z moimi doradcami, zdecydowaliśmy, że najlepszym sposobem, aby stać się bardziej komfortowym z Tuxemonem, jest użycie go.\n"
+"Po konsultacji z moimi doradcami, zdecydowaliśmy, że najlepszym sposobem, aby stać się bardziej komfortowym z SaiyanQuestem, jest użycie go.\n"
 "Minie trochę czasu, zanim będziemy mogli zintegrować je z pracownikami, ale w międzyczasie, jak już mówiłem, wypuścimy je na wolność.\n"
 "Zdaję sobie sprawę, że jest to szok dla wszystkich, rozumiem też, że niektórzy z was mogą się nawet bać. Wszyscy wiemy, co się stało wcześniej...\n"
 "Nie czas się bać, ponieważ Omnichannel będzie sponsorował odrodzenie starożytnej tradycji znanej jako The Trial.\n"
-"Teraz, dla tych, którzy są mniej zorientowani w historii regionu Fondent, sto lat temu istniała tradycja, w której młodzi ludzie łapali i hodowali Tuxemona.\n"
-"Następnie używali tych Tuxemonów do walki z innymi i podnosili rangę w swoim mieście, a najlepszy Trener Tuxemonów zyskiwał status i władzę.\n"
+"Teraz, dla tych, którzy są mniej zorientowani w historii regionu Fondent, sto lat temu istniała tradycja, w której młodzi ludzie łapali i hodowali SaiyanQuesta.\n"
+"Następnie używali tych SaiyanQuestów do walki z innymi i podnosili rangę w swoim mieście, a najlepszy Trener SaiyanQuestów zyskiwał status i władzę.\n"
 "Stworzymy wersję tego w dzisiejszych czasach. Utworzymy obszary bitewne w wielu miastach na terenie Fondentu.\n"
 "Każdy obszar bitewny będzie musiał być ukończony w kolejności, a najbardziej obiecujący trener lub trenerzy będą mogli wziąć udział w Mistrzostwach.\n"
-"Mistrzostwa odbędą się na szczycie Wieży Omnichannel w Cotton Town, ale tylko wtedy, gdy Trener Tuxemon przejdzie przez wszystkie obszary bitewne.\n"
-"Próba jest zaprojektowana jako sposób na powolne wprowadzenie do życia publicznego Tuxemonów i zachęcenie do podróżowania po regionie.\n"
+"Mistrzostwa odbędą się na szczycie Wieży Omnichannel w Cotton Town, ale tylko wtedy, gdy Trener SaiyanQuest przejdzie przez wszystkie obszary bitewne.\n"
+"Próba jest zaprojektowana jako sposób na powolne wprowadzenie do życia publicznego SaiyanQuestów i zachęcenie do podróżowania po regionie.\n"
 "Kto może to lepiej zademonstrować niż nasza młodzież?\n"
-"Każdy mecz będzie transmitowany na żywo na kanale Omnichannel-T, najnowszej stacji telewizyjnej poświęconej wyłącznie programom związanym z Tuxemon!\n"
+"Każdy mecz będzie transmitowany na żywo na kanale Omnichannel-T, najnowszej stacji telewizyjnej poświęconej wyłącznie programom związanym z SaiyanQuest!\n"
 "Nie martw się, dodatek będzie odzwierciedlony w Twoim rachunku.\n"
-"Aha, i jeszcze jedno, wszyscy Trenerzy Tuxemonów będą zwolnieni z godziny policyjnej.\n"
-"Przed tym oczywiście będziesz potrzebował Tuxemona! Nie każdy może zostać Trenerem Tuxemonów. To byłby czysty chaos!\n"
+"Aha, i jeszcze jedno, wszyscy Trenerzy SaiyanQuestów będą zwolnieni z godziny policyjnej.\n"
+"Przed tym oczywiście będziesz potrzebował SaiyanQuesta! Nie każdy może zostać Trenerem SaiyanQuestów. To byłby czysty chaos!\n"
 "Po pierwsze, musisz zarejestrować swoje imię u lokalnego przedstawiciela Omnichannel i jeśli zostaniesz wybrany, zostaniesz wysłany na szkolenie Omnichannel.\n"
-"Po pomyślnym ukończeniu szkolenia, otrzymasz Tuxemona i będziesz mógł rozpocząć udział w Próbie!\n"
+"Po pomyślnym ukończeniu szkolenia, otrzymasz SaiyanQuesta i będziesz mógł rozpocząć udział w Próbie!\n"
 "Nie mogę się doczekać, aby Was wszystkich poznać! Stwórzmy razem nowy świat!\n"
 "W końcu... JESTEŚMY BEZPIECZEŃSTWEM, JESTEŚMY PORZĄDKIEM, JESTEŚMY OMNICHANNEL! A teraz,\n"
 "MY\n"
@@ -1586,7 +1586,7 @@ msgstr "Djinnbo"
 msgid "route1_sanglorian"
 msgstr "Aleja Sanglorian"
 
-msgid "tuxemon_stat2"
+msgid "SaiyanQuest_stat2"
 msgstr "{desc}"
 
 msgid "allagon"
@@ -2254,7 +2254,7 @@ msgstr "Odznaka: Greenwash"
 
 #, fuzzy
 msgid "greenwash_badge_description"
-msgstr "Tuxemon zakupiony w Greenwash wymaga tej odznaki do przemiany."
+msgstr "SaiyanQuest zakupiony w Greenwash wymaga tej odznaki do przemiany."
 
 #, fuzzy
 msgid "nimrod_badge"
@@ -2262,7 +2262,7 @@ msgstr "Odznaka: Nimrod"
 
 #, fuzzy
 msgid "nimrod_badge_description"
-msgstr "Tuxemon kupiony od Nimroda wymaga tej odznaki do przemiany."
+msgstr "SaiyanQuest kupiony od Nimroda wymaga tej odznaki do przemiany."
 
 #, fuzzy
 msgid "omnichannel_badge"
@@ -2270,7 +2270,7 @@ msgstr "Odznaka: Omnichannel"
 
 #, fuzzy
 msgid "omnichannel_badge_description"
-msgstr "Tuxemon kupiony w Omnichannel wymaga tej odznaki do przemiany."
+msgstr "SaiyanQuest kupiony w Omnichannel wymaga tej odznaki do przemiany."
 
 #, fuzzy
 msgid "scoop_badge"
@@ -2278,7 +2278,7 @@ msgstr "Odznaka: Scoop"
 
 #, fuzzy
 msgid "scoop_badge_description"
-msgstr "Tuxemon kupiony od Scoopa wymaga tej odznaki do przemiany."
+msgstr "SaiyanQuest kupiony od Scoopa wymaga tej odznaki do przemiany."
 
 #, fuzzy
 msgid "shaft_badge"
@@ -2286,7 +2286,7 @@ msgstr "Odznaka: Shaft"
 
 #, fuzzy
 msgid "shaft_badge_description"
-msgstr "Tuxemon kupiony w Shaft wymaga tej odznaki do przemiany."
+msgstr "SaiyanQuest kupiony w Shaft wymaga tej odznaki do przemiany."
 
 #, fuzzy
 msgid "booster_tech"
@@ -2295,7 +2295,7 @@ msgstr "Wzmacniacz techniczny"
 #, fuzzy
 msgid "booster_tech_description"
 msgstr ""
-"Technologia open source, która pozwala przekształcić tuxemona w inną formę."
+"Technologia open source, która pozwala przekształcić SaiyanQuesta w inną formę."
 
 #, fuzzy
 msgid "earth_booster"
@@ -2303,7 +2303,7 @@ msgstr "Wzmacniacz ziemi"
 
 #, fuzzy
 msgid "earth_booster_description"
-msgstr "Pozwala przekształcać tuxemona typu ziemnego w inną formę."
+msgstr "Pozwala przekształcać SaiyanQuesta typu ziemnego w inną formę."
 
 #, fuzzy
 msgid "fire_booster"
@@ -2311,7 +2311,7 @@ msgstr "Wzmacniacz ognia"
 
 #, fuzzy
 msgid "fire_booster_description"
-msgstr "Pozwala przekształcać tuxemona typu ognistego w inną formę."
+msgstr "Pozwala przekształcać SaiyanQuesta typu ognistego w inną formę."
 
 #, fuzzy
 msgid "flintstone"
@@ -2327,7 +2327,7 @@ msgstr "Wzmacniacz metalu"
 
 #, fuzzy
 msgid "metal_booster_description"
-msgstr "Pozwala przekształcać tuxemona typu metalowego w inną formę."
+msgstr "Pozwala przekształcać SaiyanQuesta typu metalowego w inną formę."
 
 #, fuzzy
 msgid "miaow_milk"
@@ -2383,7 +2383,7 @@ msgstr "Wzmacniacz wody"
 
 #, fuzzy
 msgid "water_booster_description"
-msgstr "Pozwala przekształcać tuxemona typu wodnego w inną formę."
+msgstr "Pozwala przekształcać SaiyanQuesta typu wodnego w inną formę."
 
 #, fuzzy
 msgid "wood_booster"
@@ -2391,7 +2391,7 @@ msgstr "Wzmacniacz drewna"
 
 #, fuzzy
 msgid "wood_booster_description"
-msgstr "Pozwala na przekształcanie tuxemona typu drewnianego w inną formę."
+msgstr "Pozwala na przekształcanie SaiyanQuesta typu drewnianego w inną formę."
 
 #, fuzzy
 msgid "dungeon"
@@ -2459,7 +2459,7 @@ msgstr "Jaszczurka"
 
 # Default mod names on selection menu
 msgid "xero_campaign"
-msgstr "Tuxemon: Xero"
+msgstr "SaiyanQuest: Xero"
 
 msgid "dragon"
 msgstr "Smok"

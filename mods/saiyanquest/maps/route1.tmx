@@ -366,7 +366,7 @@
     <property name="act86" value="char_move misa,right 1,down 1"/>
     <property name="act87" value="wait 0.6"/>
     <property name="act88" value="translated_dialog taketheleft"/>
-    <property name="act89" value="set_variable whoartthou:tuxemon"/>
+    <property name="act89" value="set_variable whoartthou:SaiyanQuest"/>
     <property name="act90" value="unlock_controls"/>
     <property name="cond1" value="is variable_set getaway:weregone"/>
     <property name="cond2" value="is variable_set whoartthou:person"/>
@@ -383,7 +383,7 @@
     <property name="cond1" value="is char_at player"/>
     <property name="cond2" value="is char_facing player,down"/>
     <property name="cond3" value="is button_pressed K_RETURN"/>
-    <property name="cond4" value="is variable_set whoartthou:tuxemon"/>
+    <property name="cond4" value="is variable_set whoartthou:SaiyanQuest"/>
    </properties>
   </object>
   <object id="122" name="look at the other one" type="event" x="512" y="416" width="48" height="16">
@@ -392,7 +392,7 @@
     <property name="cond1" value="is char_at player"/>
     <property name="cond2" value="is char_facing player,down"/>
     <property name="cond3" value="is button_pressed K_RETURN"/>
-    <property name="cond4" value="is variable_set whoartthou:tuxemon"/>
+    <property name="cond4" value="is variable_set whoartthou:SaiyanQuest"/>
    </properties>
   </object>
   <object id="123" name="beatomni" type="event" x="448" y="368" width="16" height="16">

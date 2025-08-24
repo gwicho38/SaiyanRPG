@@ -1,4 +1,4 @@
-Tuxemon
+SaiyanQuest
 =========
 
 Copyright (C) 2014-2025 William Edwards <shadowapex@gmail.com>, Benjamin Bean <superman2k5@gmail.com>
@@ -13,7 +13,7 @@ Programming
 
 **Contributors**
 
-* [Nathan Moore](https://git.tuxemon.org:3000/u/Nate-Devv) for the experience system
+* [Nathan Moore](https://git.SaiyanQuest.org:3000/u/Nate-Devv) for the experience system
 * [C Nelson](https://github.com/cnelsonsic) for pep8 auditing
 * [Arsène Thieffry](https://github.com/druz320) for menu sorting and bug fixes
 * [dtdannen](https://github.com/dtdannen) for pathfinding and polyline collisions

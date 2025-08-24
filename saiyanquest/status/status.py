@@ -40,7 +40,7 @@ SIMPLE_PERSISTANCE_ATTRIBUTES = (
 
 class Status:
     """
-    Particular status that tuxemon monsters can be affected.
+    Particular status that SaiyanQuest monsters can be affected.
     """
 
     MAX_STACKS: int = 5

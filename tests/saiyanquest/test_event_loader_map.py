@@ -11,7 +11,7 @@ class TestYAMLEventLoader(unittest.TestCase):
     def setUp(self):
         self.loader = YAMLEventLoader()
         self.valid_yaml_path = (
-            Path("tests/tuxemon") / "test_event_loader_map.yaml"
+            Path("tests/SaiyanQuest") / "test_event_loader_map.yaml"
         )
 
     def test_parse_yaml_success(self):

@@ -42,7 +42,7 @@ MAX_BOX = prepare.MAX_KENNEL
 class MonsterTakeState(PygameMenuState):
     """Menu for the Monster Take state.
 
-    Shows all tuxemon currently in a storage kennel, and selecting one puts it
+    Shows all SaiyanQuest currently in a storage kennel, and selecting one puts it
     into your current party."""
 
     name: ClassVar[str] = "MonsterTakeState"
@@ -172,7 +172,7 @@ class MonsterTakeState(PygameMenuState):
                 self.monster_boxes.remove_monster_from(self.box_name, monster)
                 open_dialog(
                     self.client,
-                    [T.format("tuxemon_released", {"name": monster.name})],
+                    [T.format("SaiyanQuest_released", {"name": monster.name})],
                 )
 
         def info(mon: Monster) -> None:
@@ -288,7 +288,7 @@ class MonsterTakeState(PygameMenuState):
 
 
 class MonsterBoxState(PygameMenuState):
-    """Menu to choose a tuxemon box."""
+    """Menu to choose a SaiyanQuest box."""
 
     name: ClassVar[str] = "MonsterBoxState"
 
@@ -372,7 +372,7 @@ class MonsterBoxState(PygameMenuState):
 
 
 class MonsterStorageState(MonsterBoxState):
-    """Menu to choose a box, which you can then take a tuxemon from."""
+    """Menu to choose a box, which you can then take a SaiyanQuest from."""
 
     name: ClassVar[str] = "MonsterStorageState"
 
@@ -398,7 +398,7 @@ class MonsterStorageState(MonsterBoxState):
 
 
 class MonsterDropOffState(MonsterBoxState):
-    """Menu to choose a box, which you can then drop off a tuxemon into."""
+    """Menu to choose a box, which you can then drop off a SaiyanQuest into."""
 
     name: ClassVar[str] = "MonsterDropOffState"
 
@@ -424,7 +424,7 @@ class MonsterDropOffState(MonsterBoxState):
 
 
 class MonsterDropOff(MonsterMenuState):
-    """Shows all Tuxemon in player's party, puts it into box if selected."""
+    """Shows all SaiyanQuest in player's party, puts it into box if selected."""
 
     name: ClassVar[str] = "MonsterDropOff"
 

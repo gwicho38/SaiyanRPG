@@ -18,7 +18,7 @@ if TYPE_CHECKING:
 @dataclass
 class DisappearEffect(CoreEffect):
     """
-    Tuxemon disappears. It's followed by "appear".
+    SaiyanQuest disappears. It's followed by "appear".
 
     Parameters:
         attack: slug technique (attack when lands).

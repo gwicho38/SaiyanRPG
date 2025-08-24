@@ -13,7 +13,7 @@ duct tape.
 
 Example:
 
-python scripts/make_map_migration.py mods/saiyanquest/gfx/tilesets/My_tuxemon_sheet.png mods/saiyanquest/gfx/tilesets/core_outdoor.png txmn-core.yaml
+python scripts/make_map_migration.py mods/saiyanquest/gfx/tilesets/My_SaiyanQuest_sheet.png mods/saiyanquest/gfx/tilesets/core_outdoor.png txmn-core.yaml
 
 """
 

@@ -64,10 +64,10 @@ if [ $? -ne 0 ]; then
 fi
 
 # Copy project files
-cp -a "$ROOT_FOLDER/tuxemon" pypy/Lib/tuxemon
+cp -a "$ROOT_FOLDER/SaiyanQuest" pypy/Lib/SaiyanQuest
 cp -a "$ROOT_FOLDER/mods" .
 cp "$ROOT_FOLDER/LICENSE" .
-cp "$ROOT_FOLDER/run_tuxemon.py" .
+cp "$ROOT_FOLDER/run_SaiyanQuest.py" .
 cp "$ROOT_FOLDER/CONTRIBUTING.md" .
 cp "$ROOT_FOLDER/CONTRIBUTORS.md" .
 cp "$ROOT_FOLDER/ATTRIBUTIONS.md" .
@@ -81,13 +81,13 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-# Create Tuxemon.bat
-cat << EOF > Tuxemon.bat
+# Create SaiyanQuest.bat
+cat << EOF > SaiyanQuest.bat
 @echo off
 SETCONSOLE /Hide
-%~dp0\\pypy\\bin\\pypy.exe %~dp0\\run_tuxemon.py
+%~dp0\\pypy\\bin\\pypy.exe %~dp0\\run_SaiyanQuest.py
 EOF
-chmod a+x Tuxemon.bat
+chmod a+x SaiyanQuest.bat
 
 # Create README_WINDOWS.txt
 cat << EOF > README_WINDOWS.txt

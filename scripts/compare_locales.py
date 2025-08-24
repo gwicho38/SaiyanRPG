@@ -14,7 +14,7 @@ import json
 import os
 
 # assume run from test folder
-locale_folder = "../../../tuxemon/resources/db/locale/"
+locale_folder = "../../../SaiyanQuest/resources/db/locale/"
 locale_glob = locale_folder + "*.json"
 master_filename = "en_US.json"
 

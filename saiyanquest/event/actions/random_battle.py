@@ -40,7 +40,7 @@ class RandomBattleAction(EventAction):
             random_battle nr_txmns,min_level,max_level
 
     Script parameters:
-        nr_txmns: Number of tuxemon (1 to 6).
+        nr_txmns: Number of SaiyanQuest (1 to 6).
         min_level: Minimum level of the party.
         max_level: Maximum level of the party.
     """

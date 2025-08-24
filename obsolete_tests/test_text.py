@@ -5,7 +5,7 @@ import unittest
 
 from interactive.locale.verify_master_locale import test_dialog, test_translation_slugs
 
-# for some test runners that cannot find the tuxemon core
+# for some test runners that cannot find the SaiyanQuest core
 sys.path.insert(0, os.path.join('saiyanquest', ))
 
 from saiyanquest.core.components.ui import draw

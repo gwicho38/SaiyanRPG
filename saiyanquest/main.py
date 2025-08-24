@@ -28,7 +28,7 @@ def main(config: SaiyanQuestConfig, load_slot: Optional[int] = None) -> None:
     using the pygame interface.
 
     Parameters:
-        config: The Tuxemon configuration object containing game settings.
+        config: The SaiyanQuest configuration object containing game settings.
         load_slot: Number of the save slot to load, if any.
     """
     log.configure()
@@ -102,7 +102,7 @@ def headless(config: SaiyanQuestConfig) -> None:
     Sets up out headless server and start the game.
 
     Parameters:
-        config: The Tuxemon configuration object containing game settings.
+        config: The SaiyanQuest configuration object containing game settings.
     """
     log.configure()
     prepare.init(platform="headless")

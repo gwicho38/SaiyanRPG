@@ -228,7 +228,7 @@
    <properties>
     <property name="act1" value="translated_dialog hebenice"/>
     <property name="act2" value="clear_variable scene"/>
-    <property name="act5" value="set_variable go_get_tuxemon:yes"/>
+    <property name="act5" value="set_variable go_get_SaiyanQuest:yes"/>
     <property name="behav1" value="talk npc_mom"/>
     <property name="cond1" value="is variable_set announce_trials:4"/>
    </properties>

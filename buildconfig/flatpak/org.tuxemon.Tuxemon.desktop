@@ -1,11 +1,11 @@
 [Desktop Entry]
-Name=Tuxemon
-Name[de_AT]=Tuxemon
+Name=SaiyanQuest
+Name[de_AT]=SaiyanQuest
 GenericName=Open source monster-fighting RPG
-GenericName[de]=Tuxemon
+GenericName[de]=SaiyanQuest
 Comment=
-Exec=org.tuxemon.Tuxemon
-Icon=org.tuxemon.Tuxemon
+Exec=org.SaiyanQuest.SaiyanQuest
+Icon=org.SaiyanQuest.SaiyanQuest
 Terminal=false
 Type=Application
 Categories=Game

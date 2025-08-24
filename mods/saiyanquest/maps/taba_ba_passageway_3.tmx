@@ -66,42 +66,42 @@
     <property name="cond2" value="is char_facing player,up"/>
    </properties>
   </object>
-  <object id="20" name="wild tuxemon 1" type="event" x="176" y="80" width="32" height="32">
+  <object id="20" name="wild SaiyanQuest 1" type="event" x="176" y="80" width="32" height="32">
    <properties>
     <property name="act1" value="random_encounter taba_ba_passageway_3"/>
     <property name="cond1" value="is char_at player"/>
     <property name="cond2" value="is char_moved player"/>
    </properties>
   </object>
-  <object id="21" name="wild tuxemon 2" type="event" x="240" y="128" width="32" height="32">
+  <object id="21" name="wild SaiyanQuest 2" type="event" x="240" y="128" width="32" height="32">
    <properties>
     <property name="act1" value="random_encounter taba_ba_passageway_3"/>
     <property name="cond1" value="is char_at player"/>
     <property name="cond2" value="is char_moved player"/>
    </properties>
   </object>
-  <object id="22" name="wild tuxemon 3" type="event" x="16" y="112" width="32" height="16">
+  <object id="22" name="wild SaiyanQuest 3" type="event" x="16" y="112" width="32" height="16">
    <properties>
     <property name="act1" value="random_encounter taba_ba_passageway_3"/>
     <property name="cond1" value="is char_at player"/>
     <property name="cond2" value="is char_moved player"/>
    </properties>
   </object>
-  <object id="23" name="wild tuxemon 4" type="event" x="48" y="48" width="48" height="16">
+  <object id="23" name="wild SaiyanQuest 4" type="event" x="48" y="48" width="48" height="16">
    <properties>
     <property name="act1" value="random_encounter taba_ba_passageway_3"/>
     <property name="cond1" value="is char_at player"/>
     <property name="cond2" value="is char_moved player"/>
    </properties>
   </object>
-  <object id="24" name="wild tuxemon 5" type="event" x="240" y="80" width="32" height="16">
+  <object id="24" name="wild SaiyanQuest 5" type="event" x="240" y="80" width="32" height="16">
    <properties>
     <property name="act1" value="random_encounter taba_ba_passageway_3"/>
     <property name="cond1" value="is char_at player"/>
     <property name="cond2" value="is char_moved player"/>
    </properties>
   </object>
-  <object id="25" name="wild tuxemon 6" type="event" x="240" y="208" width="16" height="32">
+  <object id="25" name="wild SaiyanQuest 6" type="event" x="240" y="208" width="16" height="32">
    <properties>
     <property name="act1" value="random_encounter taba_ba_passageway_3"/>
     <property name="cond1" value="is char_at player"/>

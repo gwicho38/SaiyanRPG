@@ -211,7 +211,7 @@ COEFF_POUNDS: float = 2.2046
 # Players
 PLAYER_NPC = CONFIG.player_npc
 PLAYER_NAME_LIMIT: int = 15  # The character limit for a player name.
-PARTY_LIMIT: int = 6  # The maximum number of tuxemon this npc can hold
+PARTY_LIMIT: int = 6  # The maximum number of SaiyanQuest this npc can hold
 #  Moverate limits to avoid losing sprites
 MOVERATE_RANGE: tuple[float, float] = (0.0, 20.0)
 TRANS_TIME: float = 0.3  # transition time

@@ -76,7 +76,7 @@ def get_user_storage_dir() -> Path:
                 android_module.context.getExternalFilesDir(None).getPath()
             )
     logger.error("Android module is not available or not running on Android")
-    return Path.home() / ".tuxemon"
+    return Path.home() / ".SaiyanQuest"
 
 
 def is_android() -> bool:
@@ -97,8 +97,8 @@ def get_system_storage_dirs() -> Sequence[Path]:
     if not is_android():
         paths.extend(
             [
-                Path("/usr/share/tuxemon/"),
-                Path("/usr/local/share/tuxemon/"),
+                Path("/usr/share/SaiyanQuest/"),
+                Path("/usr/local/share/SaiyanQuest/"),
             ]
         )
 

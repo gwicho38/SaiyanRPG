@@ -221,7 +221,7 @@
     <property name="cond1" value="not char_exists spyder_leather_eula"/>
    </properties>
   </object>
-  <object id="276" name="Heal Tuxemon" type="event" x="112" y="160" width="16" height="16">
+  <object id="276" name="Heal SaiyanQuest" type="event" x="112" y="160" width="16" height="16">
    <properties>
     <property name="act10" value="set_monster_health"/>
     <property name="act11" value="set_monster_status"/>

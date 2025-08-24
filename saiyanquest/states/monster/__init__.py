@@ -269,7 +269,7 @@ class MonsterMenuHandler:
             self.client.remove_state_by_name("ChoiceState")
             self.client.remove_state_by_name("DialogState")
             params = {"name": monster.name.upper()}
-            msg = T.format("tuxemon_released", params)
+            msg = T.format("SaiyanQuest_released", params)
             open_dialog(self.client, [msg])
             self.monster_menu.remove_monster_sprite_display(monster)
 

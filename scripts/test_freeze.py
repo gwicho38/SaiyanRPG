@@ -4,7 +4,7 @@ torture test the codebase by importing all the files alone.
 * looks for broken references to files in `mods`
 * looks for awkward or broken imports
 
-[Tuxemon]$ python scripts/test_freeze.py
+[SaiyanQuest]$ python scripts/test_freeze.py
 """
 
 import os

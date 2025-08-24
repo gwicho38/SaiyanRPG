@@ -55,10 +55,10 @@
     <property name="act10" value="add_monster fruitera,10"/>
     <property name="act20" value="set_variable got_Fruitera:true"/>
     <property name="act30" value="translated_dialog mart_junkyard01"/>
-    <property name="act40" value="set_variable got_first_tuxemon:true"/>
+    <property name="act40" value="set_variable got_first_SaiyanQuest:true"/>
     <property name="cond10" value="is char_facing_tile player"/>
     <property name="cond20" value="is button_pressed K_RETURN"/>
-    <property name="cond30" value="not variable_set got_first_tuxemon:true"/>
+    <property name="cond30" value="not variable_set got_first_SaiyanQuest:true"/>
     <property name="cond40" value="is variable_set maple_bedroom1:true"/>
    </properties>
   </object>
@@ -67,10 +67,10 @@
     <property name="act10" value="add_monster bamboon,10"/>
     <property name="act20" value="set_variable got_Bamboon:true"/>
     <property name="act30" value="translated_dialog mart_junkyard02"/>
-    <property name="act40" value="set_variable got_first_tuxemon:true"/>
+    <property name="act40" value="set_variable got_first_SaiyanQuest:true"/>
     <property name="cond10" value="is char_facing_tile player"/>
     <property name="cond20" value="is button_pressed K_RETURN"/>
-    <property name="cond30" value="not variable_set got_first_tuxemon:true"/>
+    <property name="cond30" value="not variable_set got_first_SaiyanQuest:true"/>
     <property name="cond40" value="is variable_set maple_bedroom1:true"/>
    </properties>
   </object>
@@ -125,25 +125,25 @@
    <properties>
     <property name="act10" value="pathfind maple_girl,6,18"/>
     <property name="act20" value="translated_dialog mart_junkyard03"/>
-    <property name="act30" value="set_variable maple_got_tuxemon1:true"/>
+    <property name="act30" value="set_variable maple_got_SaiyanQuest1:true"/>
     <property name="cond10" value="is variable_set got_Fruitera:true"/>
-    <property name="cond20" value="not variable_set maple_got_tuxemon1:true"/>
+    <property name="cond20" value="not variable_set maple_got_SaiyanQuest1:true"/>
    </properties>
   </object>
   <object id="34" type="event" x="240" y="240" width="16" height="16">
    <properties>
     <property name="act10" value="pathfind maple_girl,14,18"/>
     <property name="act20" value="translated_dialog mart_junkyard04"/>
-    <property name="act30" value="set_variable maple_got_tuxemon1:true"/>
+    <property name="act30" value="set_variable maple_got_SaiyanQuest1:true"/>
     <property name="cond10" value="is variable_set got_Bamboon:true"/>
-    <property name="cond20" value="not variable_set maple_got_tuxemon1:true"/>
+    <property name="cond20" value="not variable_set maple_got_SaiyanQuest1:true"/>
    </properties>
   </object>
   <object id="35" type="event" x="256" y="368" width="16" height="16">
    <properties>
     <property name="act10" value="create_npc cfanatic1,12,33,stand"/>
     <property name="act20" value="set_variable fanatics_in_junkyard:true"/>
-    <property name="cond10" value="is variable_set maple_got_tuxemon1:true"/>
+    <property name="cond10" value="is variable_set maple_got_SaiyanQuest1:true"/>
     <property name="cond20" value="not variable_set fanatics_in_junkyard:true"/>
    </properties>
   </object>
@@ -151,7 +151,7 @@
    <properties>
     <property name="act10" value="create_npc cfanatic2,8,33,stand"/>
     <property name="act20" value="set_variable fanatics_in_junkyard:true"/>
-    <property name="cond10" value="is variable_set maple_got_tuxemon1:true"/>
+    <property name="cond10" value="is variable_set maple_got_SaiyanQuest1:true"/>
     <property name="cond20" value="not variable_set fanatics_in_junkyard:true"/>
    </properties>
   </object>

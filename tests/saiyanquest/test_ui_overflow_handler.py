@@ -16,7 +16,7 @@ from saiyanquest.ui.text_renderer import TextRenderer
 
 FONT_SIZE: int = prepare.FONT_SIZE
 FONT_PATH = (
-    mods_folder / "tuxemon/font" / Path(prepare.CONFIG.locale.font_file)
+    mods_folder / "SaiyanQuest/font" / Path(prepare.CONFIG.locale.font_file)
 )
 
 

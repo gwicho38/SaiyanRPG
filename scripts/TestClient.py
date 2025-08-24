@@ -10,12 +10,12 @@ from saiyanquest.mod_manager import Manager
 print(
     "",
     "Test package downloader.",
-    "Check tuxemon/mod_manager/__init__.py for module.",
-    "Downloads are located at ~/.tuxemon/cache/downloaded_packages",
+    "Check SaiyanQuest/mod_manager/__init__.py for module.",
+    "Downloads are located at ~/.SaiyanQuest/cache/downloaded_packages",
     sep="\n",
 )
 
-os.makedirs(os.path.expanduser("~/.tuxemon/cache/downloaded_packages"), exist_ok=True)
+os.makedirs(os.path.expanduser("~/.SaiyanQuest/cache/downloaded_packages"), exist_ok=True)
 
 ip = input("Enter the server URL with format: http://ip:port/\n> ")
 man = Manager(ip)

@@ -20,4 +20,4 @@ jobs:
         sudo apt install flatpak
         sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
         sudo flatpak install -y org.freedesktop.appstream-glib
-        flatpak run --env=G_DEBUG=fatal-criticals org.freedesktop.appstream-glib validate ./buildconfig/flatpak/org.saiyanquest.Tuxemon.appdata.xml
+        flatpak run --env=G_DEBUG=fatal-criticals org.freedesktop.appstream-glib validate ./buildconfig/flatpak/org.saiyanquest.SaiyanQuest.appdata.xml

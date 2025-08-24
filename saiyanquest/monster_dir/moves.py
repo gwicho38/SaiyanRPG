@@ -41,7 +41,7 @@ class MonsterMovesHandler:
 
     def learn(self, technique: Technique) -> None:
         """
-        Adds a technique to this tuxemon's moveset.
+        Adds a technique to this SaiyanQuest's moveset.
 
         Parameters:
             technique: The technique for the monster to learn.

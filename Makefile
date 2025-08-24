@@ -16,7 +16,7 @@ setup:
 # Run the game
 .PHONY: run
 run:
-	python ./run_tuxemon.py
+	python ./run_SaiyanQuest.py
 
 # Run tests
 .PHONY: test

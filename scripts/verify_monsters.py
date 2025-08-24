@@ -26,7 +26,7 @@ from os.path import basename, exists, join, normpath
 sprite_root = "gfx"
 
 # assume run from test folder
-resources_folder = normpath("../tuxemon/resources")
+resources_folder = normpath("../SaiyanQuest/resources")
 
 db_folder = join(resources_folder, "db")
 gfx_folder = join(resources_folder, "gfx")

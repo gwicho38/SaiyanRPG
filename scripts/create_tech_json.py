@@ -106,7 +106,7 @@ def create_json(data_row):
         "types": types,
     }
 
-    path = "tuxemon/resources/db/technique/%s.json" % name
+    path = "SaiyanQuest/resources/db/technique/%s.json" % name
     with open(path, "w") as f:
         dump(template, f, indent=2, separators=(",", ": "), sort_keys=True)
         f.write("\n")

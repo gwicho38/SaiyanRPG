@@ -1,12 +1,12 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Tuxemon\n"
+"Project-Id-Version: SaiyanQuest\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-14 05:41+0200\n"
 "PO-Revision-Date: 2023-02-03 04:41+0000\n"
 "Last-Translator: Betsy <betsymaxx@gmailvn.net>\n"
-"Language-Team: Czech <https://hosted.weblate.org/projects/tuxemon/tuxemon/cs/>\n"
+"Language-Team: Czech <https://hosted.weblate.org/projects/SaiyanQuest/SaiyanQuest/cs/>\n"
 "Language: cs_CZ\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -88,11 +88,11 @@ msgstr "{user} použil {name} na {target}!"
 msgid "combat_swap"
 msgstr "{user} odesláno {target}!"
 
-msgid "combat_call_tuxemon"
+msgid "combat_call_SaiyanQuest"
 msgstr "Běž {name}!"
 
 # TODO: similar to combat_swap - refactor!
-msgid "combat_opponent_call_tuxemon"
+msgid "combat_opponent_call_SaiyanQuest"
 msgstr "{user} posílá ven {name}!"
 
 msgid "combat_state_poison_damage"
@@ -249,11 +249,11 @@ msgid "menu_load"
 msgstr "Nahrát"
 
 msgid "menu_monster"
-msgstr "Tuxemon"
+msgstr "SaiyanQuest"
 
 # TODO: duplicate of menu_monster?
 msgid "menu_monsters"
-msgstr "Tuxemoni"
+msgstr "SaiyanQuesti"
 
 msgid "menu_multiplayer"
 msgstr "Multiplayer"
@@ -1000,8 +1000,8 @@ msgstr "Tým Xero Grunt X"
 
 # DIALOG TRANSLATIONS ##
 # general dialogs
-msgid "healmytuxemon"
-msgstr "Do you want to heal your Tuxemon?"
+msgid "healmySaiyanQuest"
+msgstr "Do you want to heal your SaiyanQuest?"
 
 msgid "haveagoodday"
 msgstr "Have a nice day!"
@@ -1025,7 +1025,7 @@ msgid "orange_flowers"
 msgstr "Někdo zasadil nějaké krásné oranžové květy!"
 
 msgid "famous_statue"
-msgstr "Je to socha bývalého mistra Tuxemon. Název je zvětralý..."
+msgstr "Je to socha bývalého mistra SaiyanQuest. Název je zvětralý..."
 
 msgid "famous_statue2"
 msgstr "Říká: Pro naše milované přátele a hrdiny všech, wywen"
@@ -1049,19 +1049,19 @@ msgstr "Not really"
 msgid "professor_dialog"
 msgstr ""
 "Profesor: Hurá. Přesně ten člověk se kterým jsem se chtěl setkat.\n"
-"Slyšel jsem že se chceš učit o Tuxemonech.\n"
-"Tuxemoni jsou malá zvířata, někteří je nazývají monstry, se kterými se přátelíme a používáme je k boji s dalšími Tuxemony.\n"
-"Napadlo mě, že jsem zrovna získal tři nové Tuxemony pro svůj výzkum. Jednoho bych ti rád dal.\n"
+"Slyšel jsem že se chceš učit o SaiyanQuestech.\n"
+"SaiyanQuesti jsou malá zvířata, někteří je nazývají monstry, se kterými se přátelíme a používáme je k boji s dalšími SaiyanQuesty.\n"
+"Napadlo mě, že jsem zrovna získal tři nové SaiyanQuesty pro svůj výzkum. Jednoho bych ti rád dal.\n"
 "Který by se ti líbil?"
 
 msgid "professor_dialog6.1"
-msgstr "Profesor: Skvělá volba! Hydrone je vodní tuxemon"
+msgstr "Profesor: Skvělá volba! Hydrone je vodní SaiyanQuest"
 
 msgid "professor_dialog6.2"
-msgstr "Profesor: Vynikající volba! Rockitten je zemní tuxemon"
+msgstr "Profesor: Vynikající volba! Rockitten je zemní SaiyanQuest"
 
 msgid "professor_dialog6.3"
-msgstr "Profesor: Výborná volba! Fruitera je dřevní tuxemon"
+msgstr "Profesor: Výborná volba! Fruitera je dřevní SaiyanQuest"
 
 msgid "professor_dialog7"
 msgstr ""
@@ -1075,7 +1075,7 @@ msgid "karrianna_dialog2"
 msgstr "Dobře... Byl jsi první trenér, se kterým jsem se setkal..."
 
 msgid "xero_hideout1"
-msgstr "Institut Xero pro výzkum a vývoj v oblasti Tuxemonů."
+msgstr "Institut Xero pro výzkum a vývoj v oblasti SaiyanQuestů."
 
 msgid "cherry_found"
 msgstr "Našel jsi třešeň"
@@ -1213,7 +1213,7 @@ msgid "iamknight3"
 msgstr ""
 "What are you doing here? You know that only knights are allowed through city park.\n"
 "... ... ... Hmm... So you're trying to get to Leather Town...\n"
-"Well, I guess you could enter the challenge if you want. The only problem is that you'll need a Tuxemon...\n"
+"Well, I guess you could enter the challenge if you want. The only problem is that you'll need a SaiyanQuest...\n"
 "I'm sure we can lend you one. Are you up for the challenge?"
 
 msgid "sorry"
@@ -1221,8 +1221,8 @@ msgstr "Okay, well... when you're ready, I'll still be here..."
 
 msgid "splendid"
 msgstr ""
-"You will? Splendid! Now, to find you a suitable Tuxemon...\n"
-"... ... You already have a Tuxemon? Well, I'm sure that you'd be able to handle yourself well..."
+"You will? Splendid! Now, to find you a suitable SaiyanQuest...\n"
+"... ... You already have a SaiyanQuest? Well, I'm sure that you'd be able to handle yourself well..."
 
 msgid "cottonnurse_dialog"
 msgstr "Welcome to the Cotton Town Tuxecenter!"
@@ -1230,18 +1230,18 @@ msgstr "Welcome to the Cotton Town Tuxecenter!"
 msgid "tabanurse_dialog"
 msgstr ""
 "Vítejte v ${{map_name}} Tuxecenter!\n"
-"Chcete vyléčit své Tuxemon?"
+"Chcete vyléčit své SaiyanQuest?"
 
 msgid "okaythen"
-msgstr "OK! Jen mi dej vteřinu a já uzdravím tvé Tuxemon!"
+msgstr "OK! Jen mi dej vteřinu a já uzdravím tvé SaiyanQuest!"
 
 msgid "okaythen2"
-msgstr "Well, it looks like your Tuxemon are full of energy! Here they are!"
+msgstr "Well, it looks like your SaiyanQuest are full of energy! Here they are!"
 
 msgid "input_name"
 msgstr "Jméno?"
 
-msgid "tuxemon_stat2"
+msgid "SaiyanQuest_stat2"
 msgstr "{desc}"
 
 msgid "urcine"
@@ -1794,7 +1794,7 @@ msgstr ""
 msgid "hellolovelypeople5"
 msgstr ""
 "Ne... Počkej... Chybí nám jeden člověk...\n"
-"Osamělý chovatel Tuxemon odešel do regionu Fondent. Ten, který si říká Tuxemon Professor"
+"Osamělý chovatel SaiyanQuest odešel do regionu Fondent. Ten, který si říká SaiyanQuest Professor"
 
 msgid "spyder_citypark_achievement"
 msgstr "Achievement Maniac's House: Zavřeno."
@@ -1804,7 +1804,7 @@ msgstr "Denní stacionář: Ve výstavbě."
 
 # Default mod names on selection menu
 msgid "xero_campaign"
-msgstr "Tuxemon: Xero"
+msgstr "SaiyanQuest: Xero"
 
 msgid "spyder_nimrod_plaque"
 msgstr ""

@@ -124,7 +124,7 @@ class SpawnMonsterAction(EventAction):
         character.party.add_monster(child, len(character.monsters))
 
         # Display a message to the player
-        msg = T.format("got_new_tuxemon", {"monster_name": child.name})
+        msg = T.format("got_new_SaiyanQuest", {"monster_name": child.name})
         open_dialog(session.client, [msg])
 
     def update(self, session: Session) -> None:
@@ -209,7 +209,7 @@ def _determine_seed(mother: Monster, father: Monster) -> Monster:
 
 
 def _determine_tastes(mother: Monster, father: Monster) -> tuple[str, str]:
-    """Taste inheritance for a Tuxemon offspring."""
+    """Taste inheritance for a SaiyanQuest offspring."""
     warm_slug = random.choice([mother.taste_warm, father.taste_warm])
     cold_slug = random.choice([mother.taste_cold, father.taste_cold])
 

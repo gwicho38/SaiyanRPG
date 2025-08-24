@@ -1,1 +1,1 @@
- flatpak-builder --force-clean --repo=tuxemonRepo build org.tuxemon.Tuxemon.yaml
+ flatpak-builder --force-clean --repo=SaiyanQuestRepo build org.SaiyanQuest.SaiyanQuest.yaml

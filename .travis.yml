@@ -55,5 +55,5 @@ deploy:
   draft: true
   on:
     tags: true
-    repo: Tuxemon/Tuxemon
+    repo: SaiyanQuest/SaiyanQuest
     branch: development

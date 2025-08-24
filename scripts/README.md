@@ -1,6 +1,6 @@
 ## Tools & Scripts Directory
 
-This folder contains optional utilities for manipulating game files and configurations related to Tuxemon. These are **not required** to run or play the game.
+This folder contains optional utilities for manipulating game files and configurations related to SaiyanQuest. These are **not required** to run or play the game.
 
 ### General Guidelines
 - **Documentation:** All scripts should include a description and usage instructions at the top of the file.

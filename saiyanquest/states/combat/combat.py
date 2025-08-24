@@ -299,10 +299,10 @@ class CombatState(CombatAnimations):
 
     def ask_player_for_monster(self, player: NPC) -> None:
         """
-        Open dialog to allow player to choose a Tuxemon to enter into play.
+        Open dialog to allow player to choose a SaiyanQuest to enter into play.
 
         Parameters:
-            player: Player who has to select a Tuxemon.
+            player: Player who has to select a SaiyanQuest.
         """
 
         def add(menuitem: MenuItem[Monster]) -> None:
@@ -523,7 +523,7 @@ class CombatState(CombatAnimations):
         # swapping monster
         if method.slug == "swap":
             params = {"name": target.name.upper()}
-            message = T.format("combat_call_tuxemon", params)
+            message = T.format("combat_call_SaiyanQuest", params)
         # check statuses
         if status_result:
             if status_result.extras:
@@ -800,7 +800,7 @@ class CombatState(CombatAnimations):
             if techniques:
                 tech_list = ", ".join(tech.name.upper() for tech in techniques)
                 params = {"name": winner.name.upper(), "tech": tech_list}
-                mex = T.format("tuxemon_new_tech", params)
+                mex = T.format("SaiyanQuest_new_tech", params)
                 self.text_anim.add_xp_message(mex)
             owner = winner.get_owner()
             if owner.is_player:

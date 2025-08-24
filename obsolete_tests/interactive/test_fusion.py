@@ -5,7 +5,7 @@ from fusion.py
 if __name__ == "__main__":
     #### EXAMPLES ####
     # Note: this test is non-functional
-    # The Tuxemon selected here serve only 
+    # The SaiyanQuest selected here serve only 
     # as examples of potential fusions.	
 
     # Load the sprite data.

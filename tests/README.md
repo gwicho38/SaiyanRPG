@@ -1,4 +1,4 @@
-Tuxemon Unit Tests
+SaiyanQuest Unit Tests
 ==================
 
 Tests in this folder should be non-interactive and runnable with a test
@@ -19,7 +19,7 @@ made to the convention, please open a github issue with your proposal.
 
 ## Style
 
-Tuxemon code is read by many people who may come from different backgrounds.
+SaiyanQuest code is read by many people who may come from different backgrounds.
 In addition, when making choices between code efficiency and verbosity, we
 should always prefer simple-to-understand tests, even if that reduces the
 efficiency or making verbose/duplicated code in tests. Tests should be

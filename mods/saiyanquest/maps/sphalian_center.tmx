@@ -42,7 +42,7 @@
   <object id="21" type="collision" x="0" y="112" width="16" height="16"/>
  </objectgroup>
  <objectgroup color="#ffff00" id="6" name="Events">
-  <object id="16" name="Heal Tuxemon" type="event" x="96" y="96" width="16" height="16">
+  <object id="16" name="Heal SaiyanQuest" type="event" x="96" y="96" width="16" height="16">
    <properties>
     <property name="act10" value="set_monster_health"/>
     <property name="act20" value="set_monster_status"/>

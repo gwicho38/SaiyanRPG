@@ -53,7 +53,7 @@ docs/autogen/
 *~
 
 # Save games
-tuxemon/saves/
+SaiyanQuest/saves/
 
 # Windows file
 Thumbs.db
@@ -74,6 +74,6 @@ Thumbs.db
 
 # Mac OS
 *.DS_Store
-mods/tuxemon/maps/~$Map Helper.xlsx
-mods/tuxemon/db/encounter/~$JSON-o-matic for Encounters.ods
+mods/SaiyanQuest/maps/~$Map Helper.xlsx
+mods/SaiyanQuest/db/encounter/~$JSON-o-matic for Encounters.ods
 /.mypy_cache/

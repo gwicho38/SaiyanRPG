@@ -16,7 +16,7 @@ if TYPE_CHECKING:
 @dataclass
 class AppearEffect(CoreEffect):
     """
-    Tuxemon re-appears, it follows "disappear".
+    SaiyanQuest re-appears, it follows "disappear".
 
     """
 

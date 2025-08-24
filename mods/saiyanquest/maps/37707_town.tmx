@@ -22,7 +22,7 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="1313" source="../gfx/tilesets/My_tuxemon_sheet.tsx"/>
+ <tileset firstgid="1313" source="../gfx/tilesets/My_SaiyanQuest_sheet.tsx"/>
  <layer id="1" name="Tile Layer 1" width="48" height="32">
   <data encoding="base64" compression="zlib">
    eAHtVslKBDEQnYtfoqjgIV5cQA+CW4PCeHGBcTu4/f8XWA/qQRGSSdlJ0430oaiklpeXqp7KLDcWi6WRXbOG/Vj3nWj4gsiByGFCjsRmsXLrXD4wiYFzcvnr7OD4ZHJ5H2rgbqk/5sGz1+HDZ/NyOTinhJPyd5r3o3pf9Z3odxHg2vNtH3Jc4nNy+X2wYmzwZa3h45r3AH97ju15jJXbp/h7757DpJ18uT8TvlijH/AF3cMGH/2MgS4JsEoxNf5NwY9rzD3rZHlzfe7kdeGM63uHUMAn307i8LvAObDdmDXnFjlgz7xbjaOvtQ4FfPIAd9wB51v+JT7kfy95DyqPilPK9fiDA4t3AB7XJ7K+MnKtOJfGBv+p2l9Ev6q8qc3DrxTj4U/e5F7CTPnH5p/iZG2sO/tgfVhPnX/MN95PmT9rz99DqgdT5h/XOrWf+aff8dBwlqXqTtuQ9bdvC9+Y1vpDZz/egNbz39aGb8yQujX/T6nJV095NnVdOTG+JY7fVa0OlVi2dy3r6r3XEPz5fzTWXk5/ifsP/Gvmz1BzxdsD1N9+wzVzZ4zvf0/4b/eQHcmJZ1bLueKtf9849K1v7hTyZv7j9m+u/1z/mjkwxvfzCz3q8bo=
@@ -139,7 +139,7 @@
     <property name="cond20" value="is char_at player"/>
    </properties>
   </object>
-  <object id="185" name="Give Tuxemon" type="event" x="368" y="400" width="16" height="16">
+  <object id="185" name="Give SaiyanQuest" type="event" x="368" y="400" width="16" height="16">
    <properties>
     <property name="act10" value="translated_dialog 37707_town01"/>
     <property name="act20" value="add_monster fruitera,10"/>

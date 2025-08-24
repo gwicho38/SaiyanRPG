@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-  <id>org.tuxemon.Tuxemon</id>
+  <id>org.SaiyanQuest.SaiyanQuest</id>
   <metadata_license>FSFAP</metadata_license>
   <project_license>GPL-3.0</project_license>
-  <name>Tuxemon</name>
-  <summary>Tuxemon is a free, open source monster-fighting RPG.</summary>
+  <name>SaiyanQuest</name>
+  <summary>SaiyanQuest is a free, open source monster-fighting RPG.</summary>
 
   <description>
-    <p>Tuxemon is a free, open source monster-fighting RPG. It's in constant development and improving all the time! Contributors of all skill levels are welcome to join.</p>
+    <p>SaiyanQuest is a free, open source monster-fighting RPG. It's in constant development and improving all the time! Contributors of all skill levels are welcome to join.</p>
     <p>Features:</p>
     <ul>
       <li>Game data is all json, easy to modify and extend</li>
@@ -28,36 +28,36 @@
     </ul>
   </description>
 
-  <launchable type="desktop-id">org.tuxemon.Tuxemon.desktop</launchable>
+  <launchable type="desktop-id">org.SaiyanQuest.SaiyanQuest.desktop</launchable>
 
   <screenshots>
     <screenshot type="default">
       <caption>Overview</caption>
-      <image>https://github.com/Tuxemon/Tuxemon/raw/development/docs/screenshots/tuxemon-overworld.png</image>
+      <image>https://github.com/SaiyanQuest/SaiyanQuest/raw/development/docs/screenshots/SaiyanQuest-overworld.png</image>
     </screenshot>
 	<screenshot>
-      <caption>Battle between Tuxemons</caption>
-	  <image>https://github.com/Tuxemon/Tuxemon/raw/development/docs/screenshots/2tuxemon-battle1.png</image>
+      <caption>Battle between SaiyanQuests</caption>
+	  <image>https://github.com/SaiyanQuest/SaiyanQuest/raw/development/docs/screenshots/2SaiyanQuest-battle1.png</image>
     </screenshot>
 	<screenshot>
-      <caption>Catching Tuxemons</caption>
-	  <image>https://github.com/Tuxemon/Tuxemon/raw/development/docs/screenshots/tuxemon-battle-caught.png</image>
+      <caption>Catching SaiyanQuests</caption>
+	  <image>https://github.com/SaiyanQuest/SaiyanQuest/raw/development/docs/screenshots/SaiyanQuest-battle-caught.png</image>
     </screenshot>
 	<screenshot>
       <caption>Overview</caption>
-	  <image>https://github.com/Tuxemon/Tuxemon/raw/development/docs/screenshots/2tuxemon-overworld-talk0.png</image>
+	  <image>https://github.com/SaiyanQuest/SaiyanQuest/raw/development/docs/screenshots/2SaiyanQuest-overworld-talk0.png</image>
     </screenshot>
 	<screenshot>
       <caption>Tuxecenter</caption>
-	  <image>https://github.com/Tuxemon/Tuxemon/raw/development/docs/screenshots/tuxemon-tuxecenter-heal.png</image>
+	  <image>https://github.com/SaiyanQuest/SaiyanQuest/raw/development/docs/screenshots/SaiyanQuest-tuxecenter-heal.png</image>
     </screenshot>
   </screenshots>
 
-  <url type="homepage">https://www.tuxemon.org/</url>
+  <url type="homepage">https://www.SaiyanQuest.org/</url>
 
   <provides>
-    <binary>Tuxemon</binary>
-    <id>org.tuxemon.Tuxemon</id>
+    <binary>SaiyanQuest</binary>
+    <id>org.SaiyanQuest.SaiyanQuest</id>
   </provides>
 
   <releases>

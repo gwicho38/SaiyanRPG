@@ -18,8 +18,8 @@ def mockNPC(self) -> None:
     self.party._monsters = []
 
 
-class TestCatchTuxemon(unittest.TestCase):
-    # Can't release Tuxemon if it is the only one in the party.
+class TestCatchSaiyanQuest(unittest.TestCase):
+    # Can't release SaiyanQuest if it is the only one in the party.
     def setUp(self):
         with patch.object(NPC, "__init__", mockNPC):
             self.npc = NPC()
@@ -36,7 +36,7 @@ class TestCatchTuxemon(unittest.TestCase):
         self.npc.party.release_monster(monster)
         self.assertEqual(len(self.npc.monsters), 1)
 
-    # Tuxemon can be released if there is another in the party
+    # SaiyanQuest can be released if there is another in the party
     def test_release_two(self):
         monsterA = Monster()
         self.npc.party.add_monster(monsterA, len(self.npc.monsters))
@@ -52,7 +52,7 @@ class TestCatchTuxemon(unittest.TestCase):
         self.assertEqual(self.npc.monsters[0], monsterB)
         self.assertNotEqual(self.npc.monsters[0], monsterA)
 
-    # Can't have more than 6 Tuxemon in party. The excess goes into the Kennel.
+    # Can't have more than 6 SaiyanQuest in party. The excess goes into the Kennel.
     def test_catch_multiple(self):
         self.assertEqual(len(self.npc.monsters), 0)
 

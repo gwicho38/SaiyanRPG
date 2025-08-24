@@ -102,10 +102,10 @@ class TemporaryStatBoosts(BasicStats):
 
 class Monster:
     """
-    Tuxemon monster.
+    SaiyanQuest monster.
 
-    A class for a Tuxemon monster object. This class acts as a skeleton for
-    a Tuxemon, fetching its details from a database.
+    A class for a SaiyanQuest monster object. This class acts as a skeleton for
+    a SaiyanQuest, fetching its details from a database.
     """
 
     def __init__(self, save_data: Optional[Mapping[str, Any]] = None) -> None:
@@ -175,8 +175,8 @@ class Monster:
         self.upper_catch_resistance: float = 1.0
         self.lower_catch_resistance: float = 1.0
 
-        # The tuxemon's state is used for various animations, etc. For example
-        # a tuxemon's state might be "attacking" or "fainting" so we know when
+        # The SaiyanQuest's state is used for various animations, etc. For example
+        # a SaiyanQuest's state might be "attacking" or "fainting" so we know when
         # to play the animations for those states.
         self.state: str = ""
 

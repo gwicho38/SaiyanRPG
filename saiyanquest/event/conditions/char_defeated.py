@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 @dataclass
 class CharDefeatedCondition(EventCondition):
     """
-    Check to see the character has at least one tuxemon, and all tuxemon in their
+    Check to see the character has at least one SaiyanQuest, and all SaiyanQuest in their
     party are defeated.
 
     Script usage:

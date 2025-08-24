@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: Tuxemon",
+            "name": "Python: SaiyanQuest",
             "type": "python",
             "request": "launch",
             "program": "run_saiyanquest.py",

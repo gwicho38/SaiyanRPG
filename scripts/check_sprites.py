@@ -3,7 +3,7 @@
 # Copyright (c) 2014–2025 William Edwards, Benjamin Bean
 
 """
-Sprite Validation Script for Tuxemon
+Sprite Validation Script for SaiyanQuest
 
 Usage:
 -------
@@ -51,7 +51,7 @@ def save_report_to_txt(report, output_path="sprite_report.txt"):
 
         f.write("Report:\n\n")
         for monster, entries in sorted(clustered.items()):
-            f.write(f"Tuxemon: {monster}\n")
+            f.write(f"SaiyanQuest: {monster}\n")
             for entry in entries:
                 line = f"  - {entry['filename']}: {entry['issue']}"
                 f.write(line + "\n")

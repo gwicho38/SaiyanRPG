@@ -18,7 +18,7 @@ from saiyanquest.tools import scale, transform_resource_filename
 _theme: Optional[pygame_menu.Theme] = None
 
 
-class TuxemonArrowSelection(Selection):
+class SaiyanQuestArrowSelection(Selection):
     def __init__(self) -> None:
         # Call the constructor of the Selection providing the left, right,
         # top and bottom margins of your Selection effect box.
@@ -64,33 +64,33 @@ class TuxemonArrowSelection(Selection):
 
 
 def get_theme() -> pygame_menu.Theme:
-    """Get Tuxemon default theme."""
+    """Get SaiyanQuest default theme."""
     global _theme
 
     if _theme is not None:
         return _theme
 
-    tuxemon_border = pygame_menu.BaseImage(
+    SaiyanQuest_border = pygame_menu.BaseImage(
         image_path=transform_resource_filename(prepare.CONFIG.menu_border),
     ).scale(5, 5, smooth=False)
 
-    tuxemon_background_center_rect = tuxemon_border.get_rect()
-    tuxemon_background_center_rect = tuxemon_background_center_rect.inflate(
-        -2 * tuxemon_background_center_rect.width // 3,
-        -2 * tuxemon_background_center_rect.height // 3,
+    SaiyanQuest_background_center_rect = SaiyanQuest_border.get_rect()
+    SaiyanQuest_background_center_rect = SaiyanQuest_background_center_rect.inflate(
+        -2 * SaiyanQuest_background_center_rect.width // 3,
+        -2 * SaiyanQuest_background_center_rect.height // 3,
     )
 
-    tuxemon_border._surface = tuxemon_border._surface.convert_alpha()
-    tuxemon_background = tuxemon_border.copy().crop_rect(
-        tuxemon_background_center_rect
+    SaiyanQuest_border._surface = SaiyanQuest_border._surface.convert_alpha()
+    SaiyanQuest_background = SaiyanQuest_border.copy().crop_rect(
+        SaiyanQuest_background_center_rect
     )
 
     theme = pygame_menu.Theme(
-        background_color=tuxemon_background,
+        background_color=SaiyanQuest_background,
         widget_alignment=ALIGN_LEFT,
         title=False,
-        widget_selection_effect=TuxemonArrowSelection(),
-        border_color=tuxemon_border,
+        widget_selection_effect=SaiyanQuestArrowSelection(),
+        border_color=SaiyanQuest_border,
         scrollarea_position=SCROLLAREA_POSITION_NONE,
         widget_padding=(10, 20),
         title_close_button=False,
@@ -122,7 +122,7 @@ _sound_engine: Optional[pygame_menu.Sound] = None
 def get_sound_engine(
     volume: float, filename: Optional[Path]
 ) -> pygame_menu.Sound:
-    """Get Tuxemon default sound engine."""
+    """Get SaiyanQuest default sound engine."""
     global _sound_engine
 
     if _sound_engine is not None:

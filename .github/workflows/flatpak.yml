@@ -32,23 +32,23 @@ jobs:
     - name: Show Flatpak manifest
       run:  |
         ls -R buildconfig/flatpak/
-        cat buildconfig/flatpak/org.saiyanquest.Tuxemon.yaml
+        cat buildconfig/flatpak/org.saiyanquest.SaiyanQuest.yaml
 
     - name: Build package
       uses: flatpak/flatpak-github-actions/flatpak-builder@v6
       with:
-        bundle: Tuxemon.flatpak
-        manifest-path: buildconfig/flatpak/org.saiyanquest.Tuxemon.yaml
+        bundle: SaiyanQuest.flatpak
+        manifest-path: buildconfig/flatpak/org.saiyanquest.SaiyanQuest.yaml
         cache: false
         branch: ${{ steps.flatpak_release_branch.outputs.value }}
   
     - name: Prepare Flatpak directory
       run: |
-        mkdir -p Tuxemon-x86_64
-        mv Tuxemon.flatpak Tuxemon-x86_64/
+        mkdir -p SaiyanQuest-x86_64
+        mv SaiyanQuest.flatpak SaiyanQuest-x86_64/
 
     - name: Upload Flatpak artifact as a folder
       uses: actions/upload-artifact@v4
       with:
-        name: Tuxemon-x86_64
-        path: Tuxemon-x86_64/
+        name: SaiyanQuest-x86_64
+        path: SaiyanQuest-x86_64/

@@ -22,7 +22,7 @@ SIMPLE_PERSISTANCE_ATTRIBUTES = (
 
 
 class Mission:
-    """Tuxemon mission."""
+    """SaiyanQuest mission."""
 
     def __init__(self) -> None:
         self.slug: str = ""

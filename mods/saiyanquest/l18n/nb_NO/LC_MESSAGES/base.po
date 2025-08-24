@@ -1,12 +1,12 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Tuxemon\n"
+"Project-Id-Version: SaiyanQuest\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-02-03 04:41+0000\n"
 "PO-Revision-Date: 2023-02-03 04:41+0000\n"
 "Last-Translator: Betsy <betsymaxx@gmailvn.net>\n"
-"Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/tuxemon/tuxemon/nb_NO/>\n"
+"Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/SaiyanQuest/SaiyanQuest/nb_NO/>\n"
 "Language: nb_NO\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -183,7 +183,7 @@ msgid "combat_state_poison_get"
 msgstr "{target} er forgiftet."
 
 # TODO: similar to combat_swap - refactor!
-msgid "combat_opponent_call_tuxemon"
+msgid "combat_opponent_call_SaiyanQuest"
 msgstr "{user} sendte ut {name}!"
 
 msgid "combat_swap"
@@ -214,7 +214,7 @@ msgid "allies_address"
 msgstr "Allie sin adresse"
 
 msgid "item_no_available_target"
-msgstr "{name} kan ikke brukes av noen av dine Tuxemoner akkurat nå."
+msgstr "{name} kan ikke brukes av noen av dine SaiyanQuester akkurat nå."
 
 msgid "item_cannot_use_here"
 msgstr "{name} kan ikke brukes her!"
@@ -533,10 +533,10 @@ msgstr "Du har sprunget unna!"
 
 #, fuzzy
 msgid "tm_avalanche_description"
-msgstr "Teknikkmanual som lærer vann- og jord-tuxemon-er skred-teknikken."
+msgstr "Teknikkmanual som lærer vann- og jord-SaiyanQuest-er skred-teknikken."
 
 msgid "revive_description"
-msgstr "Vekker ubevisste Tuxemon og helbreder 20 HP."
+msgstr "Vekker ubevisste SaiyanQuest og helbreder 20 HP."
 
 msgid "imperial_potion_description"
 msgstr "Helbreder et monster med 350 HP."
@@ -668,7 +668,7 @@ msgstr "Eyesore"
 msgid "foxfire"
 msgstr "Foxfire"
 
-msgid "tuxemon_stat2"
+msgid "SaiyanQuest_stat2"
 msgstr "{desc}"
 
 msgid "dollfin"
@@ -1330,7 +1330,7 @@ msgstr "Oidipus"
 
 # Default mod names on selection menu
 msgid "xero_campaign"
-msgstr "Tuxemon: Xero"
+msgstr "SaiyanQuest: Xero"
 
 msgid "combat_player_swap_status"
 msgstr ""

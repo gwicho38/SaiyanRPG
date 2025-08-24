@@ -1,13 +1,13 @@
 [app]
 
 # (str) Title of your application
-title = Tuxemon
+title = SaiyanQuest
 
 # (str) Package name
-package.name = tuxemon
+package.name = SaiyanQuest
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = org.tuxemon
+package.domain = org.SaiyanQuest
 
 # (str) Source code where the main.py live
 source.dir = .
@@ -40,11 +40,11 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = sdl2,openssl,libffi,python3,setuptools,pygame,babel,pytmx,pyscroll,natsort,tuxemon
+requirements = sdl2,openssl,libffi,python3,setuptools,pygame,babel,pytmx,pyscroll,natsort,SaiyanQuest
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
-# requirements.source.tuxemon = tuxemon
+# requirements.source.SaiyanQuest = SaiyanQuest
 
 # (list) Garden requirements
 #garden_requirements =

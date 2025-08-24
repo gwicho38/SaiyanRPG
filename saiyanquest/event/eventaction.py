@@ -60,7 +60,7 @@ class ActionContextManager:
 class EventAction(ABC):
     """EventActions are executed during gameplay.
 
-    EventAction subclasses implement "actions" defined in Tuxemon maps.
+    EventAction subclasses implement "actions" defined in SaiyanQuest maps.
     All subclasses, at minimum, must implement the following:
 
     * The EventAction.start() method
@@ -94,7 +94,7 @@ class EventAction(ABC):
 
     ** this is a work-in-progress feature, that may change in time **
 
-    Tuxemon supports type-checking of the parameters defined in the maps.
+    SaiyanQuest supports type-checking of the parameters defined in the maps.
 
     valid_parameters may be the following format (may change):
 

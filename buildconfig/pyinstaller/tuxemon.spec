@@ -3,8 +3,8 @@
 block_cipher = None
 
 a = Analysis(
-    ["../../run_tuxemon.py"],
-    pathex=["Z:\\Tuxemon"],
+    ["../../run_SaiyanQuest.py"],
+    pathex=["Z:\\SaiyanQuest"],
     binaries=[],
     datas=[],
     hiddenimports=[],
@@ -22,7 +22,7 @@ exe = EXE(
     a.scripts,
     [],
     exclude_binaries=True,
-    name="Tuxemon",
+    name="SaiyanQuest",
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -37,5 +37,5 @@ coll = COLLECT(
     strip=False,
     upx=True,
     upx_exclude=[],
-    name="tuxemon",
+    name="SaiyanQuest",
 )

@@ -1,7 +1,7 @@
 @echo off
 setlocal
 
-echo Building Tuxemon Windows Installer...
+echo Building SaiyanQuest Windows Installer...
 
 rem Get the script's directory
 set ScriptDir=%~dp0
