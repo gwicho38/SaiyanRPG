@@ -633,7 +633,7 @@ class UIManager:
             return None
             
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_ESCAPE:
+            if event.key == pygame.K_ESCAPE or event.key == pygame.K_TAB:
                 if self.current_menu:
                     self.current_menu = None
                 else:
