@@ -87,7 +87,7 @@ class GTAHUD:
     def update(self, dt: float, character: Character, world: GTAWorld) -> None:
         """Update HUD animations and states"""
         # Health flash when low
-        if character.stats.health < 25:
+        if character.health < 25:
             self.health_flash += dt * 8
         else:
             self.health_flash = 0
@@ -139,7 +139,7 @@ class GTAHUD:
         y = surface.get_height() - 100
         
         # Health bar
-        health_percent = character.stats.health / character.stats.max_health
+        health_percent = character.health / character.physics.stats.max_health
         
         # Choose color based on health level
         if health_percent > 0.6:
@@ -150,7 +150,7 @@ class GTAHUD:
             health_color = self.colors.HEALTH_RED
             
         # Flash effect when health is low
-        if character.stats.health < 25:
+        if character.health < 25:
             flash_alpha = abs(math.sin(self.health_flash)) * 0.5 + 0.5
             health_color = tuple(int(c * flash_alpha) for c in health_color)
         
@@ -164,7 +164,7 @@ class GTAHUD:
             pygame.draw.rect(surface, health_color, (x, y, fill_width, bar_height))
         
         # Health text
-        health_text = f"{int(character.stats.health)}/{int(character.stats.max_health)}"
+        health_text = f"{int(character.health)}/{int(character.physics.stats.max_health)}"
         text_surface = self.fonts.small.render(health_text, True, self.colors.WHITE)
         text_x = x + (bar_width - text_surface.get_width()) // 2
         text_y = y + (bar_height - text_surface.get_height()) // 2
@@ -588,7 +588,7 @@ class StatsMenu(GTAMenu):
         """Update stats display"""
         self.menu_items = [
             f"Level: {self.character.level}",
-            f"Health: {self.character.stats.health:.0f}/{self.character.stats.max_health:.0f}",
+            f"Health: {self.character.health:.0f}/{self.character.physics.stats.max_health:.0f}",
             f"Money: ${self.character.money:,}",
             f"Respect: {self.character.respect}",
             f"Gang: {self.character.current_gang.value.replace('_', ' ').title()}",
