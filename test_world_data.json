@@ -1,0 +1,4242 @@
+{
+  "world_size": [
+    32000,
+    24000
+  ],
+  "tile_size": 16,
+  "maps": {
+    "route6": {
+      "position": [
+        11934,
+        12074
+      ],
+      "size": [
+        640,
+        320
+      ],
+      "type": "route",
+      "district": "countryside",
+      "connections": {
+        "east": "spyder_cotton_town",
+        "south": "spyder_candy_hospital3",
+        "north": "spyder_candy_town"
+      }
+    },
+    "mansion": {
+      "position": [
+        12957,
+        11920
+      ],
+      "size": [
+        288,
+        288
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "sphalian_town",
+        "east": "city1_mart_junkyard",
+        "south": "spyder_cotton_town",
+        "north": "spyder_paper_town"
+      }
+    },
+    "spyder_dojo1": {
+      "position": [
+        13985,
+        12056
+      ],
+      "size": [
+        384,
+        192
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_cotton_town",
+        "east": "37707_town_missing",
+        "south": "leather_scoop",
+        "north": "city1_mart_junkyard"
+      }
+    },
+    "flower_city": {
+      "position": [
+        12016,
+        7984
+      ],
+      "size": [
+        640,
+        640
+      ],
+      "type": "town",
+      "district": "downtown",
+      "connections": {
+        "east": "citypark_house1",
+        "south": "eclipse_crystal_town_house"
+      }
+    },
+    "mansion_top": {
+      "position": [
+        14954,
+        11907
+      ],
+      "size": [
+        368,
+        304
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "city1_mart_junkyard",
+        "east": "tt_paper_town",
+        "south": "spyder_timber_scoop",
+        "north": "37707_town_missing"
+      }
+    },
+    "cotton_underground": {
+      "position": [
+        16096,
+        11901
+      ],
+      "size": [
+        640,
+        640
+      ],
+      "type": "town",
+      "district": "countryside",
+      "connections": {
+        "west": "37707_town_missing",
+        "east": "bedroom_test",
+        "south": "spyder_leather_scoop",
+        "north": "tt_paper_town"
+      }
+    },
+    "player_house_bedroom": {
+      "position": [
+        3960,
+        4034
+      ],
+      "size": [
+        144,
+        112
+      ],
+      "type": "notype",
+      "district": "grove_street",
+      "connections": {
+        "east": "taba_house2",
+        "south": "spyder_timber_house"
+      }
+    },
+    "healing_center": {
+      "position": [
+        17082,
+        11983
+      ],
+      "size": [
+        208,
+        176
+      ],
+      "type": "clinic",
+      "district": "countryside",
+      "connections": {
+        "west": "tt_paper_town",
+        "east": "spyder_wayfarer_inn2",
+        "south": "bedroom_test"
+      }
+    },
+    "spyder_wayfarer_inn1": {
+      "position": [
+        17924,
+        12022
+      ],
+      "size": [
+        240,
+        256
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "bedroom_test",
+        "east": "spyder_timber_center",
+        "south": "spyder_wayfarer_inn2"
+      }
+    },
+    "wayfarer_inn1": {
+      "position": [
+        18908,
+        11909
+      ],
+      "size": [
+        240,
+        256
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_wayfarer_inn1",
+        "east": "wayfarer_inn2",
+        "south": "spyder_timber_center"
+      }
+    },
+    "spyder_candy_hospital1": {
+      "position": [
+        20088,
+        12099
+      ],
+      "size": [
+        320,
+        320
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_timber_center",
+        "east": "spyder_dojo3",
+        "south": "wayfarer_inn2"
+      }
+    },
+    "routea": {
+      "position": [
+        20964,
+        12060
+      ],
+      "size": [
+        320,
+        640
+      ],
+      "type": "route",
+      "district": "countryside",
+      "connections": {
+        "west": "wayfarer_inn2",
+        "east": "mansion_basement",
+        "south": "spyder_dojo3"
+      }
+    },
+    "route5": {
+      "position": [
+        21976,
+        12100
+      ],
+      "size": [
+        640,
+        320
+      ],
+      "type": "route",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_dojo3",
+        "east": "spyder_candy_hospital2",
+        "south": "mansion_basement"
+      }
+    },
+    "citypark": {
+      "position": [
+        12914,
+        7975
+      ],
+      "size": [
+        640,
+        640
+      ],
+      "type": "route",
+      "district": "downtown",
+      "connections": {
+        "west": "eclipse_crystal_town_house",
+        "east": "azure_town",
+        "south": "citypark_house1"
+      }
+    },
+    "routec": {
+      "position": [
+        22944,
+        12099
+      ],
+      "size": [
+        640,
+        320
+      ],
+      "type": "route",
+      "district": "countryside",
+      "connections": {
+        "west": "mansion_basement",
+        "south": "professor_lab"
+      }
+    },
+    "spyder_candy_hospital3": {
+      "position": [
+        11955,
+        12717
+      ],
+      "size": [
+        192,
+        320
+      ],
+      "type": "notype",
+      "district": "countryside",
+      "connections": {
+        "north": "sphalian_town",
+        "east": "spyder_cotton_town",
+        "south": "spyder_diamond_hill"
+      }
+    },
+    "spyder_dojo2": {
+      "position": [
+        12959,
+        12794
+      ],
+      "size": [
+        384,
+        192
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "sphalian_town",
+        "north": "spyder_cotton_town",
+        "east": "city1_mart_junkyard",
+        "south": "spyder_bedroom"
+      }
+    },
+    "leather_scoop": {
+      "position": [
+        14084,
+        12703
+      ],
+      "size": [
+        208,
+        176
+      ],
+      "type": "shop",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_cotton_town",
+        "north": "city1_mart_junkyard",
+        "east": "spyder_timber_scoop",
+        "south": "eclipse_park_entrance"
+      }
+    },
+    "spyder_timber_scoop": {
+      "position": [
+        14952,
+        12854
+      ],
+      "size": [
+        208,
+        176
+      ],
+      "type": "shop",
+      "district": "countryside",
+      "connections": {
+        "west": "route4",
+        "north": "city1_mart_junkyard",
+        "east": "spyder_mansion_top",
+        "south": "eclipse_park_entrance"
+      }
+    },
+    "spyder_leather_scoop": {
+      "position": [
+        16048,
+        12768
+      ],
+      "size": [
+        208,
+        176
+      ],
+      "type": "shop",
+      "district": "countryside",
+      "connections": {
+        "west": "eclipse_park_entrance",
+        "north": "cotton_underground",
+        "east": "route1",
+        "south": "spyder_mansion_top"
+      }
+    },
+    "bedroom_test": {
+      "position": [
+        16995,
+        12798
+      ],
+      "size": [
+        144,
+        112
+      ],
+      "type": "notype",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_mansion_top",
+        "north": "healing_center",
+        "east": "route3",
+        "south": "route1"
+      }
+    },
+    "spyder_wayfarer_inn2": {
+      "position": [
+        18029,
+        12817
+      ],
+      "size": [
+        240,
+        256
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "route1",
+        "north": "wayfarer_inn1",
+        "east": "spyder_dojo4",
+        "south": "route3"
+      }
+    },
+    "spyder_timber_center": {
+      "position": [
+        19021,
+        12747
+      ],
+      "size": [
+        208,
+        176
+      ],
+      "type": "clinic",
+      "district": "countryside",
+      "connections": {
+        "west": "route3",
+        "north": "wayfarer_inn1",
+        "east": "wayfarer_inn2",
+        "south": "spyder_nimrod_bottom"
+      }
+    },
+    "wayfarer_inn2": {
+      "position": [
+        19952,
+        12715
+      ],
+      "size": [
+        240,
+        256
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_dojo4",
+        "north": "spyder_candy_hospital1",
+        "east": "spyder_mansion_basement",
+        "south": "spyder_nimrod_bottom"
+      }
+    },
+    "spyder_dojo3": {
+      "position": [
+        20965,
+        12813
+      ],
+      "size": [
+        384,
+        192
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_nimrod_bottom",
+        "north": "routea",
+        "east": "spyder_leather_center",
+        "south": "spyder_mansion_basement"
+      }
+    },
+    "leather_town": {
+      "position": [
+        14028,
+        8072
+      ],
+      "size": [
+        640,
+        640
+      ],
+      "type": "town",
+      "district": "downtown",
+      "connections": {
+        "west": "citypark_house1",
+        "east": "candy_town",
+        "south": "azure_town"
+      }
+    },
+    "mansion_basement": {
+      "position": [
+        21967,
+        12776
+      ],
+      "size": [
+        384,
+        352
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_mansion_basement",
+        "north": "route5",
+        "east": "professor_lab",
+        "south": "spyder_leather_center"
+      }
+    },
+    "spyder_candy_hospital2": {
+      "position": [
+        22924,
+        12701
+      ],
+      "size": [
+        320,
+        320
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "mansion_basement",
+        "north": "routec",
+        "south": "professor_lab"
+      }
+    },
+    "spyder_diamond_hill": {
+      "position": [
+        12060,
+        13681
+      ],
+      "size": [
+        320,
+        960
+      ],
+      "type": "route",
+      "district": "countryside",
+      "connections": {
+        "north": "spyder_candy_hospital3",
+        "east": "eclipse_routei",
+        "south": "tt_searoute1"
+      }
+    },
+    "spyder_bedroom": {
+      "position": [
+        12971,
+        13614
+      ],
+      "size": [
+        144,
+        112
+      ],
+      "type": "notype",
+      "district": "countryside",
+      "connections": {
+        "west": "eclipse_routeh",
+        "north": "spyder_dojo2",
+        "east": "russell_practice_1",
+        "south": "eclipse_routei"
+      }
+    },
+    "route4": {
+      "position": [
+        14002,
+        13621
+      ],
+      "size": [
+        320,
+        640
+      ],
+      "type": "route",
+      "district": "countryside",
+      "connections": {
+        "west": "eclipse_routei",
+        "north": "leather_scoop",
+        "east": "cotton_scoop",
+        "south": "russell_practice_1"
+      }
+    },
+    "eclipse_lion_mountain_high": {
+      "position": [
+        16079,
+        93
+      ],
+      "size": [
+        640,
+        640
+      ],
+      "type": "route",
+      "district": "mountains",
+      "connections": {
+        "east": "eclipse_lion_mountain_low",
+        "south": "buddha_mountain"
+      }
+    },
+    "taba_town": {
+      "position": [
+        14917,
+        8003
+      ],
+      "size": [
+        1024,
+        960
+      ],
+      "type": "town",
+      "district": "downtown",
+      "connections": {
+        "west": "azure_town",
+        "east": "37707_town",
+        "south": "candy_town"
+      }
+    },
+    "player_house_downstairs": {
+      "position": [
+        5001,
+        3917
+      ],
+      "size": [
+        144,
+        112
+      ],
+      "type": "notype",
+      "district": "grove_street",
+      "connections": {
+        "west": "spyder_cotton_house1",
+        "east": "spyder_flower_house1",
+        "south": "taba_house2"
+      }
+    },
+    "eclipse_lion_mountain_middle": {
+      "position": [
+        16945,
+        -67
+      ],
+      "size": [
+        640,
+        640
+      ],
+      "type": "route",
+      "district": "mountains",
+      "connections": {
+        "west": "buddha_mountain",
+        "south": "eclipse_lion_mountain_low"
+      }
+    },
+    "eclipse_park_entrance": {
+      "position": [
+        15022,
+        13693
+      ],
+      "size": [
+        160,
+        160
+      ],
+      "type": "notype",
+      "district": "countryside",
+      "connections": {
+        "north": "spyder_timber_scoop",
+        "east": "route2",
+        "west": "russell_practice_1",
+        "south": "cotton_scoop"
+      }
+    },
+    "spyder_flower_city": {
+      "position": [
+        15972,
+        7907
+      ],
+      "size": [
+        640,
+        640
+      ],
+      "type": "town",
+      "district": "downtown",
+      "connections": {
+        "west": "candy_town",
+        "south": "37707_town"
+      }
+    },
+    "spyder_mansion_top": {
+      "position": [
+        16081,
+        13500
+      ],
+      "size": [
+        368,
+        304
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "eclipse_park_entrance",
+        "north": "spyder_leather_scoop",
+        "east": "route1",
+        "south": "eclipse_crystal_bank1"
+      }
+    },
+    "route1": {
+      "position": [
+        17084,
+        13537
+      ],
+      "size": [
+        944,
+        672
+      ],
+      "type": "route",
+      "district": "countryside",
+      "connections": {
+        "west": "route2",
+        "north": "bedroom_test",
+        "east": "spyder_omnichannel1",
+        "south": "eclipse_crystal_bank1"
+      }
+    },
+    "route3": {
+      "position": [
+        17920,
+        13617
+      ],
+      "size": [
+        640,
+        640
+      ],
+      "type": "route",
+      "district": "countryside",
+      "connections": {
+        "west": "eclipse_crystal_bank1",
+        "north": "spyder_wayfarer_inn2",
+        "east": "taba_ba_br_2",
+        "south": "spyder_omnichannel1"
+      }
+    },
+    "spyder_dojo4": {
+      "position": [
+        19009,
+        13642
+      ],
+      "size": [
+        384,
+        192
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_omnichannel1",
+        "north": "spyder_timber_center",
+        "east": "spyder_routea",
+        "south": "taba_ba_br_2"
+      }
+    },
+    "spyder_nimrod_bottom": {
+      "position": [
+        19903,
+        13665
+      ],
+      "size": [
+        288,
+        320
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "north": "wayfarer_inn2",
+        "east": "spyder_route6",
+        "west": "taba_ba_br_2",
+        "south": "spyder_routea"
+      }
+    },
+    "spyder_mansion_basement": {
+      "position": [
+        21063,
+        13654
+      ],
+      "size": [
+        384,
+        352
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_routea",
+        "north": "spyder_dojo3",
+        "east": "downstairs_test",
+        "south": "spyder_paper_scoop"
+      }
+    },
+    "spyder_leather_center": {
+      "position": [
+        21948,
+        13695
+      ],
+      "size": [
+        208,
+        176
+      ],
+      "type": "clinic",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_route6",
+        "north": "spyder_candy_hospital2",
+        "east": "taba_ba_br_3",
+        "south": "downstairs_test"
+      }
+    },
+    "professor_lab": {
+      "position": [
+        23063,
+        13565
+      ],
+      "size": [
+        208,
+        288
+      ],
+      "type": "notype",
+      "district": "countryside",
+      "connections": {
+        "north": "spyder_candy_hospital2",
+        "west": "downstairs_test",
+        "south": "taba_ba_br_3"
+      }
+    },
+    "eclipse_routeh": {
+      "position": [
+        12068,
+        14474
+      ],
+      "size": [
+        640,
+        640
+      ],
+      "type": "route",
+      "district": "countryside",
+      "connections": {
+        "north": "spyder_diamond_hill",
+        "east": "37707_tower",
+        "south": "tt_searoute1"
+      }
+    },
+    "eclipse_routei": {
+      "position": [
+        13075,
+        14416
+      ],
+      "size": [
+        640,
+        640
+      ],
+      "type": "route",
+      "district": "countryside",
+      "connections": {
+        "west": "tt_searoute1",
+        "north": "spyder_bedroom",
+        "east": "spyder_leather_museum",
+        "south": "37707_tower"
+      }
+    },
+    "eclipse_crystal_town_house": {
+      "position": [
+        11931,
+        8794
+      ],
+      "size": [
+        144,
+        128
+      ],
+      "type": "notype",
+      "district": "downtown",
+      "connections": {
+        "north": "flower_city",
+        "east": "sphalian_town_house",
+        "south": "eclipse_crystal_town_cafe"
+      }
+    },
+    "russell_practice_1": {
+      "position": [
+        14087,
+        14420
+      ],
+      "size": [
+        320,
+        336
+      ],
+      "type": "outdoor",
+      "district": "countryside",
+      "connections": {
+        "west": "37707_tower",
+        "north": "route4",
+        "east": "eclipse_crystal_bank2",
+        "south": "spyder_leather_museum"
+      }
+    },
+    "cotton_scoop": {
+      "position": [
+        14926,
+        14459
+      ],
+      "size": [
+        208,
+        176
+      ],
+      "type": "shop",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_leather_museum",
+        "north": "eclipse_park_entrance",
+        "east": "spyder_radiotower",
+        "south": "eclipse_crystal_bank2"
+      }
+    },
+    "rubberduck_cave_01": {
+      "position": [
+        11943,
+        15900
+      ],
+      "size": [
+        1280,
+        1136
+      ],
+      "type": "outdoor",
+      "district": "underground",
+      "connections": {
+        "north": "tt_searoute1",
+        "east": "dragonscave",
+        "south": "spyder_tunnel"
+      }
+    },
+    "spyder_cotton_tunnel": {
+      "position": [
+        12930,
+        15984
+      ],
+      "size": [
+        640,
+        320
+      ],
+      "type": "dungeon",
+      "district": "underground",
+      "connections": {
+        "west": "spyder_tunnel",
+        "north": "37707_tower",
+        "east": "tunnel_below",
+        "south": "dragonscave"
+      }
+    },
+    "route2": {
+      "position": [
+        16089,
+        14397
+      ],
+      "size": [
+        640,
+        320
+      ],
+      "type": "route",
+      "district": "countryside",
+      "connections": {
+        "west": "eclipse_crystal_bank2",
+        "north": "spyder_mansion_top",
+        "east": "eclipse_crystal_center",
+        "south": "spyder_radiotower"
+      }
+    },
+    "citypark_house1": {
+      "position": [
+        12984,
+        8889
+      ],
+      "size": [
+        160,
+        128
+      ],
+      "type": "notype",
+      "district": "downtown",
+      "connections": {
+        "west": "eclipse_crystal_town_cafe",
+        "north": "citypark",
+        "east": "spyder_timber_town",
+        "south": "spyder_leather_town"
+      }
+    },
+    "eclipse_crystal_bank1": {
+      "position": [
+        16950,
+        14496
+      ],
+      "size": [
+        224,
+        336
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "north": "route1",
+        "east": "spyder_omnichannel2",
+        "west": "spyder_radiotower",
+        "south": "eclipse_crystal_bank3"
+      }
+    },
+    "spyder_cotton_house2": {
+      "position": [
+        5988,
+        4024
+      ],
+      "size": [
+        160,
+        128
+      ],
+      "type": "notype",
+      "district": "grove_street",
+      "connections": {
+        "west": "taba_house2",
+        "east": "taba_house3",
+        "south": "spyder_flower_house1"
+      }
+    },
+    "spyder_omnichannel1": {
+      "position": [
+        18071,
+        14379
+      ],
+      "size": [
+        224,
+        336
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "eclipse_crystal_center",
+        "north": "route3",
+        "east": "spyder_candy_center",
+        "south": "spyder_omnichannel2"
+      }
+    },
+    "taba_house4": {
+      "position": [
+        7051,
+        4041
+      ],
+      "size": [
+        192,
+        112
+      ],
+      "type": "notype",
+      "district": "grove_street",
+      "connections": {
+        "west": "spyder_flower_house1",
+        "south": "taba_house3"
+      }
+    },
+    "taba_ba_br_2": {
+      "position": [
+        18900,
+        14477
+      ],
+      "size": [
+        256,
+        256
+      ],
+      "type": "outdoor",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_omnichannel2",
+        "north": "spyder_dojo4",
+        "east": "spyder_dryadsgrove",
+        "south": "spyder_candy_center"
+      }
+    },
+    "spyder_routea": {
+      "position": [
+        19928,
+        14375
+      ],
+      "size": [
+        320,
+        640
+      ],
+      "type": "route",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_candy_center",
+        "north": "spyder_nimrod_bottom",
+        "east": "spyder_paper_scoop",
+        "south": "spyder_dryadsgrove"
+      }
+    },
+    "spyder_route6": {
+      "position": [
+        21066,
+        14316
+      ],
+      "size": [
+        640,
+        320
+      ],
+      "type": "route",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_dryadsgrove",
+        "north": "spyder_mansion_basement",
+        "east": "downstairs_test",
+        "south": "taba_ba_br_1"
+      }
+    },
+    "downstairs_test": {
+      "position": [
+        21909,
+        14328
+      ],
+      "size": [
+        144,
+        112
+      ],
+      "type": "notype",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_paper_scoop",
+        "north": "spyder_leather_center",
+        "east": "spyder_route4",
+        "south": "taba_ba_br_1"
+      }
+    },
+    "taba_ba_br_3": {
+      "position": [
+        23082,
+        14344
+      ],
+      "size": [
+        256,
+        256
+      ],
+      "type": "outdoor",
+      "district": "countryside",
+      "connections": {
+        "west": "taba_ba_br_1",
+        "north": "professor_lab",
+        "south": "spyder_route4"
+      }
+    },
+    "tt_searoute1": {
+      "position": [
+        11911,
+        15136
+      ],
+      "size": [
+        640,
+        640
+      ],
+      "type": "outdoor",
+      "district": "countryside",
+      "connections": {
+        "north": "eclipse_routeh",
+        "east": "spyder_routec",
+        "south": "spyder_routeb"
+      }
+    },
+    "37707_tower": {
+      "position": [
+        12977,
+        15263
+      ],
+      "size": [
+        384,
+        384
+      ],
+      "type": "outdoor",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_routeb",
+        "north": "eclipse_routei",
+        "east": "spyder_tunnel_below",
+        "south": "dragonscave"
+      }
+    },
+    "spyder_leather_museum": {
+      "position": [
+        14078,
+        15257
+      ],
+      "size": [
+        480,
+        176
+      ],
+      "type": "notype",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_routec",
+        "north": "russell_practice_1",
+        "east": "spyder_paper_manor",
+        "south": "spyder_tunnel_below"
+      }
+    },
+    "spyder_cotton_house1": {
+      "position": [
+        3990,
+        4889
+      ],
+      "size": [
+        160,
+        128
+      ],
+      "type": "notype",
+      "district": "grove_street",
+      "connections": {
+        "north": "player_house_bedroom",
+        "east": "cotton_misa_house",
+        "south": "spyder_timber_house"
+      }
+    },
+    "eclipse_crystal_bank2": {
+      "position": [
+        15013,
+        15196
+      ],
+      "size": [
+        224,
+        336
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_tunnel_below",
+        "north": "cotton_scoop",
+        "east": "spyder_omnichannel3",
+        "south": "spyder_paper_manor"
+      }
+    },
+    "spyder_radiotower": {
+      "position": [
+        16068,
+        15127
+      ],
+      "size": [
+        224,
+        336
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_paper_manor",
+        "north": "route2",
+        "east": "eclipse_crystal_bank3",
+        "south": "spyder_omnichannel3"
+      }
+    },
+    "eclipse_crystal_center": {
+      "position": [
+        17006,
+        15234
+      ],
+      "size": [
+        208,
+        176
+      ],
+      "type": "clinic",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_omnichannel3",
+        "north": "eclipse_crystal_bank1",
+        "east": "spyder_nimrod_room",
+        "south": "eclipse_crystal_bank3"
+      }
+    },
+    "spyder_omnichannel2": {
+      "position": [
+        18059,
+        15293
+      ],
+      "size": [
+        224,
+        336
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "eclipse_crystal_bank3",
+        "north": "spyder_omnichannel1",
+        "east": "taba_ba_br_4",
+        "south": "spyder_nimrod_room"
+      }
+    },
+    "spyder_candy_center": {
+      "position": [
+        19036,
+        15147
+      ],
+      "size": [
+        320,
+        176
+      ],
+      "type": "clinic",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_nimrod_room",
+        "north": "taba_ba_br_2",
+        "east": "spyder_route1",
+        "south": "taba_ba_br_4"
+      }
+    },
+    "spyder_dryadsgrove": {
+      "position": [
+        20016,
+        15246
+      ],
+      "size": [
+        640,
+        640
+      ],
+      "type": "route",
+      "district": "countryside",
+      "connections": {
+        "west": "taba_ba_br_4",
+        "north": "spyder_routea",
+        "east": "taba_ba_foyer",
+        "south": "spyder_route1"
+      }
+    },
+    "spyder_paper_scoop": {
+      "position": [
+        20977,
+        15139
+      ],
+      "size": [
+        208,
+        176
+      ],
+      "type": "shop",
+      "district": "countryside",
+      "connections": {
+        "north": "spyder_route6",
+        "west": "spyder_route1",
+        "east": "tabathas",
+        "south": "taba_ba_foyer"
+      }
+    },
+    "taba_ba_br_1": {
+      "position": [
+        21951,
+        15206
+      ],
+      "size": [
+        256,
+        256
+      ],
+      "type": "outdoor",
+      "district": "countryside",
+      "connections": {
+        "north": "downstairs_test",
+        "east": "spyder_healing_center",
+        "west": "spyder_paper_scoop",
+        "south": "tabathas"
+      }
+    },
+    "spyder_route4": {
+      "position": [
+        23043,
+        15196
+      ],
+      "size": [
+        320,
+        640
+      ],
+      "type": "route",
+      "district": "countryside",
+      "connections": {
+        "west": "tabathas",
+        "north": "taba_ba_br_3",
+        "south": "spyder_healing_center"
+      }
+    },
+    "spyder_routeb": {
+      "position": [
+        11948,
+        16051
+      ],
+      "size": [
+        320,
+        640
+      ],
+      "type": "route",
+      "district": "countryside",
+      "connections": {
+        "north": "tt_searoute1",
+        "east": "dragonscave",
+        "south": "spyder_tunnel"
+      }
+    },
+    "spyder_routec": {
+      "position": [
+        13002,
+        16056
+      ],
+      "size": [
+        640,
+        640
+      ],
+      "type": "route",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_tunnel",
+        "north": "37707_tower",
+        "east": "tunnel_below",
+        "south": "dragonscave"
+      }
+    },
+    "spyder_route5": {
+      "position": [
+        13913,
+        16013
+      ],
+      "size": [
+        640,
+        320
+      ],
+      "type": "route",
+      "district": "countryside",
+      "connections": {
+        "west": "dragonscave",
+        "north": "spyder_leather_museum",
+        "east": "spyder_brideswood",
+        "south": "eclipse_park_cave"
+      }
+    },
+    "spyder_paper_manor": {
+      "position": [
+        15004,
+        15966
+      ],
+      "size": [
+        160,
+        128
+      ],
+      "type": "notype",
+      "district": "countryside",
+      "connections": {
+        "west": "tunnel_below",
+        "north": "eclipse_crystal_bank2",
+        "east": "eclipse_park_cabin",
+        "south": "spyder_brideswood"
+      }
+    },
+    "spyder_omnichannel3": {
+      "position": [
+        15916,
+        16049
+      ],
+      "size": [
+        224,
+        336
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_brideswood",
+        "north": "spyder_radiotower",
+        "east": "spyder_greenwash",
+        "south": "eclipse_park_cabin"
+      }
+    },
+    "eclipse_crystal_bank3": {
+      "position": [
+        16958,
+        15921
+      ],
+      "size": [
+        224,
+        336
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "north": "eclipse_crystal_center",
+        "west": "eclipse_park_cabin",
+        "east": "spyder_nimrod_room",
+        "south": "gaming_hall"
+      }
+    },
+    "spyder_nimrod_room": {
+      "position": [
+        18088,
+        16035
+      ],
+      "size": [
+        144,
+        112
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_greenwash",
+        "north": "spyder_omnichannel2",
+        "east": "spyder_greenwash_level3",
+        "south": "gaming_hall"
+      }
+    },
+    "taba_house2": {
+      "position": [
+        4986,
+        4812
+      ],
+      "size": [
+        144,
+        112
+      ],
+      "type": "notype",
+      "district": "grove_street",
+      "connections": {
+        "west": "spyder_timber_house",
+        "north": "player_house_downstairs",
+        "east": "taba_house1",
+        "south": "cotton_misa_house"
+      }
+    },
+    "spyder_flower_house1": {
+      "position": [
+        6042,
+        4774
+      ],
+      "size": [
+        160,
+        128
+      ],
+      "type": "notype",
+      "district": "grove_street",
+      "connections": {
+        "west": "cotton_misa_house",
+        "north": "spyder_cotton_house2",
+        "east": "spyder_flower_house2",
+        "south": "taba_house1"
+      }
+    },
+    "taba_ba_br_4": {
+      "position": [
+        19077,
+        16002
+      ],
+      "size": [
+        256,
+        256
+      ],
+      "type": "outdoor",
+      "district": "countryside",
+      "connections": {
+        "west": "gaming_hall",
+        "north": "spyder_candy_center",
+        "east": "spyder_routed",
+        "south": "spyder_greenwash_level3"
+      }
+    },
+    "azure_town": {
+      "position": [
+        14000,
+        8890
+      ],
+      "size": [
+        800,
+        800
+      ],
+      "type": "town",
+      "district": "downtown",
+      "connections": {
+        "west": "sphalian_town_house",
+        "north": "leather_town",
+        "east": "spyder_citypark",
+        "south": "timber_town"
+      }
+    },
+    "spyder_route1": {
+      "position": [
+        20019,
+        16073
+      ],
+      "size": [
+        640,
+        320
+      ],
+      "type": "route",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_greenwash_level3",
+        "north": "spyder_dryadsgrove",
+        "east": "spyder_route2",
+        "south": "spyder_routed"
+      }
+    },
+    "taba_ba_foyer": {
+      "position": [
+        21091,
+        16066
+      ],
+      "size": [
+        80,
+        160
+      ],
+      "type": "outdoor",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_routed",
+        "north": "taba_ba_br_1",
+        "east": "spyder_route3",
+        "south": "spyder_route2"
+      }
+    },
+    "tabathas": {
+      "position": [
+        21960,
+        16097
+      ],
+      "size": [
+        192,
+        192
+      ],
+      "type": "notype",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_route2",
+        "north": "taba_ba_br_1",
+        "east": "dryadsgrove",
+        "south": "spyder_scoop4"
+      }
+    },
+    "spyder_healing_center": {
+      "position": [
+        23072,
+        15986
+      ],
+      "size": [
+        208,
+        176
+      ],
+      "type": "clinic",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_route3",
+        "north": "spyder_route4",
+        "south": "dryadsgrove"
+      }
+    },
+    "spyder_tunnel_below": {
+      "position": [
+        13964,
+        16017
+      ],
+      "size": [
+        320,
+        640
+      ],
+      "type": "dungeon",
+      "district": "underground",
+      "connections": {
+        "west": "dragonscave",
+        "north": "spyder_leather_museum",
+        "east": "spyder_brideswood",
+        "south": "eclipse_park_cave"
+      }
+    },
+    "taba_house3": {
+      "position": [
+        6900,
+        4891
+      ],
+      "size": [
+        192,
+        112
+      ],
+      "type": "notype",
+      "district": "grove_street",
+      "connections": {
+        "west": "taba_house1",
+        "north": "taba_house4",
+        "south": "spyder_flower_house2"
+      }
+    },
+    "rubberduck_route_01": {
+      "position": [
+        11901,
+        16884
+      ],
+      "size": [
+        736,
+        848
+      ],
+      "type": "outdoor",
+      "district": "countryside",
+      "connections": {
+        "north": "spyder_routeb",
+        "east": "spyder_dragonscave",
+        "south": "tunnel"
+      }
+    },
+    "spyder_timber_house": {
+      "position": [
+        3907,
+        5521
+      ],
+      "size": [
+        160,
+        128
+      ],
+      "type": "notype",
+      "district": "grove_street",
+      "connections": {
+        "north": "spyder_cotton_house1",
+        "east": "spyder_leather_house2",
+        "south": "spyder_leather_house1"
+      }
+    },
+    "maple_bedroom": {
+      "position": [
+        13015,
+        16785
+      ],
+      "size": [
+        144,
+        112
+      ],
+      "type": "notype",
+      "district": "countryside",
+      "connections": {
+        "west": "tunnel",
+        "north": "dragonscave",
+        "east": "eclipse_park_cave",
+        "south": "spyder_dragonscave"
+      }
+    },
+    "spyder_omnichannel4": {
+      "position": [
+        14016,
+        16839
+      ],
+      "size": [
+        224,
+        336
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_dragonscave",
+        "north": "tunnel_below",
+        "east": "spyder_downstairs",
+        "south": "eclipse_park_cave"
+      }
+    },
+    "candy_town": {
+      "position": [
+        14913,
+        8889
+      ],
+      "size": [
+        640,
+        640
+      ],
+      "type": "town",
+      "district": "downtown",
+      "connections": {
+        "west": "spyder_timber_town",
+        "north": "taba_town",
+        "east": "rubberduck_city_01",
+        "south": "eclipse_crystal_town"
+      }
+    },
+    "spyder_brideswood": {
+      "position": [
+        14995,
+        16883
+      ],
+      "size": [
+        640,
+        640
+      ],
+      "type": "route",
+      "district": "countryside",
+      "connections": {
+        "west": "eclipse_park_cave",
+        "north": "spyder_paper_manor",
+        "east": "spyder_nimrod_top",
+        "south": "taba_ba_stairwell_2"
+      }
+    },
+    "cotton_misa_house": {
+      "position": [
+        5002,
+        5546
+      ],
+      "size": [
+        144,
+        112
+      ],
+      "type": "notype",
+      "district": "grove_street",
+      "connections": {
+        "west": "spyder_leather_house1",
+        "north": "taba_house2",
+        "east": "maple_house",
+        "south": "spyder_leather_house2"
+      }
+    },
+    "taba_house1": {
+      "position": [
+        5972,
+        5654
+      ],
+      "size": [
+        144,
+        112
+      ],
+      "type": "notype",
+      "district": "grove_street",
+      "connections": {
+        "west": "spyder_leather_house2",
+        "north": "spyder_flower_house1",
+        "east": "spyder_greenwash_greenhouse",
+        "south": "maple_house"
+      }
+    },
+    "eclipse_park_cabin": {
+      "position": [
+        15904,
+        16728
+      ],
+      "size": [
+        160,
+        96
+      ],
+      "type": "notype",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_brideswood",
+        "north": "spyder_omnichannel3",
+        "east": "spyder_leather_gym",
+        "south": "spyder_nimrod_top"
+      }
+    },
+    "spyder_greenwash": {
+      "position": [
+        16925,
+        16791
+      ],
+      "size": [
+        256,
+        512
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_nimrod_top",
+        "north": "eclipse_crystal_bank3",
+        "east": "taba_ba_stairwell_1",
+        "south": "spyder_leather_gym"
+      }
+    },
+    "spyder_flower_house2": {
+      "position": [
+        6948,
+        5612
+      ],
+      "size": [
+        160,
+        128
+      ],
+      "type": "notype",
+      "district": "grove_street",
+      "connections": {
+        "west": "maple_house",
+        "north": "taba_house3",
+        "south": "spyder_greenwash_greenhouse"
+      }
+    },
+    "gaming_hall": {
+      "position": [
+        17906,
+        16896
+      ],
+      "size": [
+        304,
+        256
+      ],
+      "type": "outdoor",
+      "district": "countryside",
+      "connections": {
+        "north": "spyder_nimrod_room",
+        "east": "cotton_cafe_basement",
+        "west": "spyder_leather_gym",
+        "south": "taba_ba_stairwell_1"
+      }
+    },
+    "spyder_greenwash_level3": {
+      "position": [
+        18910,
+        16768
+      ],
+      "size": [
+        256,
+        224
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "taba_ba_stairwell_1",
+        "north": "taba_ba_br_4",
+        "east": "dojo1",
+        "south": "cotton_cafe_basement"
+      }
+    },
+    "buddha_mountain": {
+      "position": [
+        15946,
+        776
+      ],
+      "size": [
+        1600,
+        1600
+      ],
+      "type": "outdoor",
+      "district": "mountains",
+      "connections": {
+        "north": "eclipse_lion_mountain_high",
+        "east": "eclipse_lion_mountain_low"
+      }
+    },
+    "spyder_routed": {
+      "position": [
+        20094,
+        16824
+      ],
+      "size": [
+        640,
+        640
+      ],
+      "type": "route",
+      "district": "countryside",
+      "connections": {
+        "west": "cotton_cafe_basement",
+        "north": "spyder_route1",
+        "east": "spyder_nimrod_middle",
+        "south": "dojo1"
+      }
+    },
+    "spyder_route2": {
+      "position": [
+        20988,
+        16878
+      ],
+      "size": [
+        640,
+        320
+      ],
+      "type": "route",
+      "district": "countryside",
+      "connections": {
+        "west": "dojo1",
+        "north": "taba_ba_foyer",
+        "east": "spyder_scoop4",
+        "south": "spyder_leather_shaft1"
+      }
+    },
+    "spyder_route3": {
+      "position": [
+        21951,
+        16739
+      ],
+      "size": [
+        640,
+        640
+      ],
+      "type": "route",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_route2",
+        "north": "tabathas",
+        "east": "spyder_cotton_scoop",
+        "south": "spyder_scoop4"
+      }
+    },
+    "dryadsgrove": {
+      "position": [
+        22984,
+        16847
+      ],
+      "size": [
+        640,
+        320
+      ],
+      "type": "route",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_scoop4",
+        "north": "spyder_healing_center",
+        "south": "spyder_cotton_scoop"
+      }
+    },
+    "spyder_routee": {
+      "position": [
+        11975,
+        17677
+      ],
+      "size": [
+        320,
+        320
+      ],
+      "type": "route",
+      "district": "countryside",
+      "connections": {
+        "north": "spyder_tunnel",
+        "east": "spyder_dragonscave",
+        "south": "spyder_timber_cafe"
+      }
+    },
+    "spyder_greenwash_level2": {
+      "position": [
+        13031,
+        17578
+      ],
+      "size": [
+        256,
+        512
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "tunnel",
+        "north": "dragonscave",
+        "east": "eclipse_park_cave",
+        "south": "spyder_dragonscave"
+      }
+    },
+    "tt_forest_route1": {
+      "position": [
+        14091,
+        17542
+      ],
+      "size": [
+        448,
+        640
+      ],
+      "type": "outdoor",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_dragonscave",
+        "north": "eclipse_park_cave",
+        "east": "taba_ba_stairwell_2",
+        "south": "spyder_flower_petshop"
+      }
+    },
+    "spyder_downstairs": {
+      "position": [
+        15097,
+        17642
+      ],
+      "size": [
+        144,
+        112
+      ],
+      "type": "notype",
+      "district": "countryside",
+      "connections": {
+        "west": "eclipse_park_cave",
+        "north": "eclipse_park_cabin",
+        "east": "start_saiyanquest",
+        "south": "taba_ba_stairwell_2"
+      }
+    },
+    "spyder_nimrod_top": {
+      "position": [
+        15920,
+        17688
+      ],
+      "size": [
+        288,
+        320
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "taba_ba_stairwell_2",
+        "north": "eclipse_park_cabin",
+        "east": "spyder_datacenter",
+        "south": "start_saiyanquest"
+      }
+    },
+    "37707_town": {
+      "position": [
+        16033,
+        8831
+      ],
+      "size": [
+        768,
+        512
+      ],
+      "type": "outdoor",
+      "district": "downtown",
+      "connections": {
+        "west": "spyder_citypark",
+        "north": "spyder_flower_city",
+        "south": "rubberduck_city_01"
+      }
+    },
+    "spyder_leather_gym": {
+      "position": [
+        16916,
+        17665
+      ],
+      "size": [
+        400,
+        176
+      ],
+      "type": "notype",
+      "district": "countryside",
+      "connections": {
+        "west": "start_saiyanquest",
+        "north": "spyder_greenwash",
+        "east": "dojo2",
+        "south": "spyder_mansion"
+      }
+    },
+    "taba_ba_stairwell_1": {
+      "position": [
+        18088,
+        17539
+      ],
+      "size": [
+        192,
+        192
+      ],
+      "type": "outdoor",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_datacenter",
+        "north": "gaming_hall",
+        "east": "cotton_cafe_basement",
+        "south": "spyder_scoop3"
+      }
+    },
+    "cotton_cafe_basement": {
+      "position": [
+        19035,
+        17596
+      ],
+      "size": [
+        192,
+        192
+      ],
+      "type": "notype",
+      "district": "countryside",
+      "connections": {
+        "west": "dojo2",
+        "north": "spyder_greenwash_level3",
+        "east": "witcher_route_7",
+        "south": "spyder_scoop3"
+      }
+    },
+    "dojo1": {
+      "position": [
+        19917,
+        17588
+      ],
+      "size": [
+        384,
+        192
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "cotton_cafe_basement",
+        "north": "spyder_routed",
+        "east": "spyder_leather_shaft1",
+        "south": "witcher_route_7"
+      }
+    },
+    "spyder_nimrod_middle": {
+      "position": [
+        21087,
+        17658
+      ],
+      "size": [
+        288,
+        320
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "witcher_route_7",
+        "north": "spyder_route3",
+        "east": "gadget_store1",
+        "south": "spyder_leather_shaft1"
+      }
+    },
+    "spyder_scoop4": {
+      "position": [
+        22042,
+        17574
+      ],
+      "size": [
+        192,
+        352
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "north": "spyder_route3",
+        "west": "spyder_leather_shaft1",
+        "east": "spyder_candy_inn2",
+        "south": "gadget_store1"
+      }
+    },
+    "spyder_cotton_scoop": {
+      "position": [
+        23024,
+        17646
+      ],
+      "size": [
+        208,
+        176
+      ],
+      "type": "shop",
+      "district": "countryside",
+      "connections": {
+        "west": "gadget_store1",
+        "north": "dryadsgrove",
+        "south": "spyder_candy_inn2"
+      }
+    },
+    "spyder_tunnel": {
+      "position": [
+        11958,
+        16837
+      ],
+      "size": [
+        320,
+        640
+      ],
+      "type": "route",
+      "district": "underground",
+      "connections": {
+        "north": "spyder_routeb",
+        "east": "spyder_dragonscave",
+        "west": "rubberduck_route_01",
+        "south": "tunnel"
+      }
+    },
+    "spyder_timber_cafe": {
+      "position": [
+        11987,
+        18495
+      ],
+      "size": [
+        192,
+        192
+      ],
+      "type": "notype",
+      "district": "countryside",
+      "connections": {
+        "north": "tunnel",
+        "east": "spyder_dragonscave",
+        "south": "taba_ba_passageway_2"
+      }
+    },
+    "dojo3": {
+      "position": [
+        13089,
+        18354
+      ],
+      "size": [
+        384,
+        192
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "tunnel",
+        "north": "spyder_dragonscave",
+        "east": "eclipse_park_cave",
+        "south": "spyder_flower_scoop"
+      }
+    },
+    "spyder_flower_petshop": {
+      "position": [
+        14099,
+        18401
+      ],
+      "size": [
+        224,
+        144
+      ],
+      "type": "notype",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_dragonscave",
+        "north": "eclipse_park_cave",
+        "east": "taba_ba_stairwell_2",
+        "south": "spyder_candy_scoop"
+      }
+    },
+    "eclipse_lion_mountain_low": {
+      "position": [
+        17097,
+        706
+      ],
+      "size": [
+        640,
+        320
+      ],
+      "type": "route",
+      "district": "mountains",
+      "connections": {
+        "west": "buddha_mountain",
+        "north": "eclipse_lion_mountain_middle"
+      }
+    },
+    "eclipse_crystal_town_cafe": {
+      "position": [
+        12043,
+        9587
+      ],
+      "size": [
+        192,
+        192
+      ],
+      "type": "notype",
+      "district": "downtown",
+      "connections": {
+        "north": "eclipse_crystal_town_house",
+        "east": "spyder_leather_town",
+        "south": "spyder_citypark_house1"
+      }
+    },
+    "taba_ba_stairwell_2": {
+      "position": [
+        15046,
+        18366
+      ],
+      "size": [
+        256,
+        256
+      ],
+      "type": "outdoor",
+      "district": "countryside",
+      "connections": {
+        "north": "spyder_downstairs",
+        "west": "eclipse_park_cave",
+        "east": "spyder_leather_shaft2",
+        "south": "spyder_candy_scoop"
+      }
+    },
+    "sphalian_town_house": {
+      "position": [
+        12942,
+        9550
+      ],
+      "size": [
+        176,
+        144
+      ],
+      "type": "notype",
+      "district": "downtown",
+      "connections": {
+        "west": "spyder_citypark_house1",
+        "north": "citypark_house1",
+        "east": "timber_town",
+        "south": "spyder_leather_town"
+      }
+    },
+    "start_saiyanquest": {
+      "position": [
+        16072,
+        18470
+      ],
+      "size": [
+        128,
+        128
+      ],
+      "type": "notype",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_candy_scoop",
+        "north": "spyder_nimrod_top",
+        "east": "spyder_mansion",
+        "south": "spyder_leather_shaft2"
+      }
+    },
+    "spyder_timber_town": {
+      "position": [
+        13915,
+        9695
+      ],
+      "size": [
+        640,
+        640
+      ],
+      "type": "town",
+      "district": "downtown",
+      "connections": {
+        "west": "spyder_leather_town",
+        "north": "azure_town",
+        "east": "eclipse_crystal_town",
+        "south": "timber_town"
+      }
+    },
+    "spyder_datacenter": {
+      "position": [
+        16900,
+        18388
+      ],
+      "size": [
+        320,
+        320
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "start_saiyanquest",
+        "north": "spyder_leather_gym",
+        "east": "spyder_candy_inn1",
+        "south": "spyder_mansion"
+      }
+    },
+    "spyder_citypark": {
+      "position": [
+        14995,
+        9529
+      ],
+      "size": [
+        640,
+        640
+      ],
+      "type": "route",
+      "district": "downtown",
+      "connections": {
+        "west": "timber_town",
+        "north": "candy_town",
+        "east": "cotton_town",
+        "south": "eclipse_crystal_town"
+      }
+    },
+    "dojo2": {
+      "position": [
+        18027,
+        18492
+      ],
+      "size": [
+        384,
+        192
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_mansion",
+        "north": "taba_ba_stairwell_1",
+        "east": "spyder_paper_rival_downstairs",
+        "south": "spyder_candy_inn1"
+      }
+    },
+    "rubberduck_city_01": {
+      "position": [
+        16087,
+        9675
+      ],
+      "size": [
+        1120,
+        944
+      ],
+      "type": "outdoor",
+      "district": "downtown",
+      "connections": {
+        "west": "eclipse_crystal_town",
+        "north": "37707_town",
+        "south": "cotton_town"
+      }
+    },
+    "spyder_scoop3": {
+      "position": [
+        19023,
+        18496
+      ],
+      "size": [
+        192,
+        192
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "north": "dojo1",
+        "west": "spyder_candy_inn1",
+        "east": "taba_ba_br_master_foyer",
+        "south": "cotton_cafe"
+      }
+    },
+    "witcher_route_7": {
+      "position": [
+        20095,
+        18379
+      ],
+      "size": [
+        320,
+        480
+      ],
+      "type": "route",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_paper_rival_downstairs",
+        "north": "dojo1",
+        "east": "spyder_scoop1",
+        "south": "taba_ba_br_master_foyer"
+      }
+    },
+    "spyder_citypark_house1": {
+      "position": [
+        12069,
+        10313
+      ],
+      "size": [
+        160,
+        128
+      ],
+      "type": "notype",
+      "district": "downtown",
+      "connections": {
+        "north": "eclipse_crystal_town_cafe",
+        "east": "spyder_leather_town",
+        "south": "spyder_paper_town"
+      }
+    },
+    "spyder_leather_shaft1": {
+      "position": [
+        21039,
+        18361
+      ],
+      "size": [
+        240,
+        240
+      ],
+      "type": "notype",
+      "district": "countryside",
+      "connections": {
+        "north": "spyder_nimrod_middle",
+        "west": "taba_ba_br_master_foyer",
+        "east": "spyder_candy_cafe",
+        "south": "spyder_scoop1"
+      }
+    },
+    "gadget_store1": {
+      "position": [
+        21955,
+        18389
+      ],
+      "size": [
+        320,
+        208
+      ],
+      "type": "outdoor",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_scoop1",
+        "north": "spyder_scoop4",
+        "east": "spyder_paper_daycare",
+        "south": "spyder_candy_cafe"
+      }
+    },
+    "spyder_candy_inn2": {
+      "position": [
+        22916,
+        18383
+      ],
+      "size": [
+        240,
+        256
+      ],
+      "type": "notype",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_candy_cafe",
+        "north": "spyder_cotton_scoop",
+        "south": "spyder_paper_daycare"
+      }
+    },
+    "spyder_leather_town": {
+      "position": [
+        13050,
+        10321
+      ],
+      "size": [
+        640,
+        640
+      ],
+      "type": "town",
+      "district": "downtown",
+      "connections": {
+        "north": "sphalian_town_house",
+        "west": "spyder_candy_town",
+        "east": "azure_town_hall",
+        "south": "spyder_paper_town"
+      }
+    },
+    "spyder_cotton_artshop": {
+      "position": [
+        12022,
+        19182
+      ],
+      "size": [
+        352,
+        176
+      ],
+      "type": "notype",
+      "district": "countryside",
+      "connections": {
+        "north": "spyder_timber_cafe",
+        "east": "leather_shaft1",
+        "south": "taba_ba_passageway_2"
+      }
+    },
+    "spyder_leather_house1": {
+      "position": [
+        3933,
+        6476
+      ],
+      "size": [
+        160,
+        128
+      ],
+      "type": "notype",
+      "district": "grove_street",
+      "connections": {
+        "north": "spyder_timber_house",
+        "east": "taba_house3_upstairs",
+        "south": "spyder_candy_house1"
+      }
+    },
+    "spyder_scoop2": {
+      "position": [
+        12941,
+        19213
+      ],
+      "size": [
+        128,
+        80
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "taba_ba_passageway_2",
+        "north": "dojo3",
+        "east": "omnichannel4",
+        "south": "leather_shaft1"
+      }
+    },
+    "spyder_flower_scoop": {
+      "position": [
+        13926,
+        19205
+      ],
+      "size": [
+        208,
+        176
+      ],
+      "type": "shop",
+      "district": "countryside",
+      "connections": {
+        "north": "spyder_flower_petshop",
+        "east": "spyder_timber_walledgarden1",
+        "west": "leather_shaft1",
+        "south": "omnichannel4"
+      }
+    },
+    "timber_town": {
+      "position": [
+        13941,
+        10303
+      ],
+      "size": [
+        640,
+        640
+      ],
+      "type": "town",
+      "district": "downtown",
+      "connections": {
+        "north": "spyder_timber_town",
+        "west": "spyder_paper_town",
+        "east": "37707_town_missing",
+        "south": "azure_town_hall"
+      }
+    },
+    "spyder_candy_scoop": {
+      "position": [
+        14969,
+        19281
+      ],
+      "size": [
+        208,
+        176
+      ],
+      "type": "shop",
+      "district": "countryside",
+      "connections": {
+        "north": "taba_ba_stairwell_2",
+        "east": "scoop4",
+        "west": "omnichannel4",
+        "south": "eclipse_park"
+      }
+    },
+    "spyder_leather_shaft2": {
+      "position": [
+        16062,
+        19246
+      ],
+      "size": [
+        160,
+        160
+      ],
+      "type": "notype",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_timber_walledgarden1",
+        "north": "spyder_datacenter",
+        "east": "cotton_cathedral",
+        "south": "scoop4"
+      }
+    },
+    "eclipse_crystal_town": {
+      "position": [
+        15094,
+        10371
+      ],
+      "size": [
+        640,
+        320
+      ],
+      "type": "town",
+      "district": "downtown",
+      "connections": {
+        "north": "spyder_citypark",
+        "west": "azure_town_hall",
+        "east": "tt_paper_town",
+        "south": "37707_town_missing"
+      }
+    },
+    "spyder_mansion": {
+      "position": [
+        17049,
+        19117
+      ],
+      "size": [
+        288,
+        288
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "north": "spyder_datacenter",
+        "west": "spyder_leather_shaft2",
+        "east": "spyder_candy_inn1",
+        "south": "taba_ba_passageway_3"
+      }
+    },
+    "spyder_candy_inn1": {
+      "position": [
+        17973,
+        19300
+      ],
+      "size": [
+        240,
+        256
+      ],
+      "type": "notype",
+      "district": "countryside",
+      "connections": {
+        "west": "cotton_cathedral",
+        "north": "dojo2",
+        "east": "cotton_cafe",
+        "south": "taba_ba_passageway_3"
+      }
+    },
+    "spyder_paper_rival_downstairs": {
+      "position": [
+        18992,
+        19257
+      ],
+      "size": [
+        176,
+        192
+      ],
+      "type": "notype",
+      "district": "countryside",
+      "connections": {
+        "west": "taba_ba_passageway_3",
+        "north": "spyder_scoop3",
+        "east": "cotton_daycare",
+        "south": "cotton_cafe"
+      }
+    },
+    "taba_ba_br_master_foyer": {
+      "position": [
+        20066,
+        19110
+      ],
+      "size": [
+        224,
+        272
+      ],
+      "type": "outdoor",
+      "district": "countryside",
+      "connections": {
+        "west": "cotton_cafe",
+        "north": "witcher_route_7",
+        "east": "spyder_scoop1",
+        "south": "taba_ba_passageway_1"
+      }
+    },
+    "spyder_leather_house2": {
+      "position": [
+        4953,
+        6454
+      ],
+      "size": [
+        160,
+        128
+      ],
+      "type": "notype",
+      "district": "grove_street",
+      "connections": {
+        "west": "spyder_candy_house1",
+        "north": "cotton_misa_house",
+        "east": "spyder_candy_house3",
+        "south": "taba_house3_upstairs"
+      }
+    },
+    "spyder_scoop1": {
+      "position": [
+        20982,
+        19202
+      ],
+      "size": [
+        336,
+        240
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "cotton_daycare",
+        "north": "spyder_leather_shaft1",
+        "east": "leather_shaft2",
+        "south": "taba_ba_passageway_1"
+      }
+    },
+    "maple_house": {
+      "position": [
+        5906,
+        6366
+      ],
+      "size": [
+        208,
+        176
+      ],
+      "type": "notype",
+      "district": "grove_street",
+      "connections": {
+        "west": "taba_house3_upstairs",
+        "north": "taba_house1",
+        "east": "spyder_candy_house2",
+        "south": "spyder_candy_house3"
+      }
+    },
+    "spyder_greenwash_greenhouse": {
+      "position": [
+        6989,
+        6421
+      ],
+      "size": [
+        512,
+        256
+      ],
+      "type": "dungeon",
+      "district": "grove_street",
+      "connections": {
+        "west": "spyder_candy_house3",
+        "north": "spyder_flower_house2",
+        "south": "spyder_candy_house2"
+      }
+    },
+    "spyder_candy_cafe": {
+      "position": [
+        21980,
+        19218
+      ],
+      "size": [
+        192,
+        192
+      ],
+      "type": "notype",
+      "district": "countryside",
+      "connections": {
+        "west": "taba_ba_passageway_1",
+        "north": "gadget_store1",
+        "east": "spyder_timber_walledgarden2",
+        "south": "leather_shaft2"
+      }
+    },
+    "dragonscave": {
+      "position": [
+        12980,
+        16702
+      ],
+      "size": [
+        320,
+        640
+      ],
+      "type": "dungeon",
+      "district": "underground",
+      "connections": {
+        "west": "spyder_tunnel",
+        "north": "spyder_routec",
+        "east": "eclipse_park_cave",
+        "south": "spyder_dragonscave"
+      }
+    },
+    "spyder_paper_daycare": {
+      "position": [
+        23092,
+        19295
+      ],
+      "size": [
+        224,
+        144
+      ],
+      "type": "notype",
+      "district": "countryside",
+      "connections": {
+        "west": "leather_shaft2",
+        "north": "spyder_candy_inn2",
+        "south": "scoop3"
+      }
+    },
+    "taba_ba_passageway_2": {
+      "position": [
+        12038,
+        19961
+      ],
+      "size": [
+        320,
+        320
+      ],
+      "type": "outdoor",
+      "district": "countryside",
+      "connections": {
+        "north": "spyder_cotton_artshop",
+        "east": "eclipse_routeg",
+        "south": "test_npcs"
+      }
+    },
+    "leather_shaft1": {
+      "position": [
+        13009,
+        19991
+      ],
+      "size": [
+        240,
+        240
+      ],
+      "type": "notype",
+      "district": "countryside",
+      "connections": {
+        "west": "test_npcs",
+        "north": "spyder_scoop2",
+        "east": "eclipse_routef",
+        "south": "eclipse_routeg"
+      }
+    },
+    "manhattan_beach": {
+      "position": [
+        20093,
+        4072
+      ],
+      "size": [
+        480,
+        640
+      ],
+      "type": "notype",
+      "district": "beach",
+      "connections": {}
+    },
+    "omnichannel4": {
+      "position": [
+        14090,
+        19991
+      ],
+      "size": [
+        224,
+        336
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "eclipse_routeg",
+        "north": "spyder_flower_scoop",
+        "east": "eclipse_park",
+        "south": "eclipse_routef"
+      }
+    },
+    "spyder_timber_walledgarden1": {
+      "position": [
+        15076,
+        20039
+      ],
+      "size": [
+        256,
+        192
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "eclipse_routef",
+        "north": "spyder_candy_scoop",
+        "east": "tuxe_mart_taba",
+        "south": "scoop1"
+      }
+    },
+    "cotton_town": {
+      "position": [
+        16010,
+        10484
+      ],
+      "size": [
+        640,
+        640
+      ],
+      "type": "town",
+      "district": "downtown",
+      "connections": {
+        "south": "tt_paper_town",
+        "west": "37707_town_missing",
+        "north": "rubberduck_city_01"
+      }
+    },
+    "scoop4": {
+      "position": [
+        16089,
+        20086
+      ],
+      "size": [
+        192,
+        352
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "eclipse_park",
+        "north": "spyder_mansion",
+        "east": "spyder_paper_rival_office",
+        "south": "tuxe_mart_taba"
+      }
+    },
+    "cotton_cathedral": {
+      "position": [
+        16917,
+        20005
+      ],
+      "size": [
+        208,
+        176
+      ],
+      "type": "clinic",
+      "district": "countryside",
+      "connections": {
+        "west": "tuxe_mart_taba",
+        "north": "spyder_mansion",
+        "east": "taba_ba_passageway_4",
+        "south": "spyder_paper_rival_office"
+      }
+    },
+    "spyder_candy_house1": {
+      "position": [
+        4022,
+        7211
+      ],
+      "size": [
+        160,
+        128
+      ],
+      "type": "notype",
+      "district": "grove_street",
+      "connections": {
+        "north": "spyder_leather_house1",
+        "east": "cotton_misa_house_upstairs",
+        "south": "taba_house2_upstairs"
+      }
+    },
+    "spyder_candy_town": {
+      "position": [
+        12036,
+        11136
+      ],
+      "size": [
+        640,
+        640
+      ],
+      "type": "town",
+      "district": "downtown",
+      "connections": {
+        "south": "sphalian_town",
+        "east": "spyder_cotton_town",
+        "north": "spyder_citypark_house1"
+      }
+    },
+    "taba_ba_passageway_3": {
+      "position": [
+        17996,
+        20095
+      ],
+      "size": [
+        320,
+        320
+      ],
+      "type": "outdoor",
+      "district": "countryside",
+      "connections": {
+        "north": "spyder_candy_inn1",
+        "east": "omnichannel2",
+        "west": "spyder_paper_rival_office",
+        "south": "route1_sanglorian"
+      }
+    },
+    "cotton_cafe": {
+      "position": [
+        19026,
+        19927
+      ],
+      "size": [
+        192,
+        192
+      ],
+      "type": "notype",
+      "district": "countryside",
+      "connections": {
+        "north": "spyder_paper_rival_downstairs",
+        "west": "taba_ba_passageway_4",
+        "east": "eclipse_park_south",
+        "south": "omnichannel2"
+      }
+    },
+    "taba_house3_upstairs": {
+      "position": [
+        4928,
+        7207
+      ],
+      "size": [
+        192,
+        112
+      ],
+      "type": "notype",
+      "district": "grove_street",
+      "connections": {
+        "west": "taba_house2_upstairs",
+        "north": "spyder_leather_house2",
+        "east": "spyder_candy_house3",
+        "south": "cotton_misa_house_upstairs"
+      }
+    },
+    "spyder_paper_town": {
+      "position": [
+        12929,
+        11196
+      ],
+      "size": [
+        640,
+        320
+      ],
+      "type": "town",
+      "district": "downtown",
+      "connections": {
+        "west": "sphalian_town",
+        "south": "spyder_cotton_town",
+        "east": "city1_mart_junkyard",
+        "north": "spyder_leather_town"
+      }
+    },
+    "cotton_daycare": {
+      "position": [
+        20050,
+        20028
+      ],
+      "size": [
+        192,
+        144
+      ],
+      "type": "notype",
+      "district": "countryside",
+      "connections": {
+        "west": "omnichannel2",
+        "north": "taba_ba_br_master_foyer",
+        "east": "scoop2",
+        "south": "eclipse_park_south"
+      }
+    },
+    "taba_ba_passageway_1": {
+      "position": [
+        20993,
+        20093
+      ],
+      "size": [
+        320,
+        320
+      ],
+      "type": "outdoor",
+      "district": "countryside",
+      "connections": {
+        "north": "spyder_scoop1",
+        "east": "spyder_cotton_cafe",
+        "west": "eclipse_park_south",
+        "south": "spyder_flower_center"
+      }
+    },
+    "leather_shaft2": {
+      "position": [
+        22096,
+        20034
+      ],
+      "size": [
+        160,
+        160
+      ],
+      "type": "notype",
+      "district": "countryside",
+      "connections": {
+        "west": "scoop2",
+        "north": "spyder_candy_cafe",
+        "east": "scoop3",
+        "south": "spyder_cotton_cafe"
+      }
+    },
+    "spyder_timber_walledgarden2": {
+      "position": [
+        22964,
+        19959
+      ],
+      "size": [
+        256,
+        320
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_cotton_cafe",
+        "north": "spyder_paper_daycare",
+        "south": "scoop3"
+      }
+    },
+    "spyder_candy_house3": {
+      "position": [
+        6059,
+        7202
+      ],
+      "size": [
+        160,
+        128
+      ],
+      "type": "notype",
+      "district": "grove_street",
+      "connections": {
+        "west": "cotton_misa_house_upstairs",
+        "north": "maple_house",
+        "east": "spyder_candy_house2"
+      }
+    },
+    "test_npcs": {
+      "position": [
+        12036,
+        20747
+      ],
+      "size": [
+        640,
+        640
+      ],
+      "type": "notype",
+      "district": "countryside",
+      "connections": {
+        "north": "taba_ba_passageway_2",
+        "east": "taba_ba_main",
+        "south": "omnichannel3"
+      }
+    },
+    "eclipse_routeg": {
+      "position": [
+        13011,
+        20843
+      ],
+      "size": [
+        640,
+        640
+      ],
+      "type": "route",
+      "district": "countryside",
+      "connections": {
+        "west": "omnichannel3",
+        "north": "leather_shaft1",
+        "east": "omnichannel1",
+        "south": "taba_ba_main"
+      }
+    },
+    "eclipse_routef": {
+      "position": [
+        14028,
+        20716
+      ],
+      "size": [
+        640,
+        320
+      ],
+      "type": "route",
+      "district": "countryside",
+      "connections": {
+        "west": "taba_ba_main",
+        "north": "omnichannel4",
+        "east": "scoop1",
+        "south": "omnichannel1"
+      }
+    },
+    "azure_town_hall": {
+      "position": [
+        14054,
+        11271
+      ],
+      "size": [
+        480,
+        320
+      ],
+      "type": "notype",
+      "district": "downtown",
+      "connections": {
+        "west": "spyder_cotton_town",
+        "south": "city1_mart_junkyard",
+        "east": "37707_town_missing",
+        "north": "timber_town"
+      }
+    },
+    "tunnel_below": {
+      "position": [
+        13987,
+        16795
+      ],
+      "size": [
+        320,
+        640
+      ],
+      "type": "dungeon",
+      "district": "underground",
+      "connections": {
+        "west": "spyder_dragonscave",
+        "north": "spyder_tunnel_below",
+        "east": "spyder_downstairs",
+        "south": "eclipse_park_cave"
+      }
+    },
+    "tunnel": {
+      "position": [
+        12074,
+        17624
+      ],
+      "size": [
+        320,
+        640
+      ],
+      "type": "route",
+      "district": "underground",
+      "connections": {
+        "north": "dragonscave",
+        "east": "spyder_dragonscave",
+        "west": "spyder_routee",
+        "south": "spyder_timber_cafe"
+      }
+    },
+    "37707_town_missing": {
+      "position": [
+        14933,
+        11232
+      ],
+      "size": [
+        768,
+        512
+      ],
+      "type": "outdoor",
+      "district": "downtown",
+      "connections": {
+        "west": "city1_mart_junkyard",
+        "south": "mansion_top",
+        "east": "tt_paper_town",
+        "north": "eclipse_crystal_town"
+      }
+    },
+    "spyder_candy_house2": {
+      "position": [
+        6913,
+        7278
+      ],
+      "size": [
+        160,
+        128
+      ],
+      "type": "notype",
+      "district": "grove_street",
+      "connections": {
+        "west": "spyder_candy_house3",
+        "north": "spyder_greenwash_greenhouse"
+      }
+    },
+    "eclipse_park": {
+      "position": [
+        14954,
+        20731
+      ],
+      "size": [
+        640,
+        640
+      ],
+      "type": "route",
+      "district": "countryside",
+      "connections": {
+        "north": "spyder_timber_walledgarden1",
+        "west": "omnichannel1",
+        "east": "eclipse_route7",
+        "south": "scoop1"
+      }
+    },
+    "tt_paper_town": {
+      "position": [
+        16038,
+        11242
+      ],
+      "size": [
+        640,
+        352
+      ],
+      "type": "outdoor",
+      "district": "downtown",
+      "connections": {
+        "west": "37707_town_missing",
+        "south": "cotton_underground",
+        "east": "healing_center",
+        "north": "cotton_town"
+      }
+    },
+    "tuxe_mart_taba": {
+      "position": [
+        15992,
+        20883
+      ],
+      "size": [
+        208,
+        176
+      ],
+      "type": "shop",
+      "district": "countryside",
+      "connections": {
+        "west": "scoop1",
+        "north": "scoop4",
+        "east": "spyder_candy_port",
+        "south": "eclipse_route7"
+      }
+    },
+    "spyder_paper_rival_office": {
+      "position": [
+        17029,
+        20859
+      ],
+      "size": [
+        112,
+        112
+      ],
+      "type": "notype",
+      "district": "countryside",
+      "connections": {
+        "west": "eclipse_route7",
+        "north": "cotton_cathedral",
+        "east": "route1_sanglorian",
+        "south": "spyder_candy_port"
+      }
+    },
+    "taba_ba_passageway_4": {
+      "position": [
+        18000,
+        20807
+      ],
+      "size": [
+        128,
+        320
+      ],
+      "type": "outdoor",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_candy_port",
+        "north": "taba_ba_passageway_3",
+        "east": "omnichannel0",
+        "south": "route1_sanglorian"
+      }
+    },
+    "omnichannel2": {
+      "position": [
+        19044,
+        20807
+      ],
+      "size": [
+        224,
+        336
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "route1_sanglorian",
+        "north": "cotton_cafe",
+        "east": "sphalian_center",
+        "south": "omnichannel0"
+      }
+    },
+    "eclipse_park_south": {
+      "position": [
+        20010,
+        20774
+      ],
+      "size": [
+        960,
+        640
+      ],
+      "type": "route",
+      "district": "countryside",
+      "connections": {
+        "west": "omnichannel0",
+        "north": "cotton_daycare",
+        "east": "spyder_flower_center",
+        "south": "sphalian_center"
+      }
+    },
+    "taba_house2_upstairs": {
+      "position": [
+        3936,
+        7985
+      ],
+      "size": [
+        144,
+        112
+      ],
+      "type": "notype",
+      "district": "grove_street",
+      "connections": {
+        "north": "spyder_candy_house1",
+        "east": "cotton_misa_house_upstairs"
+      }
+    },
+    "scoop2": {
+      "position": [
+        20982,
+        20863
+      ],
+      "size": [
+        128,
+        80
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "sphalian_center",
+        "north": "taba_ba_passageway_1",
+        "east": "taba_ba_br_master",
+        "south": "spyder_flower_center"
+      }
+    },
+    "sphalian_town": {
+      "position": [
+        12016,
+        12100
+      ],
+      "size": [
+        368,
+        400
+      ],
+      "type": "town",
+      "district": "downtown",
+      "connections": {
+        "west": "route6",
+        "east": "spyder_cotton_town",
+        "south": "spyder_candy_hospital3",
+        "north": "spyder_candy_town"
+      }
+    },
+    "spyder_cotton_cafe": {
+      "position": [
+        21999,
+        20877
+      ],
+      "size": [
+        192,
+        192
+      ],
+      "type": "notype",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_flower_center",
+        "north": "leather_shaft2",
+        "east": "spyder_paper_rival_bedroom",
+        "south": "taba_ba_br_master"
+      }
+    },
+    "scoop3": {
+      "position": [
+        22954,
+        20762
+      ],
+      "size": [
+        192,
+        192
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "north": "spyder_timber_walledgarden2",
+        "west": "taba_ba_br_master",
+        "south": "spyder_paper_rival_bedroom"
+      }
+    },
+    "spyder_dragonscave": {
+      "position": [
+        13063,
+        17627
+      ],
+      "size": [
+        320,
+        640
+      ],
+      "type": "dungeon",
+      "district": "underground",
+      "connections": {
+        "west": "tunnel",
+        "north": "dragonscave",
+        "east": "eclipse_park_cave",
+        "south": "dojo3"
+      }
+    },
+    "spyder_cotton_town": {
+      "position": [
+        13060,
+        12040
+      ],
+      "size": [
+        640,
+        640
+      ],
+      "type": "town",
+      "district": "downtown",
+      "connections": {
+        "west": "sphalian_town",
+        "north": "spyder_paper_town",
+        "east": "city1_mart_junkyard",
+        "south": "spyder_dojo2"
+      }
+    },
+    "omnichannel3": {
+      "position": [
+        11908,
+        21660
+      ],
+      "size": [
+        224,
+        336
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "north": "test_npcs",
+        "east": "taba_ba_main"
+      }
+    },
+    "taba_ba_main": {
+      "position": [
+        12921,
+        21580
+      ],
+      "size": [
+        304,
+        240
+      ],
+      "type": "outdoor",
+      "district": "countryside",
+      "connections": {
+        "west": "omnichannel3",
+        "north": "eclipse_routeg",
+        "east": "omnichannel1"
+      }
+    },
+    "omnichannel1": {
+      "position": [
+        13998,
+        21532
+      ],
+      "size": [
+        224,
+        336
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "taba_ba_main",
+        "north": "eclipse_routef",
+        "east": "scoop1"
+      }
+    },
+    "eclipse_park_cave": {
+      "position": [
+        14054,
+        17502
+      ],
+      "size": [
+        560,
+        208
+      ],
+      "type": "dungeon",
+      "district": "underground",
+      "connections": {
+        "north": "tunnel_below",
+        "west": "spyder_dragonscave",
+        "east": "taba_ba_stairwell_2",
+        "south": "spyder_flower_petshop"
+      }
+    },
+    "scoop1": {
+      "position": [
+        14935,
+        21532
+      ],
+      "size": [
+        336,
+        240
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "north": "eclipse_park",
+        "west": "omnichannel1",
+        "east": "eclipse_route7"
+      }
+    },
+    "cotton_misa_house_upstairs": {
+      "position": [
+        5090,
+        8006
+      ],
+      "size": [
+        144,
+        112
+      ],
+      "type": "notype",
+      "district": "grove_street",
+      "connections": {
+        "west": "taba_house2_upstairs",
+        "north": "taba_house3_upstairs",
+        "east": "spyder_candy_house3"
+      }
+    },
+    "eclipse_route7": {
+      "position": [
+        15992,
+        21670
+      ],
+      "size": [
+        640,
+        640
+      ],
+      "type": "route",
+      "district": "countryside",
+      "connections": {
+        "west": "scoop1",
+        "north": "tuxe_mart_taba",
+        "east": "spyder_candy_port"
+      }
+    },
+    "spyder_candy_port": {
+      "position": [
+        16994,
+        21527
+      ],
+      "size": [
+        640,
+        320
+      ],
+      "type": "town",
+      "district": "countryside",
+      "connections": {
+        "west": "eclipse_route7",
+        "north": "spyder_paper_rival_office",
+        "east": "route1_sanglorian"
+      }
+    },
+    "route1_sanglorian": {
+      "position": [
+        17960,
+        21532
+      ],
+      "size": [
+        640,
+        320
+      ],
+      "type": "route",
+      "district": "countryside",
+      "connections": {
+        "north": "taba_ba_passageway_4",
+        "west": "spyder_candy_port",
+        "east": "omnichannel0"
+      }
+    },
+    "city1_mart_junkyard": {
+      "position": [
+        14045,
+        11908
+      ],
+      "size": [
+        336,
+        560
+      ],
+      "type": "outdoor",
+      "district": "downtown",
+      "connections": {
+        "west": "spyder_cotton_town",
+        "south": "spyder_timber_scoop",
+        "east": "37707_town_missing",
+        "north": "azure_town_hall"
+      }
+    },
+    "omnichannel0": {
+      "position": [
+        19048,
+        21633
+      ],
+      "size": [
+        224,
+        336
+      ],
+      "type": "dungeon",
+      "district": "countryside",
+      "connections": {
+        "west": "route1_sanglorian",
+        "north": "omnichannel2",
+        "east": "sphalian_center"
+      }
+    },
+    "sphalian_center": {
+      "position": [
+        19966,
+        21696
+      ],
+      "size": [
+        208,
+        176
+      ],
+      "type": "clinic",
+      "district": "countryside",
+      "connections": {
+        "west": "omnichannel0",
+        "north": "eclipse_park_south",
+        "east": "spyder_flower_center"
+      }
+    },
+    "spyder_flower_center": {
+      "position": [
+        21080,
+        21588
+      ],
+      "size": [
+        208,
+        176
+      ],
+      "type": "clinic",
+      "district": "countryside",
+      "connections": {
+        "north": "scoop2",
+        "west": "sphalian_center",
+        "east": "taba_ba_br_master"
+      }
+    },
+    "taba_ba_br_master": {
+      "position": [
+        21960,
+        21550
+      ],
+      "size": [
+        320,
+        320
+      ],
+      "type": "outdoor",
+      "district": "countryside",
+      "connections": {
+        "west": "spyder_flower_center",
+        "north": "spyder_cotton_cafe",
+        "east": "spyder_paper_rival_bedroom"
+      }
+    },
+    "spyder_paper_rival_bedroom": {
+      "position": [
+        22990,
+        21671
+      ],
+      "size": [
+        112,
+        112
+      ],
+      "type": "notype",
+      "district": "countryside",
+      "connections": {
+        "west": "taba_ba_br_master",
+        "north": "scoop3"
+      }
+    }
+  },
+  "sectors": {
+    "grove_street": [
+      "player_house_bedroom",
+      "player_house_downstairs",
+      "spyder_cotton_house2",
+      "taba_house4",
+      "spyder_cotton_house1",
+      "taba_house2",
+      "spyder_flower_house1",
+      "taba_house3",
+      "spyder_timber_house",
+      "cotton_misa_house",
+      "taba_house1",
+      "spyder_flower_house2",
+      "spyder_leather_house1",
+      "spyder_leather_house2",
+      "maple_house",
+      "spyder_greenwash_greenhouse",
+      "spyder_candy_house1",
+      "taba_house3_upstairs",
+      "spyder_candy_house3",
+      "spyder_candy_house2",
+      "taba_house2_upstairs",
+      "cotton_misa_house_upstairs"
+    ],
+    "downtown": [
+      "flower_city",
+      "citypark",
+      "leather_town",
+      "taba_town",
+      "spyder_flower_city",
+      "eclipse_crystal_town_house",
+      "citypark_house1",
+      "azure_town",
+      "candy_town",
+      "37707_town",
+      "eclipse_crystal_town_cafe",
+      "sphalian_town_house",
+      "spyder_timber_town",
+      "spyder_citypark",
+      "rubberduck_city_01",
+      "spyder_citypark_house1",
+      "spyder_leather_town",
+      "timber_town",
+      "eclipse_crystal_town",
+      "cotton_town",
+      "spyder_candy_town",
+      "spyder_paper_town",
+      "azure_town_hall",
+      "37707_town_missing",
+      "tt_paper_town",
+      "sphalian_town",
+      "spyder_cotton_town",
+      "city1_mart_junkyard"
+    ],
+    "beach": [
+      "manhattan_beach"
+    ],
+    "industrial": [],
+    "countryside": [
+      "route6",
+      "mansion",
+      "spyder_dojo1",
+      "mansion_top",
+      "cotton_underground",
+      "healing_center",
+      "spyder_wayfarer_inn1",
+      "wayfarer_inn1",
+      "spyder_candy_hospital1",
+      "routea",
+      "route5",
+      "routec",
+      "spyder_candy_hospital3",
+      "spyder_dojo2",
+      "leather_scoop",
+      "spyder_timber_scoop",
+      "spyder_leather_scoop",
+      "bedroom_test",
+      "spyder_wayfarer_inn2",
+      "spyder_timber_center",
+      "wayfarer_inn2",
+      "spyder_dojo3",
+      "mansion_basement",
+      "spyder_candy_hospital2",
+      "spyder_diamond_hill",
+      "spyder_bedroom",
+      "route4",
+      "eclipse_park_entrance",
+      "spyder_mansion_top",
+      "route1",
+      "route3",
+      "spyder_dojo4",
+      "spyder_nimrod_bottom",
+      "spyder_mansion_basement",
+      "spyder_leather_center",
+      "professor_lab",
+      "eclipse_routeh",
+      "eclipse_routei",
+      "russell_practice_1",
+      "cotton_scoop",
+      "route2",
+      "eclipse_crystal_bank1",
+      "spyder_omnichannel1",
+      "taba_ba_br_2",
+      "spyder_routea",
+      "spyder_route6",
+      "downstairs_test",
+      "taba_ba_br_3",
+      "tt_searoute1",
+      "37707_tower",
+      "spyder_leather_museum",
+      "eclipse_crystal_bank2",
+      "spyder_radiotower",
+      "eclipse_crystal_center",
+      "spyder_omnichannel2",
+      "spyder_candy_center",
+      "spyder_dryadsgrove",
+      "spyder_paper_scoop",
+      "taba_ba_br_1",
+      "spyder_route4",
+      "spyder_routeb",
+      "spyder_routec",
+      "spyder_route5",
+      "spyder_paper_manor",
+      "spyder_omnichannel3",
+      "eclipse_crystal_bank3",
+      "spyder_nimrod_room",
+      "taba_ba_br_4",
+      "spyder_route1",
+      "taba_ba_foyer",
+      "tabathas",
+      "spyder_healing_center",
+      "rubberduck_route_01",
+      "maple_bedroom",
+      "spyder_omnichannel4",
+      "spyder_brideswood",
+      "eclipse_park_cabin",
+      "spyder_greenwash",
+      "gaming_hall",
+      "spyder_greenwash_level3",
+      "spyder_routed",
+      "spyder_route2",
+      "spyder_route3",
+      "dryadsgrove",
+      "spyder_routee",
+      "spyder_greenwash_level2",
+      "tt_forest_route1",
+      "spyder_downstairs",
+      "spyder_nimrod_top",
+      "spyder_leather_gym",
+      "taba_ba_stairwell_1",
+      "cotton_cafe_basement",
+      "dojo1",
+      "spyder_nimrod_middle",
+      "spyder_scoop4",
+      "spyder_cotton_scoop",
+      "spyder_timber_cafe",
+      "dojo3",
+      "spyder_flower_petshop",
+      "taba_ba_stairwell_2",
+      "start_saiyanquest",
+      "spyder_datacenter",
+      "dojo2",
+      "spyder_scoop3",
+      "witcher_route_7",
+      "spyder_leather_shaft1",
+      "gadget_store1",
+      "spyder_candy_inn2",
+      "spyder_cotton_artshop",
+      "spyder_scoop2",
+      "spyder_flower_scoop",
+      "spyder_candy_scoop",
+      "spyder_leather_shaft2",
+      "spyder_mansion",
+      "spyder_candy_inn1",
+      "spyder_paper_rival_downstairs",
+      "taba_ba_br_master_foyer",
+      "spyder_scoop1",
+      "spyder_candy_cafe",
+      "spyder_paper_daycare",
+      "taba_ba_passageway_2",
+      "leather_shaft1",
+      "omnichannel4",
+      "spyder_timber_walledgarden1",
+      "scoop4",
+      "cotton_cathedral",
+      "taba_ba_passageway_3",
+      "cotton_cafe",
+      "cotton_daycare",
+      "taba_ba_passageway_1",
+      "leather_shaft2",
+      "spyder_timber_walledgarden2",
+      "test_npcs",
+      "eclipse_routeg",
+      "eclipse_routef",
+      "eclipse_park",
+      "tuxe_mart_taba",
+      "spyder_paper_rival_office",
+      "taba_ba_passageway_4",
+      "omnichannel2",
+      "eclipse_park_south",
+      "scoop2",
+      "spyder_cotton_cafe",
+      "scoop3",
+      "omnichannel3",
+      "taba_ba_main",
+      "omnichannel1",
+      "scoop1",
+      "eclipse_route7",
+      "spyder_candy_port",
+      "route1_sanglorian",
+      "omnichannel0",
+      "sphalian_center",
+      "spyder_flower_center",
+      "taba_ba_br_master",
+      "spyder_paper_rival_bedroom"
+    ],
+    "mountains": [
+      "eclipse_lion_mountain_high",
+      "eclipse_lion_mountain_middle",
+      "buddha_mountain",
+      "eclipse_lion_mountain_low"
+    ],
+    "desert": [],
+    "islands": [],
+    "underground": [
+      "rubberduck_cave_01",
+      "spyder_cotton_tunnel",
+      "spyder_tunnel_below",
+      "spyder_tunnel",
+      "dragonscave",
+      "tunnel_below",
+      "tunnel",
+      "spyder_dragonscave",
+      "eclipse_park_cave"
+    ]
+  },
+  "spawn_points": [
+    [
+      17132,
+      12033
+    ],
+    [
+      20138,
+      12149
+    ],
+    [
+      12005,
+      12767
+    ],
+    [
+      22974,
+      12751
+    ],
+    [
+      23122,
+      16036
+    ],
+    [
+      4010,
+      4084
+    ],
+    [
+      5051,
+      3967
+    ],
+    [
+      11981,
+      8844
+    ],
+    [
+      13034,
+      8939
+    ],
+    [
+      6038,
+      4074
+    ],
+    [
+      7101,
+      4091
+    ],
+    [
+      4040,
+      4939
+    ],
+    [
+      5036,
+      4862
+    ],
+    [
+      6092,
+      4824
+    ],
+    [
+      6950,
+      4941
+    ],
+    [
+      3957,
+      5571
+    ],
+    [
+      5052,
+      5596
+    ],
+    [
+      6022,
+      5704
+    ],
+    [
+      6998,
+      5662
+    ],
+    [
+      12992,
+      9600
+    ],
+    [
+      12119,
+      10363
+    ],
+    [
+      3983,
+      6526
+    ],
+    [
+      5003,
+      6504
+    ],
+    [
+      5956,
+      6416
+    ],
+    [
+      7039,
+      6471
+    ],
+    [
+      4072,
+      7261
+    ],
+    [
+      4978,
+      7257
+    ],
+    [
+      6109,
+      7252
+    ],
+    [
+      6963,
+      7328
+    ],
+    [
+      3986,
+      8035
+    ],
+    [
+      5140,
+      8056
+    ]
+  ],
+  "total_maps": 220,
+  "total_sprites": 367
+}

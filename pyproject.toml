@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "saiyanquest"
-description = "Open source monster-fighting RPG"
+description = "Open source monster-fighting RPG with GTA-style gameplay"
 readme = "README.md"
 license = {file = "LICENSE"}
 authors = [
@@ -21,11 +21,28 @@ classifiers = [
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.13",
         "Topic :: Games/Entertainment",
         "Topic :: Games/Entertainment :: Role-Playing"
 ]
 requires-python = ">=3.9"
-dynamic = ["version", "dependencies"]
+dependencies = [
+    "babel",
+    "cbor",
+    "neteria",
+    "pillow",
+    "pygame-ce==2.5.3",
+    "pyscroll>=2.31",
+    "pytmx==3.32",
+    "requests>=2.32.3",
+    "natsort",
+    "PyYAML>=6.0.2",
+    "prompt_toolkit",
+    "pygame-menu-ce==4.5.2",
+    "pydantic>=2.10.6",
+    "box2d>=2.3.10",
+]
+dynamic = ["version"]
 
 [project.urls]
 homepage = "https://www.SaiyanQuest.org"
@@ -33,6 +50,7 @@ source = "https://github.com/SaiyanQuest/SaiyanQuest"
 
 [project.gui-scripts]
 saiyanquest = "saiyanquest.__main__:main"
+saiyanquest-gta = "saiyanquest.gta_game:main"
 
 [tool.setuptools]
 include-package-data = true
@@ -41,8 +59,6 @@ include-package-data = true
 where = ["."]
 include = ["saiyanquest*"]
 
-[tool.setuptools.dynamic]
-dependencies = {file = "requirements.txt"}
 
 [tool.black]
 line-length = 79

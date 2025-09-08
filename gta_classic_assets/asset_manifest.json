@@ -1,0 +1,47 @@
+{
+  "vehicles": [
+    "sedan",
+    "sports_car",
+    "truck",
+    "taxi",
+    "police",
+    "ambulance",
+    "fire_truck",
+    "bus",
+    "motorcycle",
+    "van"
+  ],
+  "characters": [
+    "player",
+    "civilian_1",
+    "civilian_2",
+    "police",
+    "gangster",
+    "medic",
+    "businessman"
+  ],
+  "buildings": [
+    "house_small",
+    "house_large",
+    "apartment",
+    "office_building",
+    "shop",
+    "restaurant",
+    "gas_station",
+    "bank",
+    "hospital",
+    "police_station"
+  ],
+  "effects": [
+    "explosion_small",
+    "explosion_medium",
+    "explosion_large",
+    "muzzle_flash",
+    "blood_splatter",
+    "smoke_puff"
+  ],
+  "tileset": "urban_tileset.png",
+  "generated_by": "SaiyanQuest GTA Classic Asset Generator",
+  "tile_size": 16,
+  "total_assets": 102
+}

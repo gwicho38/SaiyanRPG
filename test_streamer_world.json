@@ -1,0 +1,675 @@
+{
+  "world_size": [
+    32000,
+    24000
+  ],
+  "chunk_size": 1024,
+  "maps": {
+    "route6": {
+      "path": "mods/saiyanquest/maps/route6.tmx",
+      "position": [
+        4844,
+        15513
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 13006,
+      "type": "route"
+    },
+    "mansion": {
+      "path": "mods/saiyanquest/maps/mansion.tmx",
+      "position": [
+        2884,
+        14918
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 8688,
+      "type": "outdoor"
+    },
+    "spyder_dojo1": {
+      "path": "mods/saiyanquest/maps/spyder_dojo1.tmx",
+      "position": [
+        19206,
+        19194
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 3264,
+      "type": "outdoor"
+    },
+    "flower_city": {
+      "path": "mods/saiyanquest/maps/flower_city.tmx",
+      "position": [
+        24291,
+        2688
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 16086,
+      "type": "city"
+    },
+    "mansion_top": {
+      "path": "mods/saiyanquest/maps/mansion_top.tmx",
+      "position": [
+        5410,
+        21186
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 5560,
+      "type": "outdoor"
+    },
+    "cotton_underground": {
+      "path": "mods/saiyanquest/maps/cotton_underground.tmx",
+      "position": [
+        20040,
+        13536
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 8258,
+      "type": "outdoor"
+    },
+    "player_house_bedroom": {
+      "path": "mods/saiyanquest/maps/player_house_bedroom.tmx",
+      "position": [
+        24480,
+        2200
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 2150,
+      "type": "indoor"
+    },
+    "healing_center": {
+      "path": "mods/saiyanquest/maps/healing_center.tmx",
+      "position": [
+        20877,
+        3444
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 8232,
+      "type": "outdoor"
+    },
+    "spyder_wayfarer_inn1": {
+      "path": "mods/saiyanquest/maps/spyder_wayfarer_inn1.tmx",
+      "position": [
+        25519,
+        19009
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 25227,
+      "type": "outdoor"
+    },
+    "wayfarer_inn1": {
+      "path": "mods/saiyanquest/maps/wayfarer_inn1.tmx",
+      "position": [
+        8265,
+        10721
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 6675,
+      "type": "outdoor"
+    },
+    "spyder_candy_hospital1": {
+      "path": "mods/saiyanquest/maps/spyder_candy_hospital1.tmx",
+      "position": [
+        3132,
+        21579
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 20930,
+      "type": "outdoor"
+    },
+    "routea": {
+      "path": "mods/saiyanquest/maps/routea.tmx",
+      "position": [
+        26546,
+        9062
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 8721,
+      "type": "route"
+    },
+    "route5": {
+      "path": "mods/saiyanquest/maps/route5.tmx",
+      "position": [
+        6965,
+        20235
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 5795,
+      "type": "route"
+    },
+    "citypark": {
+      "path": "mods/saiyanquest/maps/citypark.tmx",
+      "position": [
+        20902,
+        2958
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 24110,
+      "type": "city"
+    },
+    "routec": {
+      "path": "mods/saiyanquest/maps/routec.tmx",
+      "position": [
+        24296,
+        20894
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 5170,
+      "type": "route"
+    },
+    "spyder_candy_hospital3": {
+      "path": "mods/saiyanquest/maps/spyder_candy_hospital3.tmx",
+      "position": [
+        1652,
+        18175
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 8284,
+      "type": "outdoor"
+    },
+    "spyder_dojo2": {
+      "path": "mods/saiyanquest/maps/spyder_dojo2.tmx",
+      "position": [
+        12362,
+        18733
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 16800,
+      "type": "outdoor"
+    },
+    "leather_scoop": {
+      "path": "mods/saiyanquest/maps/leather_scoop.tmx",
+      "position": [
+        29391,
+        7139
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 3912,
+      "type": "outdoor"
+    },
+    "spyder_timber_scoop": {
+      "path": "mods/saiyanquest/maps/spyder_timber_scoop.tmx",
+      "position": [
+        22058,
+        17133
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 4477,
+      "type": "outdoor"
+    },
+    "spyder_leather_scoop": {
+      "path": "mods/saiyanquest/maps/spyder_leather_scoop.tmx",
+      "position": [
+        19457,
+        13710
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 4685,
+      "type": "outdoor"
+    },
+    "bedroom_test": {
+      "path": "mods/saiyanquest/maps/bedroom_test.tmx",
+      "position": [
+        5560,
+        16276
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 4205,
+      "type": "indoor"
+    },
+    "spyder_wayfarer_inn2": {
+      "path": "mods/saiyanquest/maps/spyder_wayfarer_inn2.tmx",
+      "position": [
+        27139,
+        13107
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 10946,
+      "type": "outdoor"
+    },
+    "spyder_timber_center": {
+      "path": "mods/saiyanquest/maps/spyder_timber_center.tmx",
+      "position": [
+        12346,
+        18689
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 2046,
+      "type": "outdoor"
+    },
+    "wayfarer_inn2": {
+      "path": "mods/saiyanquest/maps/wayfarer_inn2.tmx",
+      "position": [
+        27919,
+        14270
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 5538,
+      "type": "outdoor"
+    },
+    "spyder_dojo3": {
+      "path": "mods/saiyanquest/maps/spyder_dojo3.tmx",
+      "position": [
+        11678,
+        5615
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 17019,
+      "type": "outdoor"
+    },
+    "leather_town": {
+      "path": "mods/saiyanquest/maps/leather_town.tmx",
+      "position": [
+        6309,
+        5785
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 17891,
+      "type": "city"
+    },
+    "mansion_basement": {
+      "path": "mods/saiyanquest/maps/mansion_basement.tmx",
+      "position": [
+        5623,
+        20240
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 6725,
+      "type": "outdoor"
+    },
+    "spyder_candy_hospital2": {
+      "path": "mods/saiyanquest/maps/spyder_candy_hospital2.tmx",
+      "position": [
+        6880,
+        21069
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 17772,
+      "type": "outdoor"
+    },
+    "spyder_diamond_hill": {
+      "path": "mods/saiyanquest/maps/spyder_diamond_hill.tmx",
+      "position": [
+        22121,
+        6276
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 2843,
+      "type": "outdoor"
+    },
+    "spyder_bedroom": {
+      "path": "mods/saiyanquest/maps/spyder_bedroom.tmx",
+      "position": [
+        3039,
+        13212
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 2044,
+      "type": "indoor"
+    },
+    "route4": {
+      "path": "mods/saiyanquest/maps/route4.tmx",
+      "position": [
+        16987,
+        10774
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 6384,
+      "type": "route"
+    },
+    "eclipse_lion_mountain_high": {
+      "path": "mods/saiyanquest/maps/eclipse_lion_mountain_high.tmx",
+      "position": [
+        18518,
+        16452
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 6416,
+      "type": "outdoor"
+    },
+    "taba_town": {
+      "path": "mods/saiyanquest/maps/taba_town.tmx",
+      "position": [
+        6612,
+        18850
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 51837,
+      "type": "city"
+    },
+    "player_house_downstairs": {
+      "path": "mods/saiyanquest/maps/player_house_downstairs.tmx",
+      "position": [
+        17463,
+        5539
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 12141,
+      "type": "indoor"
+    },
+    "eclipse_lion_mountain_middle": {
+      "path": "mods/saiyanquest/maps/eclipse_lion_mountain_middle.tmx",
+      "position": [
+        10581,
+        4833
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 5380,
+      "type": "outdoor"
+    },
+    "eclipse_park_entrance": {
+      "path": "mods/saiyanquest/maps/eclipse_park_entrance.tmx",
+      "position": [
+        7131,
+        19045
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 2044,
+      "type": "outdoor"
+    },
+    "spyder_flower_city": {
+      "path": "mods/saiyanquest/maps/spyder_flower_city.tmx",
+      "position": [
+        3395,
+        12675
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 34508,
+      "type": "city"
+    },
+    "spyder_mansion_top": {
+      "path": "mods/saiyanquest/maps/spyder_mansion_top.tmx",
+      "position": [
+        28814,
+        10880
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 14489,
+      "type": "outdoor"
+    },
+    "route1": {
+      "path": "mods/saiyanquest/maps/route1.tmx",
+      "position": [
+        18766,
+        10723
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 48596,
+      "type": "route"
+    },
+    "route3": {
+      "path": "mods/saiyanquest/maps/route3.tmx",
+      "position": [
+        19660,
+        5045
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 12572,
+      "type": "route"
+    },
+    "spyder_dojo4": {
+      "path": "mods/saiyanquest/maps/spyder_dojo4.tmx",
+      "position": [
+        29219,
+        14191
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 10181,
+      "type": "outdoor"
+    },
+    "spyder_nimrod_bottom": {
+      "path": "mods/saiyanquest/maps/spyder_nimrod_bottom.tmx",
+      "position": [
+        24913,
+        18179
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 20089,
+      "type": "outdoor"
+    },
+    "spyder_mansion_basement": {
+      "path": "mods/saiyanquest/maps/spyder_mansion_basement.tmx",
+      "position": [
+        6844,
+        1061
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 16105,
+      "type": "outdoor"
+    },
+    "spyder_leather_center": {
+      "path": "mods/saiyanquest/maps/spyder_leather_center.tmx",
+      "position": [
+        27316,
+        20969
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 2047,
+      "type": "outdoor"
+    },
+    "professor_lab": {
+      "path": "mods/saiyanquest/maps/professor_lab.tmx",
+      "position": [
+        10602,
+        14976
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 25348,
+      "type": "outdoor"
+    },
+    "eclipse_routeh": {
+      "path": "mods/saiyanquest/maps/eclipse_routeh.tmx",
+      "position": [
+        7643,
+        7973
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 3591,
+      "type": "route"
+    },
+    "eclipse_routei": {
+      "path": "mods/saiyanquest/maps/eclipse_routei.tmx",
+      "position": [
+        14078,
+        13525
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 4605,
+      "type": "route"
+    },
+    "eclipse_crystal_town_house": {
+      "path": "mods/saiyanquest/maps/eclipse_crystal_town_house.tmx",
+      "position": [
+        25707,
+        14473
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 1862,
+      "type": "indoor"
+    },
+    "russell_practice_1": {
+      "path": "mods/saiyanquest/maps/russell_practice_1.tmx",
+      "position": [
+        9971,
+        4688
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 6607,
+      "type": "outdoor"
+    },
+    "cotton_scoop": {
+      "path": "mods/saiyanquest/maps/cotton_scoop.tmx",
+      "position": [
+        1631,
+        17661
+      ],
+      "size": [
+        200,
+        200
+      ],
+      "file_size": 4127,
+      "type": "outdoor"
+    }
+  },
+  "entities_count": 500,
+  "chunks_count": 45,
+  "spawn_points": [
+    [
+      24530,
+      2250
+    ],
+    [
+      17513,
+      5589
+    ],
+    [
+      25757,
+      14523
+    ]
+  ]
+}

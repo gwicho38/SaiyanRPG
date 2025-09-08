@@ -11,7 +11,7 @@ from math import cos, pi, sin, sqrt
 from typing import Any, Optional, Union, cast
 from weakref import ref
 
-from pygame.rect import Rect
+import pygame
 from pygame.sprite import Group, Sprite
 
 __all__ = ("Task", "Animation", "remove_animations_of")
@@ -642,7 +642,7 @@ class Animation(TaskBase):
                 )
                 continue
 
-            if isinstance(target, Rect):
+            if isinstance(target, pygame.Rect):
                 local_round_values_for_rect = True
 
             properties_map = {}
