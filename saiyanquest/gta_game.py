@@ -612,11 +612,11 @@ class GTAGame:
         # Add vehicles as targets
         for vehicle in self.game_state.vehicle_manager.vehicles + self.game_state.vehicle_manager.traffic_vehicles:
             if vehicle != self.game_state.current_vehicle:
-                collision_rect = vehicle.get_collision_rect()
+                vehicle_rect = vehicle.get_rect()
                 targets.append({
                     'x': vehicle.x,
                     'y': vehicle.y,
-                    'radius': max(collision_rect.width, collision_rect.height) // 2,
+                    'radius': max(vehicle_rect.width, vehicle_rect.height) // 2,
                     'type': 'vehicle',
                     'object': vehicle
                 })
