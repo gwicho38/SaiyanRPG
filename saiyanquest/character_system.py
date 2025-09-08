@@ -66,6 +66,11 @@ class Character:
         self.name = self._generate_name(character_type)
         self.unique_id = random.randint(1000, 9999)
         
+        # Player progression (for GTA compatibility)
+        self.level = 1
+        self.experience = 0
+        self.money = 1000 if is_player_controlled else 0
+        
         # Game state
         self.spawn_time = time.time()
         self.last_update_time = 0.0
@@ -535,6 +540,30 @@ class Character:
             'spawn_time': self.spawn_time,
             'age': time.time() - self.spawn_time
         }
+    
+    def add_money(self, amount: int) -> None:
+        """Add money to character"""
+        self.money += amount
+        
+    def spend_money(self, amount: int) -> bool:
+        """Spend money if character has enough"""
+        if self.money >= amount:
+            self.money -= amount
+            return True
+        return False
+        
+    def gain_experience(self, amount: int) -> bool:
+        """Gain experience and level up if needed"""
+        self.experience += amount
+        level_up = False
+        
+        # Simple leveling: 1000 XP per level
+        while self.experience >= self.level * 1000:
+            self.experience -= self.level * 1000
+            self.level += 1
+            level_up = True
+            
+        return level_up
     
     def destroy(self) -> None:
         """Clean up character"""
