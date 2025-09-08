@@ -174,8 +174,17 @@ class GTAGame:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
+                continue
+            
+            # Let UI handle events FIRST - it gets priority
+            ui_action = self.ui_manager.handle_input(event)
+            if ui_action:
+                self._handle_ui_action(ui_action)
+                # If UI handled the event, don't process it as game input
+                continue
                 
-            elif event.type == pygame.KEYDOWN:
+            # Only process game events if UI didn't handle them
+            if event.type == pygame.KEYDOWN:
                 # Don't process game input if UI menu is active
                 if not self.ui_manager.current_menu:
                     self._handle_keydown(event.key)
@@ -190,11 +199,6 @@ class GTAGame:
                 
             elif event.type == pygame.MOUSEBUTTONUP:
                 self._handle_mouse_up(event.button, event.pos)
-            
-            # Let UI handle events too
-            ui_action = self.ui_manager.handle_input(event)
-            if ui_action:
-                self._handle_ui_action(ui_action)
     
     def _handle_keydown(self, key: int) -> None:
         """Handle key press events"""

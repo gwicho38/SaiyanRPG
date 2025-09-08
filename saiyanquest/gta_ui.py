@@ -629,11 +629,12 @@ class UIManager:
             
     def handle_input(self, event: pygame.event.Event) -> Optional[str]:
         """Handle input events, return action if any"""
-        if self.input_cooldown > 0:
-            return None
-            
         if event.type == pygame.KEYDOWN:
+            # Menu toggle keys (ESC/TAB) have their own cooldown
             if event.key == pygame.K_ESCAPE or event.key == pygame.K_TAB:
+                if self.input_cooldown > 0:
+                    return None
+                    
                 if self.current_menu:
                     self.current_menu = None
                 else:
@@ -642,16 +643,17 @@ class UIManager:
                 self.input_cooldown = 0.2
                 return "menu_toggle"
                 
+            # Navigation keys don't use cooldown when menu is active
             elif self.current_menu:
                 if event.key == pygame.K_UP or event.key == pygame.K_w:
                     self.current_menu.navigate_up()
-                    self.input_cooldown = 0.1
+                    return "menu_navigate"
                 elif event.key == pygame.K_DOWN or event.key == pygame.K_s:
                     self.current_menu.navigate_down() 
-                    self.input_cooldown = 0.1
+                    return "menu_navigate"
                 elif event.key == pygame.K_RETURN:
                     selected = self.current_menu.get_selected_item()
-                    self.input_cooldown = 0.2
+                    self.input_cooldown = 0.2  # Only selection has cooldown
                     return f"menu_select_{selected.lower().replace(' ', '_')}" if selected else None
                     
         return None
