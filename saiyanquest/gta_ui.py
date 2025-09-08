@@ -642,10 +642,10 @@ class UIManager:
                 return "menu_toggle"
                 
             elif self.current_menu:
-                if event.key == pygame.K_UP:
+                if event.key == pygame.K_UP or event.key == pygame.K_w:
                     self.current_menu.navigate_up()
                     self.input_cooldown = 0.1
-                elif event.key == pygame.K_DOWN:
+                elif event.key == pygame.K_DOWN or event.key == pygame.K_s:
                     self.current_menu.navigate_down() 
                     self.input_cooldown = 0.1
                 elif event.key == pygame.K_RETURN:
