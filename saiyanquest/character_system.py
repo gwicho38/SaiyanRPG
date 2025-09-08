@@ -70,6 +70,10 @@ class Character:
         self.level = 1
         self.experience = 0
         self.money = 1000 if is_player_controlled else 0
+        self.respect = 0
+        self.current_gang = "NEUTRAL"  # Will be replaced with enum if needed
+        self.missions_completed = 0
+        self.territory_controlled = []
         
         # Game state
         self.spawn_time = time.time()

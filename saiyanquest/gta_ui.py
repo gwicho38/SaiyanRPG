@@ -591,7 +591,7 @@ class StatsMenu(GTAMenu):
             f"Health: {self.character.health:.0f}/{self.character.physics.stats.max_health:.0f}",
             f"Money: ${self.character.money:,}",
             f"Respect: {self.character.respect}",
-            f"Gang: {self.character.current_gang.value.replace('_', ' ').title()}",
+            f"Gang: {getattr(self.character.current_gang, 'value', self.character.current_gang).replace('_', ' ').title()}",
             f"Missions Completed: {self.character.missions_completed}",
             f"Territories: {len(self.character.territory_controlled)}",
             "Back"
