@@ -550,9 +550,10 @@ class GTAMenu:
             item_y = menu_y + 70 + i * 40
             
             if i == self.selected_index:
-                # Highlight selected item
+                # Highlight selected item with bright background and border
                 highlight_rect = pygame.Rect(menu_x + 10, item_y - 5, menu_width - 20, 30)
                 pygame.draw.rect(surface, self.colors.GOLD, highlight_rect)
+                pygame.draw.rect(surface, (255, 255, 255), highlight_rect, 2)
                 item_color = self.colors.BLACK
             else:
                 item_color = self.colors.WHITE
