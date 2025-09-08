@@ -354,10 +354,10 @@ class GTAGame:
         # TODO: Implement stamina regeneration with new character system
         # self.game_state.character.regenerate_stamina(dt)
         
-        # Check for unlocks
-        newly_unlocked = self.game_state.progression_system.check_unlocks(self.game_state.character)
-        for unlock in newly_unlocked:
-            print(f"Unlocked: {unlock}")
+        # Check for unlocks (TODO: Implement with new character system)
+        # newly_unlocked = self.game_state.progression_system.check_unlocks(self.game_state.character)
+        # for unlock in newly_unlocked:
+        #     print(f"Unlocked: {unlock}")
         
         # Camera is now handled by the world streamer
         
