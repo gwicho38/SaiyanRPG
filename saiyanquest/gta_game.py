@@ -362,11 +362,11 @@ class GTAGame:
         # Camera is now handled by the world streamer
         
         # Update UI
-        self.ui_manager.update(dt, self.game_state.character, self.game_state.world)
+        self.ui_manager.update(dt, self.game_state.player_character, self.game_state.world)
         
         # Auto-save
         self.game_state.state_manager.save_manager.auto_save(
-            dt, self.game_state.character, self.game_state.world,
+            dt, self.game_state.player_character, self.game_state.world,
             self.game_state.vehicle_manager, self.game_state.mission_manager,
             self.game_state.crime_system, self.game_state.player_x,
             self.game_state.player_y, self.game_state.game_time
@@ -523,7 +523,7 @@ class GTAGame:
             
             if self.game_state.current_vehicle:
                 # Exit vehicle
-                self.game_state.current_vehicle.exit_vehicle(self.game_state.character)
+                self.game_state.current_vehicle.exit_vehicle(self.game_state.player_character)
                 self.game_state.current_vehicle = None
             else:
                 # Try to enter nearby vehicle
@@ -532,7 +532,7 @@ class GTAGame:
                 )
                 
                 if nearby_vehicle:
-                    if nearby_vehicle.enter_vehicle(self.game_state.character):
+                    if nearby_vehicle.enter_vehicle(self.game_state.player_character):
                         self.game_state.current_vehicle = nearby_vehicle
                         nearby_vehicle.start_engine()
                         
@@ -726,7 +726,7 @@ class GTAGame:
         
         # Render UI
         self.ui_manager.render(
-            self.screen, self.game_state.character, self.game_state.world,
+            self.screen, self.game_state.player_character, self.game_state.world,
             self.game_state.current_weapon, self.game_state.current_vehicle,
             self.game_state.current_mission
         )
@@ -915,7 +915,7 @@ class GTAGame:
     def _quick_save(self) -> None:
         """Quick save the game"""
         success = self.game_state.state_manager.save_manager.quick_save(
-            self.game_state.character, self.game_state.world,
+            self.game_state.player_character, self.game_state.world,
             self.game_state.vehicle_manager, self.game_state.mission_manager,
             self.game_state.crime_system, self.game_state.player_x,
             self.game_state.player_y, self.game_state.game_time
@@ -933,7 +933,7 @@ class GTAGame:
         if save_data:
             # Apply save data
             player_x, player_y, game_time = self.game_state.state_manager.apply_save_data(
-                save_data, self.game_state.character, self.game_state.world,
+                save_data, self.game_state.player_character, self.game_state.world,
                 self.game_state.vehicle_manager, self.game_state.mission_manager,
                 self.game_state.crime_system
             )
