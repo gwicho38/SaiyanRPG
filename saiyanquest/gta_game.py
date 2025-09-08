@@ -176,10 +176,14 @@ class GTAGame:
                 self.running = False
                 
             elif event.type == pygame.KEYDOWN:
-                self._handle_keydown(event.key)
+                # Don't process game input if UI menu is active
+                if not self.ui_manager.current_menu:
+                    self._handle_keydown(event.key)
                 
             elif event.type == pygame.KEYUP:
-                self._handle_keyup(event.key)
+                # Don't process game input if UI menu is active
+                if not self.ui_manager.current_menu:
+                    self._handle_keyup(event.key)
                 
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 self._handle_mouse_down(event.button, event.pos)
