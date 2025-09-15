@@ -1,0 +1,596 @@
+{
+  "assets": {
+    "vehicle_sedan": {
+      "type": "vehicle",
+      "name": "sedan",
+      "size": [
+        24,
+        16
+      ],
+      "colors": [
+        [
+          0,
+          0,
+          255
+        ],
+        [
+          192,
+          192,
+          192
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "properties": {
+        "vehicle_type": "sedan"
+      }
+    },
+    "vehicle_sports_car": {
+      "type": "vehicle",
+      "name": "sports_car",
+      "size": [
+        20,
+        12
+      ],
+      "colors": [
+        [
+          0,
+          0,
+          255
+        ],
+        [
+          64,
+          64,
+          64
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "properties": {
+        "vehicle_type": "sports_car"
+      }
+    },
+    "vehicle_truck": {
+      "type": "vehicle",
+      "name": "truck",
+      "size": [
+        32,
+        20
+      ],
+      "colors": [
+        [
+          255,
+          255,
+          0
+        ],
+        [
+          64,
+          64,
+          64
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "properties": {
+        "vehicle_type": "truck"
+      }
+    },
+    "vehicle_motorcycle": {
+      "type": "vehicle",
+      "name": "motorcycle",
+      "size": [
+        16,
+        12
+      ],
+      "colors": [
+        [
+          255,
+          0,
+          255
+        ],
+        [
+          192,
+          192,
+          192
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "properties": {
+        "vehicle_type": "motorcycle"
+      }
+    },
+    "vehicle_bus": {
+      "type": "vehicle",
+      "name": "bus",
+      "size": [
+        40,
+        24
+      ],
+      "colors": [
+        [
+          255,
+          255,
+          0
+        ],
+        [
+          64,
+          64,
+          64
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "properties": {
+        "vehicle_type": "bus"
+      }
+    },
+    "vehicle_police": {
+      "type": "vehicle",
+      "name": "police",
+      "size": [
+        24,
+        16
+      ],
+      "colors": [
+        [
+          255,
+          0,
+          0
+        ],
+        [
+          64,
+          64,
+          64
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "properties": {
+        "vehicle_type": "police"
+      }
+    },
+    "vehicle_taxi": {
+      "type": "vehicle",
+      "name": "taxi",
+      "size": [
+        24,
+        16
+      ],
+      "colors": [
+        [
+          255,
+          0,
+          0
+        ],
+        [
+          128,
+          128,
+          128
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "properties": {
+        "vehicle_type": "taxi"
+      }
+    },
+    "character_civilian": {
+      "type": "character",
+      "name": "civilian",
+      "size": [
+        12,
+        16
+      ],
+      "colors": [
+        [
+          255,
+          220,
+          177
+        ],
+        [
+          128,
+          0,
+          128
+        ],
+        [
+          255,
+          255,
+          0
+        ]
+      ],
+      "properties": {
+        "character_type": "civilian"
+      }
+    },
+    "character_gangster": {
+      "type": "character",
+      "name": "gangster",
+      "size": [
+        12,
+        16
+      ],
+      "colors": [
+        [
+          205,
+          186,
+          150
+        ],
+        [
+          0,
+          0,
+          255
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "properties": {
+        "character_type": "gangster"
+      }
+    },
+    "character_police": {
+      "type": "character",
+      "name": "police",
+      "size": [
+        12,
+        16
+      ],
+      "colors": [
+        [
+          255,
+          220,
+          177
+        ],
+        [
+          0,
+          0,
+          255
+        ],
+        [
+          255,
+          255,
+          0
+        ]
+      ],
+      "properties": {
+        "character_type": "police"
+      }
+    },
+    "character_businessman": {
+      "type": "character",
+      "name": "businessman",
+      "size": [
+        12,
+        16
+      ],
+      "colors": [
+        [
+          238,
+          203,
+          173
+        ],
+        [
+          255,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "properties": {
+        "character_type": "businessman"
+      }
+    },
+    "character_tourist": {
+      "type": "character",
+      "name": "tourist",
+      "size": [
+        12,
+        16
+      ],
+      "colors": [
+        [
+          205,
+          186,
+          150
+        ],
+        [
+          255,
+          255,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "properties": {
+        "character_type": "tourist"
+      }
+    },
+    "building_house": {
+      "type": "building",
+      "name": "house",
+      "size": [
+        32,
+        24
+      ],
+      "colors": [
+        [
+          160,
+          82,
+          45
+        ],
+        [
+          192,
+          192,
+          192
+        ],
+        [
+          70,
+          130,
+          180
+        ]
+      ],
+      "properties": {
+        "building_type": "house"
+      }
+    },
+    "building_apartment": {
+      "type": "building",
+      "name": "apartment",
+      "size": [
+        24,
+        32
+      ],
+      "colors": [
+        [
+          222,
+          184,
+          135
+        ],
+        [
+          128,
+          128,
+          128
+        ],
+        [
+          135,
+          206,
+          235
+        ]
+      ],
+      "properties": {
+        "building_type": "apartment"
+      }
+    },
+    "building_office": {
+      "type": "building",
+      "name": "office",
+      "size": [
+        40,
+        40
+      ],
+      "colors": [
+        [
+          205,
+          133,
+          63
+        ],
+        [
+          64,
+          64,
+          64
+        ],
+        [
+          70,
+          130,
+          180
+        ]
+      ],
+      "properties": {
+        "building_type": "office"
+      }
+    },
+    "building_shop": {
+      "type": "building",
+      "name": "shop",
+      "size": [
+        24,
+        20
+      ],
+      "colors": [
+        [
+          139,
+          69,
+          19
+        ],
+        [
+          192,
+          192,
+          192
+        ],
+        [
+          70,
+          130,
+          180
+        ]
+      ],
+      "properties": {
+        "building_type": "shop"
+      }
+    },
+    "building_warehouse": {
+      "type": "building",
+      "name": "warehouse",
+      "size": [
+        48,
+        24
+      ],
+      "colors": [
+        [
+          205,
+          133,
+          63
+        ],
+        [
+          64,
+          64,
+          64
+        ],
+        [
+          135,
+          206,
+          235
+        ]
+      ],
+      "properties": {
+        "building_type": "warehouse"
+      }
+    },
+    "effect_explosion": {
+      "type": "effect",
+      "name": "explosion",
+      "size": [
+        16,
+        16
+      ],
+      "colors": [
+        [
+          255,
+          0,
+          0
+        ],
+        [
+          255,
+          255,
+          0
+        ],
+        [
+          255,
+          100,
+          0
+        ]
+      ],
+      "properties": {
+        "frame_count": 8,
+        "effect_type": "explosion"
+      }
+    },
+    "effect_smoke": {
+      "type": "effect",
+      "name": "smoke",
+      "size": [
+        12,
+        12
+      ],
+      "colors": [
+        [
+          255,
+          0,
+          0
+        ],
+        [
+          255,
+          255,
+          0
+        ],
+        [
+          255,
+          100,
+          0
+        ]
+      ],
+      "properties": {
+        "frame_count": 6,
+        "effect_type": "smoke"
+      }
+    },
+    "effect_sparkle": {
+      "type": "effect",
+      "name": "sparkle",
+      "size": [
+        8,
+        8
+      ],
+      "colors": [
+        [
+          255,
+          0,
+          0
+        ],
+        [
+          255,
+          255,
+          0
+        ],
+        [
+          255,
+          100,
+          0
+        ]
+      ],
+      "properties": {
+        "frame_count": 4,
+        "effect_type": "sparkle"
+      }
+    },
+    "effect_fire": {
+      "type": "effect",
+      "name": "fire",
+      "size": [
+        12,
+        16
+      ],
+      "colors": [
+        [
+          255,
+          0,
+          0
+        ],
+        [
+          255,
+          255,
+          0
+        ],
+        [
+          255,
+          100,
+          0
+        ]
+      ],
+      "properties": {
+        "frame_count": 6,
+        "effect_type": "fire"
+      }
+    }
+  }
+}

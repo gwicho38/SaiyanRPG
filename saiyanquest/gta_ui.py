@@ -111,13 +111,14 @@ class GTAHUD:
         """Render the complete HUD"""
         if not self.visible:
             return
+        
             
         # Render individual HUD elements
         self._render_health_armor(surface, character)
         self._render_wanted_level(surface, world.wanted_level)
         self._render_money_respect(surface, character)
         self._render_weapon_info(surface, current_weapon)
-        self._render_minimap(surface, world, character.money, character.money)  # Placeholder for player position
+        self._render_minimap_or_toggle_hint(surface, world, character.money, character.money)  # Placeholder for player position
         
         if current_vehicle:
             self._render_speedometer(surface, current_vehicle)
@@ -261,11 +262,19 @@ class GTAHUD:
                 money_color = self.colors.RED  # Lost money
         
         money_surface = self.fonts.medium.render(money_text, True, money_color)
+        # Add background for better visibility
+        bg_rect = pygame.Rect(x-5, y-2, money_surface.get_width()+10, money_surface.get_height()+4)
+        pygame.draw.rect(surface, (0, 0, 0, 180), bg_rect)
+        pygame.draw.rect(surface, self.colors.DARK_GRAY, bg_rect, 2)
         surface.blit(money_surface, (x, y))
         
         # Respect
         respect_text = f"Respect: {character.respect}"
         respect_surface = self.fonts.small.render(respect_text, True, self.colors.GOLD)
+        # Add background for better visibility
+        bg_rect2 = pygame.Rect(x-5, y+28, respect_surface.get_width()+10, respect_surface.get_height()+4)
+        pygame.draw.rect(surface, (0, 0, 0, 180), bg_rect2)
+        pygame.draw.rect(surface, self.colors.DARK_GRAY, bg_rect2, 2)
         surface.blit(respect_surface, (x, y + 30))
 
     def _render_weapon_info(self, surface: pygame.Surface, weapon: Optional[Weapon]) -> None:
@@ -279,6 +288,10 @@ class GTAHUD:
         # Weapon name
         weapon_name = weapon.weapon_type.value.replace('_', ' ').title()
         name_surface = self.fonts.medium.render(weapon_name, True, self.colors.WHITE)
+        # Add background for better visibility
+        bg_rect = pygame.Rect(x-5, y-2, name_surface.get_width()+10, name_surface.get_height()+4)
+        pygame.draw.rect(surface, (0, 0, 0, 180), bg_rect)
+        pygame.draw.rect(surface, self.colors.DARK_GRAY, bg_rect, 2)
         surface.blit(name_surface, (x, y))
         
         # Ammo (if applicable)
@@ -291,19 +304,46 @@ class GTAHUD:
                 ammo_color = self.colors.WHITE if weapon.current_ammo > 0 else self.colors.RED
             
             ammo_surface = self.fonts.small.render(ammo_text, True, ammo_color)
+            # Add background for better visibility
+            bg_rect2 = pygame.Rect(x-5, y+23, ammo_surface.get_width()+10, ammo_surface.get_height()+4)
+            pygame.draw.rect(surface, (0, 0, 0, 180), bg_rect2)
+            pygame.draw.rect(surface, self.colors.DARK_GRAY, bg_rect2, 2)
             surface.blit(ammo_surface, (x, y + 25))
 
-    def _render_minimap(self, surface: pygame.Surface, world: GTAWorld, player_x: float, player_y: float) -> None:
-        """Render the minimap"""
-        if not self.element_visibility[UIElement.MINIMAP]:
-            return
-            
+    def _render_minimap_or_toggle_hint(self, surface: pygame.Surface, world: GTAWorld, player_x: float, player_y: float) -> None:
+        """Render the minimap or a toggle hint if hidden"""
         minimap_size = 150
         x = surface.get_width() - minimap_size - 20
-        y = surface.get_height() - minimap_size - 20
+        y = 20  # Top right position
         
-        # Use the world's minimap rendering
-        world.render_minimap(surface, player_x, player_y, minimap_size)
+        if self.element_visibility[UIElement.MINIMAP]:
+            # Render full minimap
+            # Add border to make minimap more visible
+            border_rect = pygame.Rect(x-3, y-3, minimap_size+6, minimap_size+6)
+            pygame.draw.rect(surface, self.colors.WHITE, border_rect, 3)
+            
+            # Add toggle indicator - small "M" in corner
+            toggle_font = pygame.font.Font(None, 20)
+            toggle_text = toggle_font.render("M", True, self.colors.WHITE)
+            toggle_bg = pygame.Rect(x+minimap_size-25, y-3, 22, 22)
+            pygame.draw.rect(surface, (0, 0, 0, 180), toggle_bg)
+            pygame.draw.rect(surface, self.colors.WHITE, toggle_bg, 2)
+            surface.blit(toggle_text, (x+minimap_size-20, y))
+            
+            # Use the world's minimap rendering at the UI's position
+            world.render_minimap(surface, player_x, player_y, minimap_size, x, y)
+        else:
+            # Show toggle hint when minimap is hidden
+            hint_text = "Press M for Map"
+            hint_surface = self.fonts.small.render(hint_text, True, self.colors.WHITE)
+            hint_x = surface.get_width() - hint_surface.get_width() - 20
+            hint_y = 20
+            
+            # Add background for better visibility
+            bg_rect = pygame.Rect(hint_x-5, hint_y-2, hint_surface.get_width()+10, hint_surface.get_height()+4)
+            pygame.draw.rect(surface, (0, 0, 0, 180), bg_rect)
+            pygame.draw.rect(surface, self.colors.DARK_GRAY, bg_rect, 2)
+            surface.blit(hint_surface, (hint_x, hint_y))
 
     def _render_speedometer(self, surface: pygame.Surface, vehicle: Vehicle) -> None:
         """Render speedometer when in vehicle"""
@@ -423,6 +463,10 @@ class GTAHUD:
         
         x = surface.get_width() - time_surface.get_width() - 20
         y = surface.get_height() - 30
+        # Add background for better visibility
+        bg_rect = pygame.Rect(x-5, y-2, time_surface.get_width()+10, time_surface.get_height()+4)
+        pygame.draw.rect(surface, (0, 0, 0, 180), bg_rect)
+        pygame.draw.rect(surface, self.colors.DARK_GRAY, bg_rect, 2)
         surface.blit(time_surface, (x, y))
 
     def render_objective_marker(self, surface: pygame.Surface, objective: Objective, 
@@ -620,6 +664,7 @@ class UIManager:
               current_weapon: Optional[Weapon], current_vehicle: Optional[Vehicle],
               current_mission: Optional[Mission]) -> None:
         """Render all UI elements"""
+        
         # Render HUD
         self.hud.render(surface, character, world, current_weapon, current_vehicle, current_mission)
         
@@ -643,6 +688,13 @@ class UIManager:
                 self.input_cooldown = 0.2
                 return "menu_toggle"
                 
+            # Minimap toggle (M key) - works both in-game and in menu
+            elif event.key == pygame.K_m:
+                if self.input_cooldown <= 0:
+                    self.hud.element_visibility[UIElement.MINIMAP] = not self.hud.element_visibility[UIElement.MINIMAP]
+                    self.input_cooldown = 0.2
+                    return "minimap_toggle"
+            
             # Navigation keys don't use cooldown when menu is active
             elif self.current_menu:
                 if event.key == pygame.K_UP or event.key == pygame.K_w:

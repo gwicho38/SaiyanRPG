@@ -1,11 +1,7 @@
 #!/usr/bin/env python3
-"""
-Advanced Character AI System
-Implements intelligent pedestrian behavior, pathfinding, and decision making.
-Based on Carnage3D AI mechanics.
-"""
+# SPDX-License-Identifier: GPL-3.0
+# Advanced Character AI System with Fear Responses and Behaviors
 
-import pygame
 import math
 import random
 import time
@@ -13,664 +9,595 @@ from typing import Dict, List, Tuple, Optional, Any, Callable
 from dataclasses import dataclass
 from enum import Enum
 
-from .character_physics import CharacterPhysics, CharacterState, CharacterType
+from .physics_manager import PhysicsManager, PhysicsBody, CollisionCategory, PhysicsBodyType
 
 
-class AIBehavior(Enum):
-    """AI behavior types"""
+class CharacterState(Enum):
+    """Character states"""
     IDLE = "idle"
-    WANDERING = "wandering"
-    WALKING_TO_DESTINATION = "walking_to_destination"
-    FOLLOWING_PATH = "following_path"
-    FLEEING = "fleeing"
-    SEEKING_SHELTER = "seeking_shelter"
-    INVESTIGATING = "investigating"
-    ATTACKING = "attacking"
-    CALLING_POLICE = "calling_police"
-    DRIVING = "driving"
+    WALKING = "walking"
+    RUNNING = "running"
+    SHOOTING = "shooting"
+    STUNNED = "stunned"
+    DEAD = "dead"
+    BURNING = "burning"
+    IN_VEHICLE = "in_vehicle"
     ENTERING_VEHICLE = "entering_vehicle"
     EXITING_VEHICLE = "exiting_vehicle"
-    TALKING = "talking"
-    SHOPPING = "shopping"
-    WORKING = "working"
-    PANICKING = "panicking"
+    FLEEING = "fleeing"
+    HIDING = "hiding"
+    INVESTIGATING = "investigating"
 
 
-class ThreatLevel(Enum):
-    """Threat assessment levels"""
-    NONE = 0
-    LOW = 1
-    MEDIUM = 2
-    HIGH = 3
-    EXTREME = 4
+class FearLevel(Enum):
+    """Fear levels"""
+    CALM = 0
+    ALERT = 1
+    SCARED = 2
+    TERRIFIED = 3
+    PANIC = 4
+
+
+class StimulusType(Enum):
+    """Types of stimuli that characters can react to"""
+    GUNSHOT = "gunshot"
+    EXPLOSION = "explosion"
+    POLICE_SIREN = "police_siren"
+    VEHICLE_CRASH = "vehicle_crash"
+    PLAYER_NEARBY = "player_nearby"
+    VIOLENCE = "violence"
+    FIRE = "fire"
+    LOUD_NOISE = "loud_noise"
 
 
 @dataclass
-class AIMemory:
-    """AI memory system for tracking events and locations"""
-    last_threat_position: Optional[Tuple[float, float]] = None
-    last_threat_time: float = 0.0
-    known_safe_locations: List[Tuple[float, float]] = None
-    known_dangerous_locations: List[Tuple[float, float]] = None
-    witnessed_crimes: List[Dict] = None
-    conversation_partners: List[Any] = None
-    
-    def __post_init__(self):
-        if self.known_safe_locations is None:
-            self.known_safe_locations = []
-        if self.known_dangerous_locations is None:
-            self.known_dangerous_locations = []
-        if self.witnessed_crimes is None:
-            self.witnessed_crimes = []
-        if self.conversation_partners is None:
-            self.conversation_partners = []
+class Stimulus:
+    """A stimulus that affects character behavior"""
+    stimulus_type: StimulusType
+    position: Tuple[float, float]
+    intensity: float  # 0.0 to 1.0
+    radius: float
+    timestamp: float
+    source: Optional[Any] = None
 
 
+@dataclass
 class CharacterAI:
-    """AI controller for character behavior"""
+    """AI controller for a character"""
+    character_id: int
+    current_state: CharacterState
+    fear_level: FearLevel
+    target_position: Optional[Tuple[float, float]]
+    current_target: Optional[Any]
     
-    def __init__(self, character_physics: CharacterPhysics):
-        self.character = character_physics
-        self.character_type = character_physics.character_type
-        
-        # AI behavior state
-        self.behavior = AIBehavior.IDLE
-        self.behavior_timer = 0.0
-        self.behavior_data = {}  # Behavior-specific data
-        
-        # Personality traits (0.0 to 1.0)
-        self.traits = self._generate_personality()
-        
-        # AI memory and awareness
-        self.memory = AIMemory()
-        self.awareness_radius = 150.0  # pixels
-        self.vision_angle = 140.0  # degrees
-        self.hearing_radius = 200.0  # pixels
-        
-        # Pathfinding
-        self.destination = None
-        self.path_nodes = []
-        self.current_path_index = 0
-        self.stuck_timer = 0.0
-        self.last_position = (self.character.x, self.character.y)
-        
-        # Threat assessment
-        self.current_threat_level = ThreatLevel.NONE
-        self.threats = []  # List of perceived threats
-        self.allies = []   # List of allies/friends
-        
-        # Social behavior
-        self.conversation_cooldown = 0.0
-        self.social_interaction_range = 50.0
-        
-        # Decision making
-        self.decision_timer = 0.0
-        self.decision_interval = 2.0  # Make decisions every 2 seconds
-        
-        print(f"🧠 Character AI initialized: {self.character_type.value}")
-        print(f"   Personality: Courage={self.traits['courage']:.2f}, "
-              f"Curiosity={self.traits['curiosity']:.2f}, Social={self.traits['social']:.2f}")
+    # Behavior parameters
+    aggression: float  # 0.0 to 1.0
+    intelligence: float  # 0.0 to 1.0
+    courage: float  # 0.0 to 1.0
+    curiosity: float  # 0.0 to 1.0
     
-    def _generate_personality(self) -> Dict[str, float]:
-        """Generate personality traits based on character type"""
-        base_traits = {
-            'courage': 0.5,      # Willingness to face danger
-            'curiosity': 0.5,    # Tendency to investigate
-            'social': 0.5,       # Likelihood to interact with others
-            'aggression': 0.2,   # Tendency toward violence
-            'lawfulness': 0.7,   # Respect for law and order
-            'helpfulness': 0.6,  # Willingness to help others
-            'panic_threshold': 0.5,  # Threshold before panicking
-        }
-        
-        # Modify traits based on character type
-        type_modifiers = {
-            CharacterType.POLICE: {
-                'courage': 0.8, 'lawfulness': 0.9, 'aggression': 0.6,
-                'panic_threshold': 0.8
-            },
-            CharacterType.GANG_MEMBER: {
-                'courage': 0.7, 'aggression': 0.8, 'lawfulness': 0.2,
-                'social': 0.3
-            },
-            CharacterType.CIVILIAN: {
-                'courage': 0.4, 'curiosity': 0.6, 'social': 0.7
-            },
-            CharacterType.ELDERLY: {
-                'courage': 0.3, 'curiosity': 0.3, 'social': 0.8,
-                'panic_threshold': 0.3
-            },
-            CharacterType.CHILD: {
-                'curiosity': 0.9, 'social': 0.6, 'courage': 0.2,
-                'panic_threshold': 0.2
-            },
-            CharacterType.ATHLETE: {
-                'courage': 0.7, 'aggression': 0.4, 'social': 0.5
-            }
-        }
-        
-        modifiers = type_modifiers.get(self.character_type, {})
-        
-        # Apply modifiers with some randomization
-        traits = {}
-        for trait, base_value in base_traits.items():
-            modified_value = modifiers.get(trait, base_value)
-            # Add random variation (±0.2)
-            traits[trait] = max(0.0, min(1.0, modified_value + random.uniform(-0.2, 0.2)))
-        
-        return traits
+    # Movement
+    movement_speed: float
+    run_speed: float
+    current_direction: Tuple[float, float]
     
-    def update(self, dt: float, nearby_characters: List[Any] = None,
-               nearby_vehicles: List[Any] = None, events: List[Dict] = None) -> None:
-        """Update AI behavior"""
-        # Update timers
-        self.behavior_timer += dt
-        self.decision_timer += dt
-        self.conversation_cooldown = max(0, self.conversation_cooldown - dt)
-        
-        # Only update AI if character can act
-        if not self.character.can_interact():
-            return
-        
-        # Process events (crimes, explosions, etc.)
-        if events:
-            self._process_events(events)
-        
-        # Update awareness and threat assessment
-        self._update_awareness(nearby_characters, nearby_vehicles)
-        
-        # Make decisions periodically
-        if self.decision_timer >= self.decision_interval:
-            self._make_decision(nearby_characters, nearby_vehicles)
-            self.decision_timer = 0.0
-        
-        # Execute current behavior
-        self._execute_behavior(dt, nearby_characters, nearby_vehicles)
-        
-        # Update pathfinding
-        if self.destination:
-            self._update_pathfinding(dt)
+    # Memory
+    known_stimuli: List[Stimulus]
+    memory_duration: float
+    last_update_time: float
     
-    def _process_events(self, events: List[Dict]) -> None:
-        """Process world events and update memory"""
-        for event in events:
-            event_type = event.get('type')
-            event_pos = event.get('position', (0, 0))
-            distance = self._calculate_distance(event_pos, (self.character.x, self.character.y))
-            
-            # Only process events within hearing/sight range
-            if distance > self.hearing_radius:
-                continue
-            
-            if event_type == 'gunshot':
-                self._react_to_gunshot(event_pos, distance)
-            elif event_type == 'explosion':
-                self._react_to_explosion(event_pos, distance)
-            elif event_type == 'car_crash':
-                self._react_to_crash(event_pos, distance)
-            elif event_type == 'crime_witnessed':
-                self._witness_crime(event)
-            elif event_type == 'police_siren':
-                self._react_to_siren(event_pos, distance)
+    # Vehicle interaction
+    target_vehicle: Optional[int]
+    vehicle_interaction_timer: float
     
-    def _react_to_gunshot(self, position: Tuple[float, float], distance: float) -> None:
-        """React to hearing gunshots"""
-        panic_chance = 1.0 - (self.traits['courage'] * 0.8)
-        
-        if random.random() < panic_chance:
-            self._enter_panic_mode()
-            self.memory.last_threat_position = position
-            self.memory.last_threat_time = time.time()
-        elif self.traits['curiosity'] > 0.6 and self.character_type == CharacterType.POLICE:
-            # Police investigate gunshots
-            self.set_destination(position[0], position[1])
-            self.behavior = AIBehavior.INVESTIGATING
+    # Combat
+    weapon_skill: float
+    accuracy: float
+    reaction_time: float
     
-    def _react_to_explosion(self, position: Tuple[float, float], distance: float) -> None:
-        """React to explosions"""
-        # Everyone flees from explosions
-        self._enter_panic_mode()
-        self._flee_from_position(position)
+    # Social
+    group_id: Optional[int]
+    social_radius: float
+
+
+class CharacterController:
+    """Controller for character actions and behaviors"""
     
-    def _witness_crime(self, event: Dict) -> None:
-        """Witness a crime and decide how to react"""
-        crime_type = event.get('crime_type', 'unknown')
-        perpetrator = event.get('perpetrator')
+    def __init__(self, character_id: int, physics_body: PhysicsBody):
+        self.character_id = character_id
+        self.physics_body = physics_body
         
-        # Add to memory
-        self.memory.witnessed_crimes.append({
-            'type': crime_type,
-            'time': time.time(),
-            'position': event.get('position'),
-            'perpetrator': perpetrator
-        })
-        
-        # Decide reaction based on personality
-        if self.traits['lawfulness'] > 0.7 and self.traits['courage'] > 0.5:
-            # Call police
-            self.behavior = AIBehavior.CALLING_POLICE
-            self.behavior_timer = 0.0
-        else:
-            # Flee
-            self._enter_panic_mode()
-    
-    def _update_awareness(self, nearby_characters: List[Any], nearby_vehicles: List[Any]) -> None:
-        """Update awareness of surroundings"""
-        self.threats.clear()
-        self.allies.clear()
-        
-        # Assess nearby characters
-        if nearby_characters:
-            for other_char in nearby_characters:
-                if other_char == self.character:
-                    continue
-                
-                distance = self._calculate_distance(
-                    (other_char.x, other_char.y),
-                    (self.character.x, self.character.y)
-                )
-                
-                if distance <= self.awareness_radius:
-                    self._assess_character_threat(other_char, distance)
-        
-        # Assess nearby vehicles
-        if nearby_vehicles:
-            for vehicle in nearby_vehicles:
-                distance = self._calculate_distance(
-                    (vehicle.x, vehicle.y),
-                    (self.character.x, self.character.y)
-                )
-                
-                if distance <= self.awareness_radius:
-                    self._assess_vehicle_threat(vehicle, distance)
-    
-    def _assess_character_threat(self, other_char: Any, distance: float) -> None:
-        """Assess threat level of another character"""
-        threat_level = 0
-        
-        # Check character type
-        if hasattr(other_char, 'character_type'):
-            if other_char.character_type == CharacterType.GANG_MEMBER:
-                threat_level += 2
-            elif other_char.character_type == CharacterType.POLICE and self.character_type == CharacterType.GANG_MEMBER:
-                threat_level += 3
-        
-        # Check character state
-        if hasattr(other_char, 'state'):
-            if other_char.state == CharacterState.RAGDOLL:
-                threat_level -= 1  # Less threatening when down
-        
-        # Check if armed (would need weapon system)
-        # if other_char.is_armed:
-        #     threat_level += 2
-        
-        if threat_level > 1:
-            self.threats.append({
-                'character': other_char,
-                'threat_level': threat_level,
-                'distance': distance
-            })
-        elif threat_level < 0:
-            self.allies.append(other_char)
-    
-    def _assess_vehicle_threat(self, vehicle: Any, distance: float) -> None:
-        """Assess threat from vehicles"""
-        if hasattr(vehicle, 'get_speed_kmh'):
-            speed = vehicle.get_speed_kmh()
-            
-            # Fast-moving vehicles are threats
-            if speed > 50 and distance < 100:
-                self.threats.append({
-                    'vehicle': vehicle,
-                    'threat_level': min(3, int(speed / 30)),
-                    'distance': distance
-                })
-    
-    def _make_decision(self, nearby_characters: List[Any], nearby_vehicles: List[Any]) -> None:
-        """Make behavioral decisions based on current state"""
-        # Assess overall threat level
-        max_threat = max([t['threat_level'] for t in self.threats]) if self.threats else 0
-        self.current_threat_level = ThreatLevel(min(4, max_threat))
-        
-        # Decision tree based on threat level and personality
-        if self.current_threat_level.value >= 3:
-            # High threat - flee or fight
-            if self.traits['courage'] < 0.4:
-                self._enter_panic_mode()
-            elif self.character_type == CharacterType.POLICE:
-                self._engage_threat()
-        
-        elif self.current_threat_level.value >= 2:
-            # Medium threat - be cautious
-            if self.behavior in [AIBehavior.IDLE, AIBehavior.WANDERING]:
-                self._seek_safety()
-        
-        elif self.current_threat_level == ThreatLevel.NONE:
-            # No threats - normal behavior
-            self._choose_peaceful_behavior(nearby_characters, nearby_vehicles)
-    
-    def _choose_peaceful_behavior(self, nearby_characters: List[Any], nearby_vehicles: List[Any]) -> None:
-        """Choose behavior when there are no threats"""
-        # Random behavior selection based on personality
-        if self.behavior == AIBehavior.IDLE and self.behavior_timer > 3.0:
-            if self.traits['curiosity'] > 0.6 and random.random() < 0.3:
-                self._start_wandering()
-            elif self.traits['social'] > 0.6 and nearby_characters and random.random() < 0.2:
-                self._initiate_conversation(nearby_characters)
-        
-        elif self.behavior == AIBehavior.WANDERING and self.behavior_timer > 10.0:
-            if random.random() < 0.4:
-                self.behavior = AIBehavior.IDLE
-                self.behavior_timer = 0.0
-    
-    def _execute_behavior(self, dt: float, nearby_characters: List[Any], nearby_vehicles: List[Any]) -> None:
-        """Execute the current behavior"""
-        if self.behavior == AIBehavior.IDLE:
-            self._execute_idle(dt)
-        
-        elif self.behavior == AIBehavior.WANDERING:
-            self._execute_wandering(dt)
-        
-        elif self.behavior == AIBehavior.WALKING_TO_DESTINATION:
-            self._execute_walking_to_destination(dt)
-        
-        elif self.behavior == AIBehavior.FLEEING:
-            self._execute_fleeing(dt)
-        
-        elif self.behavior == AIBehavior.PANICKING:
-            self._execute_panicking(dt)
-        
-        elif self.behavior == AIBehavior.INVESTIGATING:
-            self._execute_investigating(dt)
-        
-        elif self.behavior == AIBehavior.CALLING_POLICE:
-            self._execute_calling_police(dt)
-        
-        elif self.behavior == AIBehavior.TALKING:
-            self._execute_talking(dt, nearby_characters)
-    
-    def _execute_idle(self, dt: float) -> None:
-        """Execute idle behavior"""
-        self.character.move(0, 0)  # Stop movement
-        
-        # Occasionally look around
-        if random.random() < 0.1:
-            self.character.facing_angle = random.uniform(0, 360)
-    
-    def _execute_wandering(self, dt: float) -> None:
-        """Execute wandering behavior"""
-        if not self.destination:
-            # Pick random destination within reasonable range
-            angle = random.uniform(0, 360)
-            distance = random.uniform(100, 300)
-            
-            dest_x = self.character.x + math.cos(math.radians(angle)) * distance
-            dest_y = self.character.y + math.sin(math.radians(angle)) * distance
-            
-            self.set_destination(dest_x, dest_y)
-        
-        # Move toward destination
-        self._move_toward_destination()
-        
-        # Change direction occasionally
-        if self.behavior_timer > random.uniform(5, 15):
-            self.destination = None
-            self.behavior_timer = 0.0
-    
-    def _execute_walking_to_destination(self, dt: float) -> None:
-        """Execute walking to specific destination"""
-        if self.destination:
-            self._move_toward_destination()
-            
-            # Check if reached destination
-            distance = self._calculate_distance(
-                (self.character.x, self.character.y),
-                self.destination
-            )
-            
-            if distance < 20:  # Reached destination
-                self.destination = None
-                self.behavior = AIBehavior.IDLE
-                self.behavior_timer = 0.0
-        else:
-            self.behavior = AIBehavior.IDLE
-    
-    def _execute_fleeing(self, dt: float) -> None:
-        """Execute fleeing behavior"""
-        if self.threats:
-            # Flee from closest threat
-            closest_threat = min(self.threats, key=lambda t: t['distance'])
-            threat_pos = self._get_threat_position(closest_threat)
-            
-            if threat_pos:
-                # Move away from threat
-                flee_angle = math.atan2(
-                    self.character.y - threat_pos[1],
-                    self.character.x - threat_pos[0]
-                )
-                
-                move_x = math.cos(flee_angle)
-                move_y = math.sin(flee_angle)
-                
-                self.character.move(move_x, move_y)
-                self.character.run(True)  # Run when fleeing
-        
-        # Stop fleeing after some time if no more threats
-        if not self.threats and self.behavior_timer > 10.0:
-            self.behavior = AIBehavior.SEEKING_SHELTER
-    
-    def _execute_panicking(self, dt: float) -> None:
-        """Execute panic behavior"""
-        # Erratic movement when panicking
-        if random.random() < 0.3:
-            move_x = random.uniform(-1, 1)
-            move_y = random.uniform(-1, 1)
-            self.character.move(move_x, move_y)
-            self.character.run(True)
-        
-        # Gradually calm down
-        if self.behavior_timer > 15.0 and not self.threats:
-            self.behavior = AIBehavior.IDLE
-            self.behavior_timer = 0.0
-    
-    def _execute_investigating(self, dt: float) -> None:
-        """Execute investigation behavior"""
-        if self.memory.last_threat_position:
-            self.set_destination(*self.memory.last_threat_position)
-            self._move_toward_destination()
-            
-            # Stop investigating after reaching location
-            if self.destination:
-                distance = self._calculate_distance(
-                    (self.character.x, self.character.y),
-                    self.destination
-                )
-                if distance < 30:
-                    self.behavior = AIBehavior.IDLE
-                    self.destination = None
-    
-    def _execute_calling_police(self, dt: float) -> None:
-        """Execute calling police behavior"""
-        # Stop moving while calling
-        self.character.move(0, 0)
-        
-        # After 5 seconds, finish call
-        if self.behavior_timer > 5.0:
-            self.behavior = AIBehavior.IDLE
-            self.behavior_timer = 0.0
-            print(f"📞 {self.character_type.value} called police")
-    
-    def _execute_talking(self, dt: float, nearby_characters: List[Any]) -> None:
-        """Execute conversation behavior"""
-        # Stop moving while talking
-        self.character.move(0, 0)
-        
-        # End conversation after some time
-        if self.behavior_timer > random.uniform(10, 30):
-            self.behavior = AIBehavior.IDLE
-            self.behavior_timer = 0.0
-            self.conversation_cooldown = 60.0  # Don't talk again for a minute
-    
-    def _move_toward_destination(self) -> None:
-        """Move character toward current destination"""
-        if not self.destination:
-            return
-        
-        # Calculate direction to destination
-        dx = self.destination[0] - self.character.x
-        dy = self.destination[1] - self.character.y
-        distance = math.sqrt(dx*dx + dy*dy)
-        
-        if distance > 10:  # Move if not close enough
-            # Normalize direction
-            move_x = dx / distance
-            move_y = dy / distance
-            
-            self.character.move(move_x, move_y)
-        else:
-            self.character.move(0, 0)
-    
-    def _update_pathfinding(self, dt: float) -> None:
-        """Update pathfinding and stuck detection"""
-        current_pos = (self.character.x, self.character.y)
-        distance_moved = self._calculate_distance(current_pos, self.last_position)
-        
-        # Check if stuck
-        if distance_moved < 5:  # Not moving much
-            self.stuck_timer += dt
-            
-            if self.stuck_timer > 3.0:  # Stuck for 3 seconds
-                self._handle_stuck()
-        else:
-            self.stuck_timer = 0.0
-        
-        self.last_position = current_pos
-    
-    def _handle_stuck(self) -> None:
-        """Handle being stuck by finding new destination"""
-        # Try random direction
-        angle = random.uniform(0, 360)
-        distance = 50
-        
-        new_x = self.character.x + math.cos(math.radians(angle)) * distance
-        new_y = self.character.y + math.sin(math.radians(angle)) * distance
-        
-        self.set_destination(new_x, new_y)
-        self.stuck_timer = 0.0
-    
-    def _start_wandering(self) -> None:
-        """Start wandering behavior"""
-        self.behavior = AIBehavior.WANDERING
-        self.behavior_timer = 0.0
-        self.destination = None
-    
-    def _enter_panic_mode(self) -> None:
-        """Enter panic state"""
-        self.behavior = AIBehavior.PANICKING
-        self.behavior_timer = 0.0
-        print(f"😱 {self.character_type.value} is panicking!")
-    
-    def _flee_from_position(self, threat_pos: Tuple[float, float]) -> None:
-        """Flee from a specific position"""
-        self.behavior = AIBehavior.FLEEING
-        self.behavior_timer = 0.0
-        
-        # Set destination away from threat
-        flee_angle = math.atan2(
-            self.character.y - threat_pos[1],
-            self.character.x - threat_pos[0]
+        # Initialize AI
+        self.ai = CharacterAI(
+            character_id=character_id,
+            current_state=CharacterState.IDLE,
+            fear_level=FearLevel.CALM,
+            target_position=None,
+            current_target=None,
+            aggression=random.uniform(0.2, 0.8),
+            intelligence=random.uniform(0.3, 0.9),
+            courage=random.uniform(0.1, 0.7),
+            curiosity=random.uniform(0.4, 0.8),
+            movement_speed=1.5,  # m/s
+            run_speed=3.0,  # m/s
+            current_direction=(0, 0),
+            known_stimuli=[],
+            memory_duration=30.0,  # seconds
+            last_update_time=time.time(),
+            target_vehicle=None,
+            vehicle_interaction_timer=0.0,
+            weapon_skill=random.uniform(0.1, 0.6),
+            accuracy=random.uniform(0.3, 0.8),
+            reaction_time=random.uniform(0.5, 2.0),
+            group_id=None,
+            social_radius=50.0
         )
         
-        flee_distance = 200
-        dest_x = self.character.x + math.cos(flee_angle) * flee_distance
-        dest_y = self.character.y + math.sin(flee_angle) * flee_distance
+        # Behavior state
+        self.state_timer = 0.0
+        self.idle_timer = 0.0
+        self.flee_timer = 0.0
         
-        self.set_destination(dest_x, dest_y)
+        # Pathfinding
+        self.path: List[Tuple[float, float]] = []
+        self.path_index = 0
+        self.path_update_timer = 0.0
+        
+        print(f"🤖 CharacterController created for character {character_id}")
     
-    def _seek_safety(self) -> None:
-        """Seek safe location"""
-        self.behavior = AIBehavior.SEEKING_SHELTER
-        self.behavior_timer = 0.0
+    def update(self, dt: float, game_state: Dict[str, Any]) -> None:
+        """Update character AI"""
+        current_time = time.time()
+        self.ai.last_update_time = current_time
         
-        # For now, just move to a random safe location
-        if self.memory.known_safe_locations:
-            safe_spot = random.choice(self.memory.known_safe_locations)
-            self.set_destination(*safe_spot)
-        else:
-            # Default: move away from threats
-            if self.threats:
-                closest_threat = min(self.threats, key=lambda t: t['distance'])
-                threat_pos = self._get_threat_position(closest_threat)
-                if threat_pos:
-                    self._flee_from_position(threat_pos)
+        # Update timers
+        self.state_timer += dt
+        self.idle_timer += dt
+        self.flee_timer += dt
+        self.path_update_timer += dt
+        
+        # Clean old stimuli from memory
+        self._clean_stimuli_memory(current_time)
+        
+        # Update fear level based on stimuli
+        self._update_fear_level(game_state)
+        
+        # Update behavior based on current state
+        self._update_behavior(dt, game_state)
+        
+        # Update movement
+        self._move_towards_target(self.ai.movement_speed if self.ai.current_state.value in ['walking', 'investigating'] else self.ai.run_speed if self.ai.current_state.value == 'running' else 0.0)
+        
+        # Update vehicle interaction
+        self._update_vehicle_interaction(dt, game_state)
     
-    def _engage_threat(self) -> None:
-        """Engage with threat (for police/security)"""
-        self.behavior = AIBehavior.ATTACKING
-        self.behavior_timer = 0.0
-        
-        if self.threats:
-            closest_threat = min(self.threats, key=lambda t: t['distance'])
-            threat_pos = self._get_threat_position(closest_threat)
-            if threat_pos:
-                self.set_destination(*threat_pos)
+    def _clean_stimuli_memory(self, current_time: float) -> None:
+        """Remove old stimuli from memory"""
+        self.ai.known_stimuli = [
+            stimulus for stimulus in self.ai.known_stimuli
+            if current_time - stimulus.timestamp < self.ai.memory_duration
+        ]
     
-    def _initiate_conversation(self, nearby_characters: List[Any]) -> None:
-        """Start conversation with nearby character"""
-        if self.conversation_cooldown > 0:
-            return
+    def _update_fear_level(self, game_state: Dict[str, Any]) -> None:
+        """Update character fear level based on nearby stimuli"""
+        character_pos = self.physics_body.position
+        fear_score = 0.0
         
-        # Find suitable conversation partner
-        for other_char in nearby_characters:
-            if other_char == self.character:
-                continue
-            
-            distance = self._calculate_distance(
-                (other_char.x, other_char.y),
-                (self.character.x, self.character.y)
+        # Check for nearby stimuli
+        for stimulus in self.ai.known_stimuli:
+            distance = math.sqrt(
+                (stimulus.position[0] - character_pos[0])**2 +
+                (stimulus.position[1] - character_pos[1])**2
             )
             
-            if distance < self.social_interaction_range and other_char.can_interact():
-                self.behavior = AIBehavior.TALKING
-                self.behavior_timer = 0.0
-                self.behavior_data['conversation_partner'] = other_char
-                print(f"💬 {self.character_type.value} started conversation")
-                break
+            if distance < stimulus.radius:
+                # Calculate fear contribution
+                distance_factor = 1.0 - (distance / stimulus.radius)
+                fear_contribution = stimulus.intensity * distance_factor
+                
+                # Different stimuli have different fear weights
+                fear_weights = {
+                    StimulusType.GUNSHOT: 0.8,
+                    StimulusType.EXPLOSION: 1.0,
+                    StimulusType.POLICE_SIREN: 0.6,
+                    StimulusType.VEHICLE_CRASH: 0.4,
+                    StimulusType.PLAYER_NEARBY: 0.3,
+                    StimulusType.VIOLENCE: 0.9,
+                    StimulusType.FIRE: 0.7,
+                    StimulusType.LOUD_NOISE: 0.2
+                }
+                
+                fear_score += fear_contribution * fear_weights.get(stimulus.stimulus_type, 0.5)
+        
+        # Apply courage modifier
+        fear_score *= (1.0 - self.ai.courage)
+        
+        # Update fear level
+        if fear_score > 0.8:
+            self.ai.fear_level = FearLevel.PANIC
+        elif fear_score > 0.6:
+            self.ai.fear_level = FearLevel.TERRIFIED
+        elif fear_score > 0.4:
+            self.ai.fear_level = FearLevel.SCARED
+        elif fear_score > 0.2:
+            self.ai.fear_level = FearLevel.ALERT
+        else:
+            self.ai.fear_level = FearLevel.CALM
     
-    def _get_threat_position(self, threat: Dict) -> Optional[Tuple[float, float]]:
-        """Get position of a threat"""
-        if 'character' in threat:
-            char = threat['character']
-            return (char.x, char.y)
-        elif 'vehicle' in threat:
-            vehicle = threat['vehicle']
-            return (vehicle.x, vehicle.y)
+    def _update_behavior(self, dt: float, game_state: Dict[str, Any]) -> None:
+        """Update character behavior based on current state and fear level"""
+        if self.ai.current_state == CharacterState.DEAD:
+            return
+        
+        # State transitions based on fear level
+        if self.ai.fear_level in [FearLevel.PANIC, FearLevel.TERRIFIED]:
+            if self.ai.current_state != CharacterState.FLEEING:
+                self._change_state(CharacterState.FLEEING)
+                self.flee_timer = 0.0
+        elif self.ai.fear_level == FearLevel.SCARED:
+            if self.ai.current_state not in [CharacterState.FLEEING, CharacterState.HIDING]:
+                if random.random() < 0.7:  # 70% chance to flee
+                    self._change_state(CharacterState.FLEEING)
+                else:
+                    self._change_state(CharacterState.HIDING)
+        elif self.ai.fear_level == FearLevel.ALERT:
+            if self.ai.current_state == CharacterState.IDLE:
+                self._change_state(CharacterState.INVESTIGATING)
+        elif self.ai.fear_level == FearLevel.CALM:
+            if self.ai.current_state in [CharacterState.FLEEING, CharacterState.HIDING]:
+                if self.flee_timer > 5.0:  # Stop fleeing after 5 seconds
+                    self._change_state(CharacterState.IDLE)
+        
+        # Behavior-specific updates
+        if self.ai.current_state == CharacterState.IDLE:
+            self._update_idle_behavior(dt)
+        elif self.ai.current_state == CharacterState.WALKING:
+            self._update_walking_behavior(dt)
+        elif self.ai.current_state == CharacterState.RUNNING:
+            self._update_running_behavior(dt)
+        elif self.ai.current_state == CharacterState.FLEEING:
+            self._update_fleeing_behavior(dt, game_state)
+        elif self.ai.current_state == CharacterState.HIDING:
+            self._update_hiding_behavior(dt)
+        elif self.ai.current_state == CharacterState.INVESTIGATING:
+            self._update_investigating_behavior(dt, game_state)
+        elif self.ai.current_state == CharacterState.SHOOTING:
+            self._update_shooting_behavior(dt, game_state)
+    
+    def _change_state(self, new_state: CharacterState) -> None:
+        """Change character state"""
+        old_state = self.ai.current_state
+        self.ai.current_state = new_state
+        self.state_timer = 0.0
+        
+        print(f"🤖 Character {self.character_id}: {old_state.value} -> {new_state.value}")
+    
+    def _update_idle_behavior(self, dt: float) -> None:
+        """Update idle behavior"""
+        # Random chance to start walking
+        if self.idle_timer > 2.0 and random.random() < 0.1:
+            self._change_state(CharacterState.WALKING)
+            self._generate_random_target()
+    
+    def _update_walking_behavior(self, dt: float) -> None:
+        """Update walking behavior"""
+        if self.ai.target_position:
+            self._move_towards_target(self.ai.movement_speed)
+        else:
+            # Random chance to stop walking
+            if random.random() < 0.05:
+                self._change_state(CharacterState.IDLE)
+    
+    def _update_running_behavior(self, dt: float) -> None:
+        """Update running behavior"""
+        if self.ai.target_position:
+            self._move_towards_target(self.ai.run_speed)
+        else:
+            self._change_state(CharacterState.IDLE)
+    
+    def _update_fleeing_behavior(self, dt: float, game_state: Dict[str, Any]) -> None:
+        """Update fleeing behavior"""
+        # Find the safest direction (away from threats)
+        character_pos = self.physics_body.position
+        flee_direction = self._calculate_flee_direction(character_pos)
+        
+        if flee_direction:
+            # Move in flee direction
+            target_x = character_pos[0] + flee_direction[0] * 100
+            target_y = character_pos[1] + flee_direction[1] * 100
+            self.ai.target_position = (target_x, target_y)
+            
+            self._move_towards_target(self.ai.run_speed)
+        else:
+            # No clear flee direction, just run randomly
+            if random.random() < 0.3:
+                self._generate_random_target()
+                self._move_towards_target(self.ai.run_speed)
+    
+    def _update_hiding_behavior(self, dt: float) -> None:
+        """Update hiding behavior"""
+        # Look for nearby hiding spots (simplified)
+        # In a real implementation, this would check for buildings, alleys, etc.
+        if random.random() < 0.1:
+            self._change_state(CharacterState.IDLE)
+    
+    def _update_investigating_behavior(self, dt: float, game_state: Dict[str, Any]) -> None:
+        """Update investigating behavior"""
+        # Move towards the most recent stimulus
+        if self.ai.known_stimuli:
+            latest_stimulus = max(self.ai.known_stimuli, key=lambda s: s.timestamp)
+            self.ai.target_position = latest_stimulus.position
+            self._move_towards_target(self.ai.movement_speed)
+        else:
+            self._change_state(CharacterState.IDLE)
+    
+    def _update_shooting_behavior(self, dt: float, game_state: Dict[str, Any]) -> None:
+        """Update shooting behavior"""
+        # This would integrate with the weapon system
+        # For now, just transition back to other states
+        if self.state_timer > 2.0:
+            if self.ai.fear_level == FearLevel.CALM:
+                self._change_state(CharacterState.IDLE)
+            else:
+                self._change_state(CharacterState.FLEEING)
+    
+    def _calculate_flee_direction(self, character_pos: Tuple[float, float]) -> Optional[Tuple[float, float]]:
+        """Calculate the best direction to flee"""
+        if not self.ai.known_stimuli:
+            return None
+        
+        # Calculate weighted average of threat directions
+        threat_x = 0.0
+        threat_y = 0.0
+        total_weight = 0.0
+        
+        for stimulus in self.ai.known_stimuli:
+            distance = math.sqrt(
+                (stimulus.position[0] - character_pos[0])**2 +
+                (stimulus.position[1] - character_pos[1])**2
+            )
+            
+            if distance > 0:
+                # Weight by intensity and inverse distance
+                weight = stimulus.intensity / distance
+                
+                # Direction from stimulus to character (away from threat)
+                direction_x = (character_pos[0] - stimulus.position[0]) / distance
+                direction_y = (character_pos[1] - stimulus.position[1]) / distance
+                
+                threat_x += direction_x * weight
+                threat_y += direction_y * weight
+                total_weight += weight
+        
+        if total_weight > 0:
+            # Normalize
+            threat_x /= total_weight
+            threat_y /= total_weight
+            
+            # Normalize to unit vector
+            length = math.sqrt(threat_x**2 + threat_y**2)
+            if length > 0:
+                return (threat_x / length, threat_y / length)
+        
         return None
     
-    def _calculate_distance(self, pos1: Tuple[float, float], pos2: Tuple[float, float]) -> float:
-        """Calculate distance between two positions"""
-        return math.sqrt((pos1[0] - pos2[0])**2 + (pos1[1] - pos2[1])**2)
+    def _generate_random_target(self) -> None:
+        """Generate a random target position"""
+        character_pos = self.physics_body.position
+        angle = random.uniform(0, 2 * math.pi)
+        distance = random.uniform(20, 100)
+        
+        target_x = character_pos[0] + math.cos(angle) * distance
+        target_y = character_pos[1] + math.sin(angle) * distance
+        
+        self.ai.target_position = (target_x, target_y)
     
-    def set_destination(self, x: float, y: float) -> None:
-        """Set movement destination"""
-        self.destination = (x, y)
-        if self.behavior == AIBehavior.IDLE:
-            self.behavior = AIBehavior.WALKING_TO_DESTINATION
+    def _move_towards_target(self, speed: float) -> None:
+        """Move towards the target position"""
+        if not self.ai.target_position:
+            return
+        
+        character_pos = self.physics_body.position
+        target_pos = self.ai.target_position
+        
+        # Calculate direction
+        dx = target_pos[0] - character_pos[0]
+        dy = target_pos[1] - character_pos[1]
+        distance = math.sqrt(dx**2 + dy**2)
+        
+        if distance > 5.0:  # 5 meter threshold
+            # Normalize direction
+            direction_x = dx / distance
+            direction_y = dy / distance
+            
+            # Set velocity
+            velocity_x = direction_x * speed
+            velocity_y = direction_y * speed
+            
+            self.physics_body.velocity = (velocity_x, velocity_y)
+            self.ai.current_direction = (direction_x, direction_y)
+        else:
+            # Reached target
+            self.physics_body.velocity = (0, 0)
+            self.ai.target_position = None
     
-    def force_behavior(self, behavior: AIBehavior) -> None:
-        """Force specific behavior (for scripted events)"""
-        self.behavior = behavior
-        self.behavior_timer = 0.0
+    def _update_vehicle_interaction(self, dt: float, game_state: Dict[str, Any]) -> None:
+        """Update vehicle interaction behavior"""
+        if self.ai.current_state == CharacterState.IN_VEHICLE:
+            return
+        
+        # Look for nearby vehicles
+        character_pos = self.physics_body.position
+        nearby_vehicles = self._find_nearby_vehicles(character_pos, 30.0, game_state)
+        
+        if nearby_vehicles and self.ai.fear_level in [FearLevel.PANIC, FearLevel.TERRIFIED]:
+            # Try to enter a vehicle to escape
+            vehicle_id = nearby_vehicles[0]  # Take the first one
+            self.ai.target_vehicle = vehicle_id
+            self._change_state(CharacterState.ENTERING_VEHICLE)
     
-    def get_status_info(self) -> Dict:
-        """Get AI status information"""
+    def _find_nearby_vehicles(self, position: Tuple[float, float], radius: float, 
+                             game_state: Dict[str, Any]) -> List[int]:
+        """Find nearby vehicles"""
+        # This would integrate with the vehicle system
+        # For now, return empty list
+        return []
+    
+    def add_stimulus(self, stimulus: Stimulus) -> None:
+        """Add a stimulus to the character's memory"""
+        self.ai.known_stimuli.append(stimulus)
+        print(f"🤖 Character {self.character_id} received stimulus: {stimulus.stimulus_type.value}")
+    
+    def get_character_info(self) -> Dict[str, Any]:
+        """Get character information"""
         return {
-            'behavior': self.behavior.value,
-            'threat_level': self.current_threat_level.value,
-            'destination': self.destination,
-            'threats_detected': len(self.threats),
-            'personality': self.traits,
-            'health': self.character.health,
-            'stamina': self.character.stamina,
-            'state': self.character.state.value
+            'character_id': self.character_id,
+            'state': self.ai.current_state.value,
+            'fear_level': self.ai.fear_level.value,
+            'position': self.physics_body.position,
+            'velocity': self.physics_body.velocity,
+            'aggression': self.ai.aggression,
+            'intelligence': self.ai.intelligence,
+            'courage': self.ai.courage,
+            'curiosity': self.ai.curiosity,
+            'known_stimuli_count': len(self.ai.known_stimuli)
         }
+
+
+class CharacterAIManager:
+    """Manager for all character AI systems"""
+    
+    def __init__(self, physics_manager: PhysicsManager):
+        self.physics_manager = physics_manager
+        self.character_controllers: Dict[int, CharacterController] = {}
+        self.stimuli_queue: List[Stimulus] = []
+        
+        print("🤖 CharacterAIManager initialized")
+    
+    def create_character(self, character_id: int, position: Tuple[float, float]) -> CharacterController:
+        """Create a new character with AI"""
+        # Create physics body
+        physics_body = self.physics_manager.create_body(
+            PhysicsBodyType.DYNAMIC,
+            position,
+            {
+                'type': 'circle',
+                'radius': 0.5,
+                'mass': 70.0,  # Average human mass
+                'friction': 0.7,
+                'restitution': 0.1
+            },
+            CollisionCategory.PEDESTRIAN,
+            user_data={'character_id': character_id, 'type': 'character'}
+        )
+        
+        # Create AI controller
+        controller = CharacterController(character_id, physics_body)
+        self.character_controllers[character_id] = controller
+        
+        print(f"🤖 Created character {character_id} with AI at {position}")
+        return controller
+    
+    def update_all_characters(self, dt: float, game_state: Dict[str, Any]) -> None:
+        """Update all character AI systems"""
+        # Process stimuli queue
+        self._process_stimuli_queue()
+        
+        # Update all character controllers
+        for controller in self.character_controllers.values():
+            controller.update(dt, game_state)
+    
+    def _process_stimuli_queue(self) -> None:
+        """Process queued stimuli"""
+        for stimulus in self.stimuli_queue:
+            # Find characters within stimulus radius
+            for controller in self.character_controllers.values():
+                character_pos = controller.physics_body.position
+                distance = math.sqrt(
+                    (stimulus.position[0] - character_pos[0])**2 +
+                    (stimulus.position[1] - character_pos[1])**2
+                )
+                
+                if distance <= stimulus.radius:
+                    controller.add_stimulus(stimulus)
+        
+        # Clear processed stimuli
+        self.stimuli_queue.clear()
+    
+    def add_stimulus(self, stimulus: Stimulus) -> None:
+        """Add a stimulus to be processed"""
+        self.stimuli_queue.append(stimulus)
+    
+    def remove_character(self, character_id: int) -> None:
+        """Remove a character"""
+        if character_id in self.character_controllers:
+            controller = self.character_controllers[character_id]
+            self.physics_manager.remove_body(controller.physics_body.body_id)
+            del self.character_controllers[character_id]
+            print(f"🤖 Removed character {character_id}")
+    
+    def get_character_statistics(self) -> Dict[str, Any]:
+        """Get character AI statistics"""
+        states = {}
+        fear_levels = {}
+        
+        for controller in self.character_controllers.values():
+            state = controller.ai.current_state.value
+            fear_level = controller.ai.fear_level.value
+            
+            states[state] = states.get(state, 0) + 1
+            fear_levels[fear_level] = fear_levels.get(fear_level, 0) + 1
+        
+        return {
+            'total_characters': len(self.character_controllers),
+            'states': states,
+            'fear_levels': fear_levels,
+            'pending_stimuli': len(self.stimuli_queue)
+        }
+
+
+# Test the character AI system
+if __name__ == "__main__":
+    print("🧪 Testing CharacterAI system...")
+    
+    # Create physics manager
+    physics_manager = PhysicsManager(gravity=(0, 0))
+    
+    # Create character AI manager
+    ai_manager = CharacterAIManager(physics_manager)
+    
+    # Create some test characters
+    character1 = ai_manager.create_character(1, (100, 100))
+    character2 = ai_manager.create_character(2, (200, 200))
+    
+    # Create a stimulus (gunshot)
+    gunshot = Stimulus(
+        stimulus_type=StimulusType.GUNSHOT,
+        position=(150, 150),
+        intensity=0.8,
+        radius=100.0,
+        timestamp=time.time()
+    )
+    
+    ai_manager.add_stimulus(gunshot)
+    
+    # Test update loop
+    start_time = time.time()
+    
+    while time.time() - start_time < 10.0:  # Run for 10 seconds
+        dt = 1.0 / 60.0  # 60 FPS
+        
+        # Update AI
+        ai_manager.update_all_characters(dt, {})
+        
+        # Update physics
+        physics_manager.update(dt)
+        
+        # Print character info
+        for controller in ai_manager.character_controllers.values():
+            info = controller.get_character_info()
+            print(f"Character {info['character_id']}: {info['state']}, Fear: {info['fear_level']}")
+        
+        time.sleep(dt)
+    
+    print("✅ CharacterAI system test completed")

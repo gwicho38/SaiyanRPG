@@ -1,0 +1,157 @@
+{
+  "issues": [
+    {
+      "id": 1,
+      "title": "Upgrade Physics System to Box2D Integration",
+      "description": "Upgrade the current basic pygame physics to a comprehensive Box2D-based physics system for realistic vehicle and character physics.",
+      "tasks": [
+        "Install and integrate PyBox2D",
+        "Create PhysicsManager class",
+        "Implement vehicle physics bodies",
+        "Add collision detection",
+        "Integrate with existing vehicle system",
+        "Add physics debugging tools"
+      ],
+      "acceptance_criteria": [
+        "Vehicles have realistic physics simulation",
+        "Collision detection works properly",
+        "Performance is acceptable (60fps with 10+ vehicles)",
+        "Integration with existing code is seamless"
+      ],
+      "priority": "high",
+      "estimated_time": "1-2 weeks",
+      "status": "in_progress",
+      "assigned_to": "",
+      "created_date": "2025-09-15T10:51:23.870959",
+      "started_date": "2025-09-15T10:51:37.376235",
+      "completed_date": "",
+      "notes": "",
+      "dependencies": []
+    },
+    {
+      "id": 2,
+      "title": "Implement Advanced Vehicle Features (Damage, Passengers, Animations)",
+      "description": "Implement comprehensive vehicle features inspired by Carnage3D including damage system, passenger management, door animations, and emergency lights.",
+      "tasks": [
+        "Implement damage system",
+        "Add passenger management",
+        "Create door animations",
+        "Add emergency lights",
+        "Implement tire physics",
+        "Add vehicle effects (fire, smoke)",
+        "Create repair mechanics"
+      ],
+      "acceptance_criteria": [
+        "Vehicles can take damage and show visual effects",
+        "Passengers can enter/exit vehicles properly",
+        "Emergency lights work",
+        "Vehicle handling feels realistic",
+        "All vehicle states (normal, damaged, burning) work"
+      ],
+      "priority": "high",
+      "estimated_time": "2-3 weeks",
+      "status": "pending",
+      "assigned_to": "",
+      "created_date": "2025-09-15T10:51:23.871143",
+      "started_date": "",
+      "completed_date": "",
+      "notes": "",
+      "dependencies": [
+        1
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Enhance Character AI with Fear Responses and Advanced Behaviors",
+      "description": "Implement advanced AI behaviors for pedestrians including fear responses, vehicle interactions, and complex animation states.",
+      "tasks": [
+        "Implement character states (idle, walking, shooting, etc.)",
+        "Add fear/response system",
+        "Create advanced AI behaviors",
+        "Implement weapon inventory",
+        "Add health and armor systems",
+        "Create animation state machine",
+        "Add vehicle interaction"
+      ],
+      "acceptance_criteria": [
+        "Characters have realistic AI behaviors",
+        "Characters respond to environment (gunshots, police)",
+        "Animation system works smoothly",
+        "Character-vehicle interaction is seamless",
+        "Health and damage systems work properly"
+      ],
+      "priority": "high",
+      "estimated_time": "2-3 weeks",
+      "status": "pending",
+      "assigned_to": "",
+      "created_date": "2025-09-15T10:51:23.871250",
+      "started_date": "",
+      "completed_date": "",
+      "notes": "",
+      "dependencies": [
+        1
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Implement 3D World System with Multiple Layers",
+      "description": "Add 3D world system with multiple layers and improved collision detection, building on the existing pixel art map system.",
+      "tasks": [
+        "Create 3D tile array system",
+        "Implement district management",
+        "Add water level support",
+        "Create collision tracing",
+        "Implement map data loading",
+        "Add pathfinding support",
+        "Integrate with existing TMX system"
+      ],
+      "acceptance_criteria": [
+        "World supports multiple layers",
+        "Districts work properly",
+        "Collision detection is accurate",
+        "Map loading is efficient",
+        "Integration with TMX maps is seamless"
+      ],
+      "priority": "high",
+      "estimated_time": "3-4 weeks",
+      "status": "pending",
+      "assigned_to": "",
+      "created_date": "2025-09-15T10:51:23.871337",
+      "started_date": "",
+      "completed_date": "",
+      "notes": "",
+      "dependencies": []
+    },
+    {
+      "id": 5,
+      "title": "Implement Traffic Management with AI-Controlled Vehicles",
+      "description": "Create a comprehensive traffic management system with AI-controlled vehicles and dynamic spawning.",
+      "tasks": [
+        "Implement vehicle spawning and despawning",
+        "Add traffic flow management",
+        "Create AI vehicle behavior",
+        "Add traffic density control",
+        "Implement traffic rules and patterns"
+      ],
+      "acceptance_criteria": [
+        "Traffic vehicles spawn and despawn dynamically",
+        "AI vehicles follow realistic driving patterns",
+        "Traffic density is configurable",
+        "Performance remains stable with many vehicles"
+      ],
+      "priority": "medium",
+      "estimated_time": "2-3 weeks",
+      "status": "pending",
+      "assigned_to": "",
+      "created_date": "2025-09-15T10:51:23.871469",
+      "started_date": "",
+      "completed_date": "",
+      "notes": "",
+      "dependencies": [
+        1,
+        2
+      ]
+    }
+  ],
+  "current_issue": 1
+}

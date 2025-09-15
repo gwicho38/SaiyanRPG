@@ -41,6 +41,8 @@ dependencies = [
     "pygame-menu-ce==4.5.2",
     "pydantic>=2.10.6",
     "box2d>=2.3.10",
+    "pygame>=2.6.1",
+    "box2d-py>=2.3.8",
 ]
 dynamic = ["version"]
 

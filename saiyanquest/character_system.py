@@ -15,6 +15,7 @@ from enum import Enum
 
 from .character_physics import CharacterPhysics, CharacterState, CharacterType, CharacterStats
 from .character_ai import CharacterAI, AIBehavior, ThreatLevel
+from .gta_asset_loader import get_asset_loader
 
 
 class AnimationState(Enum):
@@ -415,8 +416,40 @@ class Character:
         if self.ai:
             self.ai.set_destination(x, y)
     
+    def _get_sprite_name(self) -> str:
+        """Get sprite name based on character type"""
+        sprite_map = {
+            CharacterType.PLAYER: "player",
+            CharacterType.CIVILIAN: "civilian_1",
+            CharacterType.POLICE: "police", 
+            CharacterType.GANG_MEMBER: "gangster",
+            CharacterType.PARAMEDIC: "medic",
+            CharacterType.BUSINESSMAN: "businessman",
+            CharacterType.TOURIST: "civilian_2",
+            CharacterType.ATHLETE: "civilian_1",
+            CharacterType.ELDERLY: "civilian_2",
+            CharacterType.CHILD: "civilian_1",
+            CharacterType.FIREFIGHTER: "civilian_1"
+        }
+        return sprite_map.get(self.character_type, "civilian_1")
+    
+    def _get_sprite_direction(self) -> str:
+        """Convert facing angle to sprite direction"""
+        # Normalize angle to 0-360
+        angle = self.physics.facing_angle % 360
+        
+        # Map angle ranges to sprite directions
+        if 315 <= angle or angle < 45:
+            return "east"   # Right
+        elif 45 <= angle < 135:
+            return "south"  # Down  
+        elif 135 <= angle < 225:
+            return "west"   # Left
+        else:
+            return "north"  # Up
+    
     def render(self, screen: pygame.Surface, camera_offset: Tuple[float, float] = (0, 0)) -> None:
-        """Render character"""
+        """Render character using GTA sprite assets"""
         # Calculate screen position
         screen_x = int(self.x - camera_offset[0])
         screen_y = int(self.y - camera_offset[1])
@@ -426,62 +459,71 @@ class Character:
             screen_y < -50 or screen_y > screen.get_height() + 50):
             return
         
-        # Character base size
-        base_width = 12
-        base_height = 20
+        # Get asset loader
+        asset_loader = get_asset_loader()
         
-        width = int(base_width * self.appearance.width_scale)
-        height = int(base_height * self.appearance.height_scale)
-        
-        # Character body
-        body_rect = pygame.Rect(screen_x - width//2, screen_y - height//2, width, height)
-        
-        # Draw character based on state
+        # Handle special states with fallback rendering
         if self.physics.state == CharacterState.RAGDOLL:
-            # Draw as lying down
-            body_rect = pygame.Rect(screen_x - height//2, screen_y - width//2, height, width)
+            # Draw as lying down (simple fallback for now)
+            width = int(20 * self.appearance.height_scale)  # Rotated
+            height = int(12 * self.appearance.width_scale)
+            body_rect = pygame.Rect(screen_x - width//2, screen_y - height//2, width, height)
             pygame.draw.ellipse(screen, self.appearance.clothing_color, body_rect)
         elif self.physics.state == CharacterState.DEAD:
             # Draw as cross/X
             pygame.draw.line(screen, (150, 0, 0), 
-                           (screen_x - 10, screen_y - 10), (screen_x + 10, screen_y + 10), 3)
+                           (screen_x - 8, screen_y - 8), (screen_x + 8, screen_y + 8), 2)
             pygame.draw.line(screen, (150, 0, 0),
-                           (screen_x + 10, screen_y - 10), (screen_x - 10, screen_y + 10), 3)
+                           (screen_x + 8, screen_y - 8), (screen_x - 8, screen_y + 8), 2)
         else:
-            # Normal character
-            pygame.draw.ellipse(screen, self.appearance.clothing_color, body_rect)
+            # Normal character - use sprite
+            sprite_name = self._get_sprite_name()
+            sprite_direction = self._get_sprite_direction()
             
-            # Head
-            head_radius = width // 3
-            head_y = screen_y - height//2 + head_radius
-            pygame.draw.circle(screen, self.appearance.skin_color, 
-                             (screen_x, head_y), head_radius)
+            # Get sprite from asset loader
+            sprite = asset_loader.get_character_sprite(sprite_name, sprite_direction)
             
-            # Simple facing direction indicator
-            facing_rad = math.radians(self.physics.facing_angle)
-            face_x = screen_x + int(math.cos(facing_rad) * head_radius * 0.7)
-            face_y = head_y + int(math.sin(facing_rad) * head_radius * 0.7)
-            pygame.draw.circle(screen, (0, 0, 0), (face_x, face_y), 2)
+            if sprite:
+                # Scale sprite based on appearance
+                original_size = sprite.get_size()
+                scaled_width = int(original_size[0] * self.appearance.width_scale * 2)  # 2x for visibility
+                scaled_height = int(original_size[1] * self.appearance.height_scale * 2)
+                
+                if scaled_width != original_size[0] or scaled_height != original_size[1]:
+                    sprite = pygame.transform.scale(sprite, (scaled_width, scaled_height))
+                
+                # Center sprite on character position
+                sprite_rect = sprite.get_rect()
+                sprite_rect.center = (screen_x, screen_y)
+                screen.blit(sprite, sprite_rect)
+            else:
+                # Fallback to circle if sprite not found
+                pygame.draw.circle(screen, self.appearance.clothing_color, (screen_x, screen_y), 8)
+                pygame.draw.circle(screen, self.appearance.skin_color, (screen_x, screen_y - 3), 4)
+        
+        # Character dimensions for UI elements (standard size)
+        char_height = 24  # Approximate character height
+        char_width = 24   # Approximate character width
         
         # Status effects
         for i, effect in enumerate(self.status_effects):
-            effect_y = screen_y - height//2 - 10 - (i * 5)
-            pygame.draw.circle(screen, effect['color'], (screen_x + width//2, effect_y), 3)
+            effect_y = screen_y - char_height//2 - 10 - (i * 5)
+            pygame.draw.circle(screen, effect['color'], (screen_x + char_width//2, effect_y), 3)
         
         # Speech bubble
         if self.speech_bubble:
-            self._render_speech_bubble(screen, screen_x, screen_y - height//2 - 20)
+            self._render_speech_bubble(screen, screen_x, screen_y - char_height//2 - 20)
         
         # Health bar if damaged
         if self.physics.health < self.physics.stats.max_health:
-            self._render_health_bar(screen, screen_x, screen_y + height//2 + 5)
+            self._render_health_bar(screen, screen_x, screen_y + char_height//2 + 5)
         
         # AI behavior indicator (debug)
         if self.ai and hasattr(self, 'show_debug') and self.show_debug:
             behavior_text = self.ai.behavior.value[:4].upper()
             font = pygame.font.Font(None, 16)
             text_surface = font.render(behavior_text, True, (255, 255, 255))
-            screen.blit(text_surface, (screen_x - 15, screen_y + height//2 + 15))
+            screen.blit(text_surface, (screen_x - 15, screen_y + char_height//2 + 15))
     
     def _render_speech_bubble(self, screen: pygame.Surface, x: int, y: int) -> None:
         """Render speech bubble"""

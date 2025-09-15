@@ -310,6 +310,36 @@ class GTAGame:
         elif action == "menu_select_quit_game":
             self.running = False
     
+    def _get_pedestrian_sprite_name(self, pedestrian) -> str:
+        """Map pedestrian type to sprite name"""
+        from .ai_systems import PedestrianType
+        
+        sprite_map = {
+            PedestrianType.CIVILIAN: "civilian_1",
+            PedestrianType.GANG_MEMBER: "gangster",
+            PedestrianType.POLICE: "police",
+            PedestrianType.BUSINESSMAN: "businessman",
+            PedestrianType.SECURITY: "police", 
+            PedestrianType.TOURIST: "civilian_2",
+            PedestrianType.HOMELESS: "civilian_1"
+        }
+        return sprite_map.get(pedestrian.pedestrian_type, "civilian_1")
+    
+    def _get_sprite_direction_from_angle(self, angle: float) -> str:
+        """Convert angle in degrees to sprite direction"""
+        # Normalize angle to 0-360
+        angle = angle % 360
+        
+        # Map angle ranges to sprite directions  
+        if 315 <= angle or angle < 45:
+            return "east"   # Right
+        elif 45 <= angle < 135:
+            return "south"  # Down
+        elif 135 <= angle < 225:
+            return "west"   # Left
+        else:
+            return "north"  # Up
+    
     def _update(self, dt: float) -> None:
         """Update game logic"""
         # Update timers
@@ -464,6 +494,12 @@ class GTAGame:
         # Update angle based on movement direction
         if move_x != 0 or move_y != 0:
             self.game_state.player_angle = math.degrees(math.atan2(move_y, move_x))
+            # Sync with character physics for sprite rendering
+            self.game_state.player_character.physics.facing_angle = self.game_state.player_angle
+            
+        # Sync character position with game player position for sprite rendering
+        self.game_state.player_character.physics.set_position_quiet(
+            self.game_state.player_x, self.game_state.player_y)
     
     def _update_player_in_vehicle(self, dt: float) -> None:
         """Update player when in vehicle"""
@@ -739,14 +775,15 @@ class GTAGame:
             self.game_state.current_mission
         )
         
-        # Render minimap
-        self.game_state.world.render_minimap(self.screen, 
-                                           self.game_state.player_x, 
-                                           self.game_state.player_y)
+        # Render minimap - DISABLED: minimap is rendered within UI system
+        # self.game_state.world.render_minimap(self.screen, 
+        #                                    self.game_state.player_x, 
+        #                                    self.game_state.player_y)
         
         # Debug rendering
         if self.debug_mode:
             self._render_debug_info()
+        
         
         pygame.display.flip()
     
@@ -792,7 +829,11 @@ class GTAGame:
                     pygame.draw.rect(self.screen, (255, 0, 0), health_rect)
     
     def _render_pedestrians(self) -> None:
-        """Render all pedestrians"""
+        """Render all pedestrians using sprite system"""
+        from .gta_asset_loader import get_asset_loader
+        
+        asset_loader = get_asset_loader()
+        
         for pedestrian in self.game_state.ai_manager.pedestrian_manager.pedestrians:
             screen_x = pedestrian.x - self.game_state.world.camera_x
             screen_y = pedestrian.y - self.game_state.world.camera_y
@@ -801,18 +842,48 @@ class GTAGame:
             if (-50 <= screen_x <= self.screen_width + 50 and 
                 -50 <= screen_y <= self.screen_height + 50):
                 
-                # Choose color and size based on state
                 if pedestrian.state.name == 'DEAD':
-                    color = (100, 0, 0)  # Dark red
-                    radius = 8
-                elif pedestrian.state.name == 'FLEEING':
-                    color = (255, 255, 0)  # Yellow
-                    radius = 12
+                    # Draw as cross/X for dead pedestrians
+                    pygame.draw.line(self.screen, (150, 0, 0), 
+                                   (screen_x - 8, screen_y - 8), (screen_x + 8, screen_y + 8), 2)
+                    pygame.draw.line(self.screen, (150, 0, 0),
+                                   (screen_x + 8, screen_y - 8), (screen_x - 8, screen_y + 8), 2)
                 else:
-                    color = pedestrian.color
-                    radius = 10
-                
-                pygame.draw.circle(self.screen, color, (int(screen_x), int(screen_y)), radius)
+                    # Use sprites for living pedestrians
+                    sprite_name = self._get_pedestrian_sprite_name(pedestrian)
+                    sprite_direction = self._get_sprite_direction_from_angle(pedestrian.angle)
+                    
+                    sprite = asset_loader.get_character_sprite(sprite_name, sprite_direction)
+                    
+                    if sprite:
+                        # Scale sprite appropriately
+                        scale_factor = 2  # Make sprites visible
+                        if pedestrian.state.name == 'FLEEING':
+                            scale_factor = 2.5  # Slightly larger when fleeing
+                            
+                        original_size = sprite.get_size()
+                        scaled_width = int(original_size[0] * scale_factor)
+                        scaled_height = int(original_size[1] * scale_factor)
+                        
+                        if scaled_width != original_size[0] or scaled_height != original_size[1]:
+                            sprite = pygame.transform.scale(sprite, (scaled_width, scaled_height))
+                        
+                        # Center sprite on pedestrian position
+                        sprite_rect = sprite.get_rect()
+                        sprite_rect.center = (int(screen_x), int(screen_y))
+                        self.screen.blit(sprite, sprite_rect)
+                        
+                        # Color tint for special states
+                        if pedestrian.state.name == 'FLEEING':
+                            # Add yellow tint overlay for fleeing
+                            tint_surface = pygame.Surface((scaled_width, scaled_height), pygame.SRCALPHA)
+                            tint_surface.fill((255, 255, 0, 100))
+                            self.screen.blit(tint_surface, sprite_rect, special_flags=pygame.BLEND_ALPHA_SDL2)
+                    else:
+                        # Fallback to circle if sprite not found
+                        color = (255, 255, 0) if pedestrian.state.name == 'FLEEING' else pedestrian.color
+                        radius = 12 if pedestrian.state.name == 'FLEEING' else 10
+                        pygame.draw.circle(self.screen, color, (int(screen_x), int(screen_y)), radius)
                 
                 # Show health bar for damaged pedestrians
                 if pedestrian.health < 100 and pedestrian.state.name != 'DEAD':
@@ -821,29 +892,19 @@ class GTAGame:
                     pygame.draw.rect(self.screen, (255, 0, 0), health_rect)
     
     def _render_player(self) -> None:
-        """Render the player"""
-        screen_x = self.game_state.player_x - self.game_state.world.camera_x
-        screen_y = self.game_state.player_y - self.game_state.world.camera_y
-        
+        """Render the player using sprite system"""
         if self.game_state.current_vehicle:
             # Player is in vehicle - highlight the vehicle
             vehicle = self.game_state.current_vehicle
+            screen_x = self.game_state.player_x - self.game_state.world.camera_x
+            screen_y = self.game_state.player_y - self.game_state.world.camera_y
             rect = pygame.Rect(screen_x - vehicle.width//2, screen_y - vehicle.height//2,
                              vehicle.width, vehicle.height)
             pygame.draw.rect(self.screen, (255, 255, 255), rect, 3)  # White outline
         else:
-            # Player on foot
-            color = (255, 0, 255)  # Magenta for player
-            radius = 15
-            
-            pygame.draw.circle(self.screen, color, (int(screen_x), int(screen_y)), radius)
-            
-            # Draw direction indicator
-            direction_length = 25
-            end_x = screen_x + math.cos(math.radians(self.game_state.player_angle)) * direction_length
-            end_y = screen_y + math.sin(math.radians(self.game_state.player_angle)) * direction_length
-            pygame.draw.line(self.screen, (255, 255, 255), 
-                           (screen_x, screen_y), (end_x, end_y), 2)
+            # Player on foot - use sprite system
+            camera_offset = (self.game_state.world.camera_x, self.game_state.world.camera_y)
+            self.game_state.player_character.render(self.screen, camera_offset)
     
     def _render_combat_effects(self) -> None:
         """Render projectiles and combat effects"""

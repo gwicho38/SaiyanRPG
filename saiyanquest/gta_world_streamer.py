@@ -123,9 +123,8 @@ class GTAWorldStreamer:
                 if not metadata:
                     continue
                 
-                # Assign position in world (can be improved with actual world layout)
-                pos_x = random.randint(1000, self.world_width - metadata['pixel_width'] - 1000)
-                pos_y = random.randint(1000, self.world_height - metadata['pixel_height'] - 1000)
+                # Use intelligent positioning based on map type and connections
+                pos_x, pos_y = self._get_intelligent_position(map_name, metadata)
                 
                 self.maps_metadata[map_name] = {
                     'path': str(self.maps_path / f"{map_name}.tmx"),
@@ -140,6 +139,12 @@ class GTAWorldStreamer:
                 continue
         
         print(f"   Found {len(self.maps_metadata)} TMX maps")
+        
+        # Create road connections between areas
+        self._create_road_connections()
+        
+        # Generate expanded themed assets
+        self._generate_themed_expansions()
         
         # Create entities data
         self._create_entities_data()
@@ -169,7 +174,206 @@ class GTAWorldStreamer:
             return 'beach'
         else:
             return 'outdoor'
+
+    def _get_intelligent_position(self, map_name: str, metadata: dict) -> tuple:
+        """Get intelligent position based on map type and world layout"""
+        map_type = self._determine_map_type(map_name, metadata)
+        
+        # Define world layout zones
+        world_center_x = self.world_width // 2
+        world_center_y = self.world_height // 2
+        
+        # Pre-defined positions for major towns/cities (create hub network)
+        town_positions = {
+            'flower_city': (world_center_x - 2000, world_center_y - 2000),  # Northwest hub
+            'leather_town': (world_center_x + 2000, world_center_y - 2000), # Northeast hub  
+            'candy_town': (world_center_x, world_center_y),                 # Central hub
+            'azure_town': (world_center_x - 2000, world_center_y + 2000),   # Southwest hub
+            'taba_town': (world_center_x + 2000, world_center_y + 2000),    # Southeast hub
+        }
+        
+        # Check if this is a major town/city
+        for town_name, position in town_positions.items():
+            if town_name in map_name.lower():
+                return position
+        
+        # Position based on map type
+        if map_type == 'route':
+            # Routes connect towns - position between hubs
+            return self._get_route_position(map_name, metadata)
+        elif 'city' in map_name.lower() or 'town' in map_name.lower():
+            # Other towns - scatter around hubs
+            hub_x = random.choice([world_center_x - 1500, world_center_x, world_center_x + 1500])
+            hub_y = random.choice([world_center_y - 1500, world_center_y, world_center_y + 1500])
+            offset_x = random.randint(-800, 800)
+            offset_y = random.randint(-800, 800)
+            return (hub_x + offset_x, hub_y + offset_y)
+        elif map_type == 'indoor':
+            # Indoor maps near towns
+            return self._get_position_near_town(map_name, metadata)
+        else:
+            # Other maps - fill remaining space
+            return self._get_scattered_position(metadata)
     
+    def _get_route_position(self, map_name: str, metadata: dict) -> tuple:
+        """Position route maps to connect major areas"""
+        world_center_x = self.world_width // 2
+        world_center_y = self.world_height // 2
+        
+        # Route positioning based on route number/name
+        if 'route1' in map_name.lower() or 'routea' in map_name.lower():
+            return (world_center_x - 1000, world_center_y - 2000)  # Connect NW to center
+        elif 'route2' in map_name.lower() or 'routeb' in map_name.lower():
+            return (world_center_x + 1000, world_center_y - 2000)  # Connect NE to center
+        elif 'route3' in map_name.lower() or 'routec' in map_name.lower():
+            return (world_center_x, world_center_y - 1000)         # Connect N to center
+        elif 'route4' in map_name.lower() or 'routed' in map_name.lower():
+            return (world_center_x - 1000, world_center_y + 2000)  # Connect SW to center
+        elif 'route5' in map_name.lower() or 'routee' in map_name.lower():
+            return (world_center_x + 1000, world_center_y + 2000)  # Connect SE to center
+        elif 'route6' in map_name.lower():
+            return (world_center_x, world_center_y + 1000)         # Connect S to center
+        else:
+            # Other routes - connect between hubs
+            return (
+                world_center_x + random.randint(-1500, 1500),
+                world_center_y + random.randint(-1500, 1500)
+            )
+    
+    def _get_position_near_town(self, map_name: str, metadata: dict) -> tuple:
+        """Position indoor maps near their associated towns"""
+        world_center_x = self.world_width // 2
+        world_center_y = self.world_height // 2
+        
+        # Try to associate with nearby towns
+        if 'flower' in map_name.lower():
+            return (world_center_x - 2000 + random.randint(-300, 300), 
+                    world_center_y - 2000 + random.randint(-300, 300))
+        elif 'leather' in map_name.lower():
+            return (world_center_x + 2000 + random.randint(-300, 300),
+                    world_center_y - 2000 + random.randint(-300, 300))
+        elif 'candy' in map_name.lower():
+            return (world_center_x + random.randint(-300, 300),
+                    world_center_y + random.randint(-300, 300))
+        elif 'azure' in map_name.lower():
+            return (world_center_x - 2000 + random.randint(-300, 300),
+                    world_center_y + 2000 + random.randint(-300, 300))
+        elif 'taba' in map_name.lower():
+            return (world_center_x + 2000 + random.randint(-300, 300),
+                    world_center_y + 2000 + random.randint(-300, 300))
+        else:
+            # Place near a random hub
+            hub_x = random.choice([world_center_x - 2000, world_center_x, world_center_x + 2000])
+            hub_y = random.choice([world_center_y - 2000, world_center_y, world_center_y + 2000])
+            return (hub_x + random.randint(-200, 200), hub_y + random.randint(-200, 200))
+    
+    def _get_scattered_position(self, metadata: dict) -> tuple:
+        """Get scattered position for other maps"""
+        margin = 1000
+        return (
+            random.randint(margin, self.world_width - metadata.get('pixel_width', 0) - margin),
+            random.randint(margin, self.world_height - metadata.get('pixel_height', 0) - margin)
+        )
+    
+    def _create_road_connections(self):
+        """Ensure road connections exist between major areas"""
+        print("🛣️ Creating road connections between areas...")
+        
+        # This method will be called after all maps are positioned
+        # We can add logic here to verify connections and add missing routes
+        
+        major_hubs = ['flower_city', 'leather_town', 'candy_town', 'azure_town', 'taba_town']
+        connections_created = 0
+        
+        for map_name, map_data in self.maps_metadata.items():
+            if map_data['type'] == 'route':
+                connections_created += 1
+        
+        print(f"   🛣️ Found {connections_created} route connections")
+    
+    def _generate_themed_expansions(self):
+        """Generate themed asset expansions for existing worlds"""
+        print("🎨 Generating themed world expansions...")
+        
+        # Import the generator
+        try:
+            from .world_asset_generator import WorldAssetGenerator
+        except ImportError:
+            print("   ⚠️ World asset generator not available")
+            return
+        
+        generator = WorldAssetGenerator()
+        
+        # Generate comprehensive expansions with many more assets
+        expansions = generator.generate_comprehensive_expansions()
+        
+        # Add generated assets to the world
+        added_count = 0
+        for theme_name, assets in expansions.items():
+            for asset in assets:
+                # Create synthetic metadata for the asset
+                synthetic_metadata = self._create_synthetic_asset_metadata(theme_name, asset)
+                
+                # Add to maps metadata
+                asset_name = asset['name']
+                self.maps_metadata[asset_name] = synthetic_metadata
+                added_count += 1
+        
+        print(f"   🏗️ Added {added_count} procedurally generated assets")
+    
+    def _create_synthetic_asset_metadata(self, theme_name: str, asset: Dict) -> Dict:
+        """Create synthetic metadata for procedurally generated assets"""
+        # Get position based on theme and asset type
+        pos_x, pos_y = self._get_themed_asset_position(theme_name, asset)
+        
+        # Get size from asset data  
+        size_x, size_y = asset['size']
+        pixel_width = size_x * 16  # Assuming 16px tiles
+        pixel_height = size_y * 16
+        
+        return {
+            'path': f"synthetic://{asset['name']}.tmx",  # Mark as synthetic
+            'position': (pos_x, pos_y),
+            'size': (pixel_width, pixel_height),
+            'tile_size': (size_x, size_y),
+            'properties': {
+                'theme': theme_name,
+                'generated': True,
+                'asset_type': asset['type'],
+                'atmosphere': asset['atmosphere']
+            },
+            'type': asset['type'],
+            'synthetic': True,  # Mark as procedurally generated
+            'asset_data': asset  # Store full asset data
+        }
+    
+    def _get_themed_asset_position(self, theme_name: str, asset: Dict) -> Tuple[int, int]:
+        """Get position for themed asset based on existing theme locations"""
+        # Find existing assets of this theme to position near them
+        theme_positions = []
+        
+        for map_name, map_data in self.maps_metadata.items():
+            if theme_name in map_name.lower():
+                theme_positions.append(map_data['position'])
+        
+        if theme_positions:
+            # Position near existing theme assets
+            base_x, base_y = random.choice(theme_positions)
+            # Add some offset to avoid overlapping
+            offset_x = random.randint(-800, 800)
+            offset_y = random.randint(-800, 800)
+            return (base_x + offset_x, base_y + offset_y)
+        else:
+            # Fallback to hub-based positioning
+            world_center_x = self.world_width // 2
+            world_center_y = self.world_height // 2
+            
+            # Place at random hub location
+            hub_x = random.choice([world_center_x - 2000, world_center_x, world_center_x + 2000])
+            hub_y = random.choice([world_center_y - 2000, world_center_y, world_center_y + 2000])
+            
+            return (hub_x + random.randint(-500, 500), hub_y + random.randint(-500, 500))
+
     def _guess_map_type(self, map_name: str) -> str:
         """Guess map type from name"""
         name_lower = map_name.lower()
@@ -472,8 +676,8 @@ class GTAWorldStreamer:
     
     def render_world(self, surface: pygame.Surface):
         """Render visible chunks to the screen"""
-        # Clear screen
-        surface.fill((25, 25, 112))  # Midnight blue (for unloaded areas)
+        # Don't clear the entire screen - let the main game set the background
+        # Only fill gaps between chunks if needed
         
         # Render active chunks
         for chunk_key in self.active_chunks:
@@ -556,14 +760,18 @@ class GTAWorldStreamer:
         
         return rendered_count
     
-    def render_minimap(self, surface: pygame.Surface, player_x: float, player_y: float, minimap_size: int = 200):
+    def render_minimap(self, surface: pygame.Surface, player_x: float, player_y: float, minimap_size: int = 200, x: int = None, y: int = None):
         """Render minimap showing chunk loading"""
-        minimap_rect = pygame.Rect(surface.get_width() - minimap_size - 20, 20,
-                                 minimap_size, minimap_size)
+        # Use provided position or default to top-right
+        if x is None:
+            x = surface.get_width() - minimap_size - 20
+        if y is None:
+            y = 20
+            
+        minimap_rect = pygame.Rect(x, y, minimap_size, minimap_size)
         
-        # Draw minimap background
+        # Draw minimap background (UI handles border)
         pygame.draw.rect(surface, (0, 0, 0, 128), minimap_rect)
-        pygame.draw.rect(surface, (255, 255, 255), minimap_rect, 2)
         
         # Calculate scale
         scale_x = minimap_size / self.world_width

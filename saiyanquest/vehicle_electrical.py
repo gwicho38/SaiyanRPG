@@ -268,14 +268,14 @@ class VehicleElectricalSystem:
             return False
         
         component_state.is_on = True
-        print(f"💡 Turned on {component.value}")
+        # print(f"💡 Turned on {component.value}")  # Debug disabled
         return True
     
     def turn_off_component(self, component: ElectricalComponent) -> None:
         """Turn off a specific electrical component"""
         if component in self.components:
             self.components[component].is_on = False
-            print(f"🔌 Turned off {component.value}")
+            # print(f"🔌 Turned off {component.value}")  # Debug disabled
     
     def toggle_component(self, component: ElectricalComponent) -> bool:
         """Toggle a component on/off"""

@@ -443,6 +443,10 @@ class CharacterPhysics:
         self.physics_body.set_velocity((0, 0))
         print(f"⚡ Character teleported to ({x:.1f}, {y:.1f})")
     
+    def set_position_quiet(self, x: float, y: float) -> None:
+        """Set character position silently (for sprite syncing)"""
+        self.physics_body.set_position(x / 16.0, y / 16.0)
+    
     def get_speed(self) -> float:
         """Get current movement speed in pixels/second"""
         vx, vy = self.velocity

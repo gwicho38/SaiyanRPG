@@ -1,607 +1,751 @@
 #!/usr/bin/env python3
-"""
-3D World System with Layers - Based on Carnage3D's Architecture
-Provides multi-layered 3D world rendering with depth sorting and camera management.
-"""
+# SPDX-License-Identifier: GPL-3.0
+# 3D World System with Multiple Layers and Advanced Collision Detection
 
-import pygame
 import math
-import random
+import struct
+import time
 from typing import Dict, List, Tuple, Optional, Any, Set
-from dataclasses import dataclass, field
-from enum import Enum, IntEnum
-from abc import ABC, abstractmethod
+from dataclasses import dataclass
+from enum import Enum
 
-# 3D Math utilities
-@dataclass
-class Vector3:
-    """3D vector for world positions and calculations"""
-    x: float = 0.0
-    y: float = 0.0
-    z: float = 0.0
-    
-    def __add__(self, other: 'Vector3') -> 'Vector3':
-        return Vector3(self.x + other.x, self.y + other.y, self.z + other.z)
-    
-    def __sub__(self, other: 'Vector3') -> 'Vector3':
-        return Vector3(self.x - other.x, self.y - other.y, self.z - other.z)
-    
-    def __mul__(self, scalar: float) -> 'Vector3':
-        return Vector3(self.x * scalar, self.y * scalar, self.z * scalar)
-    
-    def length(self) -> float:
-        return math.sqrt(self.x * self.x + self.y * self.y + self.z * self.z)
-    
-    def normalize(self) -> 'Vector3':
-        l = self.length()
-        if l > 0:
-            return Vector3(self.x / l, self.y / l, self.z / l)
-        return Vector3(0, 0, 0)
-    
-    def dot(self, other: 'Vector3') -> float:
-        return self.x * other.x + self.y * other.y + self.z * other.z
-    
-    def distance_to(self, other: 'Vector3') -> float:
-        return (self - other).length()
+from .physics_manager import PhysicsManager, CollisionCategory
+
+
+class BlockType(Enum):
+    """Types of world blocks"""
+    EMPTY = 0
+    SOLID = 1
+    WATER = 2
+    BUILDING = 3
+    ROAD = 4
+    GRASS = 5
+    SAND = 6
+    ROCK = 7
+    BRIDGE = 8
+    RAILWAY = 9
+    SPECIAL = 10
+
+
+class DistrictType(Enum):
+    """Types of districts"""
+    RESIDENTIAL = "residential"
+    COMMERCIAL = "commercial"
+    INDUSTRIAL = "industrial"
+    DOWNTOWN = "downtown"
+    SUBURBS = "suburbs"
+    WATERFRONT = "waterfront"
+    AIRPORT = "airport"
+    PORT = "port"
+
 
 @dataclass
-class Matrix4:
-    """4x4 transformation matrix for 3D operations"""
-    data: List[List[float]] = field(default_factory=lambda: [
-        [1, 0, 0, 0],
-        [0, 1, 0, 0],
-        [0, 0, 1, 0],
-        [0, 0, 0, 1]
-    ])
-    
-    @staticmethod
-    def identity() -> 'Matrix4':
-        return Matrix4()
-    
-    @staticmethod
-    def translation(x: float, y: float, z: float) -> 'Matrix4':
-        m = Matrix4.identity()
-        m.data[0][3] = x
-        m.data[1][3] = y
-        m.data[2][3] = z
-        return m
-    
-    @staticmethod
-    def rotation_y(angle: float) -> 'Matrix4':
-        """Rotation around Y-axis (yaw)"""
-        cos_a = math.cos(angle)
-        sin_a = math.sin(angle)
-        m = Matrix4.identity()
-        m.data[0][0] = cos_a
-        m.data[0][2] = sin_a
-        m.data[2][0] = -sin_a
-        m.data[2][2] = cos_a
-        return m
-    
-    def multiply(self, other: 'Matrix4') -> 'Matrix4':
-        result = Matrix4()
-        for i in range(4):
-            for j in range(4):
-                result.data[i][j] = sum(
-                    self.data[i][k] * other.data[k][j]
-                    for k in range(4)
-                )
-        return result
-    
-    def transform_point(self, point: Vector3) -> Vector3:
-        """Transform a 3D point by this matrix"""
-        x = self.data[0][0] * point.x + self.data[0][1] * point.y + self.data[0][2] * point.z + self.data[0][3]
-        y = self.data[1][0] * point.x + self.data[1][1] * point.y + self.data[1][2] * point.z + self.data[1][3]
-        z = self.data[2][0] * point.x + self.data[2][1] * point.y + self.data[2][2] * point.z + self.data[2][3]
-        return Vector3(x, y, z)
+class MapBlockInfo:
+    """Information about a world block"""
+    block_type: BlockType
+    height: float
+    water_level: float
+    collision_enabled: bool
+    walkable: bool
+    driveable: bool
+    flyable: bool
+    district_id: int
+    properties: Dict[str, Any]
 
-# World Layer System
-class RenderLayer(IntEnum):
-    """Rendering layers ordered by depth (back to front)"""
-    BACKGROUND = 0      # Sky, distant mountains
-    TERRAIN_BASE = 1    # Ground base layer
-    ROADS = 2          # Road surfaces
-    WALKWAYS = 3       # Sidewalks, paths
-    BUILDINGS_LOW = 4  # Lower building parts
-    SHADOWS = 5        # Dynamic shadows
-    OBJECTS_GROUND = 6 # Objects on ground level
-    VEHICLES = 7       # Cars, bikes, etc.
-    CHARACTERS = 8     # Pedestrians, player
-    BUILDINGS_HIGH = 9 # Upper building parts
-    PARTICLES = 10     # Smoke, sparks, effects
-    WATER = 11         # Transparent water surfaces
-    UI_WORLD = 12      # 3D UI elements (health bars)
-    LIGHTING = 13      # Dynamic lighting overlay
-    DEBUG = 14         # Debug visualizations
-
-class WorldObjectType(Enum):
-    """Types of objects in the 3D world"""
-    STATIC_MESH = "static_mesh"      # Buildings, props
-    DYNAMIC_OBJECT = "dynamic_object" # Destructible objects
-    VEHICLE = "vehicle"              # Cars, bikes
-    CHARACTER = "character"          # Pedestrians, player
-    PARTICLE_SYSTEM = "particles"    # Effects
-    LIGHT_SOURCE = "light"           # Lights
-    TRIGGER_VOLUME = "trigger"       # Invisible triggers
-    WATER_SURFACE = "water"          # Water bodies
 
 @dataclass
-class RenderBatch:
-    """Group of similar objects to render together for performance"""
-    layer: RenderLayer
-    texture_id: Optional[str] = None
-    shader_id: Optional[str] = None
-    objects: List['WorldObject3D'] = field(default_factory=list)
-    is_transparent: bool = False
-    
-    def sort_by_depth(self, camera_pos: Vector3):
-        """Sort objects by distance from camera for proper depth rendering"""
-        self.objects.sort(
-            key=lambda obj: obj.position.distance_to(camera_pos),
-            reverse=self.is_transparent  # Transparent objects render back-to-front
-        )
+class District:
+    """A district in the world"""
+    district_id: int
+    name: str
+    district_type: DistrictType
+    bounds: Tuple[int, int, int, int]  # min_x, min_y, max_x, max_y
+    center: Tuple[float, float]
+    population_density: float
+    crime_level: float
+    police_presence: float
+    spawn_points: List[Tuple[float, float]]
+    special_properties: Dict[str, Any]
 
-class WorldObject3D(ABC):
-    """Base class for all 3D world objects"""
-    
-    def __init__(self, position: Vector3, object_type: WorldObjectType, layer: RenderLayer):
-        self.position = position
-        self.rotation = Vector3(0, 0, 0)  # Euler angles
-        self.scale = Vector3(1, 1, 1)
-        self.object_type = object_type
-        self.layer = layer
-        self.visible = True
-        self.cast_shadows = True
-        self.receive_shadows = True
-        self.bounding_box = self._calculate_bounding_box()
-        self.last_render_frame = 0
-        
-        # Transform matrix
-        self.transform_matrix = Matrix4.identity()
-        self.transform_dirty = True
-        
-        print(f"🌍 3D Object created: {object_type.value} at {position.x:.1f}, {position.y:.1f}, {position.z:.1f}")
-    
-    @abstractmethod
-    def _calculate_bounding_box(self) -> Tuple[Vector3, Vector3]:
-        """Calculate object bounding box (min, max)"""
-        pass
-    
-    @abstractmethod
-    def update(self, delta_time: float) -> None:
-        """Update object state"""
-        pass
-    
-    @abstractmethod
-    def render_2d_projection(self, surface: pygame.Surface, camera: 'Camera3D', 
-                           screen_pos: Tuple[int, int], scale: float) -> None:
-        """Render object as 2D projection on screen"""
-        pass
-    
-    def update_transform_matrix(self) -> None:
-        """Update transformation matrix from position, rotation, scale"""
-        if not self.transform_dirty:
-            return
-            
-        # Build transformation matrix: Translation * Rotation * Scale
-        translation = Matrix4.translation(self.position.x, self.position.y, self.position.z)
-        rotation_y = Matrix4.rotation_y(math.radians(self.rotation.y))  # Simplified - just Y rotation
-        
-        self.transform_matrix = translation.multiply(rotation_y)
-        self.transform_dirty = False
-    
-    def set_position(self, position: Vector3) -> None:
-        """Update object position"""
-        self.position = position
-        self.transform_dirty = True
-        self.bounding_box = self._calculate_bounding_box()
-    
-    def set_rotation(self, rotation: Vector3) -> None:
-        """Update object rotation"""
-        self.rotation = rotation
-        self.transform_dirty = True
-    
-    def get_distance_to_camera(self, camera_pos: Vector3) -> float:
-        """Get distance from object to camera for LOD and culling"""
-        return self.position.distance_to(camera_pos)
-    
-    def is_in_frustum(self, camera: 'Camera3D') -> bool:
-        """Check if object is within camera frustum (simplified)"""
-        # Simplified frustum culling - just check distance for now
-        distance = self.get_distance_to_camera(camera.position)
-        return distance <= camera.far_distance
 
-class StaticMesh3D(WorldObject3D):
-    """Static mesh object like buildings, props"""
-    
-    def __init__(self, position: Vector3, mesh_id: str, layer: RenderLayer = RenderLayer.BUILDINGS_LOW):
-        super().__init__(position, WorldObjectType.STATIC_MESH, layer)
-        self.mesh_id = mesh_id
-        self.texture_id: Optional[str] = None
-        self.color = (128, 128, 128)  # Default gray
-        self.health = 100.0
-        self.destructible = False
-        
-    def _calculate_bounding_box(self) -> Tuple[Vector3, Vector3]:
-        # Simple box for now - would be loaded from mesh data in real implementation
-        size = 2.0
-        return (
-            Vector3(self.position.x - size, self.position.y - size, self.position.z - size),
-            Vector3(self.position.x + size, self.position.y + size, self.position.z + size)
-        )
-    
-    def update(self, delta_time: float) -> None:
-        # Static meshes don't update unless destructible
-        if self.destructible and self.health <= 0:
-            self.visible = False
-    
-    def render_2d_projection(self, surface: pygame.Surface, camera: 'Camera3D', 
-                           screen_pos: Tuple[int, int], scale: float) -> None:
-        # Simple 2D representation as colored rectangle
-        size = max(4, int(20 * scale))
-        rect = pygame.Rect(screen_pos[0] - size//2, screen_pos[1] - size//2, size, size)
-        pygame.draw.rect(surface, self.color, rect)
-        
-        # Draw outline for depth
-        pygame.draw.rect(surface, (255, 255, 255), rect, 1)
+@dataclass
+class NavigationSector:
+    """Navigation sector for pathfinding"""
+    sector_id: int
+    bounds: Tuple[int, int, int, int]
+    connections: List[int]  # Connected sector IDs
+    center: Tuple[float, float]
+    is_passable: bool
+    movement_cost: float
 
-class Camera3D:
-    """3D camera system for world rendering"""
-    
-    def __init__(self, position: Vector3 = Vector3(0, 5, 10)):
-        self.position = position
-        self.target = Vector3(0, 0, 0)
-        self.up_vector = Vector3(0, 1, 0)
-        
-        # Camera parameters
-        self.fov = math.radians(75)  # Field of view
-        self.near_distance = 0.1
-        self.far_distance = 1000.0
-        self.aspect_ratio = 16.0 / 9.0
-        
-        # Projection settings for top-down GTA-style
-        self.is_orthographic = False
-        self.orthographic_size = 100.0
-        
-        # Movement parameters
-        self.movement_speed = 10.0
-        self.rotation_speed = 2.0
-        self.zoom_speed = 5.0
-        
-        # Camera state
-        self.view_matrix = Matrix4.identity()
-        self.projection_matrix = Matrix4.identity()
-        self.view_dirty = True
-        self.projection_dirty = True
-        
-        print(f"📹 3D Camera initialized at {position.x:.1f}, {position.y:.1f}, {position.z:.1f}")
-    
-    def look_at(self, target: Vector3) -> None:
-        """Point camera at target position"""
-        self.target = target
-        self.view_dirty = True
-    
-    def move_to(self, position: Vector3) -> None:
-        """Move camera to position"""
-        self.position = position
-        self.view_dirty = True
-    
-    def follow_target(self, target_pos: Vector3, offset: Vector3, smoothing: float = 0.1) -> None:
-        """Smoothly follow a target with offset"""
-        desired_pos = target_pos + offset
-        self.position = Vector3(
-            self.position.x + (desired_pos.x - self.position.x) * smoothing,
-            self.position.y + (desired_pos.y - self.position.y) * smoothing,
-            self.position.z + (desired_pos.z - self.position.z) * smoothing
-        )
-        self.look_at(target_pos)
-    
-    def world_to_screen(self, world_pos: Vector3, screen_width: int, screen_height: int) -> Tuple[int, int]:
-        """Convert 3D world position to 2D screen coordinates"""
-        # Simplified projection - proper matrix multiplication would be used in real 3D
-        
-        # Distance-based scaling (closer = larger)
-        distance = world_pos.distance_to(self.position)
-        if distance < 0.1:
-            distance = 0.1
-        
-        scale = 50.0 / distance  # Adjust scale factor as needed
-        
-        # Convert world coordinates to screen coordinates
-        # For top-down GTA-style view, we mainly use X and Z (Y is height)
-        relative_pos = world_pos - self.position
-        
-        # Simple orthographic-style projection
-        screen_x = int(screen_width / 2 + relative_pos.x * scale)
-        screen_y = int(screen_height / 2 + relative_pos.z * scale)  # Z becomes Y on screen
-        
-        return (screen_x, screen_y)
-    
-    def get_view_distance_scale(self, world_pos: Vector3) -> float:
-        """Get scaling factor based on distance from camera"""
-        distance = world_pos.distance_to(self.position)
-        if distance < 1.0:
-            return 1.0
-        return min(1.0, 20.0 / distance)  # Objects get smaller with distance
-
-class World3DLayer:
-    """Individual rendering layer in the 3D world"""
-    
-    def __init__(self, layer_type: RenderLayer):
-        self.layer_type = layer_type
-        self.objects: List[WorldObject3D] = []
-        self.render_batches: Dict[str, RenderBatch] = {}
-        self.visible = True
-        self.alpha = 1.0
-        
-        # Performance tracking
-        self.rendered_objects = 0
-        self.culled_objects = 0
-    
-    def add_object(self, obj: WorldObject3D) -> None:
-        """Add object to this layer"""
-        self.objects.append(obj)
-        self._add_to_batch(obj)
-        print(f"🎬 Object added to layer {self.layer_type.name}: {obj.object_type.value}")
-    
-    def remove_object(self, obj: WorldObject3D) -> None:
-        """Remove object from this layer"""
-        if obj in self.objects:
-            self.objects.remove(obj)
-            self._remove_from_batch(obj)
-    
-    def _add_to_batch(self, obj: WorldObject3D) -> None:
-        """Add object to appropriate render batch"""
-        batch_key = f"{obj.object_type.value}"
-        if batch_key not in self.render_batches:
-            self.render_batches[batch_key] = RenderBatch(
-                layer=self.layer_type,
-                is_transparent=(self.layer_type in [RenderLayer.WATER, RenderLayer.PARTICLES])
-            )
-        self.render_batches[batch_key].objects.append(obj)
-    
-    def _remove_from_batch(self, obj: WorldObject3D) -> None:
-        """Remove object from its render batch"""
-        batch_key = f"{obj.object_type.value}"
-        if batch_key in self.render_batches:
-            if obj in self.render_batches[batch_key].objects:
-                self.render_batches[batch_key].objects.remove(obj)
-    
-    def update(self, delta_time: float) -> None:
-        """Update all objects in this layer"""
-        for obj in self.objects[:]:  # Copy list to allow modifications
-            obj.update(delta_time)
-            if not obj.visible:
-                self.remove_object(obj)
-    
-    def render(self, surface: pygame.Surface, camera: Camera3D) -> None:
-        """Render all objects in this layer"""
-        if not self.visible:
-            return
-            
-        self.rendered_objects = 0
-        self.culled_objects = 0
-        
-        # Sort render batches for proper depth ordering
-        for batch in self.render_batches.values():
-            batch.sort_by_depth(camera.position)
-        
-        # Render each batch
-        for batch in self.render_batches.values():
-            self._render_batch(batch, surface, camera)
-    
-    def _render_batch(self, batch: RenderBatch, surface: pygame.Surface, camera: Camera3D) -> None:
-        """Render a batch of similar objects"""
-        screen_width, screen_height = surface.get_size()
-        
-        for obj in batch.objects:
-            if not obj.visible:
-                continue
-                
-            # Frustum culling
-            if not obj.is_in_frustum(camera):
-                self.culled_objects += 1
-                continue
-            
-            # Convert world position to screen position
-            screen_pos = camera.world_to_screen(obj.position, screen_width, screen_height)
-            
-            # Skip if off-screen
-            if (screen_pos[0] < -50 or screen_pos[0] > screen_width + 50 or
-                screen_pos[1] < -50 or screen_pos[1] > screen_height + 50):
-                self.culled_objects += 1
-                continue
-            
-            # Get scale based on distance
-            scale = camera.get_view_distance_scale(obj.position)
-            
-            # Render object
-            obj.render_2d_projection(surface, camera, screen_pos, scale)
-            self.rendered_objects += 1
 
 class World3DSystem:
-    """Complete 3D world system with layered rendering"""
+    """3D world system with multiple layers and advanced features"""
     
-    def __init__(self, screen_width: int = 1400, screen_height: int = 900):
-        self.screen_width = screen_width
-        self.screen_height = screen_height
+    def __init__(self, width: int = 1000, height: int = 1000, layers: int = 3):
+        self.width = width
+        self.height = height
+        self.layers = layers
         
-        # Camera system
-        self.camera = Camera3D(Vector3(0, 20, 0))  # Above world looking down
-        self.camera.is_orthographic = True
-        
-        # Layer system
-        self.layers: Dict[RenderLayer, World3DLayer] = {}
-        for layer_type in RenderLayer:
-            self.layers[layer_type] = World3DLayer(layer_type)
-        
-        # World bounds
-        self.world_bounds = {
-            'min': Vector3(-500, -10, -500),
-            'max': Vector3(500, 100, 500)
-        }
-        
-        # Performance tracking
-        self.frame_count = 0
-        self.total_objects = 0
-        self.rendered_objects = 0
-        self.culled_objects = 0
-        
-        # Lighting system (basic)
-        self.ambient_light = 0.3
-        self.sun_direction = Vector3(0.5, -1, 0.3).normalize()
-        self.sun_intensity = 0.7
-        
-        print("🌍 3D World System initialized")
-        print(f"   Screen: {screen_width}x{screen_height}")
-        print(f"   Layers: {len(self.layers)}")
-        print(f"   World bounds: {self.world_bounds['min'].x:.0f}x{self.world_bounds['min'].z:.0f} to {self.world_bounds['max'].x:.0f}x{self.world_bounds['max'].z:.0f}")
-    
-    def add_object(self, obj: WorldObject3D) -> None:
-        """Add object to appropriate layer"""
-        if obj.layer in self.layers:
-            self.layers[obj.layer].add_object(obj)
-            self.total_objects += 1
-    
-    def remove_object(self, obj: WorldObject3D) -> None:
-        """Remove object from its layer"""
-        if obj.layer in self.layers:
-            self.layers[obj.layer].remove_object(obj)
-            self.total_objects -= 1
-    
-    def create_test_world(self) -> None:
-        """Create a test world with various objects"""
-        print("🏗️ Creating test 3D world...")
-        
-        # Create ground plane objects
-        for x in range(-20, 21, 5):
-            for z in range(-20, 21, 5):
-                ground = StaticMesh3D(
-                    Vector3(x * 5, 0, z * 5),
-                    "ground_tile",
-                    RenderLayer.TERRAIN_BASE
-                )
-                ground.color = (60, 80, 40)  # Dark green ground
-                self.add_object(ground)
-        
-        # Create buildings
-        building_positions = [
-            (30, 0, 30), (-30, 0, 30), (30, 0, -30), (-30, 0, -30),
-            (50, 0, 0), (-50, 0, 0), (0, 0, 50), (0, 0, -50),
-            (70, 0, 20), (-70, 0, -20)
+        # 3D tile array: [layer][y][x]
+        self.map_tiles: List[List[List[MapBlockInfo]]] = [
+            [[MapBlockInfo(
+                block_type=BlockType.EMPTY,
+                height=0.0,
+                water_level=0.0,
+                collision_enabled=False,
+                walkable=True,
+                driveable=True,
+                flyable=True,
+                district_id=0,
+                properties={}
+            ) for x in range(width)] for y in range(height)] for layer in range(layers)
         ]
         
-        for i, (x, y, z) in enumerate(building_positions):
-            building = StaticMesh3D(
-                Vector3(x, y + 5, z),  # Elevated
-                f"building_{i}",
-                RenderLayer.BUILDINGS_LOW
-            )
-            # Vary building colors
-            colors = [(100, 100, 120), (120, 100, 100), (100, 120, 100), (120, 120, 100)]
-            building.color = colors[i % len(colors)]
-            self.add_object(building)
+        # Districts
+        self.districts: Dict[int, District] = {}
+        self.next_district_id = 1
         
-        # Create roads (simple)
-        for x in range(-100, 101, 10):
-            road = StaticMesh3D(
-                Vector3(x, 0.1, 0),
-                "road_segment",
-                RenderLayer.ROADS
-            )
-            road.color = (40, 40, 40)  # Dark gray road
-            self.add_object(road)
+        # Navigation sectors
+        self.navigation_sectors: Dict[int, NavigationSector] = {}
+        self.sector_size = 50  # 50x50 tiles per sector
+        self.next_sector_id = 1
         
-        for z in range(-100, 101, 10):
-            road = StaticMesh3D(
-                Vector3(0, 0.1, z),
-                "road_segment",
-                RenderLayer.ROADS
-            )
-            road.color = (40, 40, 40)  # Dark gray road
-            self.add_object(road)
+        # World properties
+        self.water_level = 0.0
+        self.time_of_day = 12.0  # Hours (0-24)
+        self.weather = "clear"
+        self.temperature = 20.0  # Celsius
         
-        # Create some decorative objects
-        for i in range(20):
-            x = (i - 10) * 8 + random.uniform(-3, 3)
-            z = (i - 10) * 6 + random.uniform(-3, 3)
-            prop = StaticMesh3D(
-                Vector3(x, 1, z),
-                f"prop_{i}",
-                RenderLayer.OBJECTS_GROUND
-            )
-            prop.color = (80, 60, 40)  # Brown props
-            self.add_object(prop)
+        # Collision detection
+        self.collision_cache: Dict[Tuple[int, int, int], bool] = {}
+        self.cache_timeout = 1.0  # seconds
         
-        print(f"✅ Test world created with {self.total_objects} objects")
+        print(f"🌍 World3DSystem initialized: {width}x{height}x{layers}")
     
-    def update(self, delta_time: float) -> None:
-        """Update all world layers and objects"""
-        # Update all layers
-        for layer in self.layers.values():
-            layer.update(delta_time)
-        
-        # Update camera
-        # (Camera updates would be handled by game logic)
-        
-        self.frame_count += 1
+    def load_map_data(self, filename: str) -> bool:
+        """Load compressed map data from file"""
+        try:
+            with open(filename, 'rb') as f:
+                # Read header
+                header = struct.unpack('<4sIIII', f.read(20))
+                magic, version, map_width, map_height, map_layers = header
+                
+                if magic != b'MAP3':
+                    print(f"❌ Invalid map file format: {filename}")
+                    return False
+                
+                # Resize world if needed
+                if map_width != self.width or map_height != self.height or map_layers != self.layers:
+                    self._resize_world(map_width, map_height, map_layers)
+                
+                # Read tile data
+                for layer in range(map_layers):
+                    for y in range(map_height):
+                        for x in range(map_width):
+                            tile_data = struct.unpack('<BffffBBBB', f.read(17))
+                            block_type, height, water_level, prop1, prop2, collision, walkable, driveable, flyable = tile_data
+                            
+                            self.map_tiles[layer][y][x] = MapBlockInfo(
+                                block_type=BlockType(block_type),
+                                height=height,
+                                water_level=water_level,
+                                collision_enabled=bool(collision),
+                                walkable=bool(walkable),
+                                driveable=bool(driveable),
+                                flyable=bool(flyable),
+                                district_id=0,  # Will be set later
+                                properties={'prop1': prop1, 'prop2': prop2}
+                            )
+                
+                # Read districts
+                district_count = struct.unpack('<I', f.read(4))[0]
+                for _ in range(district_count):
+                    district_data = struct.unpack('<I32sBffffffff', f.read(57))
+                    district_id, name_bytes, district_type, min_x, min_y, max_x, max_y, center_x, center_y, pop_density, crime_level = district_data
+                    
+                    name = name_bytes.decode('utf-8').rstrip('\x00')
+                    
+                    district = District(
+                        district_id=district_id,
+                        name=name,
+                        district_type=DistrictType(district_type),
+                        bounds=(int(min_x), int(min_y), int(max_x), int(max_y)),
+                        center=(center_x, center_y),
+                        population_density=pop_density,
+                        crime_level=crime_level,
+                        police_presence=0.0,
+                        spawn_points=[],
+                        special_properties={}
+                    )
+                    
+                    self.districts[district_id] = district
+                
+                print(f"✅ Loaded map data from {filename}")
+                return True
+                
+        except Exception as e:
+            print(f"❌ Error loading map data: {e}")
+            return False
     
-    def render(self, surface: pygame.Surface) -> None:
-        """Render the entire 3D world in layer order"""
-        # Clear background
-        surface.fill((135, 206, 235))  # Sky blue background
+    def save_map_data(self, filename: str) -> bool:
+        """Save compressed map data to file"""
+        try:
+            with open(filename, 'wb') as f:
+                # Write header
+                header = struct.pack('<4sIIII', b'MAP3', 1, self.width, self.height, self.layers)
+                f.write(header)
+                
+                # Write tile data
+                for layer in range(self.layers):
+                    for y in range(self.height):
+                        for x in range(self.width):
+                            tile = self.map_tiles[layer][y][x]
+                            tile_data = struct.pack('<BffffBBBB',
+                                tile.block_type.value,
+                                tile.height,
+                                tile.water_level,
+                                tile.properties.get('prop1', 0.0),
+                                tile.properties.get('prop2', 0.0),
+                                int(tile.collision_enabled),
+                                int(tile.walkable),
+                                int(tile.driveable),
+                                int(tile.flyable)
+                            )
+                            f.write(tile_data)
+                
+                # Write districts
+                district_data = struct.pack('<I', len(self.districts))
+                f.write(district_data)
+                
+                for district in self.districts.values():
+                    name_bytes = district.name.encode('utf-8')[:32].ljust(32, b'\x00')
+                    district_data = struct.pack('<I32sBffffffff',
+                        district.district_id,
+                        name_bytes,
+                        district.district_type.value,
+                        district.bounds[0], district.bounds[1],
+                        district.bounds[2], district.bounds[3],
+                        district.center[0], district.center[1],
+                        district.population_density,
+                        district.crime_level
+                    )
+                    f.write(district_data)
+                
+                print(f"✅ Saved map data to {filename}")
+                return True
+                
+        except Exception as e:
+            print(f"❌ Error saving map data: {e}")
+            return False
+    
+    def _resize_world(self, new_width: int, new_height: int, new_layers: int) -> None:
+        """Resize the world"""
+        self.width = new_width
+        self.height = new_height
+        self.layers = new_layers
         
-        # Reset performance counters
-        self.rendered_objects = 0
-        self.culled_objects = 0
+        # Create new tile array
+        new_tiles = [
+            [[MapBlockInfo(
+                block_type=BlockType.EMPTY,
+                height=0.0,
+                water_level=0.0,
+                collision_enabled=False,
+                walkable=True,
+                driveable=True,
+                flyable=True,
+                district_id=0,
+                properties={}
+            ) for x in range(new_width)] for y in range(new_height)] for layer in range(new_layers)
+        ]
         
-        # Render layers in order (back to front)
-        for layer_type in RenderLayer:
-            layer = self.layers[layer_type]
-            layer.render(surface, self.camera)
+        # Copy existing data
+        for layer in range(min(self.layers, new_layers)):
+            for y in range(min(self.height, new_height)):
+                for x in range(min(self.width, new_width)):
+                    new_tiles[layer][y][x] = self.map_tiles[layer][y][x]
+        
+        self.map_tiles = new_tiles
+        print(f"🌍 Resized world to {new_width}x{new_height}x{new_layers}")
+    
+    def get_block_info(self, x: int, y: int, layer: int = 0) -> Optional[MapBlockInfo]:
+        """Get block information at coordinates"""
+        if not self._is_valid_coordinate(x, y, layer):
+            return None
+        
+        return self.map_tiles[layer][y][x]
+    
+    def set_block_info(self, x: int, y: int, layer: int, block_info: MapBlockInfo) -> None:
+        """Set block information at coordinates"""
+        if not self._is_valid_coordinate(x, y, layer):
+            return
+        
+        self.map_tiles[layer][y][x] = block_info
+        
+        # Clear collision cache for this position
+        cache_key = (x, y, layer)
+        if cache_key in self.collision_cache:
+            del self.collision_cache[cache_key]
+    
+    def _is_valid_coordinate(self, x: int, y: int, layer: int) -> bool:
+        """Check if coordinates are valid"""
+        return (0 <= x < self.width and 
+                0 <= y < self.height and 
+                0 <= layer < self.layers)
+    
+    def trace_segment_2d(self, start: Tuple[float, float], end: Tuple[float, float], 
+                        layer: int = 0) -> Optional[Tuple[float, float, MapBlockInfo]]:
+        """Trace a 2D line segment and return collision info"""
+        # Convert world coordinates to tile coordinates
+        start_x, start_y = start
+        end_x, end_y = end
+        
+        # Calculate direction and distance
+        dx = end_x - start_x
+        dy = end_y - start_y
+        distance = math.sqrt(dx**2 + dy**2)
+        
+        if distance == 0:
+            return None
+        
+        # Normalize direction
+        dx /= distance
+        dy /= distance
+        
+        # Step along the line
+        step_size = 0.5  # Half tile size for accuracy
+        steps = int(distance / step_size) + 1
+        
+        for i in range(steps):
+            t = i * step_size / distance
+            if t > 1.0:
+                t = 1.0
             
-            # Accumulate performance stats
-            self.rendered_objects += layer.rendered_objects
-            self.culled_objects += layer.culled_objects
-    
-    def move_camera(self, offset: Vector3) -> None:
-        """Move camera by offset"""
-        new_pos = self.camera.position + offset
+            # Current position
+            current_x = start_x + dx * t * distance
+            current_y = start_y + dy * t * distance
+            
+            # Convert to tile coordinates
+            tile_x = int(current_x)
+            tile_y = int(current_y)
+            
+            # Check collision
+            block_info = self.get_block_info(tile_x, tile_y, layer)
+            if block_info and block_info.collision_enabled:
+                return (current_x, current_y, block_info)
         
-        # Clamp camera within world bounds
-        new_pos.x = max(self.world_bounds['min'].x, 
-                       min(self.world_bounds['max'].x, new_pos.x))
-        new_pos.z = max(self.world_bounds['min'].z, 
-                       min(self.world_bounds['max'].z, new_pos.z))
+        return None
+    
+    def is_position_walkable(self, x: float, y: float, layer: int = 0) -> bool:
+        """Check if a position is walkable"""
+        tile_x, tile_y = int(x), int(y)
+        block_info = self.get_block_info(tile_x, tile_y, layer)
         
-        self.camera.move_to(new_pos)
+        if not block_info:
+            return False
+        
+        return block_info.walkable
     
-    def follow_object(self, target_obj: WorldObject3D, smoothing: float = 0.1) -> None:
-        """Make camera follow an object"""
-        offset = Vector3(0, 20, 10)  # Above and behind
-        self.camera.follow_target(target_obj.position, offset, smoothing)
+    def is_position_driveable(self, x: float, y: float, layer: int = 0) -> bool:
+        """Check if a position is driveable"""
+        tile_x, tile_y = int(x), int(y)
+        block_info = self.get_block_info(tile_x, tile_y, layer)
+        
+        if not block_info:
+            return False
+        
+        return block_info.driveable
     
-    def get_stats(self) -> Dict[str, Any]:
-        """Get world system performance statistics"""
-        return {
-            'total_objects': self.total_objects,
-            'rendered_objects': self.rendered_objects,
-            'culled_objects': self.culled_objects,
-            'active_layers': sum(1 for layer in self.layers.values() if layer.visible),
-            'camera_position': (self.camera.position.x, self.camera.position.y, self.camera.position.z),
-            'frame_count': self.frame_count
+    def is_position_flyable(self, x: float, y: float, layer: int = 0) -> bool:
+        """Check if a position is flyable"""
+        tile_x, tile_y = int(x), int(y)
+        block_info = self.get_block_info(tile_x, tile_y, layer)
+        
+        if not block_info:
+            return False
+        
+        return block_info.flyable
+    
+    def get_height_at_position(self, x: float, y: float, layer: int = 0) -> float:
+        """Get height at a position"""
+        tile_x, tile_y = int(x), int(y)
+        block_info = self.get_block_info(tile_x, tile_y, layer)
+        
+        if not block_info:
+            return 0.0
+        
+        return block_info.height
+    
+    def get_water_level_at_position(self, x: float, y: float, layer: int = 0) -> float:
+        """Get water level at a position"""
+        tile_x, tile_y = int(x), int(y)
+        block_info = self.get_block_info(tile_x, tile_y, layer)
+        
+        if not block_info:
+            return 0.0
+        
+        return block_info.water_level
+    
+    def create_district(self, name: str, district_type: DistrictType, 
+                       bounds: Tuple[int, int, int, int]) -> int:
+        """Create a new district"""
+        district_id = self.next_district_id
+        self.next_district_id += 1
+        
+        min_x, min_y, max_x, max_y = bounds
+        center_x = (min_x + max_x) / 2.0
+        center_y = (min_y + max_y) / 2.0
+        
+        district = District(
+            district_id=district_id,
+            name=name,
+            district_type=district_type,
+            bounds=bounds,
+            center=(center_x, center_y),
+            population_density=0.5,
+            crime_level=0.3,
+            police_presence=0.2,
+            spawn_points=[],
+            special_properties={}
+        )
+        
+        self.districts[district_id] = district
+        
+        # Update block district IDs
+        for y in range(min_y, max_y + 1):
+            for x in range(min_x, max_x + 1):
+                for layer in range(self.layers):
+                    block_info = self.get_block_info(x, y, layer)
+                    if block_info:
+                        block_info.district_id = district_id
+        
+        print(f"🌍 Created district '{name}' ({district_type.value}) with ID {district_id}")
+        return district_id
+    
+    def get_district_at_position(self, x: float, y: float) -> Optional[District]:
+        """Get district at a position"""
+        tile_x, tile_y = int(x), int(y)
+        block_info = self.get_block_info(tile_x, tile_y, 0)
+        
+        if not block_info:
+            return None
+        
+        return self.districts.get(block_info.district_id)
+    
+    def generate_navigation_sectors(self) -> None:
+        """Generate navigation sectors for pathfinding"""
+        self.navigation_sectors.clear()
+        self.next_sector_id = 1
+        
+        sectors_x = (self.width + self.sector_size - 1) // self.sector_size
+        sectors_y = (self.height + self.sector_size - 1) // self.sector_size
+        
+        for sector_y in range(sectors_y):
+            for sector_x in range(sectors_x):
+                sector_id = self.next_sector_id
+                self.next_sector_id += 1
+                
+                # Calculate sector bounds
+                min_x = sector_x * self.sector_size
+                min_y = sector_y * self.sector_size
+                max_x = min(min_x + self.sector_size - 1, self.width - 1)
+                max_y = min(min_y + self.sector_size - 1, self.height - 1)
+                
+                # Calculate sector center
+                center_x = (min_x + max_x) / 2.0
+                center_y = (min_y + max_y) / 2.0
+                
+                # Check if sector is passable
+                is_passable = self._is_sector_passable(min_x, min_y, max_x, max_y)
+                
+                # Calculate movement cost
+                movement_cost = self._calculate_sector_movement_cost(min_x, min_y, max_x, max_y)
+                
+                sector = NavigationSector(
+                    sector_id=sector_id,
+                    bounds=(min_x, min_y, max_x, max_y),
+                    connections=[],
+                    center=(center_x, center_y),
+                    is_passable=is_passable,
+                    movement_cost=movement_cost
+                )
+                
+                self.navigation_sectors[sector_id] = sector
+        
+        # Calculate sector connections
+        self._calculate_sector_connections()
+        
+        print(f"🌍 Generated {len(self.navigation_sectors)} navigation sectors")
+    
+    def _is_sector_passable(self, min_x: int, min_y: int, max_x: int, max_y: int) -> bool:
+        """Check if a sector is passable"""
+        walkable_count = 0
+        total_count = 0
+        
+        for y in range(min_y, max_y + 1):
+            for x in range(min_x, max_x + 1):
+                block_info = self.get_block_info(x, y, 0)
+                if block_info:
+                    total_count += 1
+                    if block_info.walkable:
+                        walkable_count += 1
+        
+        # Sector is passable if more than 50% is walkable
+        return walkable_count > total_count * 0.5 if total_count > 0 else False
+    
+    def _calculate_sector_movement_cost(self, min_x: int, min_y: int, max_x: int, max_y: int) -> float:
+        """Calculate movement cost for a sector"""
+        total_cost = 0.0
+        count = 0
+        
+        for y in range(min_y, max_y + 1):
+            for x in range(min_x, max_x + 1):
+                block_info = self.get_block_info(x, y, 0)
+                if block_info:
+                    count += 1
+                    # Different block types have different movement costs
+                    if block_info.block_type == BlockType.ROAD:
+                        total_cost += 1.0
+                    elif block_info.block_type == BlockType.GRASS:
+                        total_cost += 1.5
+                    elif block_info.block_type == BlockType.SAND:
+                        total_cost += 2.0
+                    elif block_info.block_type == BlockType.ROCK:
+                        total_cost += 3.0
+                    else:
+                        total_cost += 1.0
+        
+        return total_cost / count if count > 0 else 1.0
+    
+    def _calculate_sector_connections(self) -> None:
+        """Calculate connections between sectors"""
+        for sector_id, sector in self.navigation_sectors.items():
+            connections = []
+            
+            # Check adjacent sectors
+            min_x, min_y, max_x, max_y = sector.bounds
+            
+            # Check left sector
+            if min_x > 0:
+                left_sector = self._find_sector_at_position(min_x - 1, min_y)
+                if left_sector and left_sector.is_passable:
+                    connections.append(left_sector.sector_id)
+            
+            # Check right sector
+            if max_x < self.width - 1:
+                right_sector = self._find_sector_at_position(max_x + 1, min_y)
+                if right_sector and right_sector.is_passable:
+                    connections.append(right_sector.sector_id)
+            
+            # Check top sector
+            if min_y > 0:
+                top_sector = self._find_sector_at_position(min_x, min_y - 1)
+                if top_sector and top_sector.is_passable:
+                    connections.append(top_sector.sector_id)
+            
+            # Check bottom sector
+            if max_y < self.height - 1:
+                bottom_sector = self._find_sector_at_position(min_x, max_y + 1)
+                if bottom_sector and bottom_sector.is_passable:
+                    connections.append(bottom_sector.sector_id)
+            
+            sector.connections = connections
+    
+    def _find_sector_at_position(self, x: int, y: int) -> Optional[NavigationSector]:
+        """Find sector at a position"""
+        for sector in self.navigation_sectors.values():
+            min_x, min_y, max_x, max_y = sector.bounds
+            if min_x <= x <= max_x and min_y <= y <= max_y:
+                return sector
+        return None
+    
+    def find_path(self, start: Tuple[float, float], end: Tuple[float, float]) -> List[Tuple[float, float]]:
+        """Find path between two points using navigation sectors"""
+        # Convert world coordinates to tile coordinates
+        start_tile = (int(start[0]), int(start[1]))
+        end_tile = (int(end[0]), int(end[1]))
+        
+        # Find start and end sectors
+        start_sector = self._find_sector_at_position(start_tile[0], start_tile[1])
+        end_sector = self._find_sector_at_position(end_tile[0], end_tile[1])
+        
+        if not start_sector or not end_sector:
+            return []
+        
+        if start_sector.sector_id == end_sector.sector_id:
+            return [start, end]
+        
+        # Use A* pathfinding between sectors
+        path_sectors = self._find_sector_path(start_sector.sector_id, end_sector.sector_id)
+        
+        if not path_sectors:
+            return []
+        
+        # Convert sector path to world coordinates
+        path = [start]
+        
+        for sector_id in path_sectors[1:-1]:  # Skip start and end sectors
+            sector = self.navigation_sectors[sector_id]
+            path.append(sector.center)
+        
+        path.append(end)
+        return path
+    
+    def _find_sector_path(self, start_sector_id: int, end_sector_id: int) -> List[int]:
+        """Find path between sectors using A* algorithm"""
+        # Simplified A* implementation
+        open_set = [start_sector_id]
+        came_from = {}
+        g_score = {start_sector_id: 0}
+        f_score = {start_sector_id: self._heuristic_distance(start_sector_id, end_sector_id)}
+        
+        while open_set:
+            current = min(open_set, key=lambda x: f_score.get(x, float('inf')))
+            
+            if current == end_sector_id:
+                # Reconstruct path
+                path = []
+                while current in came_from:
+                    path.append(current)
+                    current = came_from[current]
+                path.append(start_sector_id)
+                return path[::-1]
+            
+            open_set.remove(current)
+            
+            # Check neighbors
+            current_sector = self.navigation_sectors[current]
+            for neighbor_id in current_sector.connections:
+                tentative_g_score = g_score[current] + current_sector.movement_cost
+                
+                if neighbor_id not in g_score or tentative_g_score < g_score[neighbor_id]:
+                    came_from[neighbor_id] = current
+                    g_score[neighbor_id] = tentative_g_score
+                    f_score[neighbor_id] = tentative_g_score + self._heuristic_distance(neighbor_id, end_sector_id)
+                    
+                    if neighbor_id not in open_set:
+                        open_set.append(neighbor_id)
+        
+        return []
+    
+    def _heuristic_distance(self, sector_id1: int, sector_id2: int) -> float:
+        """Calculate heuristic distance between sectors"""
+        sector1 = self.navigation_sectors[sector_id1]
+        sector2 = self.navigation_sectors[sector_id2]
+        
+        dx = sector1.center[0] - sector2.center[0]
+        dy = sector1.center[1] - sector2.center[1]
+        
+        return math.sqrt(dx**2 + dy**2)
+    
+    def update_world_state(self, dt: float) -> None:
+        """Update world state (time, weather, etc.)"""
+        # Update time of day
+        self.time_of_day += dt * 0.1  # 1 hour per 10 seconds
+        if self.time_of_day >= 24.0:
+            self.time_of_day -= 24.0
+        
+        # Update weather (simplified)
+        import random
+        if random.random() < 0.001:  # 0.1% chance per frame
+            weather_options = ["clear", "cloudy", "rainy", "foggy"]
+            self.weather = random.choice(weather_options)
+        
+        # Update temperature based on time and weather
+        base_temp = 20.0
+        time_factor = math.sin((self.time_of_day - 6) * math.pi / 12) * 10.0  # Daily temperature cycle
+        
+        weather_factors = {
+            "clear": 0.0,
+            "cloudy": -2.0,
+            "rainy": -5.0,
+            "foggy": -1.0
         }
+        
+        self.temperature = base_temp + time_factor + weather_factors.get(self.weather, 0.0)
     
-    def set_layer_visibility(self, layer: RenderLayer, visible: bool) -> None:
-        """Toggle layer visibility for debugging"""
-        if layer in self.layers:
-            self.layers[layer].visible = visible
+    def get_world_statistics(self) -> Dict[str, Any]:
+        """Get world statistics"""
+        block_counts = {}
+        district_counts = {}
+        
+        # Count block types
+        for layer in range(self.layers):
+            for y in range(self.height):
+                for x in range(self.width):
+                    block_info = self.map_tiles[layer][y][x]
+                    block_type = block_info.block_type.value
+                    block_counts[block_type] = block_counts.get(block_type, 0) + 1
+        
+        # Count district types
+        for district in self.districts.values():
+            district_type = district.district_type.value
+            district_counts[district_type] = district_counts.get(district_type, 0) + 1
+        
+        return {
+            'world_size': f"{self.width}x{self.height}x{self.layers}",
+            'total_blocks': self.width * self.height * self.layers,
+            'block_types': block_counts,
+            'districts': len(self.districts),
+            'district_types': district_counts,
+            'navigation_sectors': len(self.navigation_sectors),
+            'time_of_day': self.time_of_day,
+            'weather': self.weather,
+            'temperature': self.temperature,
+            'water_level': self.water_level
+        }
+
+
+# Test the 3D world system
+if __name__ == "__main__":
+    print("🧪 Testing World3DSystem...")
     
-    def get_objects_in_radius(self, center: Vector3, radius: float) -> List[WorldObject3D]:
-        """Get all objects within radius of center point"""
-        objects = []
-        for layer in self.layers.values():
-            for obj in layer.objects:
-                if obj.position.distance_to(center) <= radius:
-                    objects.append(obj)
-        return objects
+    # Create world system
+    world = World3DSystem(100, 100, 2)
+    
+    # Create some districts
+    residential_id = world.create_district("Downtown", DistrictType.DOWNTOWN, (0, 0, 49, 49))
+    commercial_id = world.create_district("Business District", DistrictType.COMMERCIAL, (50, 0, 99, 49))
+    
+    # Set some blocks
+    for y in range(10, 20):
+        for x in range(10, 20):
+            block_info = MapBlockInfo(
+                block_type=BlockType.BUILDING,
+                height=10.0,
+                water_level=0.0,
+                collision_enabled=True,
+                walkable=False,
+                driveable=False,
+                flyable=True,
+                district_id=residential_id,
+                properties={'height': 10.0}
+            )
+            world.set_block_info(x, y, 0, block_info)
+    
+    # Generate navigation sectors
+    world.generate_navigation_sectors()
+    
+    # Test pathfinding
+    path = world.find_path((5, 5), (95, 95))
+    print(f"Path found with {len(path)} waypoints")
+    
+    # Test collision detection
+    collision = world.trace_segment_2d((5, 5), (15, 15))
+    if collision:
+        print(f"Collision detected at {collision[0]:.1f}, {collision[1]:.1f}")
+    
+    # Update world state
+    world.update_world_state(1.0)
+    
+    # Print statistics
+    stats = world.get_world_statistics()
+    print(f"World statistics: {stats}")
+    
+    # Save and load test
+    world.save_map_data("test_world.map")
+    world2 = World3DSystem()
+    world2.load_map_data("test_world.map")
+    
+    print("✅ World3DSystem test completed")
