@@ -7,7 +7,7 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 from collections.abc import Generator, Sequence
-from math import sqrt
+import math
 from typing import TypeVar, Union, overload
 
 SelfType = TypeVar("SelfType", bound="Vector")
@@ -109,6 +109,10 @@ class Vector3(Vector):
         yield self.x
         yield self.y
         yield self.z
+    
+    def length(self) -> float:
+        """Calculate the length/magnitude of the vector"""
+        return math.sqrt(self.x**2 + self.y**2 + self.z**2)
 
 
 class Vector2(Vector):

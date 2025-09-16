@@ -64,10 +64,22 @@ class PhysicsBody:
     collision_category: CollisionCategory
     user_data: Any = None
     is_sensor: bool = False
-    
+
     # Box2D specific
     b2_body: Optional[Any] = None
     b2_fixture: Optional[Any] = None
+
+    def set_position(self, x: float, y: float) -> None:
+        """Set body position"""
+        self.position = (x, y)
+        if BOX2D_AVAILABLE and self.b2_body:
+            self.b2_body.position = b2Vec2(x, y)
+
+    def set_velocity(self, velocity: Tuple[float, float]) -> None:
+        """Set body velocity"""
+        self.velocity = velocity
+        if BOX2D_AVAILABLE and self.b2_body:
+            self.b2_body.linearVelocity = b2Vec2(velocity[0], velocity[1])
 
 
 @dataclass

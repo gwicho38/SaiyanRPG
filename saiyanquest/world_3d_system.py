@@ -5,11 +5,13 @@
 import math
 import struct
 import time
+import random
 from typing import Dict, List, Tuple, Optional, Any, Set
 from dataclasses import dataclass
 from enum import Enum
 
 from .physics_manager import PhysicsManager, CollisionCategory
+from .math import Vector3
 
 
 class BlockType(Enum):
@@ -37,6 +39,34 @@ class DistrictType(Enum):
     WATERFRONT = "waterfront"
     AIRPORT = "airport"
     PORT = "port"
+
+
+class WorldObjectType(Enum):
+    """Types of world objects"""
+    STATIC_MESH = "static_mesh"
+    DYNAMIC_MESH = "dynamic_mesh"
+    CHARACTER = "character"
+    VEHICLE = "vehicle"
+    BUILDING = "building"
+    TERRAIN = "terrain"
+    PARTICLE = "particle"
+    LIGHT = "light"
+    TRIGGER = "trigger"
+
+
+class RenderLayer(Enum):
+    """Rendering layers for 3D objects"""
+    SKY = 0
+    TERRAIN = 1
+    BUILDINGS_LOW = 2
+    BUILDINGS_HIGH = 3
+    ROADS = 4
+    OBJECTS_GROUND = 5
+    VEHICLES = 6
+    CHARACTERS = 7
+    PARTICLES = 8
+    EFFECTS = 9
+    UI = 10
 
 
 @dataclass
@@ -77,6 +107,86 @@ class NavigationSector:
     center: Tuple[float, float]
     is_passable: bool
     movement_cost: float
+
+
+@dataclass
+class StaticMesh3D:
+    """3D static mesh object"""
+    position: Vector3
+    mesh_name: str
+    render_layer: RenderLayer
+    scale: Vector3 = None
+    rotation: Vector3 = None
+    color: Tuple[int, int, int] = (255, 255, 255)
+    visible: bool = True
+    
+    def __post_init__(self):
+        if self.scale is None:
+            self.scale = Vector3(1, 1, 1)
+        if self.rotation is None:
+            self.rotation = Vector3(0, 0, 0)
+    
+    def set_position(self, position: Vector3):
+        """Set object position"""
+        self.position = position
+    
+    def get_position(self) -> Vector3:
+        """Get object position"""
+        return self.position
+
+
+class Camera3D:
+    """3D camera for world rendering"""
+    
+    def __init__(self):
+        self.position = Vector3(0, 10, 0)
+        self.target = Vector3(0, 0, 0)
+        self.up = Vector3(0, 1, 0)
+        self.fov = 60.0
+        self.near_distance = 0.1
+        self.far_distance = 1000.0
+        self.is_orthographic = False
+        
+    def move_to(self, position: Vector3):
+        """Move camera to position"""
+        self.position = position
+    
+    def look_at(self, target: Vector3):
+        """Look at target position"""
+        self.target = target
+    
+    def follow_object(self, obj: StaticMesh3D, smoothing: float = 0.1):
+        """Follow an object with smoothing"""
+        if obj:
+            # Smooth camera movement towards object
+            self.target = Vector3(
+                self.target.x + (obj.position.x - self.target.x) * smoothing,
+                self.target.y + (obj.position.y - self.target.y) * smoothing,
+                self.target.z + (obj.position.z - self.target.z) * smoothing
+            )
+
+
+class WorldLayer:
+    """A rendering layer containing objects"""
+    
+    def __init__(self, layer_type: RenderLayer):
+        self.layer_type = layer_type
+        self.objects: List[StaticMesh3D] = []
+        self.visible = True
+        self.rendered_objects = 0
+    
+    def add_object(self, obj: StaticMesh3D):
+        """Add object to layer"""
+        self.objects.append(obj)
+    
+    def remove_object(self, obj: StaticMesh3D):
+        """Remove object from layer"""
+        if obj in self.objects:
+            self.objects.remove(obj)
+    
+    def set_visibility(self, visible: bool):
+        """Set layer visibility"""
+        self.visible = visible
 
 
 class World3DSystem:
@@ -120,6 +230,20 @@ class World3DSystem:
         # Collision detection
         self.collision_cache: Dict[Tuple[int, int, int], bool] = {}
         self.cache_timeout = 1.0  # seconds
+        
+        # 3D rendering system
+        self.camera = Camera3D()
+        self.layers: Dict[RenderLayer, WorldLayer] = {}
+        self.world_bounds = {
+            'min': Vector3(-500, -100, -500),
+            'max': Vector3(500, 100, 500)
+        }
+        self.ambient_light = 0.8
+        self.frame_count = 0
+        
+        # Initialize rendering layers
+        for layer_type in RenderLayer:
+            self.layers[layer_type] = WorldLayer(layer_type)
         
         print(f"🌍 World3DSystem initialized: {width}x{height}x{layers}")
     
@@ -261,7 +385,7 @@ class World3DSystem:
         ]
         
         # Copy existing data
-        for layer in range(min(self.layers, new_layers)):
+        for layer in range(min(len(self.map_tiles), new_layers)):
             for y in range(min(self.height, new_height)):
                 for x in range(min(self.width, new_width)):
                     new_tiles[layer][y][x] = self.map_tiles[layer][y][x]
@@ -292,7 +416,7 @@ class World3DSystem:
         """Check if coordinates are valid"""
         return (0 <= x < self.width and 
                 0 <= y < self.height and 
-                0 <= layer < self.layers)
+                0 <= layer < len(self.map_tiles))
     
     def trace_segment_2d(self, start: Tuple[float, float], end: Tuple[float, float], 
                         layer: int = 0) -> Optional[Tuple[float, float, MapBlockInfo]]:
@@ -415,7 +539,7 @@ class World3DSystem:
         # Update block district IDs
         for y in range(min_y, max_y + 1):
             for x in range(min_x, max_x + 1):
-                for layer in range(self.layers):
+                for layer in range(len(self.map_tiles)):
                     block_info = self.get_block_info(x, y, layer)
                     if block_info:
                         block_info.district_id = district_id
@@ -671,7 +795,7 @@ class World3DSystem:
         district_counts = {}
         
         # Count block types
-        for layer in range(self.layers):
+        for layer in range(len(self.map_tiles)):
             for y in range(self.height):
                 for x in range(self.width):
                     block_info = self.map_tiles[layer][y][x]
@@ -684,8 +808,8 @@ class World3DSystem:
             district_counts[district_type] = district_counts.get(district_type, 0) + 1
         
         return {
-            'world_size': f"{self.width}x{self.height}x{self.layers}",
-            'total_blocks': self.width * self.height * self.layers,
+            'world_size': f"{self.width}x{self.height}x{len(self.map_tiles)}",
+            'total_blocks': self.width * self.height * len(self.map_tiles),
             'block_types': block_counts,
             'districts': len(self.districts),
             'district_types': district_counts,
@@ -695,6 +819,318 @@ class World3DSystem:
             'temperature': self.temperature,
             'water_level': self.water_level
         }
+    
+    def add_object(self, obj: StaticMesh3D) -> None:
+        """Add object to appropriate layer"""
+        if obj.render_layer in self.layers:
+            self.layers[obj.render_layer].add_object(obj)
+    
+    def remove_object(self, obj: StaticMesh3D) -> None:
+        """Remove object from layer"""
+        if obj.render_layer in self.layers:
+            self.layers[obj.render_layer].remove_object(obj)
+    
+    def set_layer_visibility(self, layer_type: RenderLayer, visible: bool) -> None:
+        """Set layer visibility"""
+        if layer_type in self.layers:
+            self.layers[layer_type].set_visibility(visible)
+    
+    def move_camera(self, movement: Vector3) -> None:
+        """Move camera by movement vector"""
+        self.camera.position = Vector3(
+            self.camera.position.x + movement.x,
+            self.camera.position.y + movement.y,
+            self.camera.position.z + movement.z
+        )
+    
+    def follow_object(self, obj: StaticMesh3D, smoothing: float = 0.1) -> None:
+        """Follow an object with camera"""
+        self.camera.follow_object(obj, smoothing)
+    
+    def get_objects_in_radius(self, position: Vector3, radius: float) -> List[StaticMesh3D]:
+        """Get objects within radius of position"""
+        objects = []
+        for layer in self.layers.values():
+            for obj in layer.objects:
+                if obj.visible:
+                    distance = math.sqrt(
+                        (obj.position.x - position.x)**2 +
+                        (obj.position.y - position.y)**2 +
+                        (obj.position.z - position.z)**2
+                    )
+                    if distance <= radius:
+                        objects.append(obj)
+        return objects
+    
+    def create_test_world(self) -> None:
+        """Create a test world with sample objects"""
+        # Add some test buildings
+        for i in range(10):
+            x = random.uniform(-50, 50)
+            z = random.uniform(-50, 50)
+            building = StaticMesh3D(
+                Vector3(x, 0, z),
+                f"building_{i}",
+                RenderLayer.BUILDINGS_LOW
+            )
+            building.color = (random.randint(100, 200), random.randint(100, 200), random.randint(100, 200))
+            self.add_object(building)
+        
+        # Add some ground objects
+        for i in range(20):
+            x = random.uniform(-80, 80)
+            z = random.uniform(-80, 80)
+            obj = StaticMesh3D(
+                Vector3(x, 0, z),
+                f"ground_obj_{i}",
+                RenderLayer.OBJECTS_GROUND
+            )
+            obj.color = (random.randint(50, 150), random.randint(50, 150), random.randint(50, 150))
+            self.add_object(obj)
+        
+        print("🌍 Test world created with sample objects")
+    
+    def update(self, dt: float) -> None:
+        """Update world state"""
+        self.frame_count += 1
+        self.update_world_state(dt)
+    
+    def render(self, screen) -> None:
+        """Render world to screen (simplified for testing)"""
+        # This is a simplified render method for testing
+        # In a real implementation, this would do proper 3D rendering
+        pass
+    
+    def get_stats(self) -> Dict[str, Any]:
+        """Get world statistics"""
+        total_objects = sum(len(layer.objects) for layer in self.layers.values())
+        rendered_objects = sum(layer.rendered_objects for layer in self.layers.values())
+        culled_objects = total_objects - rendered_objects
+        active_layers = sum(1 for layer in self.layers.values() if layer.visible and len(layer.objects) > 0)
+        
+        return {
+            'total_objects': total_objects,
+            'rendered_objects': rendered_objects,
+            'culled_objects': culled_objects,
+            'active_layers': active_layers,
+            'frame_count': self.frame_count,
+            'camera_position': (self.camera.position.x, self.camera.position.y, self.camera.position.z)
+        }
+    
+    def load_tmx_map(self, map_name: str, mod_path: str = "mods/saiyanquest") -> bool:
+        """Load a TMX map and convert it to 3D world format"""
+        try:
+            import pytmx
+            from pathlib import Path
+            
+            map_file = Path(mod_path) / "maps" / f"{map_name}.tmx"
+            if not map_file.exists():
+                print(f"❌ TMX map file not found: {map_file}")
+                return False
+            
+            print(f"🗺️ Loading TMX map: {map_name}")
+            
+            # Load TMX map
+            tmx_map = pytmx.load_pygame(str(map_file), pixelalpha=True)
+            
+            # Update world dimensions
+            self.width = tmx_map.width
+            self.height = tmx_map.height
+            
+            # Resize world if needed
+            if len(self.map_tiles) != self.layers or \
+               len(self.map_tiles[0]) != self.height or \
+               len(self.map_tiles[0][0]) != self.width:
+                self._resize_world(self.width, self.height, self.layers)
+            
+            # Process each TMX layer
+            for layer_idx, layer in enumerate(tmx_map.visible_layers):
+                if isinstance(layer, pytmx.TiledTileLayer) and layer_idx < self.layers:
+                    self._process_tmx_layer_to_3d(layer, tmx_map, layer_idx)
+            
+            # Create districts based on TMX properties
+            self._create_districts_from_tmx(tmx_map)
+            
+            # Generate navigation sectors
+            self.generate_navigation_sectors()
+            
+            print(f"✅ Loaded TMX map: {map_name} ({self.width}x{self.height})")
+            print(f"   ✓ Processed {len(tmx_map.visible_layers)} layers")
+            print(f"   ✓ Created {len(self.districts)} districts")
+            print(f"   ✓ Generated {len(self.navigation_sectors)} navigation sectors")
+            
+            return True
+            
+        except Exception as e:
+            print(f"❌ Failed to load TMX map {map_name}: {e}")
+            return False
+    
+    def _process_tmx_layer_to_3d(self, layer, tmx_map, layer_idx: int) -> None:
+        """Process a TMX tile layer into 3D world blocks"""
+        for y in range(layer.height):
+            for x in range(layer.width):
+                tile_id = layer.data[y][x]
+                if tile_id == 0:  # Empty tile
+                    continue
+                
+                # Get tile properties
+                tile_props = tmx_map.get_tile_properties_by_gid(tile_id)
+                
+                # Determine block type based on tile properties or layer name
+                block_type = self._determine_block_type_from_tmx(layer.name, tile_props)
+                
+                # Create block info
+                block_info = MapBlockInfo(
+                    block_type=block_type,
+                    height=self._get_height_from_tmx(layer.name, tile_props),
+                    water_level=self._get_water_level_from_tmx(layer.name, tile_props),
+                    collision_enabled=self._get_collision_from_tmx(layer.name, tile_props),
+                    walkable=self._get_walkable_from_tmx(layer.name, tile_props),
+                    driveable=self._get_driveable_from_tmx(layer.name, tile_props),
+                    flyable=self._get_flyable_from_tmx(layer.name, tile_props),
+                    district_id=0,  # Will be set later
+                    properties=tile_props or {}
+                )
+                
+                self.set_block_info(x, y, layer_idx, block_info)
+    
+    def _determine_block_type_from_tmx(self, layer_name: str, tile_props: Dict) -> BlockType:
+        """Determine block type from TMX layer name and properties"""
+        layer_name_lower = layer_name.lower()
+        
+        if 'road' in layer_name_lower or 'street' in layer_name_lower:
+            return BlockType.ROAD
+        elif 'building' in layer_name_lower or 'house' in layer_name_lower:
+            return BlockType.BUILDING
+        elif 'water' in layer_name_lower or 'river' in layer_name_lower:
+            return BlockType.WATER
+        elif 'grass' in layer_name_lower or 'field' in layer_name_lower:
+            return BlockType.GRASS
+        elif 'sand' in layer_name_lower or 'beach' in layer_name_lower:
+            return BlockType.SAND
+        elif 'rock' in layer_name_lower or 'stone' in layer_name_lower:
+            return BlockType.ROCK
+        elif 'bridge' in layer_name_lower:
+            return BlockType.BRIDGE
+        elif 'railway' in layer_name_lower or 'train' in layer_name_lower:
+            return BlockType.RAILWAY
+        else:
+            # Check tile properties
+            if tile_props:
+                if tile_props.get('collision', False):
+                    return BlockType.SOLID
+                elif tile_props.get('water', False):
+                    return BlockType.WATER
+                elif tile_props.get('road', False):
+                    return BlockType.ROAD
+            
+            return BlockType.EMPTY
+    
+    def _get_height_from_tmx(self, layer_name: str, tile_props: Dict) -> float:
+        """Get height from TMX data"""
+        if tile_props and 'height' in tile_props:
+            return float(tile_props['height'])
+        
+        # Default heights based on layer
+        layer_name_lower = layer_name.lower()
+        if 'building' in layer_name_lower:
+            return 10.0
+        elif 'bridge' in layer_name_lower:
+            return 5.0
+        else:
+            return 0.0
+    
+    def _get_water_level_from_tmx(self, layer_name: str, tile_props: Dict) -> float:
+        """Get water level from TMX data"""
+        if tile_props and 'water_level' in tile_props:
+            return float(tile_props['water_level'])
+        
+        if 'water' in layer_name.lower():
+            return 1.0
+        
+        return 0.0
+    
+    def _get_collision_from_tmx(self, layer_name: str, tile_props: Dict) -> bool:
+        """Get collision setting from TMX data"""
+        if tile_props and 'collision' in tile_props:
+            return bool(tile_props['collision'])
+        
+        # Default collision based on layer
+        layer_name_lower = layer_name.lower()
+        if any(term in layer_name_lower for term in ['building', 'wall', 'solid', 'collision']):
+            return True
+        
+        return False
+    
+    def _get_walkable_from_tmx(self, layer_name: str, tile_props: Dict) -> bool:
+        """Get walkable setting from TMX data"""
+        if tile_props and 'walkable' in tile_props:
+            return bool(tile_props['walkable'])
+        
+        # Default walkable based on layer
+        layer_name_lower = layer_name.lower()
+        if any(term in layer_name_lower for term in ['building', 'wall', 'solid']):
+            return False
+        
+        return True
+    
+    def _get_driveable_from_tmx(self, layer_name: str, tile_props: Dict) -> bool:
+        """Get driveable setting from TMX data"""
+        if tile_props and 'driveable' in tile_props:
+            return bool(tile_props['driveable'])
+        
+        # Default driveable based on layer
+        layer_name_lower = layer_name.lower()
+        if any(term in layer_name_lower for term in ['road', 'street', 'bridge']):
+            return True
+        elif any(term in layer_name_lower for term in ['building', 'wall', 'water']):
+            return False
+        
+        return True
+    
+    def _get_flyable_from_tmx(self, layer_name: str, tile_props: Dict) -> bool:
+        """Get flyable setting from TMX data"""
+        if tile_props and 'flyable' in tile_props:
+            return bool(tile_props['flyable'])
+        
+        # Most areas are flyable except solid buildings
+        layer_name_lower = layer_name.lower()
+        if 'building' in layer_name_lower and 'roof' not in layer_name_lower:
+            return False
+        
+        return True
+    
+    def _create_districts_from_tmx(self, tmx_map) -> None:
+        """Create districts based on TMX map properties"""
+        # Look for district objects or properties
+        for obj_group in tmx_map.objectgroups:
+            for obj in obj_group:
+                if obj.name and 'district' in obj.name.lower():
+                    # Create district from object
+                    district_type = DistrictType.RESIDENTIAL  # Default
+                    
+                    # Determine district type from properties
+                    if obj.properties:
+                        if obj.properties.get('commercial', False):
+                            district_type = DistrictType.COMMERCIAL
+                        elif obj.properties.get('industrial', False):
+                            district_type = DistrictType.INDUSTRIAL
+                        elif obj.properties.get('downtown', False):
+                            district_type = DistrictType.DOWNTOWN
+                    
+                    # Create district bounds from object
+                    bounds = (
+                        int(obj.x // tmx_map.tilewidth),
+                        int(obj.y // tmx_map.tileheight),
+                        int((obj.x + obj.width) // tmx_map.tilewidth),
+                        int((obj.y + obj.height) // tmx_map.tileheight)
+                    )
+                    
+                    self.create_district(obj.name, district_type, bounds)
+        
+        # If no districts found, create a default one
+        if not self.districts:
+            self.create_district("Default District", DistrictType.RESIDENTIAL, (0, 0, self.width-1, self.height-1))
 
 
 # Test the 3D world system

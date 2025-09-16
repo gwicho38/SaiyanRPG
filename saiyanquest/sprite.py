@@ -17,7 +17,12 @@ from typing import (
     overload,
 )
 
-from pygame.rect import FRect, Rect
+from pygame.rect import Rect
+try:
+    from pygame.rect import FRect
+except ImportError:
+    # FRect not available in older pygame versions
+    FRect = None
 from pygame.sprite import DirtySprite, Group, LayeredUpdates
 from pygame.sprite import Sprite as PySprite
 from pygame.surface import Surface
@@ -122,7 +127,7 @@ class Sprite(DirtySprite):
         return self._rect
 
     @rect.setter
-    def rect(self, rect: Optional[Union[FRect, Rect]]) -> None:
+    def rect(self, rect: Optional[Union[Rect, "FRect"]]) -> None:
         """
         Set the rectangle of the sprite.
 
@@ -133,7 +138,7 @@ class Sprite(DirtySprite):
             rect = Rect(0, 0, 0, 0)
 
         if rect != self._rect:
-            if isinstance(rect, FRect):
+            if FRect is not None and isinstance(rect, FRect):
                 rect = Rect(rect.x, rect.y, rect.width, rect.height)
             self._rect = rect
             self._needs_update = True
@@ -551,7 +556,7 @@ class RelativeGroup(MenuSpriteGroup[_MenuElement]):
         else:
             self.rect = Rect(self.parent.rect)
 
-    def draw(self, surface: Surface) -> list[Union[FRect, Rect]]:
+    def draw(self, surface: Surface) -> list[Rect]:
         self.update_rect_from_parent()
         topleft = self.rect.topleft
 
@@ -628,7 +633,7 @@ class VisualSpriteList(RelativeGroup[_MenuElement]):
             super().remove(i)
         self._needs_arrange = True
 
-    def draw(self, surface: Surface) -> list[Union[FRect, Rect]]:
+    def draw(self, surface: Surface) -> list[Rect]:
         if self._needs_arrange:
             self.arrange_menu_items()
         dirty = super().draw(surface)
