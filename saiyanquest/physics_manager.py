@@ -473,7 +473,7 @@ class PhysicsManager:
         self.collision_callbacks[(category_a, category_b)] = callback
         print(f"🔧 Registered collision callback: {category_a.value} -> {category_b.value}")
     
-    def debug_draw(self, screen, camera_offset: Tuple[float, float] = (0, 0)) -> None:
+    def draw_debug(self, screen, camera_offset: Tuple[float, float] = (0, 0)) -> None:
         """Draw physics bodies for debugging"""
         if not self.debug_draw or not PYGAME_AVAILABLE:
             return
@@ -504,6 +504,20 @@ class PhysicsManager:
             'collision_callbacks': len(self.collision_callbacks)
         }
 
+
+# Global physics manager instance
+_physics_manager = None
+
+def initialize_physics(gravity: Tuple[float, float] = (0, 0)) -> PhysicsManager:
+    """Initialize the global physics manager"""
+    global _physics_manager
+    if _physics_manager is None:
+        _physics_manager = PhysicsManager(gravity)
+    return _physics_manager
+
+def get_physics_manager() -> Optional[PhysicsManager]:
+    """Get the global physics manager instance"""
+    return _physics_manager
 
 # Test the physics system
 if __name__ == "__main__":
@@ -549,7 +563,7 @@ if __name__ == "__main__":
             
             # Draw
             screen.fill((0, 0, 0))
-            physics.debug_draw(screen)
+            physics.draw_debug(screen)
             pygame.display.flip()
         
         pygame.quit()

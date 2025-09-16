@@ -139,7 +139,7 @@ def test_integrated_vehicle_systems():
                 test_vehicles[0][1].emergency_shutdown()
         
         # Update physics
-        physics.update_frame(dt)
+        physics.update(dt)
         
         # Update all vehicles
         for name, vehicle in test_vehicles:
@@ -208,7 +208,7 @@ def test_integrated_vehicle_systems():
                     pygame.draw.circle(screen, (0, 0, 255), (x, y-20), 4)
         
         # Draw physics debug
-        physics.debug_draw_bodies(screen)
+        physics.draw_debug(screen)
         
         pygame.display.flip()
         frame_count += 1

@@ -64,7 +64,7 @@ def test_character_system():
         print(f"     Position: ({info['position'][0]:.0f}, {info['position'][1]:.0f})")
         if ai_status:
             print(f"     AI Behavior: {ai_status['behavior']}")
-            print(f"     Personality: Courage={ai_status['personality']['courage']:.2f}, Social={ai_status['personality']['social']:.2f}")
+            print(f"     Personality: Courage={ai_status['personality']['courage']:.2f}, Aggression={ai_status['personality']['aggression']:.2f}")
     
     print("\n🎮 Running character system demonstration...")
     
@@ -215,7 +215,7 @@ def test_character_system():
                             char.heal(10)
         
         # Update physics
-        physics.update_frame(dt)
+        physics.update(dt)
         
         # Update character manager (handles all character updates)
         char_manager.update_all_characters(dt)
@@ -231,7 +231,7 @@ def test_character_system():
             pygame.draw.circle(screen, (100, 100, 100), (int(spawn_x), int(spawn_y)), 8, 2)
         
         # Draw physics debug bodies (simplified)
-        physics.debug_draw_bodies(screen, camera_offset)
+        physics.draw_debug(screen, camera_offset)
         
         # Render all characters
         char_manager.render_all_characters(screen, camera_offset)

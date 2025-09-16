@@ -27,7 +27,7 @@ class Vector(ABC, Sequence[float]):
 
     @property
     def magnitude(self) -> float:
-        return sqrt(sum(component**2 for component in self))
+        return math.sqrt(sum(component**2 for component in self))
 
     @property
     def normalized(self: SelfType) -> SelfType:

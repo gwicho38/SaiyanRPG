@@ -305,13 +305,18 @@ def test_map_data_streaming():
         ]
         
         # Show details for up to 10 loaded chunks
+        def distance_to_player(chunk):
+            dx = chunk.center.x - player_position.x
+            dy = chunk.center.z - player_position.z
+            return math.sqrt(dx*dx + dy*dy)
+        
         sorted_chunks = sorted(
             all_loaded_chunks,
-            key=lambda c: c.center.distance_to(player_position)
+            key=distance_to_player
         )[:10]
         
         for chunk in sorted_chunks:
-            distance = chunk.center.distance_to(player_position)
+            distance = distance_to_player(chunk)
             status = "ACTIVE" if chunk in active_chunks else "LOADED"
             lod_name = ["ULTRA", "HIGH", "MED", "LOW", "VLOW"][chunk.lod_level.value]
             

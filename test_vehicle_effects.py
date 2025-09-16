@@ -145,7 +145,7 @@ def test_vehicle_effects_system():
                         vehicle.toggle_emergency_lights()
         
         # Update physics
-        physics.update_frame(dt)
+        physics.update(dt)
         
         # Update all vehicles
         for name, vehicle in test_vehicles:
@@ -197,7 +197,7 @@ def test_vehicle_effects_system():
             vehicle.render_effects(screen, camera_offset)
         
         # Draw debug physics bodies
-        physics.debug_draw_bodies(screen, camera_offset)
+        physics.draw_debug(screen, camera_offset)
         
         # Status display
         if frame_count % 30 == 0:  # Update every 0.5 seconds

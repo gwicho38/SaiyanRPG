@@ -110,15 +110,16 @@ class NavigationSector:
 
 
 @dataclass
-class StaticMesh3D:
-    """3D static mesh object"""
+class WorldObject3D:
+    """Base class for 3D world objects"""
     position: Vector3
-    mesh_name: str
+    object_type: WorldObjectType
     render_layer: RenderLayer
     scale: Vector3 = None
     rotation: Vector3 = None
     color: Tuple[int, int, int] = (255, 255, 255)
     visible: bool = True
+    collision_enabled: bool = True
     
     def __post_init__(self):
         if self.scale is None:
@@ -133,6 +134,98 @@ class StaticMesh3D:
     def get_position(self) -> Vector3:
         """Get object position"""
         return self.position
+    
+    def set_rotation(self, rotation: Vector3):
+        """Set object rotation"""
+        self.rotation = rotation
+    
+    def get_rotation(self) -> Vector3:
+        """Get object rotation"""
+        return self.rotation
+    
+    def set_scale(self, scale: Vector3):
+        """Set object scale"""
+        self.scale = scale
+    
+    def get_scale(self) -> Vector3:
+        """Get object scale"""
+        return self.scale
+    
+    def set_visibility(self, visible: bool):
+        """Set object visibility"""
+        self.visible = visible
+    
+    def is_visible(self) -> bool:
+        """Check if object is visible"""
+        return self.visible
+    
+    def set_collision(self, enabled: bool):
+        """Set collision enabled state"""
+        self.collision_enabled = enabled
+    
+    def has_collision(self) -> bool:
+        """Check if object has collision"""
+        return self.collision_enabled
+
+
+@dataclass
+class StaticMesh3D:
+    """3D static mesh object"""
+    position: Vector3
+    object_type: WorldObjectType
+    render_layer: RenderLayer
+    mesh_name: str
+    scale: Vector3 = None
+    rotation: Vector3 = None
+    color: Tuple[int, int, int] = (255, 255, 255)
+    visible: bool = True
+    collision_enabled: bool = True
+    
+    def __post_init__(self):
+        if self.scale is None:
+            self.scale = Vector3(1, 1, 1)
+        if self.rotation is None:
+            self.rotation = Vector3(0, 0, 0)
+    
+    def set_position(self, position: Vector3):
+        """Set object position"""
+        self.position = position
+    
+    def get_position(self) -> Vector3:
+        """Get object position"""
+        return self.position
+    
+    def set_rotation(self, rotation: Vector3):
+        """Set object rotation"""
+        self.rotation = rotation
+    
+    def get_rotation(self) -> Vector3:
+        """Get object rotation"""
+        return self.rotation
+    
+    def set_scale(self, scale: Vector3):
+        """Set object scale"""
+        self.scale = scale
+    
+    def get_scale(self) -> Vector3:
+        """Get object scale"""
+        return self.scale
+    
+    def set_visibility(self, visible: bool):
+        """Set object visibility"""
+        self.visible = visible
+    
+    def is_visible(self) -> bool:
+        """Check if object is visible"""
+        return self.visible
+    
+    def set_collision(self, enabled: bool):
+        """Set collision enabled state"""
+        self.collision_enabled = enabled
+    
+    def has_collision(self) -> bool:
+        """Check if object has collision"""
+        return self.collision_enabled
 
 
 class Camera3D:
@@ -870,8 +963,9 @@ class World3DSystem:
             z = random.uniform(-50, 50)
             building = StaticMesh3D(
                 Vector3(x, 0, z),
-                f"building_{i}",
-                RenderLayer.BUILDINGS_LOW
+                WorldObjectType.BUILDING,
+                RenderLayer.BUILDINGS_LOW,
+                mesh_name=f"building_{i}"
             )
             building.color = (random.randint(100, 200), random.randint(100, 200), random.randint(100, 200))
             self.add_object(building)
@@ -882,8 +976,9 @@ class World3DSystem:
             z = random.uniform(-80, 80)
             obj = StaticMesh3D(
                 Vector3(x, 0, z),
-                f"ground_obj_{i}",
-                RenderLayer.OBJECTS_GROUND
+                WorldObjectType.STATIC_MESH,
+                RenderLayer.OBJECTS_GROUND,
+                mesh_name=f"ground_obj_{i}"
             )
             obj.color = (random.randint(50, 150), random.randint(50, 150), random.randint(50, 150))
             self.add_object(obj)

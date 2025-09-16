@@ -56,6 +56,21 @@ class StimulusType(Enum):
     LOUD_NOISE = "loud_noise"
 
 
+class AIBehavior(Enum):
+    """AI behavior types"""
+    WANDERING = "wandering"
+    INVESTIGATING = "investigating"
+    FLEEING = "fleeing"
+    HIDING = "hiding"
+    PATROLLING = "patrolling"
+    FOLLOWING = "following"
+    ATTACKING = "attacking"
+    DEFENDING = "defending"
+    SOCIALIZING = "socializing"
+    WORKING = "working"
+    RESTING = "resting"
+
+
 @dataclass
 class Stimulus:
     """A stimulus that affects character behavior"""
@@ -468,6 +483,27 @@ class CharacterController:
             'curiosity': self.ai.curiosity,
             'known_stimuli_count': len(self.ai.known_stimuli)
         }
+    
+    def get_status_info(self) -> Dict[str, Any]:
+        """Get AI status information for character system"""
+        return {
+            'behavior': self.ai.current_state.value,
+            'threat_level': self.ai.fear_level.value,
+            'personality': {
+                'aggression': self.ai.aggression,
+                'intelligence': self.ai.intelligence,
+                'courage': self.ai.courage,
+                'curiosity': self.ai.curiosity
+            },
+            'target_position': self.ai.target_position,
+            'known_stimuli': len(self.ai.known_stimuli)
+        }
+    
+    def set_destination(self, x: float, y: float) -> None:
+        """Set AI destination"""
+        self.ai.target_position = (x, y)
+        if self.ai.current_state == CharacterState.IDLE:
+            self._change_state(CharacterState.WALKING)
 
 
 class CharacterAIManager:

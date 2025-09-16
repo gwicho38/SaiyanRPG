@@ -324,25 +324,37 @@ class CharacterPhysics:
         self.set_state(CharacterState.RAGDOLL)
         
         # Remove rotation constraint
-        self.physics_body.body.fixedRotation = False
+        if self.physics_body.b2_body:
+            self.physics_body.b2_body.fixedRotation = False
         
         # Apply impulse if provided (e.g., from collision)
         if abs(impulse[0]) > 0.1 or abs(impulse[1]) > 0.1:
-            self.physics_body.apply_impulse(
-                (impulse[0] / 16.0, impulse[1] / 16.0)
-            )
+            # Apply impulse through physics manager
+            from .physics_manager import get_physics_manager
+            physics_manager = get_physics_manager()
+            if physics_manager:
+                physics_manager.apply_impulse(
+                    self.physics_body.body_id,
+                    (impulse[0] / 16.0, impulse[1] / 16.0)
+                )
         
         # Add some random angular velocity for realistic tumbling
         angular_vel = random.uniform(-5, 5)
-        self.physics_body.body.angularVelocity = angular_vel
+        if self.physics_body.b2_body:
+            self.physics_body.b2_body.angularVelocity = angular_vel
         
         print(f"💫 Character entered ragdoll mode")
     
     def exit_ragdoll(self) -> None:
         """Exit ragdoll physics mode"""
         self.ragdoll_active = False
-        self.physics_body.body.fixedRotation = True
-        self.physics_body.set_angle(0)  # Reset rotation
+        if self.physics_body.b2_body:
+            self.physics_body.b2_body.fixedRotation = True
+        # Reset rotation through physics manager
+        from .physics_manager import get_physics_manager
+        physics_manager = get_physics_manager()
+        if physics_manager and self.physics_body.b2_body:
+            self.physics_body.b2_body.angle = 0
         self.set_state(CharacterState.GETTING_UP)
         
         # Getting up animation would play here
@@ -408,7 +420,8 @@ class CharacterPhysics:
         self.set_state(CharacterState.ENTERING_VEHICLE)
         
         # Disable character physics body while in vehicle
-        self.physics_body.body.active = False
+        if self.physics_body.b2_body:
+            self.physics_body.b2_body.active = False
         
         # Animation timer for entering
         self.state_timer = 0.0
@@ -429,7 +442,8 @@ class CharacterPhysics:
         exit_y = self.current_vehicle.y
         
         self.physics_body.set_position(exit_x / 16.0, exit_y / 16.0)
-        self.physics_body.body.active = True
+        if self.physics_body.b2_body:
+            self.physics_body.b2_body.active = True
         
         self.current_vehicle = None
         self.vehicle_seat = None
@@ -468,6 +482,6 @@ class CharacterPhysics:
     def destroy(self) -> None:
         """Clean up character physics"""
         if self.physics_body:
-            self.physics_manager.destroy_body(self.physics_body)
+            self.physics_manager.remove_body(self.physics_body.body_id)
             self.physics_body = None
         print(f"🗑️ Character physics destroyed")

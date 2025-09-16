@@ -561,7 +561,7 @@ class Vehicle:
     def destroy(self) -> None:
         """Destroy the vehicle and clean up physics body"""
         if self.physics_body:
-            self.physics_manager.destroy_body(self.physics_body)
+            self.physics_manager.remove_body(self.physics_body.body_id)
             self.physics_body = None
         print(f"💥 Vehicle destroyed: {self.vehicle_type.value}")
 

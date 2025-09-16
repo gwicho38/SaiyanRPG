@@ -209,11 +209,14 @@ class Character:
         
         # Update AI if not player controlled
         if self.ai and not self.is_player_controlled:
-            nearby_chars = world_context.get('nearby_characters', []) if world_context else []
-            nearby_vehicles = world_context.get('nearby_vehicles', []) if world_context else []
-            events = world_context.get('events', []) if world_context else []
+            # Create game state dict for AI
+            game_state = {
+                'nearby_characters': world_context.get('nearby_characters', []) if world_context else [],
+                'nearby_vehicles': world_context.get('nearby_vehicles', []) if world_context else [],
+                'events': world_context.get('events', []) if world_context else []
+            }
             
-            self.ai.update(dt, nearby_chars, nearby_vehicles, events)
+            self.ai.update(dt, game_state)
         
         # Update animations
         self._update_animation(dt)
@@ -660,7 +663,7 @@ class Character:
             'alive': self.is_alive,
             'can_interact': self.can_interact(),
             'in_vehicle': self.physics.current_vehicle is not None,
-            'ai_behavior': self.ai.behavior.value if self.ai else None,
+            'ai_behavior': self.ai.ai.current_state.value if self.ai else None,
             'speech': self.speech_bubble if self.speech_timer > 0 else None,
             'spawn_time': self.spawn_time,
             'age': time.time() - self.spawn_time
