@@ -11,7 +11,7 @@ from enum import Enum
 
 # Import our new physics system
 from .physics_manager import (
-    get_physics_manager, PhysicsBody, PhysicsBodyConfig, 
+    PhysicsManager, PhysicsBody, PhysicsBodyType,
     CollisionCategory, CollisionInfo
 )
 from .tire_physics import VehicleTireSystem, TireType
@@ -54,7 +54,7 @@ class Vehicle:
         self.vehicle_type = vehicle_type
         
         # Create physics body
-        self.physics_manager = get_physics_manager()
+        self.physics_manager = PhysicsManager(gravity=(0, 0))
         
         # Get vehicle stats for physics configuration
         self.stats = self._get_vehicle_stats()
@@ -67,15 +67,16 @@ class Vehicle:
         # Determine vehicle dimensions based on type
         width, height = self._get_vehicle_dimensions(vehicle_type)
         
-        self.physics_body = self.physics_manager.create_vehicle_body(
+        self.physics_body = self.physics_manager.create_body(
+            PhysicsBodyType.DYNAMIC,
             position=(physics_x, physics_y),
-            width=width,
-            height=height,
-            game_object=self
+            shape_data={'type': 'box', 'width': width, 'height': height, 'mass': self.stats.weight},
+            collision_category=CollisionCategory.VEHICLE,
+            user_data=self
         )
         
         # Set initial angle
-        self.physics_body.set_angle(physics_angle)
+        self.physics_body.angle = physics_angle
         
         # Initialize advanced tire physics system
         tire_type = self._get_tire_type_for_vehicle(vehicle_type)
@@ -524,15 +525,9 @@ class Vehicle:
 
     def _update_damage_effects(self, dt: float) -> None:
         """Update damage-related visual effects"""
-        if self.is_burning:
-            # TODO: Add fire particle effects
-            # TODO: Add smoke effects
-            pass
-        
-        if self.damage_level > 0.5:
-            # TODO: Add damage sparks
-            # TODO: Add oil leak effects
-            pass
+        # Effects are now handled by the VehicleEffectsSystem
+        # This method is kept for compatibility but effects are generated in effects_system.update()
+        pass
     
     def _update_door_animations(self, dt: float) -> None:
         """Update door opening/closing animations"""
@@ -707,6 +702,10 @@ class Vehicle:
         self.electrical_system.emergency_shutdown()
         self.stop_engine()
         print(f"⚠️ Emergency shutdown: {self.vehicle_type.value}")
+    
+    def render_effects(self, screen, camera_offset: Tuple[float, float] = (0, 0)) -> None:
+        """Render vehicle visual effects"""
+        self.effects_system.render(screen, self, camera_offset)
     
     def get_engine_rpm(self) -> float:
         """Get current engine RPM"""

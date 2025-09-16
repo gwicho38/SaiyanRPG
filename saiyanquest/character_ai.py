@@ -27,6 +27,12 @@ class CharacterState(Enum):
     FLEEING = "fleeing"
     HIDING = "hiding"
     INVESTIGATING = "investigating"
+    TALKING = "talking"
+    JUMPING = "jumping"
+    FALLING = "falling"
+    GETTING_UP = "getting_up"
+    RAGDOLL = "ragdoll"
+    DYING = "dying"
 
 
 class FearLevel(Enum):

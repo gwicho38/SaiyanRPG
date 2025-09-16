@@ -13,8 +13,8 @@ from dataclasses import dataclass
 from enum import Enum
 
 from .physics_manager import (
-    get_physics_manager, PhysicsBody, PhysicsBodyConfig,
-    CollisionCategory, b2_dynamicBody
+    PhysicsManager, PhysicsBody, PhysicsBodyType,
+    CollisionCategory
 )
 
 
@@ -70,7 +70,7 @@ class CharacterPhysics:
     
     def __init__(self, character_type: CharacterType, x: float, y: float):
         self.character_type = character_type
-        self.physics_manager = get_physics_manager()
+        self.physics_manager = PhysicsManager(gravity=(0, 0))
         
         # Physical properties - initialize stats first
         self.stats = self._get_character_stats(character_type)
@@ -118,14 +118,17 @@ class CharacterPhysics:
         physics_y = y / 16.0
         
         # Character is represented as a capsule (circle for now)
-        body = self.physics_manager.create_pedestrian_body(
+        body = self.physics_manager.create_body(
+            PhysicsBodyType.DYNAMIC,
             position=(physics_x, physics_y),
-            radius=0.4,  # 0.4 meters radius
-            game_object=self
+            shape_data={'type': 'circle', 'radius': 0.4, 'mass': self.stats.mass},
+            collision_category=CollisionCategory.PEDESTRIAN,
+            user_data=self
         )
         
         # Set up character physics properties
-        body.body.fixedRotation = True  # Characters don't rotate in top-down view
+        if body.b2_body:
+            body.b2_body.fixedRotation = True  # Characters don't rotate in top-down view
         
         return body
     

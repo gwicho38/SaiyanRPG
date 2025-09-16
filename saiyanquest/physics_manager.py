@@ -197,11 +197,11 @@ class PhysicsManager:
             body_def = b2BodyDef()
             
             if body_type == PhysicsBodyType.STATIC:
-                body_def.type = b2Body.b2_staticBody
+                body_def.type = Box2D.b2_staticBody
             elif body_type == PhysicsBodyType.KINEMATIC:
-                body_def.type = b2Body.b2_kinematicBody
+                body_def.type = Box2D.b2_kinematicBody
             else:  # DYNAMIC
-                body_def.type = b2Body.b2_dynamicBody
+                body_def.type = Box2D.b2_dynamicBody
             
             body_def.position = b2Vec2(position[0], position[1])
             body_def.userData = physics_body

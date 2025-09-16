@@ -14,7 +14,7 @@ from dataclasses import dataclass
 from enum import Enum
 
 from .character_physics import CharacterPhysics, CharacterState, CharacterType, CharacterStats
-from .character_ai import CharacterAI, AIBehavior, ThreatLevel
+from .character_ai import CharacterAI, CharacterController, CharacterAIManager, CharacterState, FearLevel
 from .gta_asset_loader import get_asset_loader
 
 
@@ -55,17 +55,19 @@ class Character:
         
         # Initialize core systems
         self.physics = CharacterPhysics(character_type, x, y)
-        self.ai = None if is_player_controlled else CharacterAI(self.physics)
+        
+        # Character identity
+        self.name = self._generate_name(character_type)
+        self.unique_id = random.randint(1000, 9999)
+        
+        # Initialize AI after unique_id is set
+        self.ai = None if is_player_controlled else CharacterController(self.unique_id, self.physics.physics_body)
         
         # Visual properties
         self.appearance = self._generate_appearance(character_type)
         self.animation_state = AnimationState.IDLE
         self.animation_timer = 0.0
         self.animation_frame = 0
-        
-        # Character identity
-        self.name = self._generate_name(character_type)
-        self.unique_id = random.randint(1000, 9999)
         
         # Player progression (for GTA compatibility)
         self.level = 1
@@ -75,6 +77,15 @@ class Character:
         self.current_gang = "NEUTRAL"  # Will be replaced with enum if needed
         self.missions_completed = 0
         self.territory_controlled = []
+        
+        # Weapon inventory system
+        self.weapon_inventory = []
+        self.current_weapon = None
+        self.ammo = {}
+        
+        # Armor system
+        self.armor = 0.0  # 0.0 to 1.0
+        self.max_armor = 100.0
         
         # Game state
         self.spawn_time = time.time()
@@ -233,9 +244,9 @@ class Character:
         
         # Override with AI behavior animations
         if self.ai:
-            if self.ai.behavior == AIBehavior.TALKING:
+            if self.ai.ai.current_state == CharacterState.TALKING:
                 self.animation_state = AnimationState.TALKING
-            elif self.ai.behavior == AIBehavior.ATTACKING:
+            elif self.ai.ai.current_state == CharacterState.SHOOTING:
                 self.animation_state = AnimationState.ATTACKING
         
         # Default animation state mapping
@@ -340,9 +351,9 @@ class Character:
         
         # Set AI behaviors if not player controlled
         if self.ai:
-            self.ai.force_behavior(AIBehavior.TALKING)
+            self.ai.current_state = CharacterState.TALKING
         if other_character.ai:
-            other_character.ai.force_behavior(AIBehavior.TALKING)
+            other_character.ai.current_state = CharacterState.TALKING
         
         self.interaction_cooldown = 30.0  # Don't talk again soon
         other_character.interaction_cooldown = 30.0
@@ -357,7 +368,16 @@ class Character:
     def take_damage(self, damage: float, impact_force: Tuple[float, float] = (0, 0), 
                    damage_type: str = "physical") -> None:
         """Take damage"""
-        self.physics.take_damage(damage, impact_force)
+        # Apply armor protection
+        armor_reduction = self.armor * 0.5  # Armor reduces damage by 50% of armor value
+        actual_damage = max(0, damage - armor_reduction)
+        
+        self.physics.take_damage(actual_damage, impact_force)
+        
+        # Reduce armor when taking damage
+        if self.armor > 0:
+            armor_damage = min(self.armor, damage * 0.3)  # Armor takes 30% of damage
+            self.armor -= armor_damage
         
         # Add visual effect
         self.add_status_effect("damaged", 2.0, (255, 0, 0))
@@ -365,9 +385,10 @@ class Character:
         # AI reaction
         if self.ai and damage > 10:
             if damage > 50:
-                self.ai.force_behavior(AIBehavior.PANICKING)
+                self.ai.ai.fear_level = FearLevel.PANIC
+                self.ai.ai.current_state = CharacterState.FLEEING
             else:
-                self.ai.force_behavior(AIBehavior.FLEEING)
+                self.ai.ai.current_state = CharacterState.FLEEING
     
     def heal(self, amount: float) -> None:
         """Heal character"""
@@ -406,15 +427,73 @@ class Character:
             return self.ai.get_status_info()
         return None
     
-    def force_ai_behavior(self, behavior: AIBehavior) -> None:
+    def force_ai_behavior(self, behavior: CharacterState) -> None:
         """Force AI to specific behavior"""
         if self.ai:
-            self.ai.force_behavior(behavior)
+            self.ai.current_state = behavior
     
     def set_ai_destination(self, x: float, y: float) -> None:
         """Set AI movement destination"""
         if self.ai:
             self.ai.set_destination(x, y)
+    
+    # Weapon inventory methods
+    def add_weapon(self, weapon_name: str, ammo_count: int = 0) -> bool:
+        """Add weapon to inventory"""
+        if weapon_name not in self.weapon_inventory:
+            self.weapon_inventory.append(weapon_name)
+            self.ammo[weapon_name] = ammo_count
+            if not self.current_weapon:
+                self.current_weapon = weapon_name
+            print(f"🔫 {self.name} picked up {weapon_name}")
+            return True
+        return False
+    
+    def remove_weapon(self, weapon_name: str) -> bool:
+        """Remove weapon from inventory"""
+        if weapon_name in self.weapon_inventory:
+            self.weapon_inventory.remove(weapon_name)
+            if weapon_name in self.ammo:
+                del self.ammo[weapon_name]
+            if self.current_weapon == weapon_name:
+                self.current_weapon = self.weapon_inventory[0] if self.weapon_inventory else None
+            print(f"🔫 {self.name} dropped {weapon_name}")
+            return True
+        return False
+    
+    def switch_weapon(self, weapon_name: str) -> bool:
+        """Switch to different weapon"""
+        if weapon_name in self.weapon_inventory:
+            self.current_weapon = weapon_name
+            print(f"🔫 {self.name} switched to {weapon_name}")
+            return True
+        return False
+    
+    def get_ammo(self, weapon_name: str) -> int:
+        """Get ammo count for weapon"""
+        return self.ammo.get(weapon_name, 0)
+    
+    def add_ammo(self, weapon_name: str, amount: int) -> None:
+        """Add ammo for weapon"""
+        if weapon_name in self.ammo:
+            self.ammo[weapon_name] += amount
+        else:
+            self.ammo[weapon_name] = amount
+    
+    # Armor methods
+    def add_armor(self, amount: float) -> None:
+        """Add armor"""
+        self.armor = min(self.max_armor, self.armor + amount)
+        print(f"🛡️ {self.name} gained {amount} armor (total: {self.armor})")
+    
+    def remove_armor(self, amount: float) -> None:
+        """Remove armor"""
+        self.armor = max(0.0, self.armor - amount)
+        print(f"🛡️ {self.name} lost {amount} armor (remaining: {self.armor})")
+    
+    def get_armor_percentage(self) -> float:
+        """Get armor as percentage"""
+        return (self.armor / self.max_armor) * 100.0
     
     def _get_sprite_name(self) -> str:
         """Get sprite name based on character type"""
